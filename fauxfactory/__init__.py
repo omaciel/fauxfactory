@@ -267,10 +267,16 @@ class FauxFactory(object):
         _min_value = - sys.maxint - 1
         _max_value = sys.maxint
 
-        if min_value is not None:
+        if min_value is None:
             min_value = _min_value
-        if max_value is not None:
+        if max_value is None:
             max_value = _max_value
+
+        # Perform some validations
+        if not isinstance(min_value, int) or min_value < _min_value:
+            raise ValueError("\'%s\' is not a valid minimum." % min_value)
+        if not isinstance(max_value, int) or max_value > _max_value:
+            raise ValueError("\'%s\' is not a valid maximum." % max_value)
 
         value = random.randint(min_value, max_value)
 
