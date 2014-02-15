@@ -15,6 +15,13 @@ import uuid
 from fauxfactory.constants import DOMAINS, MAX_YEARS, MIN_YEARS, TLDS
 
 
+class LengthException(Exception):
+    """
+    Exception for invalid length values.
+    """
+    pass
+
+
 class FauxFactory(object):
     """
     Generate random data for your tests.
@@ -61,6 +68,11 @@ class FauxFactory(object):
         @return: A random string made up of alpha characters.
         """
 
+        print "Length is: ", length
+        # Validate length argument
+        if not isinstance(length, int) or length <= 0:
+            raise ValueError("%s is an invalid \'length\'." % length)
+
         output_string = ''.join(
             random.choice(string.ascii_letters) for i in range(length)
         )
@@ -78,6 +90,10 @@ class FauxFactory(object):
         @rtype: str
         @return: A random string made up of alpha and numeric characters.
         """
+
+        # Validate length argument
+        if not isinstance(length, int) or length <= 0:
+            raise ValueError("%s is an invalid \'length\'." % length)
 
         output_string = ''.join(
             random.choice(
@@ -121,6 +137,10 @@ class FauxFactory(object):
         @rtype: str
         @return: A random string made up of CJK characters.
         """
+
+        # Validate length argument
+        if not isinstance(length, int) or length <= 0:
+            raise ValueError("%s is an invalid \'length\'." % length)
 
         cjk_range = []
         cjk_range = ['4E00', '9FFF']
@@ -269,6 +289,10 @@ class FauxFactory(object):
         @return: A random string made up of Latin1 characters.
         """
 
+        # Validate length argument
+        if not isinstance(length, int) or length <= 0:
+            raise ValueError("%s is an invalid \'length\'." % length)
+
         range0 = range1 = range2 = []
         range0 = ['00C0', '00D6']
         range1 = ['00D8', '00F6']
@@ -349,6 +373,10 @@ class FauxFactory(object):
         @rtype: str
         @return: A random string made up of numbers.
         """
+
+        # Validate length argument
+        if not isinstance(length, int) or length <= 0:
+            raise ValueError("%s is an invalid \'length\'." % length)
 
         output_string = ''.join(
             random.choice(string.digits) for i in range(length)

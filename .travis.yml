@@ -1,0 +1,3 @@
+language: python
+install: "pip install nose"
+script: nosetests -vv tests
