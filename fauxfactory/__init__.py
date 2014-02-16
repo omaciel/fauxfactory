@@ -12,6 +12,7 @@ import string
 import sys
 import uuid
 
+from collections import Iterable
 from fauxfactory.constants import DOMAINS, MAX_YEARS, MIN_YEARS, TLDS
 
 
@@ -122,6 +123,18 @@ class FauxFactory(object):
         @type choices: list
         @param choices: List of choices from which select a random value.
         """
+
+        # Validation for 'choices'
+        if choices is None:
+            raise ValueError("Choices argument cannot be None.")
+        # We don't want a single dictionary value.
+        if not isinstance(choices, Iterable) or isinstance(choices, dict):
+            raise ValueError("Choices argument is not iterable.")
+        if len(choices) == 0:
+            raise ValueError("Choices argument cannot be empty.")
+        # If only 1 item is present, return it right away
+        if len(choices) == 1:
+            return choices[0]
 
         return random.choice(choices)
 
