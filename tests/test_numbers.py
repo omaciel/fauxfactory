@@ -125,3 +125,17 @@ class TestNumbers(unittest.TestCase):
             self.factory.generate_integer(min_value='a')
             self.factory.generate_integer(max_value='a')
             self.factory.generate_integer(min_value='a', max_value='b')
+
+    def test_generate_positive_integer_1(self):
+        """Create a random positive integer"""
+
+        result = self.factory.generate_positive_integer()
+
+        self.assertTrue(result >= 0, "Generated integer is not positive")
+
+    def test_generate_negative_integer_1(self):
+        """Create a random negative integer"""
+
+        result = self.factory.generate_negative_integer()
+
+        self.assertTrue(result <= 0, "Generated integer is not negative")
