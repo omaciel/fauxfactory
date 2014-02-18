@@ -13,7 +13,7 @@ DOMAINS = [
 
 # Range for YEARS
 MIN_YEARS = datetime.MINYEAR
-MAX_YEARS = datetime.MAXYEAR
+MAX_YEARS = 1000  # 1000 years into the future
 
 TLDS = [
     'biz',

@@ -192,6 +192,12 @@ class FauxFactory(object):
         if max_date is None:
             max_date = _max_value
 
+        # Validation
+        if not isinstance(min_date, datetime.date):
+            raise ValueError("%s is not a valid datetime.date object")
+        if not isinstance(max_date, datetime.date):
+            raise ValueError("%s is not a valid datetime.date object")
+
         # Check that max_date is not before min_date
         assert min_date < max_date
 
