@@ -356,21 +356,33 @@ class FauxFactory(object):
         return self.generate_integer(max_value=max_value)
 
     @classmethod
-    def generate_ipaddr(cls, ip3=False):
+    def generate_ipaddr(cls, ip3=False, ipv6=False):
         """
         Generates a random IP address.
 
         @type ip3: bool
         @param ip3: Whether to generate a 3 or 4 group IP.
+        @type ipv6: bool
+        @param ipv6: Whether to generate IPv6 or IPv4
 
         @rtype: str
         @return: An IP address.
         """
 
-        rng = 3 if ip3 else 4
-        ipaddr = ".".join(str(random.randrange(0, 255, 1)) for x in range(rng))
+        if ipv6:
+            # StackOverflow.com questions: generate-random-ipv6-address
+            ipaddr = ':'.join('{:x}'.format(
+                random.randint(0, 2**16 - 1)
+            ) for i in range(8))
+        else:
+            rng = 3 if ip3 else 4
+            ipaddr = ".".join(
+                str(random.randrange(0, 255, 1)) for x in range(rng))
 
-        return ipaddr if not ip3 else ipaddr + ".0"
+            if ip3:
+                ipaddr = ipaddr + ".0"
+
+        return ipaddr
 
     @classmethod
     def generate_mac(cls, delimiter=":"):
