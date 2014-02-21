@@ -396,12 +396,15 @@ class FauxFactory(object):
         @return: A random MAC address.
         """
 
+        if delimiter not in [":", "-"]:
+            raise ValueError("Delimiter is not a valid option: %s" % delimiter)
+
         chars = ['a', 'b', 'c', 'd', 'e', 'f',
                  '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-        mac = "%s".join(
+        mac = delimiter.join(
             chars[random.randrange(0, len(chars), 1)]+chars[random.randrange(
-                0, len(chars), 1)] for x in range(6)) % delimiter
+                0, len(chars), 1)] for x in range(6))
 
         return mac
 
