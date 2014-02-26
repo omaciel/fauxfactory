@@ -113,7 +113,7 @@ class TestURLs(unittest.TestCase):
         """Create a random URL with whitespace subdomain"""
 
         with self.assertRaises(ValueError):
-            self.factory.generate_url(subdomain=' ')
+            self.factory.generate_url(subdomain=" ")
 
     def test_generate_url_9(self):
         """Create a random URL with invalid subdomain"""
@@ -132,9 +132,8 @@ class TestURLs(unittest.TestCase):
             self.assertTrue(
                 len(result) > 0,
                 "A valid URL was not generated.")
-            print result, result.split(":")
             self.assertTrue(
-                result.split(":")[-1] == tlds,
+                result.split(".")[-1] == tlds,
                 "URL does not have the TLDS specified"
             )
 
@@ -143,7 +142,7 @@ class TestURLs(unittest.TestCase):
 
         for turn in xrange(10):
             with self.assertRaises(ValueError):
-                tlds = self.factory.generate_numeric(length=3)
+                tlds = self.factory.generate_numeric_string(length=3)
                 self.factory.generate_url(tlds=tlds)
 
     def test_generate_url_12(self):
@@ -151,5 +150,4 @@ class TestURLs(unittest.TestCase):
 
         for turn in xrange(10):
             with self.assertRaises(ValueError):
-                tlds = self.factory.generate_alpha(length=3)
-                self.factory.generate_url(tlds=tlds)
+                self.factory.generate_url(tlds=" ")

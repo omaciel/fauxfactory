@@ -67,7 +67,6 @@ class FauxFactory(object):
         @return: A random string made up of alpha characters.
         """
 
-        print "Length is: ", length
         # Validate length argument
         if not isinstance(length, int) or length <= 0:
             raise ValueError("%s is an invalid \'length\'." % length)
@@ -481,7 +480,7 @@ class FauxFactory(object):
         # Regex for URL scheme
         schemenator = re.compile(r"^(https?|ftp)$")
         # Regex for TLDS
-        tldsnator = re.compile(r"^[a-z]{1,3}$")
+        tldsnator = re.compile(r"^[a-zA-Z]{1,3}$")
 
         if scheme:
             if schemenator.match(scheme) is None:
