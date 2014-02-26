@@ -8,19 +8,16 @@ __all__ = ("FauxFactory",)
 
 import datetime
 import random
+import re
 import string
 import sys
 import uuid
 
 from collections import Iterable
-from fauxfactory.constants import DOMAINS, MAX_YEARS, MIN_YEARS, TLDS
-
-
-class LengthException(Exception):
-    """
-    Exception for invalid length values.
-    """
-    pass
+from fauxfactory.constants import (
+    MAX_YEARS, MIN_YEARS,
+    SCHEMES, SUBDOMAINS, TLDS
+)
 
 
 class FauxFactory(object):
@@ -28,7 +25,8 @@ class FauxFactory(object):
     Generate random data for your tests.
     """
 
-    def generate_string(self, str_type, length):
+    @classmethod
+    def generate_string(cls, str_type, length):
         """
         Create of a wide variety of string types, of arbitrary length.
 
@@ -45,15 +43,15 @@ class FauxFactory(object):
         str_type = str_type.lower()
 
         if str_type == "alphanumeric":
-            self.generate_alphanumeric(length)
+            cls.generate_alphanumeric(length)
         elif str_type == "alpha":
-            self.generate_alpha(length)
+            cls.generate_alpha(length)
         elif str_type == "latin1":
-            self.generate_latin1(length)
+            cls.generate_latin1(length)
         elif str_type == 'numeric':
-            self.generate_numeric_string(length)
+            cls.generate_numeric_string(length)
         elif str_type == "utf8":
-            self.generate_cjk(length)
+            cls.generate_cjk(length)
         else:
             raise Exception("%s is not a supported string type." % str_type)
 
@@ -103,7 +101,8 @@ class FauxFactory(object):
 
         return output_string
 
-    def generate_boolean(self):
+    @classmethod
+    def generate_boolean(cls):
         """
         Returns a random Boolean value.
 
@@ -113,7 +112,7 @@ class FauxFactory(object):
 
         choices = (True, False)
 
-        return self.generate_choice(choices)
+        return cls.generate_choice(choices)
 
     @classmethod
     def generate_choice(cls, choices):
@@ -247,7 +246,8 @@ class FauxFactory(object):
 
         return min_date + datetime.timedelta(seconds=seconds)
 
-    def generate_email(self, name=None, domain=None, tlds=None):
+    @classmethod
+    def generate_email(cls, name=None, domain=None, tlds=None):
         """
         Generates a random email address.
 
@@ -264,13 +264,13 @@ class FauxFactory(object):
 
         # Generate a new name if needed
         if name is None:
-            name = self.generate_alpha(8)
+            name = cls.generate_alpha(8)
         # Obtain a random domain if needed
         if domain is None:
-            domain = self.generate_choice(DOMAINS)
+            domain = cls.generate_choice(SUBDOMAINS)
         # Obtain a random top level domain if needed
         if tlds is None:
-            tlds = self.generate_choice(TLDS)
+            tlds = cls.generate_choice(TLDS)
 
         return "%s@%s.%s" % (name, domain, tlds)
 
@@ -343,7 +343,8 @@ class FauxFactory(object):
 
         return unicode(output_string)
 
-    def generate_negative_integer(self):
+    @classmethod
+    def generate_negative_integer(cls):
         """
         Returns a random negative integer based on the current platform.
 
@@ -353,7 +354,7 @@ class FauxFactory(object):
 
         max_value = 0
 
-        return self.generate_integer(max_value=max_value)
+        return cls.generate_integer(max_value=max_value)
 
     @classmethod
     def generate_ipaddr(cls, ip3=False, ipv6=False):
@@ -413,7 +414,7 @@ class FauxFactory(object):
         """
         Returns a random string made up of numbers.
 
-        @rtype length: int
+        @type length: int
         @param length: Length for random data.
 
         @rtype: str
@@ -430,7 +431,8 @@ class FauxFactory(object):
 
         return output_string
 
-    def generate_positive_integer(self):
+    @classmethod
+    def generate_positive_integer(cls):
         """
         Returns a random positive integer based on the current platform.
 
@@ -440,7 +442,7 @@ class FauxFactory(object):
 
         min_value = 0
 
-        return self.generate_integer(min_value=min_value)
+        return cls.generate_integer(min_value=min_value)
 
     @classmethod
     def generate_time(cls):
@@ -458,11 +460,48 @@ class FauxFactory(object):
             random.randint(0, 999999),
         )
 
-    def generate_url(self, url=None, protocol=None, tlds=None):
+    @classmethod
+    def generate_url(cls, scheme=None, subdomain=None, tlds=None):
         """
-        Generates a URL address
+        Generates a random URL address
+
+        @type scheme: str
+        @param scheme: Either http, https or ftp
+        @type subdomain: str
+        @param subdomain: A valid subdmain
+        @type tlds: str
+        @param tlds: A qualified top level domain name (e.g. \'com\', \'net\')
+
+        @rtype: str
+        @return: A random URL address.
         """
-        pass
+
+        # Regex for subdomain names
+        subdomainator = re.compile(r"^[a-zA-Z0-9][-\w.~]*$")
+        # Regex for URL scheme
+        schemenator = re.compile(r"^(https?|ftp)$")
+        # Regex for TLDS
+        tldsnator = re.compile(r"^[a-z]{1,3}$")
+
+        if scheme:
+            if schemenator.match(scheme) is None:
+                raise ValueError("Protocol \'%s\' is not valid" % scheme)
+        else:
+            scheme = cls.generate_choice(SCHEMES)
+
+        if subdomain:
+            if subdomainator.match(subdomain) is None:
+                raise ValueError("Subdomain \'%s\ is invalid'" % subdomain)
+        else:
+            subdomain = cls.generate_choice(SUBDOMAINS)
+
+        if tlds:
+            if tldsnator.match(tlds) is None:
+                raise ValueError("TLDS name \'%s\' is invalid" % tlds)
+        else:
+            tlds = cls.generate_choice(TLDS)
+
+        return "%s://%s.%s" % (scheme, subdomain, tlds)
 
     @classmethod
     def generate_uuid(cls):
