@@ -24,14 +24,22 @@ class TestNumbers(unittest.TestCase):
         cls.factory = FauxFactory()
 
     def test_generate_integer_1(self):
-        """Create a random integer with no range limits"""
+        """
+        @Test: Create a random integer with no range limits
+        @Feature: Numbers Generator
+        @Assert: A random integer is created
+        """
 
         result = self.factory.generate_integer()
         self.assertTrue(
             isinstance(result, int), "A valid integer was not generated.")
 
     def test_generate_integer_2(self):
-        """Create a random integer with set minimum limit"""
+        """
+        @Test: Create a random integer with set minimum limit
+        @Feature: Numbers Generator
+        @Assert: Integer is created and greater than minimum
+        """
 
         try:
             # Change system max int to a smaller number
@@ -51,7 +59,11 @@ class TestNumbers(unittest.TestCase):
             sys.maxint = old_sys_maxint
 
     def test_generate_integer_3(self):
-        """Create a random integer with set maximum limit"""
+        """
+        @Test: Create a random integer with set maximum limit
+        @Feature: Numbers Generator
+        @Assert: Integer is created and less than maximum value
+        """
 
         try:
             # Change system max int to a smaller number
@@ -72,7 +84,11 @@ class TestNumbers(unittest.TestCase):
             sys.maxint = old_sys_maxint
 
     def test_generate_integer_4(self):
-        """Create a random integer with set min/max limits"""
+        """
+        @Test: Create a random integer with set min/max limits
+        @Feature: Numbers Generator
+        @Assert: An integer is created and falls within the specified range
+        """
 
         for turn in xrange(10):
             result = self.factory.generate_integer(
@@ -85,7 +101,11 @@ class TestNumbers(unittest.TestCase):
             )
 
     def test_generate_integer_5(self):
-        """Create a random integer with disallowed minimum limit"""
+        """
+        @Test: Create a random integer with disallowed minimum limit
+        @Feature: Numbers Generator
+        @Assert: An integer number is not created due to value error
+        """
 
         # This is lower than allowed platform minimum
         low_min = - sys.maxint - 2
@@ -94,7 +114,11 @@ class TestNumbers(unittest.TestCase):
             self.factory.generate_integer(min_value=low_min)
 
     def test_generate_integer_6(self):
-        """Create a random integer with disallowed maximum limit"""
+        """
+        @Test: Create a random integer with disallowed maximum limit
+        @Feature: Numbers Generator
+        @Assert: An integer number is not created due to value error
+        """
 
         # This is greater than allowed platform maximum
         high_max = sys.maxint + 1
@@ -102,39 +126,113 @@ class TestNumbers(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.factory.generate_integer(max_value=high_max)
 
-    def test_generate_integer_7(self):
-        """Create a random integer using empty strings as args"""
+    def test_generate_integer_7_0(self):
+        """
+        @Test: Create a random integer using empty strings as args
+        @Feature: Numbers Generator
+        @Assert: An integer number is not created due to value error
+        """
 
         with self.assertRaises(ValueError):
             self.factory.generate_integer(min_value='')
+
+    def test_generate_integer_7_1(self):
+        """
+        @Test: Create a random integer using empty strings as args
+        @Feature: Numbers Generator
+        @Assert: An integer number is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
             self.factory.generate_integer(max_value='')
+
+    def test_generate_integer_7_2(self):
+        """
+        @Test: Create a random integer using empty strings as args
+        @Feature: Numbers Generator
+        @Assert: An integer number is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
             self.factory.generate_integer(min_value='', max_value='')
 
-    def test_generate_integer_8(self):
-        """Create a random integer using whitespace as args"""
+    def test_generate_integer_8_0(self):
+        """
+        @Test: Create a random integer using whitespace as args
+        @Feature: Numbers Generator
+        @Assert: An integer number is not created due to value error
+        """
 
         with self.assertRaises(ValueError):
             self.factory.generate_integer(min_value=' ')
+
+    def test_generate_integer_8_1(self):
+        """
+        @Test: Create a random integer using whitespace as args
+        @Feature: Numbers Generator
+        @Assert: An integer number is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
             self.factory.generate_integer(max_value=' ')
+
+    def test_generate_integer_8_2(self):
+        """
+        @Test: Create a random integer using whitespace as args
+        @Feature: Numbers Generator
+        @Assert: An integer number is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
             self.factory.generate_integer(min_value=' ', max_value=' ')
 
-    def test_generate_integer_9(self):
-        """Create a random integer using alpha strings as args"""
+    def test_generate_integer_9_0(self):
+        """
+        @Test: Create a random integer using alpha strings as args
+        @Feature: Numbers Generator
+        @Assert: An integer number is not created due to value error
+        """
 
         with self.assertRaises(ValueError):
             self.factory.generate_integer(min_value='a')
+
+    def test_generate_integer_9_1(self):
+        """
+        @Test: Create a random integer using alpha strings as args
+        @Feature: Numbers Generator
+        @Assert: An integer number is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
             self.factory.generate_integer(max_value='a')
+
+    def test_generate_integer_9_2(self):
+        """
+        @Test: Create a random integer using alpha strings as args
+        @Feature: Numbers Generator
+        @Assert: An integer number is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
             self.factory.generate_integer(min_value='a', max_value='b')
 
     def test_generate_positive_integer_1(self):
-        """Create a random positive integer"""
+        """
+        @Test: Create a random positive integer
+        @Feature: Numbers Generator
+        @Assert: A positive number is created
+        """
 
         result = self.factory.generate_positive_integer()
 
         self.assertTrue(result >= 0, "Generated integer is not positive")
 
     def test_generate_negative_integer_1(self):
-        """Create a random negative integer"""
+        """
+        @Test: Create a random negative integer
+        @Feature: Numbers Generator
+        @Assert: A negative number is created
+        """
 
         result = self.factory.generate_negative_integer()
 

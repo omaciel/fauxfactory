@@ -24,7 +24,11 @@ class TestChoices(unittest.TestCase):
         cls.factory = FauxFactory()
 
     def test_generate_choice_1(self):
-        """Select a random value from integer values"""
+        """
+        @Test: Select a random value from integer values
+        @Feature: Choice Generator
+        @Assert: Selects a random choice from options
+        """
 
         choices = xrange(5)
 
@@ -35,7 +39,11 @@ class TestChoices(unittest.TestCase):
                 "An invalid value was selected from available choices.")
 
     def test_generate_choice_2(self):
-        """Select a random value from alphanumeric values"""
+        """
+        @Test: Select a random value from alphanumeric values
+        @Feature: Choice Generator
+        @Assert: Selects a random choice from alphanumeric options
+        """
 
         choices = string.ascii_letters + string.digits
 
@@ -46,7 +54,11 @@ class TestChoices(unittest.TestCase):
                 "An invalid value was selected from available choices.")
 
     def test_generate_choice_3(self):
-        """Select a random value from short list"""
+        """
+        @Test: Select a random value from short list
+        @Feature: Choice Generator
+        @Assert: Selects a random choice from short list
+        """
 
         choices = [1, ]
 
@@ -58,7 +70,11 @@ class TestChoices(unittest.TestCase):
                 "An invalid value was selected from available choices.")
 
     def test_generate_choice_4(self):
-        """Select a random value from longer list"""
+        """
+        @Test: Select a random value from longer list
+        @Feature: Choice Generator
+        @Assert: Selects a random choice from longer list
+        """
 
         choices = [1, 2, 3, 9, 10, 11, 100, 101, 102]
 
@@ -69,7 +85,11 @@ class TestChoices(unittest.TestCase):
                 "An invalid value was selected from available choices.")
 
     def test_generate_choice_5(self):
-        """Select a random value from short tuple"""
+        """
+        @Test: Select a random value from short tuple
+        @Feature: Choice Generator
+        @Assert: Selects a random choice from short tuple
+        """
 
         choices = (1, )
 
@@ -81,7 +101,11 @@ class TestChoices(unittest.TestCase):
                 "An invalid value was selected from available choices.")
 
     def test_generate_choice_6(self):
-        """Select a random value from longer tuple"""
+        """
+        @Test: Select a random value from longer tuple
+        @Feature: Choice Generator
+        @Assert: Selects a random choice from longer tuple
+        """
 
         choices = (1, 2, 3, 9, 10, 11, 100, 101, 102, )
 
@@ -92,7 +116,11 @@ class TestChoices(unittest.TestCase):
                 "An invalid value was selected from available choices.")
 
     def test_generate_choice_7(self):
-        """Select a random value from empty list"""
+        """
+        @Test: Select a random value from empty list
+        @Feature: Choice Generator
+        @Assert: No choice from empty list
+        """
 
         choices = []
 
@@ -100,7 +128,11 @@ class TestChoices(unittest.TestCase):
             self.factory.generate_choice(choices)
 
     def test_generate_choice_8(self):
-        """Select a random value from empty tuple"""
+        """
+        @Test: Select a random value from empty tuple
+        @Feature: Choice Generator
+        @Assert: No choice from empty tuple
+        """
 
         choices = ()
 
@@ -108,7 +140,11 @@ class TestChoices(unittest.TestCase):
             self.factory.generate_choice(choices)
 
     def test_generate_choice_9(self):
-        """Select a random value from empty dictionary"""
+        """
+        @Test: Select a random value from empty dictionary
+        @Feature: Choice Generator
+        @Assert: No choice from empty dictionary
+        """
 
         choices = {}
 
@@ -116,7 +152,11 @@ class TestChoices(unittest.TestCase):
             self.factory.generate_choice(choices)
 
     def test_generate_choice_10(self):
-        """Select a random value from single dictionary"""
+        """
+        @Test: Select a random value from single dictionary
+        @Feature: Choice Generator
+        @Assert: No choice from single dictionary
+        """
 
         choices = {'Name': 'Bob', 'Age': 39}
 
@@ -124,7 +164,11 @@ class TestChoices(unittest.TestCase):
             self.factory.generate_choice(choices)
 
     def test_generate_choice_11(self):
-        """Select a random value from dictionary list"""
+        """
+        @Test: Select a random value from dictionary list
+        @Feature: Choice Generator
+        @Assert: Selects a value from a list of dictionaries
+        """
 
         choices = [
             {'Name': 'Bob', 'Age': 39},

@@ -25,14 +25,23 @@ class TestDates(unittest.TestCase):
         cls.factory = FauxFactory()
 
     def test_generate_datetime_1(self):
-        """Create a datetime with no arguments"""
+        """
+        @Test: Create a datetime with no arguments
+        @Feature: DateTime Generator
+        @Assert: Datetime is created with random values
+        """
+
         result = self.factory.generate_datetime()
         self.assertTrue(
             isinstance(result, datetime.datetime),
             "Data is not instance of datetime.date.")
 
     def test_generate_datetime_2(self):
-        """Create a datetime with only min_date"""
+        """
+        @Test: Create a datetime with only min_date
+        @Feature: DateTime Generator
+        @Assert: Datetime is created and falls after minimum datetime
+        """
 
         # Today is...
         today = datetime.datetime.now()
@@ -44,7 +53,11 @@ class TestDates(unittest.TestCase):
             self.assertTrue(result >= min_date)
 
     def test_generate_datetime_3(self):
-        """Create a datetime with only max_date"""
+        """
+        @Test: Create a datetime with only max_date
+        @Feature: DateTime Generator
+        @Assert: Datetime is created and falls before minumum datetime
+        """
 
         # Today is...
         today = datetime.datetime.now()
@@ -56,7 +69,11 @@ class TestDates(unittest.TestCase):
             self.assertTrue(result <= max_date)
 
     def test_generate_datetime_4(self):
-        """Create a datetime with both arguments"""
+        """
+        @Test: Create a datetime with a 5-days datetime range
+        @Feature: DateTime Generator
+        @Assert: Datetime is created and falls within the datetime range
+        """
 
         # Today is...
         today = datetime.datetime.now()
@@ -74,7 +91,11 @@ class TestDates(unittest.TestCase):
             self.assertTrue(result <= max_date)
 
     def test_generate_datetime_5(self):
-        """Create a datetime with min_date == 'None'"""
+        """
+        @Test: Create a datetime with min_date = None
+        @Feature: DateTime Generator
+        @Assert: Datetime is created and falls within the datetime range
+        """
 
         # min_date for the platform
         min_date = (datetime.datetime.now() -
@@ -91,7 +112,11 @@ class TestDates(unittest.TestCase):
             self.assertTrue(result.year >= min_date.year)
 
     def test_generate_datetime_6(self):
-        """Create a datetime with max_date == 'None'"""
+        """
+        @Test: Create a datetime with max_date == None
+        @Feature: DateTime Generator
+        @Assert: Datetime is after minimum and before system max
+        """
 
         # max_date for the platform
         max_date = (datetime.datetime.now() +
@@ -108,7 +133,11 @@ class TestDates(unittest.TestCase):
             self.assertTrue(result.year >= min_date.year, result)
 
     def test_generate_datetime_7(self):
-        """Create a datetime with both arguments == 'None'"""
+        """
+        @Test: Create a datetime with specified datetime ranges
+        @Feature: DateTime Generator
+        @Assert: Datetime is created and falls in the specified datetime range
+        """
 
         # min_date for the platform
         min_date = (datetime.datetime.now() -
@@ -126,32 +155,76 @@ class TestDates(unittest.TestCase):
             self.assertTrue(result.year >= min_date.year, result)
 
     def test_generate_datetime_8(self):
-        """Create a datetime with non-Date arguments"""
+        """
+        @Test: Create a datetime with non-Date arguments
+        @Feature: DateTime Generator
+        @Assert: Datetime is not created due to value error
+        """
 
         with self.assertRaises(ValueError):
             self.factory.generate_datetime(
                 min_date='',
                 max_date=''
             )
+
+    def test_generate_datetime_9(self):
+        """
+        @Test: Create a datetime with non-Date arguments
+        @Feature: DateTime Generator
+        @Assert: Datetime is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
             self.factory.generate_datetime(
                 min_date='abc',
                 max_date='def'
             )
+
+    def test_generate_datetime_10(self):
+        """
+        @Test: Create a datetime with non-Date arguments
+        @Feature: DateTime Generator
+        @Assert: Datetime is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
             self.factory.generate_datetime(
                 min_date=1,
                 max_date=1
             )
+
+    def test_generate_datetime_11(self):
+        """
+        @Test: Create a datetime with non-Date arguments
+        @Feature: DateTime Generator
+        @Assert: Datetime is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
             self.factory.generate_datetime(
                 min_date=(1,),
                 max_date=(2, 3, 4)
             )
+
+    def test_generate_datetime_12(self):
+        """
+        @Test: Create a datetime with non-Date arguments
+        @Feature: DateTime Generator
+        @Assert: Datetime is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
             self.factory.generate_datetime(
                 min_date=['a', 'b'],
                 max_date=['c', 'd', 'e']
             )
 
-    def test_generate_datetime_9(self):
-        """Create a datetime with min_date > max_date"""
+    def test_generate_datetime_13(self):
+        """
+        @Test: Create a datetime with min_date > max_date
+        @Feature: DateTime Generator
+        @Assert: Datetime should not be created due to assertion error
+        """
 
         # Today is...
         today = datetime.datetime.now()

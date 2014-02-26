@@ -23,7 +23,11 @@ class TestBooleans(unittest.TestCase):
         cls.factory = FauxFactory()
 
     def test_generate_boolean_1(self):
-        """Create a random boolean value"""
+        """
+        @Test: Create a random boolean value
+        @Feature: Boolean Generator
+        @Assert: A random boolean value is generated
+        """
 
         for turn in xrange(100):
             result = self.factory.generate_boolean()
