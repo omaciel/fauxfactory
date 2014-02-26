@@ -1,6 +1,6 @@
 language: python
-install: "pip install nose"
-script: nosetests -vv tests
+install: "pip install nose nose-cov"
+script: nosetests --verbosity=2 --with-coverage --cover-package fauxfactory tests/
 
 notifications:
     email:
