@@ -31,6 +31,5 @@ class TestBooleans(unittest.TestCase):
 
         for turn in xrange(100):
             result = self.factory.generate_boolean()
-            self.assertTrue(
-                isinstance(result, bool),
-                "A valid boolean value was not generated.")
+            self.assertIsInstance(result, bool,
+                                  "A valid boolean value was not generated.")
