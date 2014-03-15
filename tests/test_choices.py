@@ -34,8 +34,9 @@ class TestChoices(unittest.TestCase):
 
         for turn in xrange(10):
             result = self.factory.generate_choice(choices)
-            self.assertTrue(
-                result in choices,
+            self.assertIn(
+                result,
+                choices,
                 "An invalid value was selected from available choices.")
 
     def test_generate_choice_2(self):
@@ -49,8 +50,9 @@ class TestChoices(unittest.TestCase):
 
         for turn in xrange(10):
             result = self.factory.generate_choice(choices)
-            self.assertTrue(
-                result in choices,
+            self.assertIn(
+                result,
+                choices,
                 "An invalid value was selected from available choices.")
 
     def test_generate_choice_3(self):
@@ -80,8 +82,9 @@ class TestChoices(unittest.TestCase):
 
         for turn in xrange(10):
             result = self.factory.generate_choice(choices)
-            self.assertTrue(
-                result in choices,
+            self.assertIn(
+                result,
+                choices,
                 "An invalid value was selected from available choices.")
 
     def test_generate_choice_5(self):
@@ -111,8 +114,9 @@ class TestChoices(unittest.TestCase):
 
         for turn in xrange(10):
             result = self.factory.generate_choice(choices)
-            self.assertTrue(
-                result in choices,
+            self.assertIn(
+                result,
+                choices,
                 "An invalid value was selected from available choices.")
 
     def test_generate_choice_7(self):
@@ -178,6 +182,23 @@ class TestChoices(unittest.TestCase):
 
         for turn in xrange(10):
             result = self.factory.generate_choice(choices)
-            self.assertTrue(
-                result in choices,
+            self.assertIn(
+                result,
+                choices,
+                "An invalid value was selected from available choices.")
+
+    def test_generate_choice_12(self):
+        """
+        @Test: Select a random value from words list
+        @Feature: Choice Generator
+        @Assert: Selects a random choice from list
+        """
+
+        choices = ['green', 'yellow', 'blue' 'white']
+
+        for turn in xrange(10):
+            result = self.factory.generate_choice(choices)
+            self.assertIn(
+                result,
+                choices,
                 "An invalid value was selected from available choices.")
