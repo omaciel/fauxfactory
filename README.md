@@ -68,6 +68,9 @@ Out[12]: datetime.time(22, 51, 2, 154172)
 
 In [13]: FauxFactory.generate_choice(['green', 'yellow', 'blue', 'white'])
 Out[13]: 'white'
+
+In [14]: FauxFactory.generate_url(subdomain=FauxFactory.generate_alpha())
+Out[14]: 'ftp://GtDPI.gov'
 ```
 
 Full documentation coming soon!
