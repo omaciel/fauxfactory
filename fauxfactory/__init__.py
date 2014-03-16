@@ -75,7 +75,7 @@ class FauxFactory(object):
             random.choice(string.ascii_letters) for i in range(length)
         )
 
-        return output_string
+        return unicode(output_string)
 
     @classmethod
     def generate_alphanumeric(cls, length=5):
@@ -98,7 +98,7 @@ class FauxFactory(object):
                 string.ascii_letters + string.digits
             ) for i in range(length))
 
-        return output_string
+        return unicode(output_string)
 
     @classmethod
     def generate_boolean(cls):
@@ -162,7 +162,6 @@ class FauxFactory(object):
 
         output_string = ''.join(
             unichr(random.choice(output_array)) for x in xrange(length))
-        output_string.encode('utf-8')
 
         return unicode(output_string)
 
@@ -338,7 +337,6 @@ class FauxFactory(object):
 
         output_string = ''.join(
             unichr(random.choice(output_array)) for x in xrange(length))
-        output_string.encode('utf-8')
 
         return unicode(output_string)
 
@@ -428,7 +426,7 @@ class FauxFactory(object):
             random.choice(string.digits) for i in range(length)
         )
 
-        return output_string
+        return unicode(output_string)
 
     @classmethod
     def generate_positive_integer(cls):
