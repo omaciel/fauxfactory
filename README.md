@@ -58,7 +58,7 @@ In [9]: FauxFactory.generate_datetime()
 Out[9]: datetime.datetime(2225, 5, 22, 18, 19, 12, 452661)
 
 In [10]: FauxFactory.generate_uuid()
-Out[10]: u'c9744eb8-ac59-11e3-8b5e-7cc3a1885119'
+Out[10]: u'81670150-ed11-4b28-88a0-7f61ba8338c4'
 
 In [11]: FauxFactory.generate_email()
 Out[11]: 'lVYREmpx@example.biz'
