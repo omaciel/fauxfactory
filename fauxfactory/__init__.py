@@ -509,6 +509,6 @@ class FauxFactory(object):
         @return: Returns a string representation for a UUID.
         """
 
-        output_uuid = unicode(uuid.uuid1())
+        output_uuid = unicode(uuid.uuid4())
 
         return output_uuid

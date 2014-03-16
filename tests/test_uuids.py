@@ -24,7 +24,7 @@ class TestUUID(unittest.TestCase):
 
     def test_generate_uuid_1(self):
         """
-        @Test: Create a random UUID value
+        @Test: Create a random UUID4 value
         @Feature: UUID Generator
         @Assert: A random UUID value is generated
         """
