@@ -1,12 +1,9 @@
 FauxFactory
 ===========
 
-.. |build| image:: https://travis-ci.org/omaciel/fauxfactory.png?branch=master   :target: https://travis-ci.org/omaciel/fauxfactory
-
+.. image:: https://travis-ci.org/omaciel/fauxfactory.png?branch=master   :target: https://travis-ci.org/omaciel/fauxfactory
 
 **FauxFactory** generates random data for your automated tests easily!
-
-**Build Status** |build|
 
 Available methods are:
 
