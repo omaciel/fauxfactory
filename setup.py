@@ -8,7 +8,7 @@ with open('README.md') as file:
 
 setup(
     name='fauxfactory',
-    version='0.1.0',
+    version='0.1.1',
     url='https://github.com/omaciel/fauxfactory',
     author='Og Maciel',
     author_email='omaciel@redhat.com',
