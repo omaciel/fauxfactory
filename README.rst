@@ -85,3 +85,14 @@ Or you can download the latest version and install it using ``setup.py``::
     git clone git@github.com:omaciel/fauxfactory.git
     cd fauxfactory
     python setup.py build install
+
+Version History
+---------------
+
+* Version 0.1.2
+ * Generators for ``email``, ``url`` and ``IP`` should return a
+   unicode string.
+* Version 0.1.1
+ * Fixed formatting of README for better display on Pypi.
+* Version 0.1.0
+ * Initial Release.

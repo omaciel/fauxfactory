@@ -8,7 +8,7 @@ with open('README.rst') as file:
 
 setup(
     name='fauxfactory',
-    version='0.1.1',
+    version='0.1.2',
     url='https://github.com/omaciel/fauxfactory',
     author='Og Maciel',
     author_email='omaciel@redhat.com',
