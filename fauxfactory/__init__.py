@@ -270,7 +270,9 @@ class FauxFactory(object):
         if tlds is None:
             tlds = cls.generate_choice(TLDS)
 
-        return "%s@%s.%s" % (name, domain, tlds)
+        email = "%s@%s.%s" % (name, domain, tlds)
+
+        return unicode(email)
 
     @classmethod
     def generate_integer(cls, min_value=None, max_value=None):
@@ -380,7 +382,7 @@ class FauxFactory(object):
             if ip3:
                 ipaddr = ipaddr + ".0"
 
-        return ipaddr
+        return unicode(ipaddr)
 
     @classmethod
     def generate_mac(cls, delimiter=":"):
@@ -404,7 +406,7 @@ class FauxFactory(object):
             chars[random.randrange(0, len(chars), 1)]+chars[random.randrange(
                 0, len(chars), 1)] for x in range(6))
 
-        return mac
+        return unicode(mac)
 
     @classmethod
     def generate_numeric_string(cls, length=5):
@@ -498,7 +500,9 @@ class FauxFactory(object):
         else:
             tlds = cls.generate_choice(TLDS)
 
-        return "%s://%s.%s" % (scheme, subdomain, tlds)
+        url = "%s://%s.%s" % (scheme, subdomain, tlds)
+
+        return unicode(url)
 
     @classmethod
     def generate_uuid(cls):
