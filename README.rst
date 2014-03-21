@@ -101,3 +101,16 @@ Version History
 - Version 0.1.0
 
  - Initial Release.
+
+Author
+------
+
+This software is developed by `Og Maciel`_.
+
+.. _Og Maciel: https://github.com/omaciel/
+
+Contributors
+------------
+| `Corey Welton <https://github.com/cswiii/>`_ - UTF-8 and CJK char
+generators were based off his work for `Robottelo <https://github.com/omaciel/robottelo>`_
+| `ElyÃ©zer Rezende <https://github.com/elyezer/>`_
