@@ -111,6 +111,5 @@ This software is developed by `Og Maciel`_.
 
 Contributors
 ------------
-| `Corey Welton <https://github.com/cswiii/>`_ - UTF-8 and CJK char
-generators were based off his work for `Robottelo <https://github.com/omaciel/robottelo>`_
-| `ElyÃ©zer Rezende <https://github.com/elyezer/>`_
+- `Corey Welton <https://github.com/cswiii/>`_
+- `Elyézer Rezende <https://github.com/elyezer/>`_
