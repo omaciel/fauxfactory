@@ -154,7 +154,7 @@ class FauxFactory(object):
             raise ValueError("%s is an invalid \'length\'." % length)
 
         cjk_range = []
-        cjk_range = ['4E00', '9FFF']
+        cjk_range = ['4E00', '9FCC']
         output_array = []
 
         for i in range(int(cjk_range[0], 16), int(cjk_range[1], 16)):
