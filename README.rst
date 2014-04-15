@@ -113,3 +113,4 @@ Contributors
 ------------
 - `Corey Welton <https://github.com/cswiii/>`_
 - `Elyézer Rezende <https://github.com/elyezer/>`_
+- `Jefferson Fausto Vaz <https://github.com/faustovaz/>`_
