@@ -486,3 +486,32 @@ class TestStrings(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             self.factory.generate_numeric_string(length='a')
+
+    def test_generate_string(self):
+        """
+        @Test: Create alphanumeric string with given lenght
+        @Feature: String Generator
+        @Assert: Alphanumeric string is created with size of 15 chars
+        """            
+        alphanumeric_string = self.factory.generate_string('alphanumeric', 15)
+        self.assertEqual(15, len(alphanumeric_string), "Generated string does not have the expected length" )
+
+    def test_generate_string2(self):
+        """ 
+        @Test: Create alpha string with given length
+        @Feature: String generator
+        @Assert: Alpha string is not created due to the lack of the parameter type
+        """
+        with self.assertRaises(Exception):
+            self.factory.generate_string('', 15)
+
+    def test_generate_string3(self):
+        """ 
+        @Test: Create a numeric string with the given length
+        @Feature: String generator
+        @Assert: Numeric string is created with size of 20 chars
+        """
+        numeric_string = self.factory.generate_string('numeric', 20)
+        self.assertEqual(20, len(numeric_string), "Generated string does not have the expected length")
+
+
