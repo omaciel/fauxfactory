@@ -52,7 +52,6 @@ Methods available
         >>>my_list = ['Jhon', 'Paul', 'Philip']
         >>>FauxFactory.generate_choice( my_list )
         'Paul'
-
         >>>my_tuple = (1,2,3,4,5)
         >>>FauxFactory.generate_choice( my_tuple )
         2
@@ -69,7 +68,6 @@ Methods available
         >>>max_date = datetime.date(2014, 05, 01)
         >>>print FauxFactory.generate_date( min_date, max_date )
         2014-02-13
-
         >>>print FauxFactory.generate_date( )
         2894-07-17
 
@@ -83,7 +81,6 @@ Methods available
 
         >>>FauxFactory.generate_email('ozzy')
         ozzy@test.com
-
         >>FauxFactory.generate_email(name='paul', domain='mycompany')
         paul@company.biz
 
@@ -102,14 +99,10 @@ Methods available
 
         >>>FauxFactory.generate_ipaddr( )
         13.169.231.199
-
         >>>FauxFactory.generate_ipaddr(ip3=True)
         165.209.148.0
-
         >>>FauxFactory.generate_ipaddr(ipv6=True)
         adab:a917:3226:c64b:8d02:cceb:c212:be9d
-
-
 
 
 
@@ -121,23 +114,33 @@ Methods available
 
 
 **FauxFactory.generate_negative_integer( )**
+    Generates a random negative integer number.
 
 
 **FauxFactory.generate_numeric_string( length=5 )**
+    Generates a numeric string of the size of ``length``.
 
 
 **FauxFactory.generate_positive_integer( )**
+    Generates a random positive integer number.
 
 
-**FauxFactory.generate_string( type, length=5 )**
-    Generates a random string according to the given ``type`` and ``length``.
-    Accpeted values for the parameter ``type`` are: 
+**FauxFactory.generate_string( str_type, length )**
+    Generates a random string according to the given ``str_type`` and ``length``.
+    Accpeted values for the parameter ``str_type`` are: 
         - "alphanumeric"                                                   
         - "alpha"                                                          
         - "latin1"                                                         
         - "numeric"                                                        
-        - "utf8"                                                           
+        - "utf8" ::
 
+            >>>FauxFactory.generate_string('alphanumeric', 10)
+            vhErvQKP3G
+            >>>FauxFactory.generate_string('alpha', 20)
+            PEIZvevsWZllMGmClnvf
+            >>>FauxFactory.generate_string('numeric', 5)
+            11356
+                                              
 
 **FauxFactory.generate_time( )**
 
