@@ -63,18 +63,54 @@ Methods available
 
 
 **FauxFactory.generate_date( min_date=None, max_date=None )**
+    Generates a random date between ``min_date`` and ``max_date``. Both parameters must be instances of datetime.date ::
+
+        >>>min_date = datetime.date(2014, 01, 01)
+        >>>max_date = datetime.date(2014, 05, 01)
+        >>>print FauxFactory.generate_date( min_date, max_date )
+        2014-02-13
+
+        >>>print FauxFactory.generate_date( )
+        2894-07-17
 
 
 **FauxFactory.generate_datetime( min_date=None, max_date=None )**
+    Generates a random datetime value between ``min_date`` and ``max_date``.
 
 
 **FauxFactory.generate_email( name=None, domain=None, tlds=None )**
+    Generates a random email according to the given ``name``, ``domain`` and ``tlds``(Top Level Domain Server). ::
+
+        >>>FauxFactory.generate_email('ozzy')
+        ozzy@test.com
+
+        >>FauxFactory.generate_email(name='paul', domain='mycompany')
+        paul@company.biz
 
 
 **FauxFactory.generate_integer( min_value=None, max_value=None )**
+    Generates a random integer number betweeen ``min_value`` and ``max_value``. ::
+
+        >>>FauxFactory.generate_integer(1, 10)
+        5
+        >>>FauxFactory.generate_integer()
+        2395249348247495256
 
 
 **FauxFactory.generate_ipaddr( ip3=False, ipv6=False )**
+    Generates a random ip address. ::
+
+        >>>FauxFactory.generate_ipaddr( )
+        13.169.231.199
+
+        >>>FauxFactory.generate_ipaddr(ip3=True)
+        165.209.148.0
+
+        >>>FauxFactory.generate_ipaddr(ipv6=True)
+        adab:a917:3226:c64b:8d02:cceb:c212:be9d
+
+
+
 
 
 **FauxFactory.generate_latin1( length=5 )**
