@@ -43,15 +43,15 @@ class FauxFactory(object):
         str_type = str_type.lower()
 
         if str_type == "alphanumeric":
-            cls.generate_alphanumeric(length)
+            return cls.generate_alphanumeric(length)
         elif str_type == "alpha":
-            cls.generate_alpha(length)
+            return cls.generate_alpha(length)
         elif str_type == "latin1":
-            cls.generate_latin1(length)
+            return cls.generate_latin1(length)
         elif str_type == 'numeric':
-            cls.generate_numeric_string(length)
+            return cls.generate_numeric_string(length)
         elif str_type == "utf8":
-            cls.generate_cjk(length)
+            return cls.generate_cjk(length)
         else:
             raise Exception("%s is not a supported string type." % str_type)
 
