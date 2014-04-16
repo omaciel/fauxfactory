@@ -89,6 +89,15 @@ Or you can download the latest version and install it using ``setup.py``::
 Version History
 ---------------
 
+- Version 0.1.3
+
+ - Updated character range for CJK generator to avoid generating
+   'tofu' characters.
+ - Added Contributors section to README.
+ - Fixed generate_string function (@faustovaz)
+ - New `documentation
+   <http://fauxfactory.readthedocs.org/en/latest/>`_ (@faustovaz)
+
 - Version 0.1.2
 
  - Generators for ``email``, ``url`` and ``IP`` should return a
