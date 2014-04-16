@@ -1,7 +1,7 @@
 FauxFactory's Documentation
 =======================================
 
-FauxFactory is a tool written in python that helps you generate random data for your automated tests!
+FauxFactory generates random data for your automated tests easily!
 
 .. toctree::
     :maxdepth: 2

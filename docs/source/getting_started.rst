@@ -1,7 +1,7 @@
 Getting Started
 ====================
 
-FauxFactory is a tool written in python that helps you generate random data for your automated tests!
+FauxFactory generates random data for your automated tests easily!
 
 Need a 10 characters string for one of your tests? ::
 
