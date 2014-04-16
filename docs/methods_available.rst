@@ -56,7 +56,10 @@ Methods available
 |
 
 **FauxFactory.generate_email( name=None, domain=None, tlds=None )**
-    Generates a random email according to the given ``name``, ``domain`` and ``tlds``(Top Level Domain Server). ::
+    Generates a random email according to the given ``name``,
+    ``domain`` and ``tlds``(Top Level Domain Server).
+
+ ::
 
         >>>FauxFactory.generate_email('ozzy')
         ozzy@test.com
