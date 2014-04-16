@@ -9,7 +9,7 @@ FauxFactory is available in PYPI and can be installed using pip::
 
 From source
 -----------
-You can install FauxFactory by downloading the lastest version of the source code::
+You can install FauxFactory by downloading the latest version of the source code::
 
     $ git clone git@github.com:omaciel/fauxfactory.git
     $ cd fauxfactory
