@@ -91,13 +91,13 @@ Installation
 ------------
 
 `FauxFactory is available at PyPI <http://pypi.python.org/pypi/fauxfactory>`_, so
-installing it is as simple as executing::
+installing it is as simple as executing
 
 .. code-block:: bash
 
     $ pip install fauxfactory
 
-Or you can download the latest version and install it using ``setup.py``::
+Or you can download the latest version and install it using ``setup.py``
 
 .. code-block:: bash
 
