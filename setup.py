@@ -1,10 +1,13 @@
 from distutils.core import setup
 
-with open('LICENSE') as file:
-    license = file.read()
+with open('README.rst') as f:
+    readme = f.read()
+with open('HISTORY.rst') as f:
+    history = f.read()
+with open('AUTHORS.rst') as f:
+    authors = f.read()
 
-with open('README.rst') as file:
-    long_description = file.read()
+long_description = readme + '\n\n' + authors + '\n\n' + history
 
 setup(
     name='fauxfactory',
@@ -15,13 +18,17 @@ setup(
     author_email='omaciel@redhat.com',
     url='https://github.com/omaciel/fauxfactory',
     packages=['fauxfactory'],
-    license=license,
+    keywords='python automation data',
+    license='Apache 2.0',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)',
+        'Natural Language :: English',
+        'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
         'Topic :: Software Development :: Testing',
     ]
 )

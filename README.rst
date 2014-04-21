@@ -12,71 +12,80 @@ FauxFactory
 
 **FauxFactory** generates random data for your automated tests easily!
 
-Available methods are:
+There are times when you're writing tests for your application when
+you need to pass random, non-specific data to the areas you are
+testing. For these scenarios when all you need is a random string,
+numbers, dates, times, email address, IP, etc, then FauxFactory can
+help!
 
-* FauxFactory.generate_alpha
-* FauxFactory.generate_alphanumeric
-* FauxFactory.generate_boolean
-* FauxFactory.generate_choice
-* FauxFactory.generate_cjk
-* FauxFactory.generate_date
-* FauxFactory.generate_datetime
-* FauxFactory.generate_email
-* FauxFactory.generate_integer
-* FauxFactory.generate_ipaddr
-* FauxFactory.generate_latin1
-* FauxFactory.generate_mac
-* FauxFactory.generate_negative_integer
-* FauxFactory.generate_numeric_string
-* FauxFactory.generate_positive_integer
-* FauxFactory.generate_string
-* FauxFactory.generate_time
-* FauxFactory.generate_url
-* FauxFactory.generate_uuid
+Available methods
+-----------------
+
+- generate_alpha
+- generate_alphanumeric
+- generate_boolean
+- generate_choice
+- generate_cjk
+- generate_date
+- generate_datetime
+- generate_email
+- generate_integer
+- generate_ipaddr
+- generate_latin1
+- generate_mac
+- generate_negative_integer
+- generate_numeric_string
+- generate_positive_integer
+- generate_string
+- generate_time
+- generate_url
+- generate_uuid
 
 Examples
 --------
 
->>> In [1]: from fauxfactory import FauxFactory
+.. code-block:: pycon
 
->>> In [2]: FauxFactory.generate_alphanumeric()
->>> Out[2]: '3MVWA'
+    >>> In [1]: from fauxfactory import FauxFactory
 
->>> In [3]: FauxFactory.generate_alphanumeric(length=15)
->>> Out[3]: 'Cxju7QlNhLMSzaV'
+    >>> In [2]: FauxFactory.generate_alphanumeric()
+    >>> Out[2]: u'3MVWA'
 
->>> In [4]: FauxFactory.generate_cjk()
->>> Out[4]: u'\u7914\u4f5e\u58cb\u63e5\u56ef'
+    >>> In [3]: FauxFactory.generate_alphanumeric(length=15)
+    >>> Out[3]: u'Cxju7QlNhLMSzaV'
 
->>> In [5]: FauxFactory.generate_latin1()
->>> Out[5]: u'\xea\xd4\xf2\xfa\xe5'
+    >>> In [4]: FauxFactory.generate_cjk()
+    >>> Out[4]: u'\u7914\u4f5e\u58cb\u63e5\u56ef'
 
->>> In [6]: FauxFactory.generate_url()
->>> Out[6]: 'http://test.edu'
+    >>> In [5]: FauxFactory.generate_latin1()
+    >>> Out[5]: u'\xea\xd4\xf2\xfa\xe5'
 
->>> In [7]: FauxFactory.generate_url(scheme='https', tlds='io')
->>> Out[7]: 'https://test.io'
+    >>> In [6]: FauxFactory.generate_url()
+    >>> Out[6]: u'http://test.edu'
 
->>> In [8]: FauxFactory.generate_ipaddr()
->>> Out[8]: '42.237.22.59'
+    >>> In [7]: FauxFactory.generate_url(scheme='https', tlds='io')
+    >>> Out[7]: u'https://test.io'
 
->>> In [9]: FauxFactory.generate_datetime()
->>> Out[9]: datetime.datetime(2225, 5, 22, 18, 19, 12, 452661)
+    >>> In [8]: FauxFactory.generate_ipaddr()
+    >>> Out[8]: u'42.237.22.59'
 
->>> In [10]: FauxFactory.generate_uuid()
->>> Out[10]: u'81670150-ed11-4b28-88a0-7f61ba8338c4'
+    >>> In [9]: FauxFactory.generate_datetime()
+    >>> Out[9]: datetime.datetime(2225, 5, 22, 18, 19, 12, 452661)
 
->>> In [11]: FauxFactory.generate_email()
->>> Out[11]: 'lVYREmpx@example.biz'
+    >>> In [10]: FauxFactory.generate_uuid()
+    >>> Out[10]: u'81670150-ed11-4b28-88a0-7f61ba8338c4'
 
->>> In [12]: FauxFactory.generate_time()
->>> Out[12]: datetime.time(22, 51, 2, 154172)
+    >>> In [11]: FauxFactory.generate_email()
+    >>> Out[11]: u'lVYREmpx@example.biz'
 
->>> In [13]: FauxFactory.generate_choice(['green', 'yellow', 'blue', 'white'])
->>> Out[13]: 'white'
+    >>> In [12]: FauxFactory.generate_time()
+    >>> Out[12]: datetime.time(22, 51, 2, 154172)
 
->>> In [14]: FauxFactory.generate_url(subdomain=FauxFactory.generate_alpha())
->>> Out[14]: 'ftp://GtDPI.gov'
+    >>> In [13]: FauxFactory.generate_choice(['green', 'yellow', 'blue', 'white'])
+    >>> Out[13]: 'white'
+
+    >>> In [14]: FauxFactory.generate_url(subdomain=FauxFactory.generate_alpha())
+    >>> Out[14]: u'ftp://GtDPI.gov'
 
 Installation
 ------------
@@ -84,48 +93,24 @@ Installation
 `FauxFactory is available at PyPI <http://pypi.python.org/pypi/fauxfactory>`_, so
 installing it is as simple as executing::
 
-    pip install fauxfactory
+.. code-block:: bash
+
+    $ pip install fauxfactory
 
 Or you can download the latest version and install it using ``setup.py``::
 
-    git clone git@github.com:omaciel/fauxfactory.git
-    cd fauxfactory
-    python setup.py build install
+.. code-block:: bash
 
-Version History
----------------
+    $ git clone git@github.com:omaciel/fauxfactory.git
+    $ cd fauxfactory
+    $ python setup.py build install
 
-- Version 0.1.3
+Contribute
+----------
 
- - Updated character range for CJK generator to avoid generating
-   'tofu' characters.
- - Added Contributors section to README.
- - Fixed generate_string function (@faustovaz)
- - New `documentation
-   <http://fauxfactory.readthedocs.org/en/latest/>`_ (@faustovaz)
+#. Fork `the repository`_ on GitHub to start making your changes to the **master** branch (or branch off of it).
+#. Write a test which shows that the bug was fixed or that the feature works as expected.
+#. Send a pull request and bug the maintainer until it gets merged and published. :) Make sure to add yourself to AUTHORS_.
 
-- Version 0.1.2
-
- - Generators for ``email``, ``url`` and ``IP`` should return a
-   unicode string.
-
-- Version 0.1.1
-
- - Fixed formatting of README for better display on Pypi.
-
-- Version 0.1.0
-
- - Initial Release.
-
-Author
-------
-
-This software is developed by `Og Maciel`_.
-
-.. _Og Maciel: https://github.com/omaciel/
-
-Contributors
-------------
-- `Corey Welton <https://github.com/cswiii/>`_
-- `Elyézer Rezende <https://github.com/elyezer/>`_
-- `Jefferson Fausto Vaz <https://github.com/faustovaz/>`_
+.. _`the repository`: http://github.com/omaciel/fauxfactory
+.. _AUTHORS: https://github.com/omaciel/fauxfactory/blob/master/AUTHORS.rst
