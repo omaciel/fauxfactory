@@ -1,6 +1,7 @@
 language: python
-install: "pip install nose nose-cov"
+install: "pip install nose nose-cov coveralls"
 script: nosetests --verbosity=2 --with-coverage --cover-package fauxfactory tests/
+after_success: coveralls
 
 notifications:
     email:
