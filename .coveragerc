@@ -1,0 +1,7 @@
+[run]
+source = fauxfactory
+
+[report]
+omit =
+    */python?.?/*
+    */site-packages/nose/*
