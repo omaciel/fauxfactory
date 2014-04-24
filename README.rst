@@ -8,7 +8,10 @@ FauxFactory
     :target: http://badge.fury.io/py/fauxfactory
 
 .. image:: https://pypip.in/d/fauxfactory/badge.png
-        :target: https://crate.io/packages/fauxfactory/
+   :target: https://crate.io/packages/fauxfactory/
+
+.. image:: https://coveralls.io/repos/omaciel/fauxfactory/badge.png?branch=master
+   :target: https://coveralls.io/r/omaciel/fauxfactory?branch=master
 
 **FauxFactory** generates random data for your automated tests easily!
 

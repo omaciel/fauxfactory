@@ -1,6 +1,6 @@
 language: python
-install: "pip install nose nose-cov coverage coveralls"
-script: nosetests --verbosity=2 && coverage report --fail-under=100
+install: "pip install nose nose-cov coveralls"
+script: nosetests --verbosity=2 --with-coverage --cover-package fauxfactory tests/
 after_success: coveralls
 
 notifications:
