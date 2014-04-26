@@ -236,3 +236,16 @@ class TestDates(unittest.TestCase):
                 min_date=min_date,
                 max_date=today
             )
+
+    def test_generate_date_14(self):
+        """
+        @Test: max-date must be a Datetime type
+        @Feature: DateTime Generator
+        @Assert: Datetime should not be created due to value error
+        """
+
+        with self.assertRaises(ValueError):
+            self.factory.generate_date(
+                min_date=datetime.datetime.now(),
+                max_date='foo'
+            )

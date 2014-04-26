@@ -147,6 +147,17 @@ class TestStrings(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.factory.generate_alpha(length='a')
 
+    def test_generate_alpha_9(self):
+        """
+        @Test: Create alpha string of varied length
+        @Feature: String Generator
+        @Assert: Alpha string is created
+        """
+
+        result = self.factory.generate_string('alpha', 15)
+        self.assertTrue(
+            len(result) > 0, "Empty string was generated")
+
     def test_generate_alphanumeric_1(self):
         """
         @Test: Create alphanumeric string of varied length
@@ -317,6 +328,17 @@ class TestStrings(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.factory.generate_cjk(length='a')
 
+    def test_generate_cjk_9(self):
+        """
+        @Test: Create CJK string of varied length
+        @Feature: String Generator
+        @Assert: CJK string is generated
+        """
+
+        result = self.factory.generate_string('utf8', 15)
+        self.assertTrue(
+            len(result) > 0, "Empty string was generated")
+
     def test_generate_latin1_1(self):
         """
         @Test: Create latin1 string of varied length
@@ -401,6 +423,17 @@ class TestStrings(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             self.factory.generate_latin1(length='a')
+
+    def test_generate_latin1_9(self):
+        """
+        @Test: Create latin1 string of varied length
+        @Feature: String Generator
+        @Assert: Latin1 string is generated
+        """
+
+        result = self.factory.generate_string('latin1', 15)
+        self.assertTrue(
+            len(result) > 0, "Empty string was generated")
 
     def test_generate_numeric_string_1(self):
         """
@@ -492,26 +525,28 @@ class TestStrings(unittest.TestCase):
         @Test: Create alphanumeric string with given lenght
         @Feature: String Generator
         @Assert: Alphanumeric string is created with size of 15 chars
-        """            
+        """
         alphanumeric_string = self.factory.generate_string('alphanumeric', 15)
-        self.assertEqual(15, len(alphanumeric_string), "Generated string does not have the expected length" )
+        self.assertEqual(15, len(alphanumeric_string),
+                         "Generated string does not have the expected length")
 
     def test_generate_string2(self):
-        """ 
+        """
         @Test: Create alpha string with given length
         @Feature: String generator
-        @Assert: Alpha string is not created due to the lack of the parameter type
+        @Assert: Alpha string is not created due to the lack of parameter type
         """
         with self.assertRaises(Exception):
             self.factory.generate_string('', 15)
 
     def test_generate_string3(self):
-        """ 
+        """
         @Test: Create a numeric string with the given length
         @Feature: String generator
         @Assert: Numeric string is created with size of 20 chars
         """
         numeric_string = self.factory.generate_string('numeric', 20)
-        self.assertEqual(20, len(numeric_string), "Generated string does not have the expected length")
+        self.assertEqual(20, len(numeric_string),
+                         "Generated string does not have the expected length")
 
 

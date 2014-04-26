@@ -202,3 +202,15 @@ class TestChoices(unittest.TestCase):
                 result,
                 choices,
                 "An invalid value was selected from available choices.")
+
+    def test_generate_choice_13(self):
+        """
+        @Test: Cannot use None for Choice generator
+        @Feature: Choice Generator
+        @Assert: ValueError is raised
+        """
+
+        choices = None
+
+        with self.assertRaises(ValueError):
+            self.factory.generate_choice(choices)
