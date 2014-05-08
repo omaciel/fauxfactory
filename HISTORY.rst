@@ -3,9 +3,10 @@
 Release History
 ---------------
 
-0.1.4 (YYYY-MM-DD)
+0.2.0 (2014-05-08)
 ++++++++++++++++++
 
+- Added new 'Lorem Ipsum' generator.
 - Changed license from LGPL3+ to Apache 2.0
 
 0.1.3 (2014-04-16)

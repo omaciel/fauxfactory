@@ -34,6 +34,7 @@ Available methods
 - generate_email
 - generate_integer
 - generate_ipaddr
+- generate_iplum
 - generate_latin1
 - generate_mac
 - generate_negative_integer
@@ -89,6 +90,9 @@ Examples
 
     >>> In [14]: FauxFactory.generate_url(subdomain=FauxFactory.generate_alpha())
     >>> Out[14]: u'ftp://GtDPI.gov'
+
+    >>> In [15]: FauxFactory.generate_iplum()
+    >>> Out[3]: u'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 
 Installation
 ------------
