@@ -15,6 +15,7 @@ import uuid
 
 from collections import Iterable
 from fauxfactory.constants import (
+    LOREM_IPSUM_TEXT,
     MAX_YEARS, MIN_YEARS,
     SCHEMES, SUBDOMAINS, TLDS
 )
@@ -306,6 +307,69 @@ class FauxFactory(object):
         value = random.randint(min_value, max_value)
 
         return value
+
+    @classmethod
+    def generate_iplum(cls, words=None, paragraphs=None):
+        """
+        Returns a lorem ipsum string. If no arguments are passed, then
+        return the entire default lorem ipsum string.
+
+        @rtype words: int
+        @param words: How many words to return.
+        @rtype paragraphs: int
+        @param paragraphs: How many paragraphs to return.
+
+        @rtype string
+        @return: A lorem ipsum string.
+        """
+
+        # Check parameters
+        if words is None or words == 0:
+            words = len(LOREM_IPSUM_TEXT.split())
+        if paragraphs is None:
+            paragraphs = 1
+
+        if not isinstance(words, int) or words < 0:
+            raise ValueError(
+                "Cannot generate a string with negative number of words.")
+
+        if not isinstance(paragraphs, int) or paragraphs <= 0:
+            raise ValueError(
+                "Cannot generate a string with negative number of paragraphs.")
+
+        all_words = LOREM_IPSUM_TEXT.split()
+        total_words_needed = words * paragraphs
+
+        # Do we have enough words?
+        if words < total_words_needed:
+            quotient = total_words_needed / len(all_words)
+            modulus = total_words_needed % len(all_words)
+
+            all_words = all_words * (quotient + modulus)
+
+        result = u""
+        start_pos = 0
+        for idx in range(0, paragraphs):
+            sentence = u" ".join(
+                all_words[start_pos:start_pos + words])
+
+            # Remove comma from the end, if it exists
+            if sentence.endswith(','):
+                sentence = sentence.rstrip(',')
+            # Remove period from the end, if it exists
+            if sentence.endswith('.'):
+                sentence = sentence.rstrip('.')
+
+            # Each sentence should be properly capitalized
+            cap_sentence = [
+                frag.capitalize() + u'.' for frag in sentence.split('. ')]
+
+            # Add newline at the end
+            result += " ".join(cap_sentence) + u"\n"
+
+            # Increment positional counter
+            start_pos += words
+        return unicode(result.rstrip())
 
     @classmethod
     def generate_latin1(cls, length=5):
