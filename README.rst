@@ -5,7 +5,7 @@ FauxFactory
    :target: https://travis-ci.org/omaciel/fauxfactory
 
 .. image:: https://badge.fury.io/py/fauxfactory.png
-    :target: http://badge.fury.io/py/fauxfactory
+   :target: http://badge.fury.io/py/fauxfactory
 
 .. image:: https://pypip.in/d/fauxfactory/badge.png
    :target: https://crate.io/packages/fauxfactory/

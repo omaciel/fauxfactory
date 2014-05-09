@@ -3,6 +3,13 @@
 Release History
 ---------------
 
+
+0.2.0 (2014-05-08)
+++++++++++++++++++
+
+- Fixed issue that prevented strings longer than the full length of
+  LOREM_IPSUM_TEXT from being generated (Guthub Issue #16).
+
 0.2.0 (2014-05-08)
 ++++++++++++++++++
 

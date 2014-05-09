@@ -337,15 +337,16 @@ class FauxFactory(object):
             raise ValueError(
                 "Cannot generate a string with negative number of paragraphs.")
 
+        # Original Lorem Ipsum string
         all_words = LOREM_IPSUM_TEXT.split()
+        # How many words do we need?
         total_words_needed = words * paragraphs
 
-        # Do we have enough words?
-        if words < total_words_needed:
-            quotient = total_words_needed / len(all_words)
-            modulus = total_words_needed % len(all_words)
+        quotient = total_words_needed / len(all_words)
+        modulus = total_words_needed % len(all_words)
 
-            all_words = all_words * (quotient + modulus)
+        # Pool of words to use
+        all_words = all_words * (quotient + modulus)
 
         result = u""
         start_pos = 0

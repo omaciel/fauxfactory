@@ -48,7 +48,7 @@ class TestLoremIpsum(unittest.TestCase):
         """
 
         for i in xrange(20):
-            length = random.randint(1, 50)
+            length = random.randint(1, 500)
             result = self.factory.generate_iplum(words=length)
             self.assertEqual(
                 len(result.split()),
@@ -134,3 +134,27 @@ class TestLoremIpsum(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             self.factory.generate_iplum(paragraphs='a')
+
+    def test_generate_loremipsum_10(self):
+        """
+        @Test: Create a lorem ipsum string with random words/paragraphs
+        @Feature: Lorem Ipsum Generator
+        @Assert: lorem ipsum value has exact number of words/paragraphs
+        """
+
+        for i in xrange(20):
+            words = random.randint(1, 500)
+            paragraphs = random.randint(1, 500)
+            result = self.factory.generate_iplum(
+                words=words, paragraphs=paragraphs)
+            self.assertEqual(
+                len(result.split('\n')),
+                paragraphs,
+                ("Generated string does not have the correct number"
+                 "of paragraphs"))
+            for sentence in result.split('\n'):
+                self.assertEqual(
+                    len(sentence.split()),
+                    words,
+                    ("Generated string does not have the correct"
+                     "number of words"))
