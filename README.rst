@@ -48,9 +48,9 @@ Available methods
 Examples
 --------
 
-.. code-block:: pycon
+Some examples::
 
-    >>> In [1]: from fauxfactory import FauxFactory
+    >>> In [0]: from fauxfactory import FauxFactory
 
     >>> In [2]: FauxFactory.generate_alphanumeric()
     >>> Out[2]: u'3MVWA'
@@ -92,21 +92,17 @@ Examples
     >>> Out[14]: u'ftp://GtDPI.gov'
 
     >>> In [15]: FauxFactory.generate_iplum()
-    >>> Out[3]: u'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+    >>> Out[15]: u'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 
 Installation
 ------------
 
 `FauxFactory is available at PyPI <http://pypi.python.org/pypi/fauxfactory>`_, so
-installing it is as simple as executing
-
-.. code-block:: bash
+installing it is as simple as executing::
 
     $ pip install fauxfactory
 
-Or you can download the latest version and install it using ``setup.py``
-
-.. code-block:: bash
+Or you can download the latest version and install it using ``setup.py``::
 
     $ git clone git@github.com:omaciel/fauxfactory.git
     $ cd fauxfactory
@@ -117,7 +113,7 @@ Contribute
 
 #. Fork `the repository`_ on GitHub to start making your changes to the **master** branch (or branch off of it).
 #. Write a test which shows that the bug was fixed or that the feature works as expected.
-#. Send a pull request and bug the maintainer until it gets merged and published. :) Make sure to add yourself to AUTHORS_.
+#. Send a pull request and bug the maintainer until it gets merged and published. :) Make sure to add yourself to `AUTHORS`_.
 
 .. _`the repository`: http://github.com/omaciel/fauxfactory
-.. _AUTHORS: https://github.com/omaciel/fauxfactory/blob/master/AUTHORS.rst
+.. _`AUTHORS`: https://github.com/omaciel/fauxfactory/blob/master/AUTHORS.rst

@@ -4,7 +4,7 @@ contributors.
 Development Lead
 ````````````````
 
--  Og Maciel `@omaciel https://github.com/omaciel/`_
+- Og Maciel `@omaciel <https://github.com/omaciel/>`_
 
 Contributors
 ````````````

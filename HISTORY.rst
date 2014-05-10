@@ -1,10 +1,9 @@
 .. :changelog:
 
 Release History
----------------
+```````````````
 
-
-0.2.0 (2014-05-08)
+0.2.1 (2014-05-09)
 ++++++++++++++++++
 
 - Fixed issue that prevented strings longer than the full length of
