@@ -30,7 +30,7 @@ class TestURLs(unittest.TestCase):
         @Assert:  URL should be created with random values
         """
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_url()
             self.assertTrue(
                 len(result) > 0,
@@ -47,7 +47,7 @@ class TestURLs(unittest.TestCase):
         @Assert:  URL should be created with \'http\' scheme
         """
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_url(scheme='http')
             self.assertTrue(
                 len(result) > 0,
@@ -64,12 +64,11 @@ class TestURLs(unittest.TestCase):
         @Assert: URL should be created with \'https\' scheme
         """
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_url(scheme='https')
             self.assertTrue(
                 len(result) > 0,
                 "A valid URL was not generated.")
-            print result, result.split(":")
             self.assertTrue(
                 result.split(":")[0] == 'https',
                 "URL does not start with https"
@@ -82,7 +81,7 @@ class TestURLs(unittest.TestCase):
         @Assert: URL should be created with \'ftp\' scheme
         """
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_url(scheme='ftp')
             self.assertTrue(
                 len(result) > 0,
@@ -99,7 +98,7 @@ class TestURLs(unittest.TestCase):
         @Assert: URL should be created with a random scheme
         """
 
-        for turn in xrange(10):
+        for turn in range(10):
             scheme = self.factory.generate_alphanumeric()
             with self.assertRaises(ValueError):
                 self.factory.generate_url(scheme=scheme)
@@ -111,7 +110,7 @@ class TestURLs(unittest.TestCase):
         @Assert: URL should be created with provided subdomain
         """
 
-        for turn in xrange(10):
+        for turn in range(10):
             subdomain = self.factory.generate_alphanumeric()
             result = self.factory.generate_url(subdomain=subdomain)
             self.assertTrue(
@@ -154,7 +153,7 @@ class TestURLs(unittest.TestCase):
         @Assert: URL should not be created
         """
 
-        for turn in xrange(10):
+        for turn in range(10):
             subdomain = self.factory.generate_cjk()
             with self.assertRaises(ValueError):
                 self.factory.generate_url(subdomain=subdomain)
@@ -166,7 +165,7 @@ class TestURLs(unittest.TestCase):
         @Assert: URL should be created with the TLDS provided
         """
 
-        for turn in xrange(10):
+        for turn in range(10):
             tlds = self.factory.generate_alpha(length=3)
             result = self.factory.generate_url(tlds=tlds)
             self.assertTrue(
@@ -184,7 +183,7 @@ class TestURLs(unittest.TestCase):
         @Assert: URL should not be created
         """
 
-        for turn in xrange(10):
+        for turn in range(10):
             with self.assertRaises(ValueError):
                 tlds = self.factory.generate_numeric_string(length=3)
                 self.factory.generate_url(tlds=tlds)
@@ -196,6 +195,6 @@ class TestURLs(unittest.TestCase):
         @Assert: URL should not be created
         """
 
-        for turn in xrange(10):
+        for turn in range(10):
             with self.assertRaises(ValueError):
                 self.factory.generate_url(tlds=" ")

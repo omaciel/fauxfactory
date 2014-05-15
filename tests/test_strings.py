@@ -40,7 +40,7 @@ class TestStrings(unittest.TestCase):
         @Assert: Alpha string of fixed length is generated
         """
 
-        for length in xrange(2, 12, 2):
+        for length in range(2, 12, 2):
             result = self.factory.generate_alpha(length)
             self.assertEqual(
                 len(result),
@@ -176,7 +176,7 @@ class TestStrings(unittest.TestCase):
         @Assert: Alphanumeric string with fixed length is created
         """
 
-        for length in xrange(2, 12, 2):
+        for length in range(2, 12, 2):
             result = self.factory.generate_alphanumeric(length)
             self.assertEqual(
                 len(result),
@@ -261,7 +261,7 @@ class TestStrings(unittest.TestCase):
         @Assert: CJK string with fixed length is generated
         """
 
-        for length in xrange(2, 12, 2):
+        for length in range(2, 12, 2):
             result = self.factory.generate_cjk(length)
             self.assertEqual(
                 len(result),
@@ -357,7 +357,7 @@ class TestStrings(unittest.TestCase):
         @Assert: Latin1 string with fixed length is created
         """
 
-        for length in xrange(2, 12, 2):
+        for length in range(2, 12, 2):
             result = self.factory.generate_latin1(length)
             self.assertEqual(
                 len(result),
@@ -453,7 +453,7 @@ class TestStrings(unittest.TestCase):
         @Assert: Numeric string is created
         """
 
-        for length in xrange(2, 12, 2):
+        for length in range(2, 12, 2):
             result = self.factory.generate_numeric_string(length)
             self.assertEqual(
                 len(result),

@@ -47,7 +47,7 @@ class TestLoremIpsum(unittest.TestCase):
         @Assert: lorem ipsum value has exact number of words
         """
 
-        for i in xrange(20):
+        for i in range(20):
             length = random.randint(1, 500)
             result = self.factory.generate_iplum(words=length)
             self.assertEqual(
@@ -62,7 +62,7 @@ class TestLoremIpsum(unittest.TestCase):
         @Assert: length lorem ipsum value has exact number of paragraphs
         """
 
-        for i in xrange(20):
+        for i in range(20):
             length = random.randint(1, 20)
             result = self.factory.generate_iplum(paragraphs=length)
             self.assertEqual(
@@ -142,7 +142,7 @@ class TestLoremIpsum(unittest.TestCase):
         @Assert: lorem ipsum value has exact number of words/paragraphs
         """
 
-        for i in xrange(20):
+        for i in range(20):
             words = random.randint(1, 500)
             paragraphs = random.randint(1, 500)
             result = self.factory.generate_iplum(

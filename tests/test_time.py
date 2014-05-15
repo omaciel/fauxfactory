@@ -30,7 +30,7 @@ class TestTime(unittest.TestCase):
         @Assert: A random UUID value is generated
         """
 
-        for turn in xrange(100):
+        for turn in range(100):
             result = self.factory.generate_time()
             self.assertIsInstance(result, datetime.time,
                                   "A valid Time value was not generated.")

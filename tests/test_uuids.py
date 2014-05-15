@@ -29,7 +29,7 @@ class TestUUID(unittest.TestCase):
         @Assert: A random UUID value is generated
         """
 
-        for turn in xrange(100):
+        for turn in range(100):
             result = self.factory.generate_uuid()
             self.assertGreater(len(result), 0,
                                "A valid UUID value was not generated.")

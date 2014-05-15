@@ -30,9 +30,9 @@ class TestChoices(unittest.TestCase):
         @Assert: Selects a random choice from options
         """
 
-        choices = xrange(5)
+        choices = range(5)
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_choice(choices)
             self.assertIn(
                 result,
@@ -48,7 +48,7 @@ class TestChoices(unittest.TestCase):
 
         choices = string.ascii_letters + string.digits
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_choice(choices)
             self.assertIn(
                 result,
@@ -64,7 +64,7 @@ class TestChoices(unittest.TestCase):
 
         choices = [1, ]
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_choice(choices)
             self.assertEqual(
                 result,
@@ -80,7 +80,7 @@ class TestChoices(unittest.TestCase):
 
         choices = [1, 2, 3, 9, 10, 11, 100, 101, 102]
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_choice(choices)
             self.assertIn(
                 result,
@@ -96,7 +96,7 @@ class TestChoices(unittest.TestCase):
 
         choices = (1, )
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_choice(choices)
             self.assertEqual(
                 result,
@@ -112,7 +112,7 @@ class TestChoices(unittest.TestCase):
 
         choices = (1, 2, 3, 9, 10, 11, 100, 101, 102, )
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_choice(choices)
             self.assertIn(
                 result,
@@ -180,7 +180,7 @@ class TestChoices(unittest.TestCase):
             {'Name': 'Pete', 'Age': 79},
         ]
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_choice(choices)
             self.assertIn(
                 result,
@@ -196,7 +196,7 @@ class TestChoices(unittest.TestCase):
 
         choices = ['green', 'yellow', 'blue' 'white']
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_choice(choices)
             self.assertIn(
                 result,
