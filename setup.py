@@ -1,13 +1,16 @@
+import os
+
 from distutils.core import setup
 
-with open('README.rst') as f:
-    readme = f.read()
-with open('HISTORY.rst') as f:
-    history = f.read()
-with open('AUTHORS.rst') as f:
-    authors = f.read()
 
-long_description = readme + '\n\n' + authors + '\n\n' + history
+def read(*paths):
+    """Build a file path from *paths* and return the contents."""
+    with open(os.path.join(*paths), 'r') as f:
+        return f.read()
+
+long_description = (read('README.rst') + '\n\n' +
+                    read('AUTHORS.rst') + '\n\n' +
+                    read('HISTORY.rst'))
 
 setup(
     name='fauxfactory',
@@ -29,6 +32,7 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.3',
         'Topic :: Software Development :: Testing',
     ]
 )

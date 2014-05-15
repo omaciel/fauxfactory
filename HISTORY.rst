@@ -3,6 +3,11 @@
 Release History
 ```````````````
 
+0.2.x (xxxx-xx-xx)
+++++++++++++++++++
+
+- FauxFactory is now Python 3 compatible
+
 0.2.1 (2014-05-09)
 ++++++++++++++++++
 
