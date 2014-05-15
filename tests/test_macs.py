@@ -110,4 +110,5 @@ class TestMacs(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_mac(delimiter=random.choice(string.letters))
+            self.factory.generate_mac(
+                delimiter=random.choice(string.ascii_letters))

@@ -34,8 +34,8 @@ class TestEmails(unittest.TestCase):
 
         # Regex for email validation
         emailinator = re.compile(REGEX)
-        for turn in xrange(100):
+        for turn in range(100):
             result = self.factory.generate_email()
-            print result
+
             self.assertIsNotNone(emailinator.match(result),
                                  "A valid email value was not generated.")

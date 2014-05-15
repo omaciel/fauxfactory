@@ -29,7 +29,7 @@ class TestBooleans(unittest.TestCase):
         @Assert: A random boolean value is generated
         """
 
-        for turn in xrange(100):
+        for turn in range(100):
             result = self.factory.generate_boolean()
             self.assertIsInstance(result, bool,
                                   "A valid boolean value was not generated.")

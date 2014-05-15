@@ -21,6 +21,25 @@ from fauxfactory.constants import (
 )
 
 
+def codify(data):
+    """
+    Handles unicode compatibility with Python 3
+
+    @type data: str
+    @param data: String to return using unicode.
+
+    @rtype: str
+    @return: String in unicode format.
+    """
+
+    try:
+        result = unicode(data)
+    except NameError:
+        result = data
+
+    return result
+
+
 class FauxFactory(object):
     """
     Generate random data for your tests.
@@ -72,11 +91,11 @@ class FauxFactory(object):
         if not isinstance(length, int) or length <= 0:
             raise ValueError("%s is an invalid \'length\'." % length)
 
-        output_string = ''.join(
+        output_string = u''.join(
             random.choice(string.ascii_letters) for i in range(length)
         )
 
-        return unicode(output_string)
+        return codify(output_string)
 
     @classmethod
     def generate_alphanumeric(cls, length=5):
@@ -94,12 +113,12 @@ class FauxFactory(object):
         if not isinstance(length, int) or length <= 0:
             raise ValueError("%s is an invalid \'length\'." % length)
 
-        output_string = ''.join(
+        output_string = u''.join(
             random.choice(
                 string.ascii_letters + string.digits
             ) for i in range(length))
 
-        return unicode(output_string)
+        return codify(output_string)
 
     @classmethod
     def generate_boolean(cls):
@@ -161,10 +180,14 @@ class FauxFactory(object):
         for i in range(int(cjk_range[0], 16), int(cjk_range[1], 16)):
             output_array.append(i)
 
-        output_string = ''.join(
-            unichr(random.choice(output_array)) for x in xrange(length))
+        try:
+            output_string = u''.join(
+                unichr(random.choice(output_array)) for x in range(length))
+        except NameError:
+            output_string = u''.join(
+                chr(random.choice(output_array)) for x in range(length))
 
-        return unicode(output_string)
+        return codify(output_string)
 
     @classmethod
     def generate_date(cls, min_date=None, max_date=None):
@@ -271,9 +294,9 @@ class FauxFactory(object):
         if tlds is None:
             tlds = cls.generate_choice(TLDS)
 
-        email = "%s@%s.%s" % (name, domain, tlds)
+        email = u"%s@%s.%s" % (name, domain, tlds)
 
-        return unicode(email)
+        return codify(email)
 
     @classmethod
     def generate_integer(cls, min_value=None, max_value=None):
@@ -290,8 +313,8 @@ class FauxFactory(object):
         """
 
         # Platform-specific value range for integers
-        _min_value = - sys.maxint - 1
-        _max_value = sys.maxint
+        _min_value = - sys.maxsize - 1
+        _max_value = sys.maxsize
 
         if min_value is None:
             min_value = _min_value
@@ -342,7 +365,7 @@ class FauxFactory(object):
         # How many words do we need?
         total_words_needed = words * paragraphs
 
-        quotient = total_words_needed / len(all_words)
+        quotient = int(total_words_needed / len(all_words))
         modulus = total_words_needed % len(all_words)
 
         # Pool of words to use
@@ -370,7 +393,7 @@ class FauxFactory(object):
 
             # Increment positional counter
             start_pos += words
-        return unicode(result.rstrip())
+        return codify(result.rstrip())
 
     @classmethod
     def generate_latin1(cls, length=5):
@@ -402,10 +425,14 @@ class FauxFactory(object):
         for i in range(int(range2[0], 16), int(range2[1], 16)):
             output_array.append(i)
 
-        output_string = ''.join(
-            unichr(random.choice(output_array)) for x in xrange(length))
+        try:
+            output_string = u''.join(
+                unichr(random.choice(output_array)) for x in range(length))
+        except NameError:
+            output_string = u''.join(
+                chr(random.choice(output_array)) for x in range(length))
 
-        return unicode(output_string)
+        return codify(output_string)
 
     @classmethod
     def generate_negative_integer(cls):
@@ -436,18 +463,18 @@ class FauxFactory(object):
 
         if ipv6:
             # StackOverflow.com questions: generate-random-ipv6-address
-            ipaddr = ':'.join('{:x}'.format(
+            ipaddr = u':'.join('{:x}'.format(
                 random.randint(0, 2**16 - 1)
             ) for i in range(8))
         else:
             rng = 3 if ip3 else 4
-            ipaddr = ".".join(
+            ipaddr = u".".join(
                 str(random.randrange(0, 255, 1)) for x in range(rng))
 
             if ip3:
-                ipaddr = ipaddr + ".0"
+                ipaddr = ipaddr + u".0"
 
-        return unicode(ipaddr)
+        return codify(ipaddr)
 
     @classmethod
     def generate_mac(cls, delimiter=":"):
@@ -471,7 +498,7 @@ class FauxFactory(object):
             chars[random.randrange(0, len(chars), 1)]+chars[random.randrange(
                 0, len(chars), 1)] for x in range(6))
 
-        return unicode(mac)
+        return codify(mac)
 
     @classmethod
     def generate_numeric_string(cls, length=5):
@@ -489,11 +516,11 @@ class FauxFactory(object):
         if not isinstance(length, int) or length <= 0:
             raise ValueError("%s is an invalid \'length\'." % length)
 
-        output_string = ''.join(
+        output_string = u''.join(
             random.choice(string.digits) for i in range(length)
         )
 
-        return unicode(output_string)
+        return codify(output_string)
 
     @classmethod
     def generate_positive_integer(cls):
@@ -565,9 +592,9 @@ class FauxFactory(object):
         else:
             tlds = cls.generate_choice(TLDS)
 
-        url = "%s://%s.%s" % (scheme, subdomain, tlds)
+        url = u"%s://%s.%s" % (scheme, subdomain, tlds)
 
-        return unicode(url)
+        return codify(url)
 
     @classmethod
     def generate_uuid(cls):
@@ -578,6 +605,6 @@ class FauxFactory(object):
         @return: Returns a string representation for a UUID.
         """
 
-        output_uuid = unicode(uuid.uuid4())
+        output_uuid = codify(str(uuid.uuid4()))
 
         return output_uuid

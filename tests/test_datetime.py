@@ -48,7 +48,7 @@ class TestDates(unittest.TestCase):
         # Five minutes ago
         min_date = today - datetime.timedelta(seconds=5*60)
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_datetime(min_date=min_date)
             self.assertTrue(result >= min_date)
 
@@ -64,7 +64,7 @@ class TestDates(unittest.TestCase):
         # Five minutes into the future
         max_date = today + datetime.timedelta(seconds=5*60)
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_datetime(max_date=max_date)
             self.assertTrue(result <= max_date)
 
@@ -82,7 +82,7 @@ class TestDates(unittest.TestCase):
         # Five minutes into the future
         max_date = today + datetime.timedelta(seconds=5*60)
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_datetime(
                 min_date=min_date,
                 max_date=max_date
@@ -103,7 +103,7 @@ class TestDates(unittest.TestCase):
         # max_date = min_date + 1 year
         max_date = min_date + datetime.timedelta(365 * 1)
 
-        for turn in xrange(20):
+        for turn in range(20):
             result = self.factory.generate_datetime(
                 min_date=None,
                 max_date=max_date
@@ -124,7 +124,7 @@ class TestDates(unittest.TestCase):
         # min_date  = max_date - 1 year
         min_date = max_date - datetime.timedelta(365 * 1)
 
-        for turn in xrange(20):
+        for turn in range(20):
             result = self.factory.generate_datetime(
                 min_date=min_date,
                 max_date=None
@@ -146,7 +146,7 @@ class TestDates(unittest.TestCase):
         max_date = (datetime.datetime.now() +
                     datetime.timedelta(365 * MAX_YEARS))
 
-        for turn in xrange(20):
+        for turn in range(20):
             result = self.factory.generate_datetime(
                 min_date=min_date,
                 max_date=max_date

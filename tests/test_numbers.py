@@ -43,20 +43,20 @@ class TestNumbers(unittest.TestCase):
 
         try:
             # Change system max int to a smaller number
-            old_sys_maxint = sys.maxint
-            sys.maxint = 5
+            old_sys_maxsize = sys.maxsize
+            sys.maxsize = 5
 
-            for turn in xrange(10):
+            for turn in range(10):
                 result = self.factory.generate_integer(min_value=1)
                 self.assertTrue(
-                    result <= sys.maxint, "Integer is greater than max_value"
+                    result <= sys.maxsize, "Integer is greater than max_value"
                 )
                 self.assertTrue(
                     result >= 1, "Integer is less than specified minimum"
                 )
         finally:
             # Reset system max int back to original value
-            sys.maxint = old_sys_maxint
+            sys.maxsize = old_sys_maxsize
 
     def test_generate_integer_3(self):
         """
@@ -67,11 +67,11 @@ class TestNumbers(unittest.TestCase):
 
         try:
             # Change system max int to a smaller number
-            old_sys_maxint = sys.maxint
-            sys.maxint = 5
-            min_value = - sys.maxint - 1
+            old_sys_maxsize = sys.maxsize
+            sys.maxsize = 5
+            min_value = - sys.maxsize - 1
 
-            for turn in xrange(10):
+            for turn in range(10):
                 result = self.factory.generate_integer(max_value=1)
                 self.assertTrue(
                     result >= min_value, "Integer is less than min_value"
@@ -81,7 +81,7 @@ class TestNumbers(unittest.TestCase):
                 )
         finally:
             # Reset system max int back to original value
-            sys.maxint = old_sys_maxint
+            sys.maxsize = old_sys_maxsize
 
     def test_generate_integer_4(self):
         """
@@ -90,7 +90,7 @@ class TestNumbers(unittest.TestCase):
         @Assert: An integer is created and falls within the specified range
         """
 
-        for turn in xrange(10):
+        for turn in range(10):
             result = self.factory.generate_integer(
                 min_value=1, max_value=3)
             self.assertTrue(
@@ -108,7 +108,7 @@ class TestNumbers(unittest.TestCase):
         """
 
         # This is lower than allowed platform minimum
-        low_min = - sys.maxint - 2
+        low_min = - sys.maxsize - 2
 
         with self.assertRaises(ValueError):
             self.factory.generate_integer(min_value=low_min)
@@ -121,7 +121,7 @@ class TestNumbers(unittest.TestCase):
         """
 
         # This is greater than allowed platform maximum
-        high_max = sys.maxint + 1
+        high_max = sys.maxsize + 1
 
         with self.assertRaises(ValueError):
             self.factory.generate_integer(max_value=high_max)
