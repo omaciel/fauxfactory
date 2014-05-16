@@ -173,21 +173,15 @@ class FauxFactory(object):
         if not isinstance(length, int) or length <= 0:
             raise ValueError("%s is an invalid \'length\'." % length)
 
-        cjk_range = []
-        cjk_range = ['4E00', '9FCC']
-        output_array = []
-
-        for i in range(int(cjk_range[0], 16), int(cjk_range[1], 16)):
-            output_array.append(i)
-
+        # Generate codepoints, then convert the codepoints to a string. The
+        # valid range of CJK codepoints is 0x4E00 - 0x9FCC, inclusive. Python 2
+        # and 3 support the `unichr` and `chr` functions, respectively.
+        codepoints = [random.randrange(0x4E00, 0x9FCD) for i in range(length)]
         try:
-            output_string = u''.join(
-                unichr(random.choice(output_array)) for x in range(length))
+            output = u''.join(unichr(codepoint) for codepoint in codepoints)
         except NameError:
-            output_string = u''.join(
-                chr(random.choice(output_array)) for x in range(length))
-
-        return codify(output_string)
+            output = u''.join(chr(codepoint) for codepoint in codepoints)
+        return codify(output)
 
     @classmethod
     def generate_date(cls, min_date=None, max_date=None):
