@@ -46,6 +46,22 @@ class FauxFactory(object):
     """
 
     @classmethod
+    def is_valid_length(cls, length):
+        """
+        Check that ``length`` argument is a valid integer, greater than zero.
+
+        @type length: int
+        @param length: The desired length of the string
+
+        @rtype: Exception
+        @return: An exception
+        """
+
+        # Validate length argument
+        if not isinstance(length, int) or length <= 0:
+            raise ValueError("%s is an invalid \'length\'." % length)
+
+    @classmethod
     def generate_string(cls, str_type, length):
         """
         Create of a wide variety of string types, of arbitrary length.
@@ -99,8 +115,7 @@ class FauxFactory(object):
         """
 
         # Validate length argument
-        if not isinstance(length, int) or length <= 0:
-            raise ValueError("%s is an invalid \'length\'." % length)
+        cls.is_valid_length(length)
 
         output_string = u''.join(
             random.choice(string.ascii_letters) for i in range(length)
@@ -121,8 +136,7 @@ class FauxFactory(object):
         """
 
         # Validate length argument
-        if not isinstance(length, int) or length <= 0:
-            raise ValueError("%s is an invalid \'length\'." % length)
+        cls.is_valid_length(length)
 
         output_string = u''.join(
             random.choice(
@@ -181,8 +195,7 @@ class FauxFactory(object):
         """
 
         # Validate length argument
-        if not isinstance(length, int) or length <= 0:
-            raise ValueError("%s is an invalid \'length\'." % length)
+        cls.is_valid_length(length)
 
         # Generate codepoints, then convert the codepoints to a string. The
         # valid range of CJK codepoints is 0x4E00 - 0x9FCC, inclusive. Python 2
@@ -414,8 +427,7 @@ class FauxFactory(object):
         """
 
         # Validate length argument
-        if not isinstance(length, int) or length <= 0:
-            raise ValueError("%s is an invalid \'length\'." % length)
+        cls.is_valid_length(length)
 
         range0 = range1 = range2 = []
         range0 = ['00C0', '00D6']
@@ -518,8 +530,7 @@ class FauxFactory(object):
         """
 
         # Validate length argument
-        if not isinstance(length, int) or length <= 0:
-            raise ValueError("%s is an invalid \'length\'." % length)
+        cls.is_valid_length(length)
 
         output_string = u''.join(
             random.choice(string.digits) for i in range(length)
@@ -614,8 +625,7 @@ class FauxFactory(object):
         """
 
         # Validate length argument
-        if not isinstance(length, int) or length <= 0:
-            raise ValueError("%s is an invalid \'length\'." % length)
+        cls.is_valid_length(length)
 
         # Generate codepoints. The valid range of UTF-8 codepoints is
         # 0x0-0x10FFFF, minus the following: 0xC0-0xC1, 0xF5-0xFF and
@@ -625,9 +635,10 @@ class FauxFactory(object):
         codepoints = []
         while len(codepoints) < length:
             codepoint = random.randint(0x0, 0x10FFFF)
-            if  codepoint not in range(0xC0, 0xC1 + 1) \
-            and codepoint not in range(0xF5, 0xFF + 1) \
-            and codepoint not in range(0xD800, 0xDFFF + 1):
+            if (
+                    codepoint not in range(0xC0, 0xC1 + 1)
+                    and codepoint not in range(0xF5, 0xFF + 1)
+                    and codepoint not in range(0xD800, 0xDFFF + 1)):
                 codepoints.append(codepoint)
 
         # Convert codepoints to characters. Python 2 and 3 support the `unichr`
