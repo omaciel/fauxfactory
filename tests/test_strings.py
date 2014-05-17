@@ -5,8 +5,10 @@ Tests for all string generators
 """
 
 from fauxfactory import FauxFactory
+from sys import version_info
 
 import unittest
+import random
 
 
 class TestStrings(unittest.TestCase):
@@ -335,9 +337,45 @@ class TestStrings(unittest.TestCase):
         @Assert: CJK string is generated
         """
 
-        result = self.factory.generate_string('utf8', 15)
+        result = self.factory.generate_string('cjk', 15)
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
+
+    def test_generate_utf8_1(self):
+        """
+        @Test: Create a unicode string.
+        @Feature: String Generator
+        @Assert: A unicode string is generated.
+        """
+
+        result = self.factory.generate_string('utf8', 5)
+        if version_info[0] == 2:
+            self.assertTrue(isinstance(result, unicode))
+        else:
+            self.assertTrue(isinstance(result, str))
+
+    def test_generate_utf8_2(self):
+        """
+        @Test: Create a unicode string and specify a length.
+        @Feature: String Generator
+        @Assert: A unicode string of the specified length is generated.
+        """
+
+        length = random.randint(1, 100)
+        self.assertEqual(
+            len(self.factory.generate_string('utf8', length)),
+            length
+        )
+
+    def test_generate_utf8_3(self):
+        """
+        @Test: Create a unicode string and specify an invalid length.
+        @Feature: String Generator
+        @Assert: A ``ValueError`` exception is raised.
+        """
+
+        with self.assertRaises(ValueError):
+            self.factory.generate_string('utf8', 'foo')
 
     def test_generate_latin1_1(self):
         """

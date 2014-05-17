@@ -51,12 +51,21 @@ class FauxFactory(object):
         Create of a wide variety of string types, of arbitrary length.
 
         @type str_type: str
-        @param str_type: A valid string type.
+        @param str_type: The desired type of string to be generated.
         @type length: int
         @param length: Length for generated strng.
 
         @rtype: int
         @return: A random string of the type and length specified.
+
+        Valid values for ``str_type`` are as follows:
+
+        * alphanumeric
+        * alpha
+        * latin1
+        * numeric
+        * cjk
+        * utf8
         """
 
         # First lowercase the selected str type
@@ -70,8 +79,10 @@ class FauxFactory(object):
             return cls.generate_latin1(length)
         elif str_type == 'numeric':
             return cls.generate_numeric_string(length)
-        elif str_type == "utf8":
+        elif str_type == "cjk":
             return cls.generate_cjk(length)
+        elif str_type == "utf8":
+            return cls.generate_utf8(length)
         else:
             raise Exception("%s is not a supported string type." % str_type)
 
@@ -173,21 +184,15 @@ class FauxFactory(object):
         if not isinstance(length, int) or length <= 0:
             raise ValueError("%s is an invalid \'length\'." % length)
 
-        cjk_range = []
-        cjk_range = ['4E00', '9FCC']
-        output_array = []
-
-        for i in range(int(cjk_range[0], 16), int(cjk_range[1], 16)):
-            output_array.append(i)
-
+        # Generate codepoints, then convert the codepoints to a string. The
+        # valid range of CJK codepoints is 0x4E00 - 0x9FCC, inclusive. Python 2
+        # and 3 support the `unichr` and `chr` functions, respectively.
+        codepoints = [random.randint(0x4E00, 0x9FCC) for i in range(length)]
         try:
-            output_string = u''.join(
-                unichr(random.choice(output_array)) for x in range(length))
+            output = u''.join(unichr(codepoint) for codepoint in codepoints)
         except NameError:
-            output_string = u''.join(
-                chr(random.choice(output_array)) for x in range(length))
-
-        return codify(output_string)
+            output = u''.join(chr(codepoint) for codepoint in codepoints)
+        return codify(output)
 
     @classmethod
     def generate_date(cls, min_date=None, max_date=None):
@@ -595,6 +600,43 @@ class FauxFactory(object):
         url = u"%s://%s.%s" % (scheme, subdomain, tlds)
 
         return codify(url)
+
+    @classmethod
+    def generate_utf8(cls, length=5):
+        """
+        Returns a random string made up of UTF-8 characters, as per RFC 3629.
+
+        @rtype length: int
+        @param length: Length for random data.
+
+        @rtype: str
+        @return: A random string made up of UTF-8 characters.
+        """
+
+        # Validate length argument
+        if not isinstance(length, int) or length <= 0:
+            raise ValueError("%s is an invalid \'length\'." % length)
+
+        # Generate codepoints. The valid range of UTF-8 codepoints is
+        # 0x0-0x10FFFF, minus the following: 0xC0-0xC1, 0xF5-0xFF and
+        # 0xD800-0xDFFF. These 2061 invalid codepoints (2 + 11 + 2048) comprise
+        # 0.2% of 0x0-0x10FFFF. Thus, it should be OK to just check for invalid
+        # codepoints and generate new ones if need be.
+        codepoints = []
+        while len(codepoints) < length:
+            codepoint = random.randint(0x0, 0x10FFFF)
+            if  codepoint not in range(0xC0, 0xC1 + 1) \
+            and codepoint not in range(0xF5, 0xFF + 1) \
+            and codepoint not in range(0xD800, 0xDFFF + 1):
+                codepoints.append(codepoint)
+
+        # Convert codepoints to characters. Python 2 and 3 support the `unichr`
+        # and `chr` functions, respectively.
+        try:
+            output = u''.join(unichr(codepoint) for codepoint in codepoints)
+        except NameError:
+            output = u''.join(chr(codepoint) for codepoint in codepoints)
+        return codify(output)
 
     @classmethod
     def generate_uuid(cls):
