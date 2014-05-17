@@ -176,7 +176,7 @@ class FauxFactory(object):
         # Generate codepoints, then convert the codepoints to a string. The
         # valid range of CJK codepoints is 0x4E00 - 0x9FCC, inclusive. Python 2
         # and 3 support the `unichr` and `chr` functions, respectively.
-        codepoints = [random.randrange(0x4E00, 0x9FCD) for i in range(length)]
+        codepoints = [random.randint(0x4E00, 0x9FCC) for i in range(length)]
         try:
             output = u''.join(unichr(codepoint) for codepoint in codepoints)
         except NameError:
