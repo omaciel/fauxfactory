@@ -7,6 +7,7 @@ Release History
 ++++++++++++++++++
 
 - FauxFactory is now Python 3 compatible
+- Added method generate_utf8
 
 0.2.1 (2014-05-09)
 ++++++++++++++++++

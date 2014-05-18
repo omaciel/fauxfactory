@@ -43,6 +43,7 @@ Available methods
 - generate_string
 - generate_time
 - generate_url
+- generate_utf8
 - generate_uuid
 
 Examples

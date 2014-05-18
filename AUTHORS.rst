@@ -12,3 +12,4 @@ Contributors
 - Corey Welton `@cswiii <https://github.com/cswiii/>`_
 - Elyézer Rezende `@elyezer <https://github.com/elyezer/>`_
 - Jefferson Fausto Vaz `@faustovaz <https://github.com/faustovaz/>`_
+- Jeremy Audet `@Ichimonji10 <https://github.com/Ichimonji10/>`_
