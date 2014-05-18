@@ -46,7 +46,7 @@ class FauxFactory(object):
     """
 
     @classmethod
-    def is_valid_length(cls, length):
+    def _is_positive_int(cls, length):
         """
         Check that ``length`` argument is a valid integer, greater than zero.
 
@@ -54,7 +54,7 @@ class FauxFactory(object):
         @param length: The desired length of the string
 
         @rtype: Exception
-        @return: An exception
+        @return: A ``ValueError`` exception
         """
 
         # Validate length argument
@@ -115,7 +115,7 @@ class FauxFactory(object):
         """
 
         # Validate length argument
-        cls.is_valid_length(length)
+        cls._is_positive_int(length)
 
         output_string = u''.join(
             random.choice(string.ascii_letters) for i in range(length)
@@ -136,7 +136,7 @@ class FauxFactory(object):
         """
 
         # Validate length argument
-        cls.is_valid_length(length)
+        cls._is_positive_int(length)
 
         output_string = u''.join(
             random.choice(
@@ -195,7 +195,7 @@ class FauxFactory(object):
         """
 
         # Validate length argument
-        cls.is_valid_length(length)
+        cls._is_positive_int(length)
 
         # Generate codepoints, then convert the codepoints to a string. The
         # valid range of CJK codepoints is 0x4E00 - 0x9FCC, inclusive. Python 2
@@ -373,10 +373,7 @@ class FauxFactory(object):
         if not isinstance(words, int) or words < 0:
             raise ValueError(
                 "Cannot generate a string with negative number of words.")
-
-        if not isinstance(paragraphs, int) or paragraphs <= 0:
-            raise ValueError(
-                "Cannot generate a string with negative number of paragraphs.")
+        cls._is_positive_int(paragraphs)
 
         # Original Lorem Ipsum string
         all_words = LOREM_IPSUM_TEXT.split()
@@ -427,7 +424,7 @@ class FauxFactory(object):
         """
 
         # Validate length argument
-        cls.is_valid_length(length)
+        cls._is_positive_int(length)
 
         range0 = range1 = range2 = []
         range0 = ['00C0', '00D6']
@@ -530,7 +527,7 @@ class FauxFactory(object):
         """
 
         # Validate length argument
-        cls.is_valid_length(length)
+        cls._is_positive_int(length)
 
         output_string = u''.join(
             random.choice(string.digits) for i in range(length)
@@ -625,7 +622,7 @@ class FauxFactory(object):
         """
 
         # Validate length argument
-        cls.is_valid_length(length)
+        cls._is_positive_int(length)
 
         # Generate codepoints. The valid range of UTF-8 codepoints is
         # 0x0-0x10FFFF, minus the following: 0xC0-0xC1, 0xF5-0xFF and
