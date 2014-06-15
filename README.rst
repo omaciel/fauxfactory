@@ -95,6 +95,9 @@ Some examples::
     >>> In [15]: FauxFactory.generate_iplum()
     >>> Out[15]: u'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 
+    >>> In [16]: FauxFactory.generate_utf8()
+    >>> Out[16]: u'\U00042a80\U000fb486\U00010c58\U000f2b5e\U00051c5c'
+
 Installation
 ------------
 
