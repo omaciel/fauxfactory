@@ -631,7 +631,12 @@ class FauxFactory(object):
         # codepoints and generate new ones if need be.
         codepoints = []
         while len(codepoints) < length:
-            codepoint = random.randint(0x0, 0x10FFFF)
+            # Use sys.maxunicode instead of 0x10FFFF to avoid the exception
+            # below, in a narrow Python build (before Python 3.3)
+            # ValueError: unichr() arg not in range(0x10000) (narrow Python
+            # build)
+            # For more information, read PEP 261.
+            codepoint = random.randint(0x0, sys.maxunicode)
             if (
                     codepoint not in range(0xC0, 0xC1 + 1)
                     and codepoint not in range(0xF5, 0xFF + 1)
