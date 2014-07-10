@@ -2,6 +2,10 @@
 
 Release History
 ```````````````
+0.3.1 (2014-07-10)
+++++++++++++++++++
+
+- Check for sys.maxunicode when generating utf8 characters.
 
 0.3.0 (2014-06-15)
 ++++++++++++++++++
