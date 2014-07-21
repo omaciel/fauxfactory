@@ -4,6 +4,9 @@ FauxFactory
 .. image:: https://travis-ci.org/omaciel/fauxfactory.png?branch=master
    :target: https://travis-ci.org/omaciel/fauxfactory
 
+.. image:: https://pypip.in/py_versions/fauxfactory/badge.png
+   :target: https://pypi.python.org/pypi/fauxfactory
+
 .. image:: https://badge.fury.io/py/fauxfactory.png
    :target: http://badge.fury.io/py/fauxfactory
 
