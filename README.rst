@@ -16,6 +16,9 @@ FauxFactory
 .. image:: https://coveralls.io/repos/omaciel/fauxfactory/badge.png?branch=master
    :target: https://coveralls.io/r/omaciel/fauxfactory?branch=master
 
+.. image:: https://pypip.in/license/fauxfactory/badge.png
+   :target: https://pypi.python.org/pypi/fauxfactory/
+
 **FauxFactory** generates random data for your automated tests easily!
 
 There are times when you're writing tests for your application when
