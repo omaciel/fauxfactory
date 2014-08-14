@@ -586,5 +586,3 @@ class TestStrings(unittest.TestCase):
         numeric_string = self.factory.generate_string('numeric', 20)
         self.assertEqual(20, len(numeric_string),
                          "Generated string does not have the expected length")
-
-
