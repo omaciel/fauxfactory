@@ -13,3 +13,4 @@ Contributors
 - Elyézer Rezende `@elyezer <https://github.com/elyezer/>`_
 - Jefferson Fausto Vaz `@faustovaz <https://github.com/faustovaz/>`_
 - Jeremy Audet `@Ichimonji10 <https://github.com/Ichimonji10/>`_
+- Kedar Bidarkar  `@kbidarkar <https://github.com/kbidarkar/>`_
