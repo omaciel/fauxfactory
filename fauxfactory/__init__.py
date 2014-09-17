@@ -15,7 +15,7 @@ import uuid
 
 from collections import Iterable
 from fauxfactory.constants import (
-    LOREM_IPSUM_TEXT,
+    HTML_TAGS, LOREM_IPSUM_TEXT,
     MAX_YEARS, MIN_YEARS,
     SCHEMES, SUBDOMAINS, TLDS
 )
@@ -663,3 +663,23 @@ class FauxFactory(object):
         output_uuid = codify(str(uuid.uuid4()))
 
         return output_uuid
+
+    @classmethod
+    def generate_html(cls, length=5):
+        """
+        Returns a random string made up of html characters.
+
+        @rtype length: int
+        @param length: Length for random data.
+        @rtype: str
+        @return: A random string made up of html characters.
+        """
+
+        # Validate length argument
+        cls._is_positive_int(length)
+
+        html_tag = random.choice(HTML_TAGS)
+        output_string = u'<{0}>{1}</{2}>'.format(
+            html_tag, cls.generate_string("alpha", length), html_tag)
+
+        return codify(output_string)
