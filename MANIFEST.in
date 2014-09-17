@@ -2,6 +2,7 @@ include AUTHORS.rst
 include HISTORY.rst
 include LICENSE
 include README.rst
+include makefile
 recursive-include *.py
 include docs/*
 include tests/*.py
