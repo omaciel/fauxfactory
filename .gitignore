@@ -38,3 +38,6 @@ nosetests.xml
 
 # Documentation artifacts
 /docs/_build/
+
+# Vim swap files
+*.swp
