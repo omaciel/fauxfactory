@@ -5,8 +5,10 @@ Tests for HTML generator
 """
 
 from fauxfactory import FauxFactory
-
+import re
+import sys
 import unittest
+# (too-many-public-methods) pylint:disable=R0904
 
 
 class TestHTML(unittest.TestCase):
@@ -17,18 +19,47 @@ class TestHTML(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """
-        Instantiate our factory object
+        Instantiate a factory and compile a regex.
+
+        The compiled regex can be used to find the contents of an HTML tag.
         """
 
         cls.factory = FauxFactory()
+        cls.matcher = re.compile('^<.*?>(.*?)</.*>$')
 
-    def test_generate_html_1(self):
+    def test_length_arg_omitted(self):
         """
-        @Test: Create a random HTML value
+        @Test: Generate a random HTML tag and provide no value for the
+            ``length`` argument.
         @Feature: HTML Generator
-        @Assert: A string at least one character long is generated.
+        @Assert: The contents of the HTML tag are at least one character long.
+        """
+
+        match = self.matcher.search(self.factory.generate_html())
+        self.assertGreaterEqual(len(match.group(1)), 1)
+
+    def test_length_arg_provided(self):
+        """
+        @Test: Generate a random HTML tag and provide a value for the
+            ``length`` argument.
+        @Feature: HTML Generator
+        @Assert: The contents of the HTML tag are ``length`` characters long.
+        """
+
+        length = self.factory.generate_integer(1, 25)
+        match = self.matcher.search(self.factory.generate_html(length))
+        self.assertEqual(len(match.group(1)), length)
+
+    def test_unicode(self):
+        """
+        @Test: Generate a random HTML tag.
+        @Feature: HTML Generator
+        @Assert: A unicode string is generated.
         """
 
         result = self.factory.generate_html()
-        self.assertGreater(len(result), 0,
-                           "A valid HTML value was not generated.")
+        if sys.version_info[0] is 2:
+            # (undefined-variable) pylint:disable=E0602
+            self.assertIsInstance(result, unicode)  # flake8:noqa
+        else:
+            self.assertIsInstance(result, str)
