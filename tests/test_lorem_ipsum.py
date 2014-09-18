@@ -16,14 +16,6 @@ class TestLoremIpsum(unittest.TestCase):
     Test lorem ipsum generator
     """
 
-    @classmethod
-    def setUpClass(cls):
-        """
-        Instantiate our factory object
-        """
-
-        cls.factory = FauxFactory()
-
     def test_generate_loremipsum_1(self):
         """
         @Test: Create a complete lorem ipsum string
@@ -31,7 +23,7 @@ class TestLoremIpsum(unittest.TestCase):
         @Assert: Complete lorem ipsum value that starts with 'Lorem ipsum'
         """
 
-        result = self.factory.generate_iplum()
+        result = FauxFactory.generate_iplum()
         self.assertEqual(
             result,
             LOREM_IPSUM_TEXT, "Generated text is not Lorem Ipsum")
@@ -49,7 +41,7 @@ class TestLoremIpsum(unittest.TestCase):
 
         for i in range(20):
             length = random.randint(1, 500)
-            result = self.factory.generate_iplum(words=length)
+            result = FauxFactory.generate_iplum(words=length)
             self.assertEqual(
                 len(result.split()),
                 length,
@@ -64,7 +56,7 @@ class TestLoremIpsum(unittest.TestCase):
 
         for i in range(20):
             length = random.randint(1, 20)
-            result = self.factory.generate_iplum(paragraphs=length)
+            result = FauxFactory.generate_iplum(paragraphs=length)
             self.assertEqual(
                 len(result.split('\n')),
                 length,
@@ -78,7 +70,7 @@ class TestLoremIpsum(unittest.TestCase):
         @Assert: Complete lorem ipsum value is returned
         """
 
-        result = self.factory.generate_iplum(words=0)
+        result = FauxFactory.generate_iplum(words=0)
         self.assertEqual(
             result,
             LOREM_IPSUM_TEXT, "Generated text is not Lorem Ipsum")
@@ -91,7 +83,7 @@ class TestLoremIpsum(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_iplum(paragraphs=0)
+            FauxFactory.generate_iplum(paragraphs=0)
 
     def test_generate_loremipsum_6(self):
         """
@@ -101,7 +93,7 @@ class TestLoremIpsum(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_iplum(words=1, paragraphs=0)
+            FauxFactory.generate_iplum(words=1, paragraphs=0)
 
     def test_generate_loremipsum_7(self):
         """
@@ -110,7 +102,7 @@ class TestLoremIpsum(unittest.TestCase):
         @Assert: Generated string has 1 word in 1 paragraph
         """
 
-        result = self.factory.generate_iplum(words=1, paragraphs=1)
+        result = FauxFactory.generate_iplum(words=1, paragraphs=1)
         self.assertEqual(len(result.split()), 1, "String is not 1-word long")
         self.assertEqual(
             len(result.split()), 1, "String is not 1-paragraph long")
@@ -123,7 +115,7 @@ class TestLoremIpsum(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_iplum(words='a')
+            FauxFactory.generate_iplum(words='a')
 
     def test_generate_loremipsum_9(self):
         """
@@ -133,7 +125,7 @@ class TestLoremIpsum(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_iplum(paragraphs='a')
+            FauxFactory.generate_iplum(paragraphs='a')
 
     def test_generate_loremipsum_10(self):
         """
@@ -145,7 +137,7 @@ class TestLoremIpsum(unittest.TestCase):
         for i in range(20):
             words = random.randint(1, 500)
             paragraphs = random.randint(1, 500)
-            result = self.factory.generate_iplum(
+            result = FauxFactory.generate_iplum(
                 words=words, paragraphs=paragraphs)
             self.assertEqual(
                 len(result.split('\n')),

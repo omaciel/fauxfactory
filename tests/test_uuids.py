@@ -14,14 +14,6 @@ class TestUUID(unittest.TestCase):
     Test UUID generator
     """
 
-    @classmethod
-    def setUpClass(cls):
-        """
-        Instantiate our factory object
-        """
-
-        cls.factory = FauxFactory()
-
     def test_generate_uuid_1(self):
         """
         @Test: Create a random UUID4 value
@@ -30,6 +22,6 @@ class TestUUID(unittest.TestCase):
         """
 
         for turn in range(100):
-            result = self.factory.generate_uuid()
+            result = FauxFactory.generate_uuid()
             self.assertGreater(len(result), 0,
                                "A valid UUID value was not generated.")

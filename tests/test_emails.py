@@ -17,14 +17,6 @@ class TestEmails(unittest.TestCase):
     Test Email generator
     """
 
-    @classmethod
-    def setUpClass(cls):
-        """
-        Instantiate our factory object
-        """
-
-        cls.factory = FauxFactory()
-
     def test_generate_email_1(self):
         """
         @Test: Create a random email value
@@ -35,7 +27,7 @@ class TestEmails(unittest.TestCase):
         # Regex for email validation
         emailinator = re.compile(REGEX)
         for turn in range(100):
-            result = self.factory.generate_email()
+            result = FauxFactory.generate_email()
 
             self.assertIsNotNone(emailinator.match(result),
                                  "A valid email value was not generated.")

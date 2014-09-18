@@ -15,14 +15,6 @@ class TestTime(unittest.TestCase):
     Test Time generator
     """
 
-    @classmethod
-    def setUpClass(cls):
-        """
-        Instantiate our factory object
-        """
-
-        cls.factory = FauxFactory()
-
     def test_generate_uuid_1(self):
         """
         @Test: Create a random UUID value
@@ -31,6 +23,6 @@ class TestTime(unittest.TestCase):
         """
 
         for turn in range(100):
-            result = self.factory.generate_time()
+            result = FauxFactory.generate_time()
             self.assertIsInstance(result, datetime.time,
                                   "A valid Time value was not generated.")
