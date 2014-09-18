@@ -18,7 +18,13 @@ import os
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-#sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(
+    0,
+    os.path.realpath(os.path.join(
+        os.path.dirname(__file__),
+        os.path.pardir
+    ))
+)
 
 # -- General configuration ------------------------------------------------
 
@@ -96,6 +102,21 @@ pygments_style = 'sphinx'
 
 # If true, keep warnings as "system message" paragraphs in the built documents.
 #keep_warnings = False
+
+# If true, Sphinx will warn about all references where the target cannot be
+# found.
+nitpicky = True
+
+# A list of (type, target) tuples (by default empty) that should be ignored when
+# generating warnings in “nitpicky mode”.
+nitpick_ignore = [
+    ('py:obj', 'bool'),
+    ('py:obj', 'dict'),
+    ('py:obj', 'int'),
+    ('py:obj', 'list'),
+    ('py:obj', 'str'),
+    ('py:obj', 'tuple'),
+]
 
 
 # -- Options for HTML output ----------------------------------------------

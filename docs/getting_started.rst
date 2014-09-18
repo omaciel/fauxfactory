@@ -10,9 +10,7 @@ Getting Started
         sys.path.append(ROOT_PATH)
     from fauxfactory import FauxFactory
 
-FauxFactory generates random data for your automated tests easily!
-
-Need a 10 characters string for one of your tests?
+Need a 10 character string for one of your tests?
 
 .. doctest::
 
