@@ -586,3 +586,13 @@ class TestStrings(unittest.TestCase):
         numeric_string = self.factory.generate_string('numeric', 20)
         self.assertEqual(20, len(numeric_string),
                          "Generated string does not have the expected length")
+
+    def test_generate_string4(self):
+        """
+        @Test: Create a html string with the given length
+        @Feature: String generator
+        @Assert: HTML string is created and should greater than given length
+        """
+        html_string = self.factory.generate_string('html', 10)
+        self.assertTrue(len(html_string) > 10,
+                        "Generated string does not have the expected length")
