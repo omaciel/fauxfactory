@@ -2,6 +2,12 @@
 
 Release History
 ```````````````
+
+1.0.1 (2014-09-18)
+++++++++++++++++++
+
+- Updated ``generate_string`` to also accept ``html`` strings.
+
 1.0.0 (2014-09-17)
 ++++++++++++++++++
 

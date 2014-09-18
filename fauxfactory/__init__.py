@@ -76,13 +76,13 @@ class FauxFactory(object):
 
         Valid values for ``str_type`` are as follows:
 
-        * alphanumeric
         * alpha
+        * alphanumeric
+        * cjk
+        * html
         * latin1
         * numeric
-        * cjk
         * utf8
-        * html
         """
 
         # First lowercase the selected str type
