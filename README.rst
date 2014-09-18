@@ -38,6 +38,7 @@ Available methods
 - generate_date
 - generate_datetime
 - generate_email
+- generate_html
 - generate_integer
 - generate_ipaddr
 - generate_iplum
@@ -103,6 +104,9 @@ Some examples::
 
     >>> In [16]: FauxFactory.generate_utf8()
     >>> Out[16]: u'\U00042a80\U000fb486\U00010c58\U000f2b5e\U00051c5c'
+
+    >>> In [17]: FauxFactory.generate_html()
+    >>> Out[18]: u'<em>R6FGd</em>'
 
 Installation
 ------------

@@ -2,6 +2,12 @@
 
 Release History
 ```````````````
+1.0.0 (2014-09-17)
+++++++++++++++++++
+
+- Added new method generate_html
+- Added new makefile
+
 0.3.1 (2014-07-10)
 ++++++++++++++++++
 
@@ -17,7 +23,7 @@ Release History
 ++++++++++++++++++
 
 - Fixed issue that prevented strings longer than the full length of
-  LOREM_IPSUM_TEXT from being generated (Guthub Issue #16).
+  LOREM_IPSUM_TEXT from being generated (Github Issue #16).
 
 0.2.0 (2014-05-08)
 ++++++++++++++++++
