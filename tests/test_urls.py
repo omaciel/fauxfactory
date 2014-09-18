@@ -15,14 +15,6 @@ class TestURLs(unittest.TestCase):
     Test URL generator
     """
 
-    @classmethod
-    def setUpClass(cls):
-        """
-        Instantiate our factory object
-        """
-
-        cls.factory = FauxFactory()
-
     def test_generate_url_1(self):
         """
         @Test: Create a random URL
@@ -31,7 +23,7 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            result = self.factory.generate_url()
+            result = FauxFactory.generate_url()
             self.assertTrue(
                 len(result) > 0,
                 "A valid URL was not generated.")
@@ -48,7 +40,7 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            result = self.factory.generate_url(scheme='http')
+            result = FauxFactory.generate_url(scheme='http')
             self.assertTrue(
                 len(result) > 0,
                 "A valid URL was not generated.")
@@ -65,7 +57,7 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            result = self.factory.generate_url(scheme='https')
+            result = FauxFactory.generate_url(scheme='https')
             self.assertTrue(
                 len(result) > 0,
                 "A valid URL was not generated.")
@@ -82,7 +74,7 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            result = self.factory.generate_url(scheme='ftp')
+            result = FauxFactory.generate_url(scheme='ftp')
             self.assertTrue(
                 len(result) > 0,
                 "A valid URL was not generated.")
@@ -99,9 +91,9 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            scheme = self.factory.generate_alphanumeric()
+            scheme = FauxFactory.generate_alphanumeric()
             with self.assertRaises(ValueError):
-                self.factory.generate_url(scheme=scheme)
+                FauxFactory.generate_url(scheme=scheme)
 
     def test_generate_url_6(self):
         """
@@ -111,8 +103,8 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            subdomain = self.factory.generate_alphanumeric()
-            result = self.factory.generate_url(subdomain=subdomain)
+            subdomain = FauxFactory.generate_alphanumeric()
+            result = FauxFactory.generate_url(subdomain=subdomain)
             self.assertTrue(
                 len(result) > 0,
                 "A valid URL was not generated.")
@@ -131,7 +123,7 @@ class TestURLs(unittest.TestCase):
         @Assert: URL should be created with a random subdomain
         """
 
-        result = self.factory.generate_url(subdomain='')
+        result = FauxFactory.generate_url(subdomain='')
         self.assertTrue(
             len(result) > 0,
             "A valid URL was not generated.")
@@ -144,7 +136,7 @@ class TestURLs(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_url(subdomain=" ")
+            FauxFactory.generate_url(subdomain=" ")
 
     def test_generate_url_9(self):
         """
@@ -154,9 +146,9 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            subdomain = self.factory.generate_cjk()
+            subdomain = FauxFactory.generate_cjk()
             with self.assertRaises(ValueError):
-                self.factory.generate_url(subdomain=subdomain)
+                FauxFactory.generate_url(subdomain=subdomain)
 
     def test_generate_url_10(self):
         """
@@ -166,8 +158,8 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            tlds = self.factory.generate_alpha(length=3)
-            result = self.factory.generate_url(tlds=tlds)
+            tlds = FauxFactory.generate_alpha(length=3)
+            result = FauxFactory.generate_url(tlds=tlds)
             self.assertTrue(
                 len(result) > 0,
                 "A valid URL was not generated.")
@@ -185,8 +177,8 @@ class TestURLs(unittest.TestCase):
 
         for turn in range(10):
             with self.assertRaises(ValueError):
-                tlds = self.factory.generate_numeric_string(length=3)
-                self.factory.generate_url(tlds=tlds)
+                tlds = FauxFactory.generate_numeric_string(length=3)
+                FauxFactory.generate_url(tlds=tlds)
 
     def test_generate_url_12(self):
         """
@@ -197,4 +189,4 @@ class TestURLs(unittest.TestCase):
 
         for turn in range(10):
             with self.assertRaises(ValueError):
-                self.factory.generate_url(tlds=" ")
+                FauxFactory.generate_url(tlds=" ")

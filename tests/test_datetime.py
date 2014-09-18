@@ -16,14 +16,6 @@ class TestDates(unittest.TestCase):
     Test datetime generator
     """
 
-    @classmethod
-    def setUpClass(cls):
-        """
-        Instantiate our factory object
-        """
-
-        cls.factory = FauxFactory()
-
     def test_generate_datetime_1(self):
         """
         @Test: Create a datetime with no arguments
@@ -31,7 +23,7 @@ class TestDates(unittest.TestCase):
         @Assert: Datetime is created with random values
         """
 
-        result = self.factory.generate_datetime()
+        result = FauxFactory.generate_datetime()
         self.assertTrue(
             isinstance(result, datetime.datetime),
             "Data is not instance of datetime.date.")
@@ -49,7 +41,7 @@ class TestDates(unittest.TestCase):
         min_date = today - datetime.timedelta(seconds=5*60)
 
         for turn in range(10):
-            result = self.factory.generate_datetime(min_date=min_date)
+            result = FauxFactory.generate_datetime(min_date=min_date)
             self.assertTrue(result >= min_date)
 
     def test_generate_datetime_3(self):
@@ -65,7 +57,7 @@ class TestDates(unittest.TestCase):
         max_date = today + datetime.timedelta(seconds=5*60)
 
         for turn in range(10):
-            result = self.factory.generate_datetime(max_date=max_date)
+            result = FauxFactory.generate_datetime(max_date=max_date)
             self.assertTrue(result <= max_date)
 
     def test_generate_datetime_4(self):
@@ -83,7 +75,7 @@ class TestDates(unittest.TestCase):
         max_date = today + datetime.timedelta(seconds=5*60)
 
         for turn in range(10):
-            result = self.factory.generate_datetime(
+            result = FauxFactory.generate_datetime(
                 min_date=min_date,
                 max_date=max_date
             )
@@ -104,7 +96,7 @@ class TestDates(unittest.TestCase):
         max_date = min_date + datetime.timedelta(365 * 1)
 
         for turn in range(20):
-            result = self.factory.generate_datetime(
+            result = FauxFactory.generate_datetime(
                 min_date=None,
                 max_date=max_date
             )
@@ -125,7 +117,7 @@ class TestDates(unittest.TestCase):
         min_date = max_date - datetime.timedelta(365 * 1)
 
         for turn in range(20):
-            result = self.factory.generate_datetime(
+            result = FauxFactory.generate_datetime(
                 min_date=min_date,
                 max_date=None
             )
@@ -147,7 +139,7 @@ class TestDates(unittest.TestCase):
                     datetime.timedelta(365 * MAX_YEARS))
 
         for turn in range(20):
-            result = self.factory.generate_datetime(
+            result = FauxFactory.generate_datetime(
                 min_date=min_date,
                 max_date=max_date
             )
@@ -162,7 +154,7 @@ class TestDates(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_datetime(
+            FauxFactory.generate_datetime(
                 min_date='',
                 max_date=''
             )
@@ -175,7 +167,7 @@ class TestDates(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_datetime(
+            FauxFactory.generate_datetime(
                 min_date='abc',
                 max_date='def'
             )
@@ -188,7 +180,7 @@ class TestDates(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_datetime(
+            FauxFactory.generate_datetime(
                 min_date=1,
                 max_date=1
             )
@@ -201,7 +193,7 @@ class TestDates(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_datetime(
+            FauxFactory.generate_datetime(
                 min_date=(1,),
                 max_date=(2, 3, 4)
             )
@@ -214,7 +206,7 @@ class TestDates(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_datetime(
+            FauxFactory.generate_datetime(
                 min_date=['a', 'b'],
                 max_date=['c', 'd', 'e']
             )
@@ -232,7 +224,7 @@ class TestDates(unittest.TestCase):
         min_date = today + datetime.timedelta(seconds=5*60)
 
         with self.assertRaises(AssertionError):
-            self.factory.generate_datetime(
+            FauxFactory.generate_datetime(
                 min_date=min_date,
                 max_date=today
             )
@@ -245,7 +237,7 @@ class TestDates(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_date(
+            FauxFactory.generate_date(
                 min_date=datetime.datetime.now(),
                 max_date='foo'
             )

@@ -15,14 +15,6 @@ class TestNumbers(unittest.TestCase):
     Test number generators
     """
 
-    @classmethod
-    def setUpClass(cls):
-        """
-        Instantiate our factory object
-        """
-
-        cls.factory = FauxFactory()
-
     def test_generate_integer_1(self):
         """
         @Test: Create a random integer with no range limits
@@ -30,7 +22,7 @@ class TestNumbers(unittest.TestCase):
         @Assert: A random integer is created
         """
 
-        result = self.factory.generate_integer()
+        result = FauxFactory.generate_integer()
         self.assertTrue(
             isinstance(result, int), "A valid integer was not generated.")
 
@@ -47,7 +39,7 @@ class TestNumbers(unittest.TestCase):
             sys.maxsize = 5
 
             for turn in range(10):
-                result = self.factory.generate_integer(min_value=1)
+                result = FauxFactory.generate_integer(min_value=1)
                 self.assertTrue(
                     result <= sys.maxsize, "Integer is greater than max_value"
                 )
@@ -72,7 +64,7 @@ class TestNumbers(unittest.TestCase):
             min_value = - sys.maxsize - 1
 
             for turn in range(10):
-                result = self.factory.generate_integer(max_value=1)
+                result = FauxFactory.generate_integer(max_value=1)
                 self.assertTrue(
                     result >= min_value, "Integer is less than min_value"
                 )
@@ -91,7 +83,7 @@ class TestNumbers(unittest.TestCase):
         """
 
         for turn in range(10):
-            result = self.factory.generate_integer(
+            result = FauxFactory.generate_integer(
                 min_value=1, max_value=3)
             self.assertTrue(
                 result >= 1, "Integer is less than min_value"
@@ -111,7 +103,7 @@ class TestNumbers(unittest.TestCase):
         low_min = - sys.maxsize - 2
 
         with self.assertRaises(ValueError):
-            self.factory.generate_integer(min_value=low_min)
+            FauxFactory.generate_integer(min_value=low_min)
 
     def test_generate_integer_6(self):
         """
@@ -124,7 +116,7 @@ class TestNumbers(unittest.TestCase):
         high_max = sys.maxsize + 1
 
         with self.assertRaises(ValueError):
-            self.factory.generate_integer(max_value=high_max)
+            FauxFactory.generate_integer(max_value=high_max)
 
     def test_generate_integer_7_0(self):
         """
@@ -134,7 +126,7 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_integer(min_value='')
+            FauxFactory.generate_integer(min_value='')
 
     def test_generate_integer_7_1(self):
         """
@@ -144,7 +136,7 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_integer(max_value='')
+            FauxFactory.generate_integer(max_value='')
 
     def test_generate_integer_7_2(self):
         """
@@ -154,7 +146,7 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_integer(min_value='', max_value='')
+            FauxFactory.generate_integer(min_value='', max_value='')
 
     def test_generate_integer_8_0(self):
         """
@@ -164,7 +156,7 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_integer(min_value=' ')
+            FauxFactory.generate_integer(min_value=' ')
 
     def test_generate_integer_8_1(self):
         """
@@ -174,7 +166,7 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_integer(max_value=' ')
+            FauxFactory.generate_integer(max_value=' ')
 
     def test_generate_integer_8_2(self):
         """
@@ -184,7 +176,7 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_integer(min_value=' ', max_value=' ')
+            FauxFactory.generate_integer(min_value=' ', max_value=' ')
 
     def test_generate_integer_9_0(self):
         """
@@ -194,7 +186,7 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_integer(min_value='a')
+            FauxFactory.generate_integer(min_value='a')
 
     def test_generate_integer_9_1(self):
         """
@@ -204,7 +196,7 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_integer(max_value='a')
+            FauxFactory.generate_integer(max_value='a')
 
     def test_generate_integer_9_2(self):
         """
@@ -214,7 +206,7 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            self.factory.generate_integer(min_value='a', max_value='b')
+            FauxFactory.generate_integer(min_value='a', max_value='b')
 
     def test_generate_positive_integer_1(self):
         """
@@ -223,7 +215,7 @@ class TestNumbers(unittest.TestCase):
         @Assert: A positive number is created
         """
 
-        result = self.factory.generate_positive_integer()
+        result = FauxFactory.generate_positive_integer()
 
         self.assertTrue(result >= 0, "Generated integer is not positive")
 
@@ -234,6 +226,6 @@ class TestNumbers(unittest.TestCase):
         @Assert: A negative number is created
         """
 
-        result = self.factory.generate_negative_integer()
+        result = FauxFactory.generate_negative_integer()
 
         self.assertTrue(result <= 0, "Generated integer is not negative")
