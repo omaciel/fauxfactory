@@ -82,6 +82,7 @@ class FauxFactory(object):
         * numeric
         * cjk
         * utf8
+        * html
         """
 
         # First lowercase the selected str type
@@ -99,6 +100,8 @@ class FauxFactory(object):
             return cls.generate_cjk(length)
         elif str_type == "utf8":
             return cls.generate_utf8(length)
+        elif str_type == "html":
+            return cls.generate_html(length)
         else:
             raise Exception("%s is not a supported string type." % str_type)
 
