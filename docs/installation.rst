@@ -3,12 +3,14 @@ Installation
 
 Python Package Index
 --------------------
-FauxFactory is available in PYPI and can be installed using pip::
+
+FauxFactory is available in PyPi and can be installed using pip::
 
     $ pip install fauxfactory
 
 From Source
 -----------
+
 You can install FauxFactory by downloading the latest version of the source
 code::
 

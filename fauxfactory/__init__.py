@@ -22,57 +22,45 @@ from fauxfactory.constants import (
 
 
 def codify(data):
+    """Convert ``data`` to a unicode string if running Python 2.
+
+    :param str data: A string to be type cast.
+    :return: ``data``, but as unicode. ``data`` is never modified: if a type
+        cast is necessary, a copy of ``data`` is returned.
+
     """
-    Handles unicode compatibility with Python 3
-
-    @type data: str
-    @param data: String to return using unicode.
-
-    @rtype: str
-    @return: String in unicode format.
-    """
-
-    try:
-        result = unicode(data)
-    except NameError:
-        result = data
-
-    return result
+    if sys.version_info[0] is 2:
+        return unicode(data)
+    return data
 
 
 class FauxFactory(object):
-    """
-    Generate random data for your tests.
-    """
+    """Generate random data for your tests."""
 
     @classmethod
     def _is_positive_int(cls, length):
+        """Check that ``length`` argument is an integer greater than zero.
+
+        :param int length: The desired length of the string
+        :raises: ``ValueError`` if ``length`` is not an ``int`` or is less than
+            1.
+        :returns: Nothing.
+        :rtype: None
+
         """
-        Check that ``length`` argument is a valid integer, greater than zero.
-
-        @type length: int
-        @param length: The desired length of the string
-
-        @rtype: Exception
-        @return: A ``ValueError`` exception
-        """
-
-        # Validate length argument
         if not isinstance(length, int) or length <= 0:
-            raise ValueError("%s is an invalid \'length\'." % length)
+            raise ValueError("{} is an invalid 'length'.".format(length))
 
     @classmethod
     def generate_string(cls, str_type, length):
-        """
-        Create of a wide variety of string types, of arbitrary length.
+        """A simple wrapper that calls other string generation methods.
 
-        @type str_type: str
-        @param str_type: The desired type of string to be generated.
-        @type length: int
-        @param length: Length for generated strng.
-
-        @rtype: int
-        @return: A random string of the type and length specified.
+        :param str str_type: The type of string which should be generated.
+        :param int length: The length of the generated string. Must be 1 or
+            greater.
+        :raises: ``Exception`` if an invalid ``str_type`` is specified.
+        :returns: A string.
+        :rtype: str
 
         Valid values for ``str_type`` are as follows:
 
@@ -83,27 +71,29 @@ class FauxFactory(object):
         * latin1
         * numeric
         * utf8
+
         """
-
-        # First lowercase the selected str type
-        str_type = str_type.lower()
-
-        if str_type == "alphanumeric":
-            return cls.generate_alphanumeric(length)
-        elif str_type == "alpha":
-            return cls.generate_alpha(length)
-        elif str_type == "latin1":
-            return cls.generate_latin1(length)
-        elif str_type == 'numeric':
-            return cls.generate_numeric_string(length)
-        elif str_type == "cjk":
-            return cls.generate_cjk(length)
-        elif str_type == "utf8":
-            return cls.generate_utf8(length)
-        elif str_type == "html":
-            return cls.generate_html(length)
+        str_types = (
+            'alpha',
+            'alphanumeric',
+            'cjk',
+            'html',
+            'latin1',
+            'numeric',
+            'utf8',
+        )
+        str_type_lower = str_type.lower()  # do not modify user data
+        if str_type_lower not in str_types:
+            raise Exception(  # FIXME: Raise a more specific exception.
+                '{} is not a supported string type. Valid string types are {}.'
+                ''.format(str_type_lower, str_types)
+            )
+        if str_type_lower == 'numeric':
+            method = cls.generate_numeric_string
         else:
-            raise Exception("%s is not a supported string type." % str_type)
+            method = getattr(cls, 'generate_{}'.format(str_type_lower))
+        return method(length)
+
 
     @classmethod
     def generate_alpha(cls, length=5):

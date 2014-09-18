@@ -8,4 +8,4 @@ FauxFactory generates random data for your automated tests easily!
 
     installation
     getting_started
-    methods_available
+    api
