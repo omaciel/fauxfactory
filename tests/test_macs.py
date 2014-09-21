@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""
-Tests for MAC generator
-"""
+"""Tests for MAC generator."""
 
-from fauxfactory import FauxFactory
+from fauxfactory import generate_mac
 
 import random
 import re
@@ -15,9 +13,7 @@ mac = re.compile("[0-9a-f]{2}([-:])[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$")
 
 
 class TestMacs(unittest.TestCase):
-    """
-    Test MAC generator
-    """
+    """Test MAC generator."""
 
     def test_generate_mac_1(self):
         """
@@ -26,7 +22,7 @@ class TestMacs(unittest.TestCase):
         @Assert: A MAC address is generated using \":\" as the delimiter
         """
 
-        result = FauxFactory.generate_mac()
+        result = generate_mac()
         self.assertTrue(
             len(result.split(":")) == 6,
             "Did not generate a MAC addrss")
@@ -41,7 +37,7 @@ class TestMacs(unittest.TestCase):
         @Assert: A MAC address is generated using \":\" as the delimiter
         """
 
-        result = FauxFactory.generate_mac(delimiter=":")
+        result = generate_mac(delimiter=":")
         self.assertTrue(
             len(result.split(":")) == 6,
             "Did not generate a MAC addrss")
@@ -56,7 +52,7 @@ class TestMacs(unittest.TestCase):
         @Assert: A MAC address is generated using \"-\" as the delimiter
         """
 
-        result = FauxFactory.generate_mac(delimiter="-")
+        result = generate_mac(delimiter="-")
         self.assertTrue(
             len(result.split("-")) == 6,
             "Did not generate a MAC addrss")
@@ -72,7 +68,7 @@ class TestMacs(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_mac(delimiter=".")
+            generate_mac(delimiter=".")
 
     def test_generate_mac_5(self):
         """
@@ -82,7 +78,7 @@ class TestMacs(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_mac(delimiter=" ")
+            generate_mac(delimiter=" ")
 
     def test_generate_mac_6(self):
         """
@@ -92,7 +88,7 @@ class TestMacs(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_mac(delimiter=random.randint(0, 10))
+            generate_mac(delimiter=random.randint(0, 10))
 
     def test_generate_mac_7(self):
         """
@@ -102,5 +98,5 @@ class TestMacs(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_mac(
+            generate_mac(
                 delimiter=random.choice(string.ascii_letters))

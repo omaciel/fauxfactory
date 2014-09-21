@@ -1,10 +1,17 @@
 # -*- coding: utf-8 -*-
 
-"""
-Tests for all string generators
-"""
+"""Tests for all string generators."""
 
-from fauxfactory import FauxFactory
+from fauxfactory import (
+    generate_alpha,
+    generate_alphanumeric,
+    generate_cjk,
+    generate_html,
+    generate_latin1,
+    generate_numeric_string,
+    generate_string,
+    generate_utf8,
+)
 from sys import version_info
 
 import unittest
@@ -12,9 +19,7 @@ import random
 
 
 class TestStrings(unittest.TestCase):
-    """
-    Test string generators
-    """
+    """Test string generators."""
 
     def test_generate_alpha_1(self):
         """
@@ -23,7 +28,7 @@ class TestStrings(unittest.TestCase):
         @Assert: Alpha string is created
         """
 
-        result = FauxFactory.generate_alpha()
+        result = generate_alpha()
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
@@ -35,7 +40,7 @@ class TestStrings(unittest.TestCase):
         """
 
         for length in range(2, 12, 2):
-            result = FauxFactory.generate_alpha(length)
+            result = generate_alpha(length)
             self.assertEqual(
                 len(result),
                 length,
@@ -49,7 +54,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_alpha(length=0)
+            generate_alpha(length=0)
 
     def test_generate_alpha_3_1(self):
         """
@@ -59,7 +64,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_alphanumeric(length=0)
+            generate_alphanumeric(length=0)
 
     def test_generate_alpha_3_2(self):
         """
@@ -69,7 +74,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_cjk(length=0)
+            generate_cjk(length=0)
 
     def test_generate_alpha_3_3(self):
         """
@@ -79,7 +84,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_latin1(length=0)
+            generate_latin1(length=0)
 
     def test_generate_alpha_3_4(self):
         """
@@ -89,7 +94,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_numeric_string(length=0)
+            generate_numeric_string(length=0)
 
     def test_generate_alpha_4(self):
         """
@@ -99,7 +104,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_alpha(length=-1)
+            generate_alpha(length=-1)
 
     def test_generate_alpha_5(self):
         """
@@ -109,7 +114,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_alpha(length=None)
+            generate_alpha(length=None)
 
     def test_generate_alpha_6(self):
         """
@@ -119,7 +124,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_alpha(length='')
+            generate_alpha(length='')
 
     def test_generate_alpha_7(self):
         """
@@ -129,7 +134,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_alpha(length=' ')
+            generate_alpha(length=' ')
 
     def test_generate_alpha_8(self):
         """
@@ -139,7 +144,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_alpha(length='a')
+            generate_alpha(length='a')
 
     def test_generate_alpha_9(self):
         """
@@ -148,7 +153,7 @@ class TestStrings(unittest.TestCase):
         @Assert: Alpha string is created
         """
 
-        result = FauxFactory.generate_string('alpha', 15)
+        result = generate_string('alpha', 15)
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
@@ -159,7 +164,7 @@ class TestStrings(unittest.TestCase):
         @Assert: Alphanumeric string is generated
         """
 
-        result = FauxFactory.generate_alphanumeric()
+        result = generate_alphanumeric()
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
@@ -171,7 +176,7 @@ class TestStrings(unittest.TestCase):
         """
 
         for length in range(2, 12, 2):
-            result = FauxFactory.generate_alphanumeric(length)
+            result = generate_alphanumeric(length)
             self.assertEqual(
                 len(result),
                 length,
@@ -185,7 +190,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_alphanumeric(length=0)
+            generate_alphanumeric(length=0)
 
     def test_generate_alphanumeric_4(self):
         """
@@ -195,7 +200,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_alphanumeric(length=-1)
+            generate_alphanumeric(length=-1)
 
     def test_generate_alphanumeric_5(self):
         """
@@ -205,7 +210,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_alphanumeric(length=None)
+            generate_alphanumeric(length=None)
 
     def test_generate_alphanumeric_6(self):
         """
@@ -215,7 +220,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_alphanumeric(length='')
+            generate_alphanumeric(length='')
 
     def test_generate_alphanumeric_7(self):
         """
@@ -225,7 +230,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_alphanumeric(length=' ')
+            generate_alphanumeric(length=' ')
 
     def test_generate_alphanumeric_8(self):
         """
@@ -235,7 +240,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_alphanumeric(length='a')
+            generate_alphanumeric(length='a')
 
     def test_generate_cjk_1(self):
         """
@@ -244,7 +249,7 @@ class TestStrings(unittest.TestCase):
         @Assert: CJK string is generated
         """
 
-        result = FauxFactory.generate_cjk()
+        result = generate_cjk()
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
@@ -256,7 +261,7 @@ class TestStrings(unittest.TestCase):
         """
 
         for length in range(2, 12, 2):
-            result = FauxFactory.generate_cjk(length)
+            result = generate_cjk(length)
             self.assertEqual(
                 len(result),
                 length,
@@ -270,7 +275,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_cjk(length=0)
+            generate_cjk(length=0)
 
     def test_generate_cjk_4(self):
         """
@@ -280,7 +285,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_cjk(length=-1)
+            generate_cjk(length=-1)
 
     def test_generate_cjk_5(self):
         """
@@ -290,7 +295,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_cjk(length=None)
+            generate_cjk(length=None)
 
     def test_generate_cjk_6(self):
         """
@@ -300,7 +305,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_cjk(length='')
+            generate_cjk(length='')
 
     def test_generate_cjk_7(self):
         """
@@ -310,7 +315,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_cjk(length=' ')
+            generate_cjk(length=' ')
 
     def test_generate_cjk_8(self):
         """
@@ -320,7 +325,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_cjk(length='a')
+            generate_cjk(length='a')
 
     def test_generate_cjk_9(self):
         """
@@ -329,7 +334,7 @@ class TestStrings(unittest.TestCase):
         @Assert: CJK string is generated
         """
 
-        result = FauxFactory.generate_string('cjk', 15)
+        result = generate_string('cjk', 15)
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
@@ -340,7 +345,7 @@ class TestStrings(unittest.TestCase):
         @Assert: A unicode string is generated.
         """
 
-        result = FauxFactory.generate_string('utf8', 5)
+        result = generate_string('utf8', 5)
         if version_info[0] == 2:
             self.assertTrue(isinstance(result, unicode))  # flake8:noqa
         else:
@@ -355,7 +360,7 @@ class TestStrings(unittest.TestCase):
 
         length = random.randint(1, 100)
         self.assertEqual(
-            len(FauxFactory.generate_string('utf8', length)),
+            len(generate_string('utf8', length)),
             length
         )
 
@@ -367,7 +372,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_string('utf8', 'foo')
+            generate_string('utf8', 'foo')
 
     def test_generate_latin1_1(self):
         """
@@ -376,7 +381,7 @@ class TestStrings(unittest.TestCase):
         @Assert: Latin1 string is generated
         """
 
-        result = FauxFactory.generate_latin1()
+        result = generate_latin1()
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
@@ -388,7 +393,7 @@ class TestStrings(unittest.TestCase):
         """
 
         for length in range(2, 12, 2):
-            result = FauxFactory.generate_latin1(length)
+            result = generate_latin1(length)
             self.assertEqual(
                 len(result),
                 length,
@@ -402,7 +407,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_latin1(length=0)
+            generate_latin1(length=0)
 
     def test_generate_latin1_4(self):
         """
@@ -412,7 +417,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_latin1(length=-1)
+            generate_latin1(length=-1)
 
     def test_generate_latin1_5(self):
         """
@@ -422,7 +427,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_latin1(length=None)
+            generate_latin1(length=None)
 
     def test_generate_latin1_6(self):
         """
@@ -432,7 +437,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_latin1(length='')
+            generate_latin1(length='')
 
     def test_generate_latin1_7(self):
         """
@@ -442,7 +447,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_latin1(length=' ')
+            generate_latin1(length=' ')
 
     def test_generate_latin1_8(self):
         """
@@ -452,7 +457,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_latin1(length='a')
+            generate_latin1(length='a')
 
     def test_generate_latin1_9(self):
         """
@@ -461,7 +466,7 @@ class TestStrings(unittest.TestCase):
         @Assert: Latin1 string is generated
         """
 
-        result = FauxFactory.generate_string('latin1', 15)
+        result = generate_string('latin1', 15)
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
@@ -472,7 +477,7 @@ class TestStrings(unittest.TestCase):
         @Assert: Latin1 string is not created due to value error
         """
 
-        result = FauxFactory.generate_numeric_string()
+        result = generate_numeric_string()
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
@@ -484,7 +489,7 @@ class TestStrings(unittest.TestCase):
         """
 
         for length in range(2, 12, 2):
-            result = FauxFactory.generate_numeric_string(length)
+            result = generate_numeric_string(length)
             self.assertEqual(
                 len(result),
                 length,
@@ -498,7 +503,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_numeric_string(length=0)
+            generate_numeric_string(length=0)
 
     def test_generate_numeric_string_4(self):
         """
@@ -508,7 +513,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_numeric_string(length=-1)
+            generate_numeric_string(length=-1)
 
     def test_generate_numeric_string_5(self):
         """
@@ -518,7 +523,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_numeric_string(length=None)
+            generate_numeric_string(length=None)
 
     def test_generate_numeric_string_6(self):
         """
@@ -528,7 +533,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_numeric_string(length='')
+            generate_numeric_string(length='')
 
     def test_generate_numeric_string_7(self):
         """
@@ -538,7 +543,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_numeric_string(length=' ')
+            generate_numeric_string(length=' ')
 
     def test_generate_numeric_string_8(self):
         """
@@ -548,7 +553,7 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_numeric_string(length='a')
+            generate_numeric_string(length='a')
 
     def test_generate_string(self):
         """
@@ -556,7 +561,7 @@ class TestStrings(unittest.TestCase):
         @Feature: String Generator
         @Assert: Alphanumeric string is created with size of 15 chars
         """
-        alphanumeric_string = FauxFactory.generate_string('alphanumeric', 15)
+        alphanumeric_string = generate_string('alphanumeric', 15)
         self.assertEqual(15, len(alphanumeric_string),
                          "Generated string does not have the expected length")
 
@@ -567,7 +572,7 @@ class TestStrings(unittest.TestCase):
         @Assert: Alpha string is not created due to the lack of parameter type
         """
         with self.assertRaises(Exception):
-            FauxFactory.generate_string('', 15)
+            generate_string('', 15)
 
     def test_generate_string3(self):
         """
@@ -575,7 +580,7 @@ class TestStrings(unittest.TestCase):
         @Feature: String generator
         @Assert: Numeric string is created with size of 20 chars
         """
-        numeric_string = FauxFactory.generate_string('numeric', 20)
+        numeric_string = generate_string('numeric', 20)
         self.assertEqual(20, len(numeric_string),
                          "Generated string does not have the expected length")
 
@@ -585,6 +590,6 @@ class TestStrings(unittest.TestCase):
         @Feature: String generator
         @Assert: HTML string is created and should greater than given length
         """
-        html_string = FauxFactory.generate_string('html', 10)
+        html_string = generate_string('html', 10)
         self.assertTrue(len(html_string) > 10,
                         "Generated string does not have the expected length")

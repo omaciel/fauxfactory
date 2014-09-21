@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
 
-"""
-Tests for all boolean generators
-"""
+"""Tests for all boolean generators."""
 
-from fauxfactory import FauxFactory
+from fauxfactory import generate_boolean
 
 import unittest
 
 
 class TestBooleans(unittest.TestCase):
-    """
-    Test boolean generator
-    """
+    """Test boolean generator."""
 
     def test_generate_boolean_1(self):
         """
@@ -22,6 +18,7 @@ class TestBooleans(unittest.TestCase):
         """
 
         for turn in range(100):
-            result = FauxFactory.generate_boolean()
-            self.assertIsInstance(result, bool,
-                                  "A valid boolean value was not generated.")
+            result = generate_boolean()
+            self.assertIsInstance(
+                result, bool,
+                "A valid boolean value was not generated.")

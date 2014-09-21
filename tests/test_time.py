@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 
-"""
-Tests for Time generator
-"""
+"""Tests for Time generator."""
 
-from fauxfactory import FauxFactory
+from fauxfactory import generate_time
 
 import unittest
 import datetime
 
 
 class TestTime(unittest.TestCase):
-    """
-    Test Time generator
-    """
+    """Test Time generator."""
 
     def test_generate_uuid_1(self):
         """
@@ -23,6 +19,7 @@ class TestTime(unittest.TestCase):
         """
 
         for turn in range(100):
-            result = FauxFactory.generate_time()
-            self.assertIsInstance(result, datetime.time,
-                                  "A valid Time value was not generated.")
+            result = generate_time()
+            self.assertIsInstance(
+                result, datetime.time,
+                "A valid Time value was not generated.")

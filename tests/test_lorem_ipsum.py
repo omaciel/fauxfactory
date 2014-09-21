@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""
-Tests for Lorem Ipsum generator
-"""
+"""Tests for Lorem Ipsum generator."""
 
-from fauxfactory import FauxFactory
+from fauxfactory import generate_iplum
 from fauxfactory.constants import LOREM_IPSUM_TEXT
 
 import random
@@ -23,7 +21,7 @@ class TestLoremIpsum(unittest.TestCase):
         @Assert: Complete lorem ipsum value that starts with 'Lorem ipsum'
         """
 
-        result = FauxFactory.generate_iplum()
+        result = generate_iplum()
         self.assertEqual(
             result,
             LOREM_IPSUM_TEXT, "Generated text is not Lorem Ipsum")
@@ -41,7 +39,7 @@ class TestLoremIpsum(unittest.TestCase):
 
         for i in range(20):
             length = random.randint(1, 500)
-            result = FauxFactory.generate_iplum(words=length)
+            result = generate_iplum(words=length)
             self.assertEqual(
                 len(result.split()),
                 length,
@@ -56,7 +54,7 @@ class TestLoremIpsum(unittest.TestCase):
 
         for i in range(20):
             length = random.randint(1, 20)
-            result = FauxFactory.generate_iplum(paragraphs=length)
+            result = generate_iplum(paragraphs=length)
             self.assertEqual(
                 len(result.split('\n')),
                 length,
@@ -70,7 +68,7 @@ class TestLoremIpsum(unittest.TestCase):
         @Assert: Complete lorem ipsum value is returned
         """
 
-        result = FauxFactory.generate_iplum(words=0)
+        result = generate_iplum(words=0)
         self.assertEqual(
             result,
             LOREM_IPSUM_TEXT, "Generated text is not Lorem Ipsum")
@@ -83,7 +81,7 @@ class TestLoremIpsum(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_iplum(paragraphs=0)
+            generate_iplum(paragraphs=0)
 
     def test_generate_loremipsum_6(self):
         """
@@ -93,7 +91,7 @@ class TestLoremIpsum(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_iplum(words=1, paragraphs=0)
+            generate_iplum(words=1, paragraphs=0)
 
     def test_generate_loremipsum_7(self):
         """
@@ -102,7 +100,7 @@ class TestLoremIpsum(unittest.TestCase):
         @Assert: Generated string has 1 word in 1 paragraph
         """
 
-        result = FauxFactory.generate_iplum(words=1, paragraphs=1)
+        result = generate_iplum(words=1, paragraphs=1)
         self.assertEqual(len(result.split()), 1, "String is not 1-word long")
         self.assertEqual(
             len(result.split()), 1, "String is not 1-paragraph long")
@@ -115,7 +113,7 @@ class TestLoremIpsum(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_iplum(words='a')
+            generate_iplum(words='a')
 
     def test_generate_loremipsum_9(self):
         """
@@ -125,7 +123,7 @@ class TestLoremIpsum(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_iplum(paragraphs='a')
+            generate_iplum(paragraphs='a')
 
     def test_generate_loremipsum_10(self):
         """
@@ -137,7 +135,7 @@ class TestLoremIpsum(unittest.TestCase):
         for i in range(20):
             words = random.randint(1, 500)
             paragraphs = random.randint(1, 500)
-            result = FauxFactory.generate_iplum(
+            result = generate_iplum(
                 words=words, paragraphs=paragraphs)
             self.assertEqual(
                 len(result.split('\n')),

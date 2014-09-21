@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 
-"""
-Tests for all choice generators
-"""
+"""Tests for all choice generators."""
 
-from fauxfactory import FauxFactory
+from fauxfactory import generate_choice
 
 import string
 import unittest
 
 
 class TestChoices(unittest.TestCase):
-    """
-    Test choices generator
-    """
+    """Test choices generator."""
 
     def test_generate_choice_1(self):
         """
@@ -25,7 +21,7 @@ class TestChoices(unittest.TestCase):
         choices = range(5)
 
         for turn in range(10):
-            result = FauxFactory.generate_choice(choices)
+            result = generate_choice(choices)
             self.assertIn(
                 result,
                 choices,
@@ -41,7 +37,7 @@ class TestChoices(unittest.TestCase):
         choices = string.ascii_letters + string.digits
 
         for turn in range(10):
-            result = FauxFactory.generate_choice(choices)
+            result = generate_choice(choices)
             self.assertIn(
                 result,
                 choices,
@@ -57,7 +53,7 @@ class TestChoices(unittest.TestCase):
         choices = [1, ]
 
         for turn in range(10):
-            result = FauxFactory.generate_choice(choices)
+            result = generate_choice(choices)
             self.assertEqual(
                 result,
                 choices[0],
@@ -73,7 +69,7 @@ class TestChoices(unittest.TestCase):
         choices = [1, 2, 3, 9, 10, 11, 100, 101, 102]
 
         for turn in range(10):
-            result = FauxFactory.generate_choice(choices)
+            result = generate_choice(choices)
             self.assertIn(
                 result,
                 choices,
@@ -89,7 +85,7 @@ class TestChoices(unittest.TestCase):
         choices = (1, )
 
         for turn in range(10):
-            result = FauxFactory.generate_choice(choices)
+            result = generate_choice(choices)
             self.assertEqual(
                 result,
                 choices[0],
@@ -105,7 +101,7 @@ class TestChoices(unittest.TestCase):
         choices = (1, 2, 3, 9, 10, 11, 100, 101, 102, )
 
         for turn in range(10):
-            result = FauxFactory.generate_choice(choices)
+            result = generate_choice(choices)
             self.assertIn(
                 result,
                 choices,
@@ -121,7 +117,7 @@ class TestChoices(unittest.TestCase):
         choices = []
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_choice(choices)
+            generate_choice(choices)
 
     def test_generate_choice_8(self):
         """
@@ -133,7 +129,7 @@ class TestChoices(unittest.TestCase):
         choices = ()
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_choice(choices)
+            generate_choice(choices)
 
     def test_generate_choice_9(self):
         """
@@ -145,7 +141,7 @@ class TestChoices(unittest.TestCase):
         choices = {}
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_choice(choices)
+            generate_choice(choices)
 
     def test_generate_choice_10(self):
         """
@@ -157,7 +153,7 @@ class TestChoices(unittest.TestCase):
         choices = {'Name': 'Bob', 'Age': 39}
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_choice(choices)
+            generate_choice(choices)
 
     def test_generate_choice_11(self):
         """
@@ -173,7 +169,7 @@ class TestChoices(unittest.TestCase):
         ]
 
         for turn in range(10):
-            result = FauxFactory.generate_choice(choices)
+            result = generate_choice(choices)
             self.assertIn(
                 result,
                 choices,
@@ -189,7 +185,7 @@ class TestChoices(unittest.TestCase):
         choices = ['green', 'yellow', 'blue' 'white']
 
         for turn in range(10):
-            result = FauxFactory.generate_choice(choices)
+            result = generate_choice(choices)
             self.assertIn(
                 result,
                 choices,
@@ -205,4 +201,4 @@ class TestChoices(unittest.TestCase):
         choices = None
 
         with self.assertRaises(ValueError):
-            FauxFactory.generate_choice(choices)
+            generate_choice(choices)

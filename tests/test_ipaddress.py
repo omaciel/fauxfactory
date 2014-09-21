@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
 
-"""
-Tests for ipaddr generator
-"""
+"""Tests for ipaddr generator."""
 
-from fauxfactory import FauxFactory
+from fauxfactory import generate_ipaddr
 
 import unittest
 
 
 class TestIpaddr(unittest.TestCase):
-    """
-    Test ipaddr generator
-    """
+    """Test ipaddr generator."""
 
     def test_generate_ipv4_1(self):
         """
@@ -22,7 +18,7 @@ class TestIpaddr(unittest.TestCase):
                  will always end with a \'.0\')
         """
 
-        result = FauxFactory.generate_ipaddr(ip3=True)
+        result = generate_ipaddr(ip3=True)
         self.assertTrue(
             result.split(".")[-1] == '0',
             "Did not generate a 3-group IPv4 addrss")
@@ -34,7 +30,7 @@ class TestIpaddr(unittest.TestCase):
         @Assert: A 4-group IPv4 address is generated
         """
 
-        result = FauxFactory.generate_ipaddr()
+        result = generate_ipaddr()
         self.assertTrue(
             len(result.split(".")) == 4,
             "Did not generate a 4-group IPv4 addrss")
@@ -46,7 +42,7 @@ class TestIpaddr(unittest.TestCase):
         @Assert: A 4-group IPv4 address is generated
         """
 
-        result = FauxFactory.generate_ipaddr(ip3=False)
+        result = generate_ipaddr(ip3=False)
         self.assertTrue(
             len(result.split(".")) == 4,
             "Did not generate a 4-group IPv4 addrss")
@@ -58,7 +54,7 @@ class TestIpaddr(unittest.TestCase):
         @Assert: A 4-group IPv4 address is generated
         """
 
-        result = FauxFactory.generate_ipaddr(ip3=False, ipv6=False)
+        result = generate_ipaddr(ip3=False, ipv6=False)
         self.assertTrue(
             len(result.split(".")) == 4,
             "Did not generate a 4-group IPv4 addrss")
@@ -70,7 +66,7 @@ class TestIpaddr(unittest.TestCase):
         @Assert: A IPv6 address is generated
         """
 
-        result = FauxFactory.generate_ipaddr(ipv6=True)
+        result = generate_ipaddr(ipv6=True)
         self.assertTrue(
             len(result.split(":")) == 8,
             "Did not generate a IPv6 addrss")
@@ -82,7 +78,7 @@ class TestIpaddr(unittest.TestCase):
         @Assert: A IPv6 address is generated
         """
 
-        result = FauxFactory.generate_ipaddr(ip3=True, ipv6=True)
+        result = generate_ipaddr(ip3=True, ipv6=True)
         self.assertTrue(
             len(result.split(":")) == 8,
             "Did not generate a IPv6 addrss")
