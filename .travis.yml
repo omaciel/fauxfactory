@@ -1,11 +1,12 @@
 language: python
 python:
-  - "2.7"
-  - "3.3"
+  - 2.7
+  - 3.3
+  - 3.4
 install:
-  "pip install nose nose-cov coveralls"
+  pip install -r requirements-optional.txt
 script:
-  nosetests --verbosity=2 --with-coverage --cover-package fauxfactory tests/
+  make test-all
 after_success:
   coveralls
 notifications:

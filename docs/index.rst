@@ -113,7 +113,15 @@ Contribute
 
 #. Fork `the repository`_ on GitHub and make some changes. Make sure to add
    yourself to `AUTHORS`_.
-#. Write tests for your changes.
+#. Install the development requirements. ``pip install -r requirements.txt``.
+#.  Test your changes.
+
+    #. Run ``make test-all`` and make sure nothing has broken.
+    #. Run ``coverage report --show-missing`` to check for untested code.
+    #. Add tests to the ``tests/`` directory if appropriate.
+
+    Repeat this cycle as needed.
+
 #. Send a pull request and bug the maintainer until it gets merged and
    published. :)
 
