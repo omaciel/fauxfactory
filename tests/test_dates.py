@@ -2,7 +2,7 @@
 
 """Tests for date generator."""
 
-from fauxfactory import generate_date
+from fauxfactory import gen_date
 from fauxfactory.constants import MAX_YEARS, MIN_YEARS
 
 import datetime
@@ -12,18 +12,18 @@ import unittest
 class TestDates(unittest.TestCase):
     """Test date generator."""
 
-    def test_generate_date_1(self):
+    def test_gen_date_1(self):
         """
         @Test: Create a date with no arguments
         @Feature: Date Generator
         @Assert: Date is created with random values.
         """
-        result = generate_date()
+        result = gen_date()
         self.assertTrue(
             isinstance(result, datetime.date),
             "Data is not instance of datetime.date.")
 
-    def test_generate_date_2(self):
+    def test_gen_date_2(self):
         """
         @Test: Create a date with only min_date
         @Feature: Date Generator
@@ -36,10 +36,10 @@ class TestDates(unittest.TestCase):
         min_date = today - datetime.timedelta(5)
 
         for turn in range(10):
-            result = generate_date(min_date=min_date)
+            result = gen_date(min_date=min_date)
             self.assertTrue(result >= min_date)
 
-    def test_generate_date_3(self):
+    def test_gen_date_3(self):
         """
         @Test: Create a date with only max_date
         @Feature: Date Generator
@@ -52,10 +52,10 @@ class TestDates(unittest.TestCase):
         max_date = today + datetime.timedelta(5)
 
         for turn in range(10):
-            result = generate_date(max_date=max_date)
+            result = gen_date(max_date=max_date)
             self.assertTrue(result <= max_date)
 
-    def test_generate_date_4(self):
+    def test_gen_date_4(self):
         """
         @Test: Create a date with both arguments
         @Feature: Date Generator
@@ -70,14 +70,14 @@ class TestDates(unittest.TestCase):
         max_date = today + datetime.timedelta(5)
 
         for turn in range(10):
-            result = generate_date(
+            result = gen_date(
                 min_date=min_date,
                 max_date=max_date
             )
             self.assertTrue(result >= min_date)
             self.assertTrue(result <= max_date)
 
-    def test_generate_date_5(self):
+    def test_gen_date_5(self):
         """
         @Test: Create a date with min_date == 'None'
         @Feature: Date Generator
@@ -91,14 +91,14 @@ class TestDates(unittest.TestCase):
         max_date = min_date + datetime.timedelta(365 * 1)
 
         for turn in range(20):
-            result = generate_date(
+            result = gen_date(
                 min_date=None,
                 max_date=max_date
             )
             self.assertTrue(result.year <= max_date.year)
             self.assertTrue(result.year >= min_date.year)
 
-    def test_generate_date_6(self):
+    def test_gen_date_6(self):
         """
         @Test: Create a date with max_date == 'None'
         @Feature: Date Generator
@@ -112,14 +112,14 @@ class TestDates(unittest.TestCase):
         min_date = max_date - datetime.timedelta(365 * 1)
 
         for turn in range(20):
-            result = generate_date(
+            result = gen_date(
                 min_date=min_date,
                 max_date=None
             )
             self.assertTrue(result.year <= max_date.year, result)
             self.assertTrue(result.year >= min_date.year, result)
 
-    def test_generate_date_7(self):
+    def test_gen_date_7(self):
         """
         @Test: Create a date with specific date ranges
         @Feature: Date Generator
@@ -134,14 +134,14 @@ class TestDates(unittest.TestCase):
                     datetime.timedelta(365 * MAX_YEARS))
 
         for turn in range(20):
-            result = generate_date(
+            result = gen_date(
                 min_date=min_date,
                 max_date=max_date
             )
             self.assertTrue(result.year <= max_date.year, result)
             self.assertTrue(result.year >= min_date.year, result)
 
-    def test_generate_date_8(self):
+    def test_gen_date_8(self):
         """
         @Test: Create a date with non-Date arguments
         @Feature: Date Generator
@@ -149,12 +149,12 @@ class TestDates(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_date(
+            gen_date(
                 min_date='',
                 max_date=''
             )
 
-    def test_generate_date_9(self):
+    def test_gen_date_9(self):
         """
         @Test: Create a date with non-Date arguments
         @Feature: Date Generator
@@ -162,12 +162,12 @@ class TestDates(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_date(
+            gen_date(
                 min_date='abc',
                 max_date='def'
             )
 
-    def test_generate_date_10(self):
+    def test_gen_date_10(self):
         """
         @Test: Create a date with non-Date arguments
         @Feature: Date Generator
@@ -175,12 +175,12 @@ class TestDates(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_date(
+            gen_date(
                 min_date=1,
                 max_date=1
             )
 
-    def test_generate_date_11(self):
+    def test_gen_date_11(self):
         """
         @Test: Create a date with non-Date arguments
         @Feature: Date Generator
@@ -188,12 +188,12 @@ class TestDates(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_date(
+            gen_date(
                 min_date=(1,),
                 max_date=(2, 3, 4)
             )
 
-    def test_generate_date_12(self):
+    def test_gen_date_12(self):
         """
         @Test: Create a date with non-Date arguments
         @Feature: Date Generator
@@ -201,12 +201,12 @@ class TestDates(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_date(
+            gen_date(
                 min_date=['a', 'b'],
                 max_date=['c', 'd', 'e']
             )
 
-    def test_generate_date_13(self):
+    def test_gen_date_13(self):
         """
         @Test: Create a date with min_date > max_date
         @Feature: Date Generator
@@ -219,12 +219,12 @@ class TestDates(unittest.TestCase):
         min_date = today + datetime.timedelta(5)
 
         with self.assertRaises(AssertionError):
-            generate_date(
+            gen_date(
                 min_date=min_date,
                 max_date=today
             )
 
-    def test_generate_date_14(self):
+    def test_gen_date_14(self):
         """
         @Test: max-date must be a Date type
         @Feature: Date Generator
@@ -232,7 +232,7 @@ class TestDates(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_date(
+            gen_date(
                 min_date=datetime.date.today(),
                 max_date='foo'
             )

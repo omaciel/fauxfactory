@@ -2,7 +2,7 @@
 
 """Tests for Time generator."""
 
-from fauxfactory import generate_time
+from fauxfactory import gen_time
 
 import unittest
 import datetime
@@ -11,7 +11,7 @@ import datetime
 class TestTime(unittest.TestCase):
     """Test Time generator."""
 
-    def test_generate_uuid_1(self):
+    def test_gen_uuid_1(self):
         """
         @Test: Create a random UUID value
         @Feature: UUID Generator
@@ -19,7 +19,7 @@ class TestTime(unittest.TestCase):
         """
 
         for turn in range(100):
-            result = generate_time()
+            result = gen_time()
             self.assertIsInstance(
                 result, datetime.time,
                 "A valid Time value was not generated.")

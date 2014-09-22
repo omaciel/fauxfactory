@@ -62,7 +62,7 @@ Need a 10 character string for one of your tests?
 
 .. doctest::
 
-    >>> string = fauxfactory.generate_string('alphanumeric', 10)
+    >>> string = fauxfactory.gen_string('alphanumeric', 10)
     >>> string.isalnum()
     True
     >>> len(string)
@@ -72,7 +72,7 @@ Need a 5 character numeric string?
 
 .. doctest::
 
-    >>> string = fauxfactory.generate_string('numeric', 5)
+    >>> string = fauxfactory.gen_string('numeric', 5)
     >>> string.isnumeric()
     True
     >>> len(string)
@@ -83,16 +83,16 @@ Now, let's say you need a random date:
 .. doctest::
 
     >>> import datetime
-    >>> isinstance(fauxfactory.generate_date(), datetime.date)
+    >>> isinstance(fauxfactory.gen_date(), datetime.date)
     True
-    >>> isinstance(fauxfactory.generate_datetime(), datetime.datetime)
+    >>> isinstance(fauxfactory.gen_datetime(), datetime.datetime)
     True
 
 Or a fake email with your company domain:
 
 .. doctest::
 
-    >>> email = fauxfactory.generate_email(domain='mycompany')
+    >>> email = fauxfactory.gen_email(domain='mycompany')
     >>> '@mycompany' in email
     True
 

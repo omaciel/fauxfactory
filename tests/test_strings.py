@@ -3,14 +3,14 @@
 """Tests for all string generators."""
 
 from fauxfactory import (
-    generate_alpha,
-    generate_alphanumeric,
-    generate_cjk,
-    generate_html,
-    generate_latin1,
-    generate_numeric_string,
-    generate_string,
-    generate_utf8,
+    gen_alpha,
+    gen_alphanumeric,
+    gen_cjk,
+    gen_html,
+    gen_latin1,
+    gen_numeric_string,
+    gen_string,
+    gen_utf8,
 )
 from sys import version_info
 
@@ -21,18 +21,18 @@ import random
 class TestStrings(unittest.TestCase):
     """Test string generators."""
 
-    def test_generate_alpha_1(self):
+    def test_gen_alpha_1(self):
         """
         @Test: Create alpha string of varied length
         @Feature: String Generator
         @Assert: Alpha string is created
         """
 
-        result = generate_alpha()
+        result = gen_alpha()
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
-    def test_generate_alpha_2(self):
+    def test_gen_alpha_2(self):
         """
         @Test: Create alpha string of fixed length
         @Feature: String Generator
@@ -40,13 +40,13 @@ class TestStrings(unittest.TestCase):
         """
 
         for length in range(2, 12, 2):
-            result = generate_alpha(length)
+            result = gen_alpha(length)
             self.assertEqual(
                 len(result),
                 length,
                 "Generate string does not have the expected length")
 
-    def test_generate_alpha_3_0(self):
+    def test_gen_alpha_3_0(self):
         """
         @Test: Create alpha string with zero length
         @Feature: String Generator
@@ -54,9 +54,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_alpha(length=0)
+            gen_alpha(length=0)
 
-    def test_generate_alpha_3_1(self):
+    def test_gen_alpha_3_1(self):
         """
         @Test: Create alpha string with zero length
         @Feature: String Generator
@@ -64,9 +64,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_alphanumeric(length=0)
+            gen_alphanumeric(length=0)
 
-    def test_generate_alpha_3_2(self):
+    def test_gen_alpha_3_2(self):
         """
         @Test: Create alpha string with zero length
         @Feature: String Generator
@@ -74,9 +74,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_cjk(length=0)
+            gen_cjk(length=0)
 
-    def test_generate_alpha_3_3(self):
+    def test_gen_alpha_3_3(self):
         """
         @Test: Create alpha string with zero length
         @Feature: String Generator
@@ -84,9 +84,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_latin1(length=0)
+            gen_latin1(length=0)
 
-    def test_generate_alpha_3_4(self):
+    def test_gen_alpha_3_4(self):
         """
         @Test: Create alpha string with zero length
         @Feature: String Generator
@@ -94,9 +94,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_numeric_string(length=0)
+            gen_numeric_string(length=0)
 
-    def test_generate_alpha_4(self):
+    def test_gen_alpha_4(self):
         """
         @Test: Create alpha string with negative length
         @Feature: String Generator
@@ -104,9 +104,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_alpha(length=-1)
+            gen_alpha(length=-1)
 
-    def test_generate_alpha_5(self):
+    def test_gen_alpha_5(self):
         """
         @Test: Create alpha string with None length
         @Feature: String Generator
@@ -114,9 +114,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_alpha(length=None)
+            gen_alpha(length=None)
 
-    def test_generate_alpha_6(self):
+    def test_gen_alpha_6(self):
         """
         @Test: Create alpha string with empty string length
         @Feature: String Generator
@@ -124,9 +124,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_alpha(length='')
+            gen_alpha(length='')
 
-    def test_generate_alpha_7(self):
+    def test_gen_alpha_7(self):
         """
         @Test: Create alpha string with white space length
         @Feature: String Generator
@@ -134,9 +134,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_alpha(length=' ')
+            gen_alpha(length=' ')
 
-    def test_generate_alpha_8(self):
+    def test_gen_alpha_8(self):
         """
         @Test: Create alpha string with alpha string length
         @Feature: String Generator
@@ -144,31 +144,31 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_alpha(length='a')
+            gen_alpha(length='a')
 
-    def test_generate_alpha_9(self):
+    def test_gen_alpha_9(self):
         """
         @Test: Create alpha string of varied length
         @Feature: String Generator
         @Assert: Alpha string is created
         """
 
-        result = generate_string('alpha', 15)
+        result = gen_string('alpha', 15)
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
-    def test_generate_alphanumeric_1(self):
+    def test_gen_alphanumeric_1(self):
         """
         @Test: Create alphanumeric string of varied length
         @Feature: String Generator
         @Assert: Alphanumeric string is generated
         """
 
-        result = generate_alphanumeric()
+        result = gen_alphanumeric()
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
-    def test_generate_alphanumeric_2(self):
+    def test_gen_alphanumeric_2(self):
         """
         @Test: Create alphanumeric string of fixed length
         @Feature: String Generator
@@ -176,13 +176,13 @@ class TestStrings(unittest.TestCase):
         """
 
         for length in range(2, 12, 2):
-            result = generate_alphanumeric(length)
+            result = gen_alphanumeric(length)
             self.assertEqual(
                 len(result),
                 length,
                 "Generate string does not have the expected length")
 
-    def test_generate_alphanumeric_3(self):
+    def test_gen_alphanumeric_3(self):
         """
         @Test: Create alphanumeric string with zero length
         @Feature: String Generator
@@ -190,9 +190,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_alphanumeric(length=0)
+            gen_alphanumeric(length=0)
 
-    def test_generate_alphanumeric_4(self):
+    def test_gen_alphanumeric_4(self):
         """
         @Test: Create alphanumeric string with negative length
         @Feature: String Generator
@@ -200,9 +200,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_alphanumeric(length=-1)
+            gen_alphanumeric(length=-1)
 
-    def test_generate_alphanumeric_5(self):
+    def test_gen_alphanumeric_5(self):
         """
         @Test: Create alphanumeric string with None length
         @Feature: String Generator
@@ -210,9 +210,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_alphanumeric(length=None)
+            gen_alphanumeric(length=None)
 
-    def test_generate_alphanumeric_6(self):
+    def test_gen_alphanumeric_6(self):
         """
         @Test: Create alphanumeric string with empty string length
         @Feature: String Generator
@@ -220,9 +220,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_alphanumeric(length='')
+            gen_alphanumeric(length='')
 
-    def test_generate_alphanumeric_7(self):
+    def test_gen_alphanumeric_7(self):
         """
         @Test: Create alphanumeric string with white space length
         @Feature: String Generator
@@ -230,9 +230,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_alphanumeric(length=' ')
+            gen_alphanumeric(length=' ')
 
-    def test_generate_alphanumeric_8(self):
+    def test_gen_alphanumeric_8(self):
         """
         @Test: Create alphanumeric string with alpha string length
         @Feature: String Generator
@@ -240,20 +240,20 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_alphanumeric(length='a')
+            gen_alphanumeric(length='a')
 
-    def test_generate_cjk_1(self):
+    def test_gen_cjk_1(self):
         """
         @Test: Create CJK string of varied length
         @Feature: String Generator
         @Assert: CJK string is generated
         """
 
-        result = generate_cjk()
+        result = gen_cjk()
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
-    def test_generate_cjk_2(self):
+    def test_gen_cjk_2(self):
         """
         @Test: Create CJK string of fixed length
         @Feature: String Generator
@@ -261,13 +261,13 @@ class TestStrings(unittest.TestCase):
         """
 
         for length in range(2, 12, 2):
-            result = generate_cjk(length)
+            result = gen_cjk(length)
             self.assertEqual(
                 len(result),
                 length,
                 "Generate string does not have the expected length")
 
-    def test_generate_cjk_3(self):
+    def test_gen_cjk_3(self):
         """
         @Test: Create CJK string with zero length
         @Feature: String Generator
@@ -275,9 +275,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_cjk(length=0)
+            gen_cjk(length=0)
 
-    def test_generate_cjk_4(self):
+    def test_gen_cjk_4(self):
         """
         @Test: Create CJK string with negative length
         @Feature: String Generator
@@ -285,9 +285,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_cjk(length=-1)
+            gen_cjk(length=-1)
 
-    def test_generate_cjk_5(self):
+    def test_gen_cjk_5(self):
         """
         @Test: Create CJK string with None length
         @Feature: String Generator
@@ -295,9 +295,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_cjk(length=None)
+            gen_cjk(length=None)
 
-    def test_generate_cjk_6(self):
+    def test_gen_cjk_6(self):
         """
         @Test: Create CJK string with empty string length
         @Feature: String Generator
@@ -305,9 +305,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_cjk(length='')
+            gen_cjk(length='')
 
-    def test_generate_cjk_7(self):
+    def test_gen_cjk_7(self):
         """
         @Test: Create CJK string with white space length
         @Feature: String Generator
@@ -315,9 +315,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_cjk(length=' ')
+            gen_cjk(length=' ')
 
-    def test_generate_cjk_8(self):
+    def test_gen_cjk_8(self):
         """
         @Test: Create CJK string with alpha string length
         @Feature: String Generator
@@ -325,33 +325,33 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_cjk(length='a')
+            gen_cjk(length='a')
 
-    def test_generate_cjk_9(self):
+    def test_gen_cjk_9(self):
         """
         @Test: Create CJK string of varied length
         @Feature: String Generator
         @Assert: CJK string is generated
         """
 
-        result = generate_string('cjk', 15)
+        result = gen_string('cjk', 15)
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
-    def test_generate_utf8_1(self):
+    def test_gen_utf8_1(self):
         """
         @Test: Create a unicode string.
         @Feature: String Generator
         @Assert: A unicode string is generated.
         """
 
-        result = generate_string('utf8', 5)
+        result = gen_string('utf8', 5)
         if version_info[0] == 2:
             self.assertTrue(isinstance(result, unicode))  # flake8:noqa
         else:
             self.assertTrue(isinstance(result, str))
 
-    def test_generate_utf8_2(self):
+    def test_gen_utf8_2(self):
         """
         @Test: Create a unicode string and specify a length.
         @Feature: String Generator
@@ -360,11 +360,11 @@ class TestStrings(unittest.TestCase):
 
         length = random.randint(1, 100)
         self.assertEqual(
-            len(generate_string('utf8', length)),
+            len(gen_string('utf8', length)),
             length
         )
 
-    def test_generate_utf8_3(self):
+    def test_gen_utf8_3(self):
         """
         @Test: Create a unicode string and specify an invalid length.
         @Feature: String Generator
@@ -372,20 +372,20 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_string('utf8', 'foo')
+            gen_string('utf8', 'foo')
 
-    def test_generate_latin1_1(self):
+    def test_gen_latin1_1(self):
         """
         @Test: Create latin1 string of varied length
         @Feature: String Generator
         @Assert: Latin1 string is generated
         """
 
-        result = generate_latin1()
+        result = gen_latin1()
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
-    def test_generate_latin1_2(self):
+    def test_gen_latin1_2(self):
         """
         @Test: Create latin1 string of fixed length
         @Feature: String Generator
@@ -393,13 +393,13 @@ class TestStrings(unittest.TestCase):
         """
 
         for length in range(2, 12, 2):
-            result = generate_latin1(length)
+            result = gen_latin1(length)
             self.assertEqual(
                 len(result),
                 length,
                 "Generate string does not have the expected length")
 
-    def test_generate_latin1_3(self):
+    def test_gen_latin1_3(self):
         """
         @Test: Create latin1 string with zero length
         @Feature: String Generator
@@ -407,9 +407,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_latin1(length=0)
+            gen_latin1(length=0)
 
-    def test_generate_latin1_4(self):
+    def test_gen_latin1_4(self):
         """
         @Test: Create latin1 string with negative length
         @Feature: String Generator
@@ -417,9 +417,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_latin1(length=-1)
+            gen_latin1(length=-1)
 
-    def test_generate_latin1_5(self):
+    def test_gen_latin1_5(self):
         """
         @Test: Create latin1 string with None length
         @Feature: String Generator
@@ -427,9 +427,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_latin1(length=None)
+            gen_latin1(length=None)
 
-    def test_generate_latin1_6(self):
+    def test_gen_latin1_6(self):
         """
         @Test: Create latin1 string with empty string length
         @Feature: String Generator
@@ -437,9 +437,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_latin1(length='')
+            gen_latin1(length='')
 
-    def test_generate_latin1_7(self):
+    def test_gen_latin1_7(self):
         """
         @Test: Create latin1 string with white space length
         @Feature: String Generator
@@ -447,9 +447,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_latin1(length=' ')
+            gen_latin1(length=' ')
 
-    def test_generate_latin1_8(self):
+    def test_gen_latin1_8(self):
         """
         @Test: Create latin1 string with alpha string length
         @Feature: String Generator
@@ -457,31 +457,31 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_latin1(length='a')
+            gen_latin1(length='a')
 
-    def test_generate_latin1_9(self):
+    def test_gen_latin1_9(self):
         """
         @Test: Create latin1 string of varied length
         @Feature: String Generator
         @Assert: Latin1 string is generated
         """
 
-        result = generate_string('latin1', 15)
+        result = gen_string('latin1', 15)
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
-    def test_generate_numeric_string_1(self):
+    def test_gen_numeric_string_1(self):
         """
         @Test: Create numeric string of varied length
         @Feature: String Generator
         @Assert: Latin1 string is not created due to value error
         """
 
-        result = generate_numeric_string()
+        result = gen_numeric_string()
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 
-    def test_generate_numeric_string_2(self):
+    def test_gen_numeric_string_2(self):
         """
         @Test: Create numeric string of fixed length
         @Feature: String Generator
@@ -489,13 +489,13 @@ class TestStrings(unittest.TestCase):
         """
 
         for length in range(2, 12, 2):
-            result = generate_numeric_string(length)
+            result = gen_numeric_string(length)
             self.assertEqual(
                 len(result),
                 length,
                 "Generate string does not have the expected length")
 
-    def test_generate_numeric_string_3(self):
+    def test_gen_numeric_string_3(self):
         """
         @Test: Create numeric string with zero length
         @Feature: String Generator
@@ -503,9 +503,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_numeric_string(length=0)
+            gen_numeric_string(length=0)
 
-    def test_generate_numeric_string_4(self):
+    def test_gen_numeric_string_4(self):
         """
         @Test: Create numeric string with negative length
         @Feature: String Generator
@@ -513,9 +513,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_numeric_string(length=-1)
+            gen_numeric_string(length=-1)
 
-    def test_generate_numeric_string_5(self):
+    def test_gen_numeric_string_5(self):
         """
         @Test: Create numeric string with None length
         @Feature: String Generator
@@ -523,9 +523,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_numeric_string(length=None)
+            gen_numeric_string(length=None)
 
-    def test_generate_numeric_string_6(self):
+    def test_gen_numeric_string_6(self):
         """
         @Test: Create numeric string with empty string length
         @Feature: String Generator
@@ -533,9 +533,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_numeric_string(length='')
+            gen_numeric_string(length='')
 
-    def test_generate_numeric_string_7(self):
+    def test_gen_numeric_string_7(self):
         """
         @Test: Create numeric string with white space length
         @Feature: String Generator
@@ -543,9 +543,9 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_numeric_string(length=' ')
+            gen_numeric_string(length=' ')
 
-    def test_generate_numeric_string_8(self):
+    def test_gen_numeric_string_8(self):
         """
         @Test: Create numeric string with alpha string length
         @Feature: String Generator
@@ -553,43 +553,43 @@ class TestStrings(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_numeric_string(length='a')
+            gen_numeric_string(length='a')
 
-    def test_generate_string(self):
+    def test_gen_string(self):
         """
         @Test: Create alphanumeric string with given lenght
         @Feature: String Generator
         @Assert: Alphanumeric string is created with size of 15 chars
         """
-        alphanumeric_string = generate_string('alphanumeric', 15)
+        alphanumeric_string = gen_string('alphanumeric', 15)
         self.assertEqual(15, len(alphanumeric_string),
                          "Generated string does not have the expected length")
 
-    def test_generate_string2(self):
+    def test_gen_string2(self):
         """
         @Test: Create alpha string with given length
         @Feature: String generator
         @Assert: Alpha string is not created due to the lack of parameter type
         """
         with self.assertRaises(Exception):
-            generate_string('', 15)
+            gen_string('', 15)
 
-    def test_generate_string3(self):
+    def test_gen_string3(self):
         """
         @Test: Create a numeric string with the given length
         @Feature: String generator
         @Assert: Numeric string is created with size of 20 chars
         """
-        numeric_string = generate_string('numeric', 20)
+        numeric_string = gen_string('numeric', 20)
         self.assertEqual(20, len(numeric_string),
                          "Generated string does not have the expected length")
 
-    def test_generate_string4(self):
+    def test_gen_string4(self):
         """
         @Test: Create a html string with the given length
         @Feature: String generator
         @Assert: HTML string is created and should greater than given length
         """
-        html_string = generate_string('html', 10)
+        html_string = gen_string('html', 10)
         self.assertTrue(len(html_string) > 10,
                         "Generated string does not have the expected length")

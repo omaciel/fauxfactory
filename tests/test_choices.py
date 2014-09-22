@@ -2,7 +2,7 @@
 
 """Tests for all choice generators."""
 
-from fauxfactory import generate_choice
+from fauxfactory import gen_choice
 
 import string
 import unittest
@@ -11,7 +11,7 @@ import unittest
 class TestChoices(unittest.TestCase):
     """Test choices generator."""
 
-    def test_generate_choice_1(self):
+    def test_gen_choice_1(self):
         """
         @Test: Select a random value from integer values
         @Feature: Choice Generator
@@ -21,13 +21,13 @@ class TestChoices(unittest.TestCase):
         choices = range(5)
 
         for turn in range(10):
-            result = generate_choice(choices)
+            result = gen_choice(choices)
             self.assertIn(
                 result,
                 choices,
                 "An invalid value was selected from available choices.")
 
-    def test_generate_choice_2(self):
+    def test_gen_choice_2(self):
         """
         @Test: Select a random value from alphanumeric values
         @Feature: Choice Generator
@@ -37,13 +37,13 @@ class TestChoices(unittest.TestCase):
         choices = string.ascii_letters + string.digits
 
         for turn in range(10):
-            result = generate_choice(choices)
+            result = gen_choice(choices)
             self.assertIn(
                 result,
                 choices,
                 "An invalid value was selected from available choices.")
 
-    def test_generate_choice_3(self):
+    def test_gen_choice_3(self):
         """
         @Test: Select a random value from short list
         @Feature: Choice Generator
@@ -53,13 +53,13 @@ class TestChoices(unittest.TestCase):
         choices = [1, ]
 
         for turn in range(10):
-            result = generate_choice(choices)
+            result = gen_choice(choices)
             self.assertEqual(
                 result,
                 choices[0],
                 "An invalid value was selected from available choices.")
 
-    def test_generate_choice_4(self):
+    def test_gen_choice_4(self):
         """
         @Test: Select a random value from longer list
         @Feature: Choice Generator
@@ -69,13 +69,13 @@ class TestChoices(unittest.TestCase):
         choices = [1, 2, 3, 9, 10, 11, 100, 101, 102]
 
         for turn in range(10):
-            result = generate_choice(choices)
+            result = gen_choice(choices)
             self.assertIn(
                 result,
                 choices,
                 "An invalid value was selected from available choices.")
 
-    def test_generate_choice_5(self):
+    def test_gen_choice_5(self):
         """
         @Test: Select a random value from short tuple
         @Feature: Choice Generator
@@ -85,13 +85,13 @@ class TestChoices(unittest.TestCase):
         choices = (1, )
 
         for turn in range(10):
-            result = generate_choice(choices)
+            result = gen_choice(choices)
             self.assertEqual(
                 result,
                 choices[0],
                 "An invalid value was selected from available choices.")
 
-    def test_generate_choice_6(self):
+    def test_gen_choice_6(self):
         """
         @Test: Select a random value from longer tuple
         @Feature: Choice Generator
@@ -101,13 +101,13 @@ class TestChoices(unittest.TestCase):
         choices = (1, 2, 3, 9, 10, 11, 100, 101, 102, )
 
         for turn in range(10):
-            result = generate_choice(choices)
+            result = gen_choice(choices)
             self.assertIn(
                 result,
                 choices,
                 "An invalid value was selected from available choices.")
 
-    def test_generate_choice_7(self):
+    def test_gen_choice_7(self):
         """
         @Test: Select a random value from empty list
         @Feature: Choice Generator
@@ -117,9 +117,9 @@ class TestChoices(unittest.TestCase):
         choices = []
 
         with self.assertRaises(ValueError):
-            generate_choice(choices)
+            gen_choice(choices)
 
-    def test_generate_choice_8(self):
+    def test_gen_choice_8(self):
         """
         @Test: Select a random value from empty tuple
         @Feature: Choice Generator
@@ -129,9 +129,9 @@ class TestChoices(unittest.TestCase):
         choices = ()
 
         with self.assertRaises(ValueError):
-            generate_choice(choices)
+            gen_choice(choices)
 
-    def test_generate_choice_9(self):
+    def test_gen_choice_9(self):
         """
         @Test: Select a random value from empty dictionary
         @Feature: Choice Generator
@@ -141,9 +141,9 @@ class TestChoices(unittest.TestCase):
         choices = {}
 
         with self.assertRaises(ValueError):
-            generate_choice(choices)
+            gen_choice(choices)
 
-    def test_generate_choice_10(self):
+    def test_gen_choice_10(self):
         """
         @Test: Select a random value from single dictionary
         @Feature: Choice Generator
@@ -153,9 +153,9 @@ class TestChoices(unittest.TestCase):
         choices = {'Name': 'Bob', 'Age': 39}
 
         with self.assertRaises(ValueError):
-            generate_choice(choices)
+            gen_choice(choices)
 
-    def test_generate_choice_11(self):
+    def test_gen_choice_11(self):
         """
         @Test: Select a random value from dictionary list
         @Feature: Choice Generator
@@ -169,13 +169,13 @@ class TestChoices(unittest.TestCase):
         ]
 
         for turn in range(10):
-            result = generate_choice(choices)
+            result = gen_choice(choices)
             self.assertIn(
                 result,
                 choices,
                 "An invalid value was selected from available choices.")
 
-    def test_generate_choice_12(self):
+    def test_gen_choice_12(self):
         """
         @Test: Select a random value from words list
         @Feature: Choice Generator
@@ -185,13 +185,13 @@ class TestChoices(unittest.TestCase):
         choices = ['green', 'yellow', 'blue' 'white']
 
         for turn in range(10):
-            result = generate_choice(choices)
+            result = gen_choice(choices)
             self.assertIn(
                 result,
                 choices,
                 "An invalid value was selected from available choices.")
 
-    def test_generate_choice_13(self):
+    def test_gen_choice_13(self):
         """
         @Test: Cannot use None for Choice generator
         @Feature: Choice Generator
@@ -201,4 +201,4 @@ class TestChoices(unittest.TestCase):
         choices = None
 
         with self.assertRaises(ValueError):
-            generate_choice(choices)
+            gen_choice(choices)

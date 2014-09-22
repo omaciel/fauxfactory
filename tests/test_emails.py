@@ -2,7 +2,7 @@
 
 """Tests for Email generator."""
 
-from fauxfactory import generate_email
+from fauxfactory import gen_email
 
 import re
 import unittest
@@ -13,7 +13,7 @@ REGEX = r"^[a-zA-Z][a-zA-Z-.]*[^.-]@\w*\.[a-zA-Z]{2,3}"
 class TestEmails(unittest.TestCase):
     """Test Email generator."""
 
-    def test_generate_email_1(self):
+    def test_gen_email_1(self):
         """
         @Test: Create a random email value
         @Feature: Email Generator
@@ -23,7 +23,7 @@ class TestEmails(unittest.TestCase):
         # Regex for email validation
         emailinator = re.compile(REGEX)
         for turn in range(100):
-            result = generate_email()
+            result = gen_email()
 
             self.assertIsNotNone(
                 emailinator.match(result),

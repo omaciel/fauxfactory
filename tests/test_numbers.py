@@ -3,9 +3,9 @@
 """Tests for all number generators."""
 
 from fauxfactory import (
-    generate_integer,
-    generate_negative_integer,
-    generate_positive_integer,
+    gen_integer,
+    gen_negative_integer,
+    gen_positive_integer,
 )
 
 import sys
@@ -15,18 +15,18 @@ import unittest
 class TestNumbers(unittest.TestCase):
     """Test number generators."""
 
-    def test_generate_integer_1(self):
+    def test_gen_integer_1(self):
         """
         @Test: Create a random integer with no range limits
         @Feature: Numbers Generator
         @Assert: A random integer is created
         """
 
-        result = generate_integer()
+        result = gen_integer()
         self.assertTrue(
             isinstance(result, int), "A valid integer was not generated.")
 
-    def test_generate_integer_2(self):
+    def test_gen_integer_2(self):
         """
         @Test: Create a random integer with set minimum limit
         @Feature: Numbers Generator
@@ -39,7 +39,7 @@ class TestNumbers(unittest.TestCase):
             sys.maxsize = 5
 
             for turn in range(10):
-                result = generate_integer(min_value=1)
+                result = gen_integer(min_value=1)
                 self.assertTrue(
                     result <= sys.maxsize, "Integer is greater than max_value"
                 )
@@ -50,7 +50,7 @@ class TestNumbers(unittest.TestCase):
             # Reset system max int back to original value
             sys.maxsize = old_sys_maxsize
 
-    def test_generate_integer_3(self):
+    def test_gen_integer_3(self):
         """
         @Test: Create a random integer with set maximum limit
         @Feature: Numbers Generator
@@ -64,7 +64,7 @@ class TestNumbers(unittest.TestCase):
             min_value = - sys.maxsize - 1
 
             for turn in range(10):
-                result = generate_integer(max_value=1)
+                result = gen_integer(max_value=1)
                 self.assertTrue(
                     result >= min_value, "Integer is less than min_value"
                 )
@@ -75,7 +75,7 @@ class TestNumbers(unittest.TestCase):
             # Reset system max int back to original value
             sys.maxsize = old_sys_maxsize
 
-    def test_generate_integer_4(self):
+    def test_gen_integer_4(self):
         """
         @Test: Create a random integer with set min/max limits
         @Feature: Numbers Generator
@@ -83,7 +83,7 @@ class TestNumbers(unittest.TestCase):
         """
 
         for turn in range(10):
-            result = generate_integer(
+            result = gen_integer(
                 min_value=1, max_value=3)
             self.assertTrue(
                 result >= 1, "Integer is less than min_value"
@@ -92,7 +92,7 @@ class TestNumbers(unittest.TestCase):
                 result <= 3, "Integer is greater than specified maximum"
             )
 
-    def test_generate_integer_5(self):
+    def test_gen_integer_5(self):
         """
         @Test: Create a random integer with disallowed minimum limit
         @Feature: Numbers Generator
@@ -103,9 +103,9 @@ class TestNumbers(unittest.TestCase):
         low_min = - sys.maxsize - 2
 
         with self.assertRaises(ValueError):
-            generate_integer(min_value=low_min)
+            gen_integer(min_value=low_min)
 
-    def test_generate_integer_6(self):
+    def test_gen_integer_6(self):
         """
         @Test: Create a random integer with disallowed maximum limit
         @Feature: Numbers Generator
@@ -116,9 +116,9 @@ class TestNumbers(unittest.TestCase):
         high_max = sys.maxsize + 1
 
         with self.assertRaises(ValueError):
-            generate_integer(max_value=high_max)
+            gen_integer(max_value=high_max)
 
-    def test_generate_integer_7_0(self):
+    def test_gen_integer_7_0(self):
         """
         @Test: Create a random integer using empty strings as args
         @Feature: Numbers Generator
@@ -126,9 +126,9 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_integer(min_value='')
+            gen_integer(min_value='')
 
-    def test_generate_integer_7_1(self):
+    def test_gen_integer_7_1(self):
         """
         @Test: Create a random integer using empty strings as args
         @Feature: Numbers Generator
@@ -136,9 +136,9 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_integer(max_value='')
+            gen_integer(max_value='')
 
-    def test_generate_integer_7_2(self):
+    def test_gen_integer_7_2(self):
         """
         @Test: Create a random integer using empty strings as args
         @Feature: Numbers Generator
@@ -146,9 +146,9 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_integer(min_value='', max_value='')
+            gen_integer(min_value='', max_value='')
 
-    def test_generate_integer_8_0(self):
+    def test_gen_integer_8_0(self):
         """
         @Test: Create a random integer using whitespace as args
         @Feature: Numbers Generator
@@ -156,9 +156,9 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_integer(min_value=' ')
+            gen_integer(min_value=' ')
 
-    def test_generate_integer_8_1(self):
+    def test_gen_integer_8_1(self):
         """
         @Test: Create a random integer using whitespace as args
         @Feature: Numbers Generator
@@ -166,9 +166,9 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_integer(max_value=' ')
+            gen_integer(max_value=' ')
 
-    def test_generate_integer_8_2(self):
+    def test_gen_integer_8_2(self):
         """
         @Test: Create a random integer using whitespace as args
         @Feature: Numbers Generator
@@ -176,9 +176,9 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_integer(min_value=' ', max_value=' ')
+            gen_integer(min_value=' ', max_value=' ')
 
-    def test_generate_integer_9_0(self):
+    def test_gen_integer_9_0(self):
         """
         @Test: Create a random integer using alpha strings as args
         @Feature: Numbers Generator
@@ -186,9 +186,9 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_integer(min_value='a')
+            gen_integer(min_value='a')
 
-    def test_generate_integer_9_1(self):
+    def test_gen_integer_9_1(self):
         """
         @Test: Create a random integer using alpha strings as args
         @Feature: Numbers Generator
@@ -196,9 +196,9 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_integer(max_value='a')
+            gen_integer(max_value='a')
 
-    def test_generate_integer_9_2(self):
+    def test_gen_integer_9_2(self):
         """
         @Test: Create a random integer using alpha strings as args
         @Feature: Numbers Generator
@@ -206,26 +206,26 @@ class TestNumbers(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_integer(min_value='a', max_value='b')
+            gen_integer(min_value='a', max_value='b')
 
-    def test_generate_positive_integer_1(self):
+    def test_gen_positive_integer_1(self):
         """
         @Test: Create a random positive integer
         @Feature: Numbers Generator
         @Assert: A positive number is created
         """
 
-        result = generate_positive_integer()
+        result = gen_positive_integer()
 
         self.assertTrue(result >= 0, "Generated integer is not positive")
 
-    def test_generate_negative_integer_1(self):
+    def test_gen_negative_integer_1(self):
         """
         @Test: Create a random negative integer
         @Feature: Numbers Generator
         @Assert: A negative number is created
         """
 
-        result = generate_negative_integer()
+        result = gen_negative_integer()
 
         self.assertTrue(result <= 0, "Generated integer is not negative")
