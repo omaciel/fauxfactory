@@ -2,7 +2,7 @@
 
 """Tests for MAC generator."""
 
-from fauxfactory import generate_mac
+from fauxfactory import gen_mac
 
 import random
 import re
@@ -15,14 +15,14 @@ mac = re.compile("[0-9a-f]{2}([-:])[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$")
 class TestMacs(unittest.TestCase):
     """Test MAC generator."""
 
-    def test_generate_mac_1(self):
+    def test_gen_mac_1(self):
         """
         @Test: Generate a MAC address using \":\" as the delimiter
         @Feature: MAC Generator
         @Assert: A MAC address is generated using \":\" as the delimiter
         """
 
-        result = generate_mac()
+        result = gen_mac()
         self.assertTrue(
             len(result.split(":")) == 6,
             "Did not generate a MAC addrss")
@@ -30,14 +30,14 @@ class TestMacs(unittest.TestCase):
             mac.match(result),
             "Did not match regular expression for MAC address")
 
-    def test_generate_mac_2(self):
+    def test_gen_mac_2(self):
         """
         @Test: Generate a MAC address using \":\" as the delimiter
         @Feature: MAC Generator
         @Assert: A MAC address is generated using \":\" as the delimiter
         """
 
-        result = generate_mac(delimiter=":")
+        result = gen_mac(delimiter=":")
         self.assertTrue(
             len(result.split(":")) == 6,
             "Did not generate a MAC addrss")
@@ -45,14 +45,14 @@ class TestMacs(unittest.TestCase):
             mac.match(result),
             "Did not match regular expression for MAC address")
 
-    def test_generate_mac_3(self):
+    def test_gen_mac_3(self):
         """
         @Test: Generate a MAC address using \"-\" as the delimiter
         @Feature: MAC Generator
         @Assert: A MAC address is generated using \"-\" as the delimiter
         """
 
-        result = generate_mac(delimiter="-")
+        result = gen_mac(delimiter="-")
         self.assertTrue(
             len(result.split("-")) == 6,
             "Did not generate a MAC addrss")
@@ -60,7 +60,7 @@ class TestMacs(unittest.TestCase):
             mac.match(result),
             "Did not match regular expression for MAC address")
 
-    def test_generate_mac_4(self):
+    def test_gen_mac_4(self):
         """
         @Test: Generate a MAC address using \".\" as the delimiter
         @Feature: MAC Generator
@@ -68,9 +68,9 @@ class TestMacs(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_mac(delimiter=".")
+            gen_mac(delimiter=".")
 
-    def test_generate_mac_5(self):
+    def test_gen_mac_5(self):
         """
         @Test: Generate a MAC address using \" \" as the delimiter
         @Feature: MAC Generator
@@ -78,9 +78,9 @@ class TestMacs(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_mac(delimiter=" ")
+            gen_mac(delimiter=" ")
 
-    def test_generate_mac_6(self):
+    def test_gen_mac_6(self):
         """
         @Test: Generate a MAC address using a number as the delimiter
         @Feature: MAC Generator
@@ -88,9 +88,9 @@ class TestMacs(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_mac(delimiter=random.randint(0, 10))
+            gen_mac(delimiter=random.randint(0, 10))
 
-    def test_generate_mac_7(self):
+    def test_gen_mac_7(self):
         """
         @Test: Generate a MAC address using a letter as the delimiter
         @Feature: MAC Generator
@@ -98,5 +98,5 @@ class TestMacs(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_mac(
+            gen_mac(
                 delimiter=random.choice(string.ascii_letters))

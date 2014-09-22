@@ -2,7 +2,7 @@
 
 """Tests for UUID generator."""
 
-from fauxfactory import generate_uuid
+from fauxfactory import gen_uuid
 
 import unittest
 
@@ -10,7 +10,7 @@ import unittest
 class TestUUID(unittest.TestCase):
     """Test UUID generator."""
 
-    def test_generate_uuid_1(self):
+    def test_gen_uuid_1(self):
         """
         @Test: Create a random UUID4 value
         @Feature: UUID Generator
@@ -18,7 +18,7 @@ class TestUUID(unittest.TestCase):
         """
 
         for turn in range(100):
-            result = generate_uuid()
+            result = gen_uuid()
             self.assertGreater(
                 len(result), 0,
                 "A valid UUID value was not generated.")

@@ -5,11 +5,11 @@
 import unittest
 
 from fauxfactory import (
-    generate_alpha,
-    generate_alphanumeric,
-    generate_cjk,
-    generate_numeric_string,
-    generate_url,
+    gen_alpha,
+    gen_alphanumeric,
+    gen_cjk,
+    gen_numeric_string,
+    gen_url,
 )
 from fauxfactory.constants import SCHEMES
 
@@ -17,7 +17,7 @@ from fauxfactory.constants import SCHEMES
 class TestURLs(unittest.TestCase):
     """Test URL generator."""
 
-    def test_generate_url_1(self):
+    def test_gen_url_1(self):
         """
         @Test: Create a random URL
         @Feature: URL Generator
@@ -25,7 +25,7 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            result = generate_url()
+            result = gen_url()
             self.assertTrue(
                 len(result) > 0,
                 "A valid URL was not generated.")
@@ -34,7 +34,7 @@ class TestURLs(unittest.TestCase):
                 "URL does not start with a valid scheme"
             )
 
-    def test_generate_url_2(self):
+    def test_gen_url_2(self):
         """
         @Test: Create a random URL with http scheme
         @Feature: URL Generator
@@ -42,7 +42,7 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            result = generate_url(scheme='http')
+            result = gen_url(scheme='http')
             self.assertTrue(
                 len(result) > 0,
                 "A valid URL was not generated.")
@@ -51,7 +51,7 @@ class TestURLs(unittest.TestCase):
                 "URL does not start with http"
             )
 
-    def test_generate_url_3(self):
+    def test_gen_url_3(self):
         """
         @Test: Create a random URL with https scheme
         @Feature: URL Generator
@@ -59,7 +59,7 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            result = generate_url(scheme='https')
+            result = gen_url(scheme='https')
             self.assertTrue(
                 len(result) > 0,
                 "A valid URL was not generated.")
@@ -68,7 +68,7 @@ class TestURLs(unittest.TestCase):
                 "URL does not start with https"
             )
 
-    def test_generate_url_4(self):
+    def test_gen_url_4(self):
         """
         @Test: Create a random URL with ftp scheme
         @Feature: URL Generator
@@ -76,7 +76,7 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            result = generate_url(scheme='ftp')
+            result = gen_url(scheme='ftp')
             self.assertTrue(
                 len(result) > 0,
                 "A valid URL was not generated.")
@@ -85,7 +85,7 @@ class TestURLs(unittest.TestCase):
                 "URL does not start with ftp"
             )
 
-    def test_generate_url_5(self):
+    def test_gen_url_5(self):
         """
         @Test: Create a random URL with invalid scheme
         @Feature: URL Generator
@@ -93,11 +93,11 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            scheme = generate_alphanumeric()
+            scheme = gen_alphanumeric()
             with self.assertRaises(ValueError):
-                generate_url(scheme=scheme)
+                gen_url(scheme=scheme)
 
-    def test_generate_url_6(self):
+    def test_gen_url_6(self):
         """
         @Test: Create a random URL with valid subdomain
         @Feature: URL Generator
@@ -105,8 +105,8 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            subdomain = generate_alphanumeric()
-            result = generate_url(subdomain=subdomain)
+            subdomain = gen_alphanumeric()
+            result = gen_url(subdomain=subdomain)
             self.assertTrue(
                 len(result) > 0,
                 "A valid URL was not generated.")
@@ -118,19 +118,19 @@ class TestURLs(unittest.TestCase):
                 domain[0] == subdomain
             )
 
-    def test_generate_url_7(self):
+    def test_gen_url_7(self):
         """
         @Test: Create a random URL with empty subdomain
         @Feature: URL Generator
         @Assert: URL should be created with a random subdomain
         """
 
-        result = generate_url(subdomain='')
+        result = gen_url(subdomain='')
         self.assertTrue(
             len(result) > 0,
             "A valid URL was not generated.")
 
-    def test_generate_url_8(self):
+    def test_gen_url_8(self):
         """
         @Test: Create a random URL with whitespace subdomain
         @Feature: URL Generator
@@ -138,9 +138,9 @@ class TestURLs(unittest.TestCase):
         """
 
         with self.assertRaises(ValueError):
-            generate_url(subdomain=" ")
+            gen_url(subdomain=" ")
 
-    def test_generate_url_9(self):
+    def test_gen_url_9(self):
         """
         @Test: Create a random URL with invalid subdomain
         @Feature: URL Generator
@@ -148,11 +148,11 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            subdomain = generate_cjk()
+            subdomain = gen_cjk()
             with self.assertRaises(ValueError):
-                generate_url(subdomain=subdomain)
+                gen_url(subdomain=subdomain)
 
-    def test_generate_url_10(self):
+    def test_gen_url_10(self):
         """
         @Test: Create a random URL with valid TLDS
         @Feature: URL Generator
@@ -160,8 +160,8 @@ class TestURLs(unittest.TestCase):
         """
 
         for turn in range(10):
-            tlds = generate_alpha(length=3)
-            result = generate_url(tlds=tlds)
+            tlds = gen_alpha(length=3)
+            result = gen_url(tlds=tlds)
             self.assertTrue(
                 len(result) > 0,
                 "A valid URL was not generated.")
@@ -170,7 +170,7 @@ class TestURLs(unittest.TestCase):
                 "URL does not have the TLDS specified"
             )
 
-    def test_generate_url_11(self):
+    def test_gen_url_11(self):
         """
         @Test: Create a random URL with numeric TLDS
         @Feature: URL Generator
@@ -179,10 +179,10 @@ class TestURLs(unittest.TestCase):
 
         for turn in range(10):
             with self.assertRaises(ValueError):
-                tlds = generate_numeric_string(length=3)
-                generate_url(tlds=tlds)
+                tlds = gen_numeric_string(length=3)
+                gen_url(tlds=tlds)
 
-    def test_generate_url_12(self):
+    def test_gen_url_12(self):
         """
         @Test: Create a random URL with whitespace TLDS
         @Feature: URL Generator
@@ -191,4 +191,4 @@ class TestURLs(unittest.TestCase):
 
         for turn in range(10):
             with self.assertRaises(ValueError):
-                generate_url(tlds=" ")
+                gen_url(tlds=" ")

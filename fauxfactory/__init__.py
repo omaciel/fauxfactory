@@ -1,31 +1,29 @@
 # -*- coding: utf-8 -*-
-
 """Generate random data for your tests."""
 
 __all__ = (
-    'codify',
-    'generate_alpha',
-    'generate_alphanumeric',
-    'generate_boolean',
-    'generate_choice',
-    'generate_cjk',
-    'generate_date',
-    'generate_datetime',
-    'generate_email',
-    'generate_html',
-    'generate_integer',
-    'generate_iplum',
-    'generate_latin1',
-    'generate_mac',
-    'generate_negative_integer',
-    'generate_numeric_string',
-    'generate_positive_integer',
-    'generate_string',
-    'generate_time',
-    'generate_url',
-    'generate_utf8',
-    'generate_uuid',
-    'generate_ipaddr',
+    'gen_alpha',
+    'gen_alphanumeric',
+    'gen_boolean',
+    'gen_choice',
+    'gen_cjk',
+    'gen_date',
+    'gen_datetime',
+    'gen_email',
+    'gen_html',
+    'gen_integer',
+    'gen_ipaddr',
+    'gen_iplum',
+    'gen_latin1',
+    'gen_mac',
+    'gen_negative_integer',
+    'gen_numeric_string',
+    'gen_positive_integer',
+    'gen_string',
+    'gen_time',
+    'gen_url',
+    'gen_utf8',
+    'gen_uuid',
 )
 
 import datetime
@@ -43,7 +41,10 @@ from fauxfactory.constants import (
 )
 
 
-def codify(data):
+# Private Functions -----------------------------------------------------------
+
+
+def _make_unicode(data):
     """Convert ``data`` to a unicode string if running Python 2.
 
     :param str data: A string to be type cast.
@@ -52,12 +53,12 @@ def codify(data):
 
     """
     if sys.version_info[0] is 2:
-        return unicode(data)
+        # (undefined-variable) pylint:disable=E0602
+        return unicode(data)  # flake8:noqa
     return data
-    pass
 
 
-def is_positive_int(length):
+def _is_positive_int(length):
     """Check that ``length`` argument is an integer greater than zero.
 
     :param int length: The desired length of the string
@@ -71,7 +72,10 @@ def is_positive_int(length):
         raise ValueError("{0} is an invalid 'length'.".format(length))
 
 
-def generate_string(str_type, length):
+# Public Functions ------------------------------------------------------------
+
+
+def gen_string(str_type, length):
     """A simple wrapper that calls other string generation methods.
 
     :param str str_type: The type of string which should be generated.
@@ -93,13 +97,13 @@ def generate_string(str_type, length):
 
     """
     str_types_functions = {
-        u'alpha': generate_alpha,
-        u'alphanumeric': generate_alphanumeric,
-        u'cjk': generate_cjk,
-        u'html': generate_html,
-        u'latin1': generate_latin1,
-        u'numeric': generate_numeric_string,
-        u'utf8': generate_utf8,
+        u'alpha': gen_alpha,
+        u'alphanumeric': gen_alphanumeric,
+        u'cjk': gen_cjk,
+        u'html': gen_html,
+        u'latin1': gen_latin1,
+        u'numeric': gen_numeric_string,
+        u'utf8': gen_utf8,
     }
     str_type_lower = str_type.lower()  # do not modify user data
     if str_type_lower not in str_types_functions.keys():
@@ -111,7 +115,7 @@ def generate_string(str_type, length):
     return method(length)
 
 
-def generate_alpha(length=5):
+def gen_alpha(length=5):
     """Returns a random string made up of alpha characters.
 
     @rtype length: int
@@ -123,16 +127,16 @@ def generate_alpha(length=5):
     """
 
     # Validate length argument
-    is_positive_int(length)
+    _is_positive_int(length)
 
     output_string = u''.join(
         random.choice(string.ascii_letters) for i in range(length)
     )
 
-    return codify(output_string)
+    return _make_unicode(output_string)
 
 
-def generate_alphanumeric(length=5):
+def gen_alphanumeric(length=5):
     """Returns a random string made up of alpha and numeric characters.
 
     @rtype length: int
@@ -144,17 +148,17 @@ def generate_alphanumeric(length=5):
     """
 
     # Validate length argument
-    is_positive_int(length)
+    _is_positive_int(length)
 
     output_string = u''.join(
         random.choice(
             string.ascii_letters + string.digits
         ) for i in range(length))
 
-    return codify(output_string)
+    return _make_unicode(output_string)
 
 
-def generate_boolean():
+def gen_boolean():
     """Returns a random Boolean value.
 
     @rtype: bool
@@ -164,10 +168,10 @@ def generate_boolean():
 
     choices = (True, False)
 
-    return generate_choice(choices)
+    return gen_choice(choices)
 
 
-def generate_choice(choices):
+def gen_choice(choices):
     """Returns a random choice from the available choices.
 
     @type choices: list
@@ -190,7 +194,7 @@ def generate_choice(choices):
     return random.choice(choices)
 
 
-def generate_cjk(length=5):
+def gen_cjk(length=5):
     """Returns a random string made up of CJK characters.
     (Source: Wikipedia - CJK Unified Ideographs)
 
@@ -203,20 +207,21 @@ def generate_cjk(length=5):
     """
 
     # Validate length argument
-    is_positive_int(length)
+    _is_positive_int(length)
 
     # Generate codepoints, then convert the codepoints to a string. The
     # valid range of CJK codepoints is 0x4E00 - 0x9FCC, inclusive. Python 2
     # and 3 support the `unichr` and `chr` functions, respectively.
-    codepoints = [random.randint(0x4E00, 0x9FCC) for i in range(length)]
+    codepoints = [random.randint(0x4E00, 0x9FCC) for _ in range(length)]
     try:
+        # (undefined-variable) pylint:disable=E0602
         output = u''.join(unichr(codepoint) for codepoint in codepoints)
     except NameError:
         output = u''.join(chr(codepoint) for codepoint in codepoints)
-    return codify(output)
+    return _make_unicode(output)
 
 
-def generate_date(min_date=None, max_date=None):
+def gen_date(min_date=None, max_date=None):
     """Returns a random date value
 
     @type min_date: object
@@ -256,7 +261,7 @@ def generate_date(min_date=None, max_date=None):
     return date
 
 
-def generate_datetime(min_date=None, max_date=None):
+def gen_datetime(min_date=None, max_date=None):
     """Returns a random datetime value
 
     @type min_date: object
@@ -295,7 +300,7 @@ def generate_datetime(min_date=None, max_date=None):
     return min_date + datetime.timedelta(seconds=seconds)
 
 
-def generate_email(name=None, domain=None, tlds=None):
+def gen_email(name=None, domain=None, tlds=None):
     """Generates a random email address.
 
     @type name: str
@@ -312,20 +317,20 @@ def generate_email(name=None, domain=None, tlds=None):
 
     # Generate a new name if needed
     if name is None:
-        name = generate_alpha(8)
+        name = gen_alpha(8)
     # Obtain a random domain if needed
     if domain is None:
-        domain = generate_choice(SUBDOMAINS)
+        domain = gen_choice(SUBDOMAINS)
     # Obtain a random top level domain if needed
     if tlds is None:
-        tlds = generate_choice(TLDS)
+        tlds = gen_choice(TLDS)
 
     email = u"{0}@{1}.{2}".format(name, domain, tlds)
 
-    return codify(email)
+    return _make_unicode(email)
 
 
-def generate_integer(min_value=None, max_value=None):
+def gen_integer(min_value=None, max_value=None):
     """Returns a random integer value based on the current platform.
 
     @type min_value: int
@@ -358,7 +363,7 @@ def generate_integer(min_value=None, max_value=None):
     return value
 
 
-def generate_iplum(words=None, paragraphs=None):
+def gen_iplum(words=None, paragraphs=None):
     """Returns a lorem ipsum string. If no arguments are passed, then
     return the entire default lorem ipsum string.
 
@@ -381,7 +386,7 @@ def generate_iplum(words=None, paragraphs=None):
     if not isinstance(words, int) or words < 0:
         raise ValueError(
             "Cannot generate a string with negative number of words.")
-    is_positive_int(paragraphs)
+    _is_positive_int(paragraphs)
 
     # Original Lorem Ipsum string
     all_words = LOREM_IPSUM_TEXT.split()
@@ -396,7 +401,7 @@ def generate_iplum(words=None, paragraphs=None):
 
     result = u""
     start_pos = 0
-    for idx in range(0, paragraphs):
+    for _ in range(0, paragraphs):
         sentence = u" ".join(
             all_words[start_pos:start_pos + words])
 
@@ -416,10 +421,10 @@ def generate_iplum(words=None, paragraphs=None):
 
         # Increment positional counter
         start_pos += words
-    return codify(result.rstrip())
+    return _make_unicode(result.rstrip())
 
 
-def generate_latin1(length=5):
+def gen_latin1(length=5):
     """Returns a random string made up of UTF-8 characters.
     (Font: Wikipedia - Latin-1 Supplement Unicode Block)
 
@@ -432,7 +437,7 @@ def generate_latin1(length=5):
     """
 
     # Validate length argument
-    is_positive_int(length)
+    _is_positive_int(length)
 
     range0 = range1 = range2 = []
     range0 = ['00C0', '00D6']
@@ -449,15 +454,16 @@ def generate_latin1(length=5):
 
     try:
         output_string = u''.join(
+            # (undefined-variable) pylint:disable=E0602
             unichr(random.choice(output_array)) for x in range(length))
     except NameError:
         output_string = u''.join(
             chr(random.choice(output_array)) for x in range(length))
 
-    return codify(output_string)
+    return _make_unicode(output_string)
 
 
-def generate_negative_integer():
+def gen_negative_integer():
     """Returns a random negative integer based on the current platform.
 
     @rtype: int
@@ -467,10 +473,10 @@ def generate_negative_integer():
 
     max_value = 0
 
-    return generate_integer(max_value=max_value)
+    return gen_integer(max_value=max_value)
 
 
-def generate_ipaddr(ip3=False, ipv6=False):
+def gen_ipaddr(ip3=False, ipv6=False):
     """Generates a random IP address.
 
     @type ip3: bool
@@ -496,10 +502,10 @@ def generate_ipaddr(ip3=False, ipv6=False):
         if ip3:
             ipaddr = ipaddr + u".0"
 
-    return codify(ipaddr)
+    return _make_unicode(ipaddr)
 
 
-def generate_mac(delimiter=":"):
+def gen_mac(delimiter=":"):
     """Generates a random MAC address.
 
     @type delimeter: str
@@ -520,10 +526,10 @@ def generate_mac(delimiter=":"):
         chars[random.randrange(0, len(chars), 1)]+chars[random.randrange(
             0, len(chars), 1)] for x in range(6))
 
-    return codify(mac)
+    return _make_unicode(mac)
 
 
-def generate_numeric_string(length=5):
+def gen_numeric_string(length=5):
     """Returns a random string made up of numbers.
 
     @type length: int
@@ -535,16 +541,16 @@ def generate_numeric_string(length=5):
     """
 
     # Validate length argument
-    is_positive_int(length)
+    _is_positive_int(length)
 
     output_string = u''.join(
         random.choice(string.digits) for i in range(length)
     )
 
-    return codify(output_string)
+    return _make_unicode(output_string)
 
 
-def generate_positive_integer():
+def gen_positive_integer():
     """Returns a random positive integer based on the current platform.
 
     @rtype: int
@@ -554,10 +560,10 @@ def generate_positive_integer():
 
     min_value = 0
 
-    return generate_integer(min_value=min_value)
+    return gen_integer(min_value=min_value)
 
 
-def generate_time():
+def gen_time():
     """Generates a random time.
 
     @rtype: object
@@ -573,7 +579,7 @@ def generate_time():
     )
 
 
-def generate_url(scheme=None, subdomain=None, tlds=None):
+def gen_url(scheme=None, subdomain=None, tlds=None):
     """Generates a random URL address
 
     @type scheme: str
@@ -599,26 +605,26 @@ def generate_url(scheme=None, subdomain=None, tlds=None):
         if schemenator.match(scheme) is None:
             raise ValueError("Protocol {0} is not valid.".format(scheme))
     else:
-        scheme = generate_choice(SCHEMES)
+        scheme = gen_choice(SCHEMES)
 
     if subdomain:
         if subdomainator.match(subdomain) is None:
             raise ValueError("Subdomain {0} is invalid.".format(subdomain))
     else:
-        subdomain = generate_choice(SUBDOMAINS)
+        subdomain = gen_choice(SUBDOMAINS)
 
     if tlds:
         if tldsnator.match(tlds) is None:
             raise ValueError("TLDS name {0} is invalid.".format(tlds))
     else:
-        tlds = generate_choice(TLDS)
+        tlds = gen_choice(TLDS)
 
     url = u"{0}://{1}.{2}".format(scheme, subdomain, tlds)
 
-    return codify(url)
+    return _make_unicode(url)
 
 
-def generate_utf8(length=5):
+def gen_utf8(length=5):
     """Returns a random string made up of UTF-8 characters, as per RFC 3629.
 
     @rtype length: int
@@ -630,7 +636,7 @@ def generate_utf8(length=5):
     """
 
     # Validate length argument
-    is_positive_int(length)
+    _is_positive_int(length)
 
     # Generate codepoints. The valid range of UTF-8 codepoints is
     # 0x0-0x10FFFF, minus the following: 0xC0-0xC1, 0xF5-0xFF and
@@ -654,13 +660,14 @@ def generate_utf8(length=5):
     # Convert codepoints to characters. Python 2 and 3 support the `unichr`
     # and `chr` functions, respectively.
     try:
+        # (undefined-variable) pylint:disable=E0602
         output = u''.join(unichr(codepoint) for codepoint in codepoints)
     except NameError:
         output = u''.join(chr(codepoint) for codepoint in codepoints)
-    return codify(output)
+    return _make_unicode(output)
 
 
-def generate_uuid():
+def gen_uuid():
     """Generates a UUID string (universally unique identifiers).
 
     @rtype: str
@@ -668,12 +675,12 @@ def generate_uuid():
 
     """
 
-    output_uuid = codify(str(uuid.uuid4()))
+    output_uuid = _make_unicode(str(uuid.uuid4()))
 
     return output_uuid
 
 
-def generate_html(length=5):
+def gen_html(length=5):
     """Returns a random string made up of html characters.
 
     @rtype length: int
@@ -684,10 +691,10 @@ def generate_html(length=5):
     """
 
     # Validate length argument
-    is_positive_int(length)
+    _is_positive_int(length)
 
     html_tag = random.choice(HTML_TAGS)
     output_string = u'<{0}>{1}</{2}>'.format(
-        html_tag, generate_string("alpha", length), html_tag)
+        html_tag, gen_string("alpha", length), html_tag)
 
-    return codify(output_string)
+    return _make_unicode(output_string)
