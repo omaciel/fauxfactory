@@ -18,13 +18,13 @@ setup(
     long_description=long_description,
     version='1.0.1',
     author='Og Maciel',
-    author_email='omaciel@redhat.com',
+    author_email='omaciel@ogmaciel.com',
     url='https://github.com/omaciel/fauxfactory',
     packages=['fauxfactory'],
     keywords='python automation data',
     license='Apache 2.0',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'License :: OSI Approved :: Apache Software License',
@@ -32,6 +32,7 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
         'Topic :: Software Development :: Testing',
     ]
 )
