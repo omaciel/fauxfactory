@@ -118,11 +118,9 @@ def gen_string(str_type, length):
 def gen_alpha(length=5):
     """Returns a random string made up of alpha characters.
 
-    @rtype length: int
-    @param length: Length for random data.
-
-    @rtype: str
-    @return: A random string made up of alpha characters.
+    :param int length: Length for random data.
+    :returns: A random string made up of alpha characters.
+    :rtype: str
 
     """
 
@@ -139,11 +137,9 @@ def gen_alpha(length=5):
 def gen_alphanumeric(length=5):
     """Returns a random string made up of alpha and numeric characters.
 
-    @rtype length: int
-    @param length: Length for random data.
-
-    @rtype: str
-    @return: A random string made up of alpha and numeric characters.
+    :param int length: Length for random data.
+    :returns: A random string made up of alpha and numeric characters.
+    :rtype: str
 
     """
 
@@ -161,8 +157,8 @@ def gen_alphanumeric(length=5):
 def gen_boolean():
     """Returns a random Boolean value.
 
-    @rtype: bool
-    @return: A random Boolean value.
+    :returns: A random Boolean value.
+    :rtype: bool
 
     """
 
@@ -174,8 +170,11 @@ def gen_boolean():
 def gen_choice(choices):
     """Returns a random choice from the available choices.
 
-    @type choices: list
-    @param choices: List of choices from which select a random value.
+    :param list choices: List of choices from which select a random value.
+    :raises: ``Exception`` if ``choices`` is ``None`` or not ``Iterable`` or
+        a ``dict``.
+    :returns: A random choice from the available choices.
+    :rtype: obj
 
     """
 
@@ -198,11 +197,9 @@ def gen_cjk(length=5):
     """Returns a random string made up of CJK characters.
     (Source: Wikipedia - CJK Unified Ideographs)
 
-    @rtype length: int
-    @param length: Length for random data.
-
-    @rtype: str
-    @return: A random string made up of CJK characters.
+    :param int length: Length for random data.
+    :returns: A random string made up of CJK characters.
+    :rtype: str
 
     """
 
@@ -224,13 +221,12 @@ def gen_cjk(length=5):
 def gen_date(min_date=None, max_date=None):
     """Returns a random date value
 
-    @type min_date: object
-    @param max_date: A valid datetime.date object
-    @type min_date: object
-    @param max_date: A valid datetime.date object
-
-    @rtype: object
-    @return: Random datetime.date object.
+    :param obj max_date: A valid ``datetime.date`` object.
+    :param obj max_date: A valid ``datetime.date`` object.
+    :raises: ``ValueError`` if arguments are not valid ``datetime.date``
+        objects.
+    :returns: Random ``datetime.date`` object.
+    :rtype: object
 
     """
 
@@ -264,13 +260,12 @@ def gen_date(min_date=None, max_date=None):
 def gen_datetime(min_date=None, max_date=None):
     """Returns a random datetime value
 
-    @type min_date: object
-    @param max_date: A valid datetime.datetime object
-    @type min_date: object
-    @param max_date: A valid datetime.datetime object
-
-    @rtype: object
-    @return: Random datetime.datetime object.
+    :param obj max_date: A valid ``datetime.datetime`` object.
+    :param obj max_date: A valid ``datetime.datetime`` object.
+    :raises: ``ValueError`` if arguments are not valid ``datetime.datetime``
+        objects.
+    :returns: Random ``datetime.datetime`` object.
+    :rtype: object
 
     """
 
@@ -303,15 +298,11 @@ def gen_datetime(min_date=None, max_date=None):
 def gen_email(name=None, domain=None, tlds=None):
     """Generates a random email address.
 
-    @type name: str
-    @param name: Email name.
-    @type domain: str
-    @param domain: Domain name.
-    @type tlds: str
-    @param tlds: Top Level Domain Server
-
-    @rtype: str
-    @return: An email address.
+    :param str name: Email name.
+    :param str domain: Domain name.
+    :param str tlds: Top Level Domain Server
+    :returns: An email address.
+    :rtype: str
 
     """
 
@@ -333,13 +324,12 @@ def gen_email(name=None, domain=None, tlds=None):
 def gen_integer(min_value=None, max_value=None):
     """Returns a random integer value based on the current platform.
 
-    @type min_value: int
-    @param min_value: The minimum allowed value.
-    @type max_value: int
-    @param max_value: The maximum allowed value.
-
-    @rtype: int
-    @return: Returns a random integer value.
+    :param int min_value: The minimum allowed value.
+    :param int max_value: The maximum allowed value.
+    :raises: ``ValueError`` if arguments are not integers or if they are
+        less or greater than the system's allowed range for integers.
+    :returns: Returns a random integer value.
+    :rtype: int
 
     """
 
@@ -367,13 +357,13 @@ def gen_iplum(words=None, paragraphs=None):
     """Returns a lorem ipsum string. If no arguments are passed, then
     return the entire default lorem ipsum string.
 
-    @rtype words: int
-    @param words: How many words to return.
-    @rtype paragraphs: int
-    @param paragraphs: How many paragraphs to return.
-
-    @rtype string
-    @return: A lorem ipsum string.
+    :param int words: The number of words to return.
+    :param int paragraphs: The number of paragraphs to return.
+    :raises: ``ValueError`` if ``words`` is not a valid positive integer.
+    :returns: A ``lorem ipsum`` string containing either the number of ``words``
+        or ``paragraphs``, extending and wrapping around the text as needed to
+        make sure that it has the specified length.
+    :rtype string
 
     """
 
@@ -428,11 +418,9 @@ def gen_latin1(length=5):
     """Returns a random string made up of UTF-8 characters.
     (Font: Wikipedia - Latin-1 Supplement Unicode Block)
 
-    @rtype length: int
-    @param length: Length for random data.
-
-    @rtype: str
-    @return: A random string made up of Latin1 characters.
+    :param int length: Length for random data.
+    :returns: A random string made up of ``Latin1`` characters.
+    :rtype: str
 
     """
 
@@ -466,8 +454,8 @@ def gen_latin1(length=5):
 def gen_negative_integer():
     """Returns a random negative integer based on the current platform.
 
-    @rtype: int
-    @return: Returns a random negative integer value.
+    :returns: Returns a random negative integer value.
+    :rtype: int
 
     """
 
@@ -479,13 +467,10 @@ def gen_negative_integer():
 def gen_ipaddr(ip3=False, ipv6=False):
     """Generates a random IP address.
 
-    @type ip3: bool
-    @param ip3: Whether to generate a 3 or 4 group IP.
-    @type ipv6: bool
-    @param ipv6: Whether to generate IPv6 or IPv4
-
-    @rtype: str
-    @return: An IP address.
+    :param bool ip3: Whether to generate a 3 or 4 group IP.
+    :param bool ipv6: Whether to generate IPv6 or IPv4
+    :returns: An IP address.
+    :rtype: str
 
     """
 
@@ -508,11 +493,9 @@ def gen_ipaddr(ip3=False, ipv6=False):
 def gen_mac(delimiter=":"):
     """Generates a random MAC address.
 
-    @type delimeter: str
-    @param delimeter: Valid MAC delimeter (e.g \':\', \'-\').
-
-    @rtype: str
-    @return: A random MAC address.
+    :param str delimeter: Valid MAC delimeter (e.g \':\', \'-\').
+    :returns: A random MAC address.
+    :rtype: str
 
     """
 
@@ -532,11 +515,9 @@ def gen_mac(delimiter=":"):
 def gen_numeric_string(length=5):
     """Returns a random string made up of numbers.
 
-    @type length: int
-    @param length: Length for random data.
-
-    @rtype: str
-    @return: A random string made up of numbers.
+    :param int length: Length for random data.
+    :returns: A random string made up of numbers.
+    :rtype: str
 
     """
 
@@ -553,8 +534,8 @@ def gen_numeric_string(length=5):
 def gen_positive_integer():
     """Returns a random positive integer based on the current platform.
 
-    @rtype: int
-    @return: Returns a random positive integer value.
+    :returns: A random positive integer value.
+    :rtype: int
 
     """
 
@@ -566,8 +547,8 @@ def gen_positive_integer():
 def gen_time():
     """Generates a random time.
 
-    @rtype: object
-    @return: A datetime.time object.
+    :returns: A random ``datetime.time`` object.
+    :rtype: object
 
     """
 
@@ -582,15 +563,12 @@ def gen_time():
 def gen_url(scheme=None, subdomain=None, tlds=None):
     """Generates a random URL address
 
-    @type scheme: str
-    @param scheme: Either http, https or ftp
-    @type subdomain: str
-    @param subdomain: A valid subdmain
-    @type tlds: str
-    @param tlds: A qualified top level domain name (e.g. \'com\', \'net\')
-
-    @rtype: str
-    @return: A random URL address.
+    :param str scheme: Either http, https or ftp.
+    :param str subdomain: A valid subdmain
+    :param str tlds: A qualified top level domain name (e.g. \'com\', \'net\')
+    :raises: ``ValueError`` if arguments are not valid.
+    :returns: A random URL address.
+    :rtype: str
 
     """
 
@@ -627,11 +605,9 @@ def gen_url(scheme=None, subdomain=None, tlds=None):
 def gen_utf8(length=5):
     """Returns a random string made up of UTF-8 characters, as per RFC 3629.
 
-    @rtype length: int
-    @param length: Length for random data.
-
-    @rtype: str
-    @return: A random string made up of UTF-8 characters.
+    :param int length: Length for random data.
+    :returns: A random string made up of ``UTF-8`` characters.
+    :rtype: str
 
     """
 
@@ -670,8 +646,8 @@ def gen_utf8(length=5):
 def gen_uuid():
     """Generates a UUID string (universally unique identifiers).
 
-    @rtype: str
-    @return: Returns a string representation for a UUID.
+    :returns: Returns a string representation for a UUID.
+    :rtype: str
 
     """
 
@@ -683,10 +659,9 @@ def gen_uuid():
 def gen_html(length=5):
     """Returns a random string made up of html characters.
 
-    @rtype length: int
-    @param length: Length for random data.
-    @rtype: str
-    @return: A random string made up of html characters.
+    :param int length: Length for random data.
+    :returns: A random string made up of html characters.
+    :rtype: str
 
     """
 
