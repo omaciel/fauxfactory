@@ -62,8 +62,7 @@ def _is_positive_int(length):
     """Check that ``length`` argument is an integer greater than zero.
 
     :param int length: The desired length of the string
-    :raises: ``ValueError`` if ``length`` is not an ``int`` or is less than
-        1.
+    :raises: ``ValueError`` if ``length`` is not an ``int`` or is less than 1.
     :returns: Nothing.
     :rtype: None
 
@@ -173,8 +172,7 @@ def gen_choice(choices):
     :param list choices: List of choices from which select a random value.
     :raises: ``Exception`` if ``choices`` is ``None`` or not ``Iterable`` or
         a ``dict``.
-    :returns: A random choice from the available choices.
-    :rtype: obj
+    :returns: A random element from ``choices``.
 
     """
 
@@ -221,12 +219,11 @@ def gen_cjk(length=5):
 def gen_date(min_date=None, max_date=None):
     """Returns a random date value
 
-    :param obj max_date: A valid ``datetime.date`` object.
-    :param obj max_date: A valid ``datetime.date`` object.
+    :param max_date: A valid ``datetime.date`` object.
+    :param max_date: A valid ``datetime.date`` object.
     :raises: ``ValueError`` if arguments are not valid ``datetime.date``
         objects.
     :returns: Random ``datetime.date`` object.
-    :rtype: object
 
     """
 
@@ -260,12 +257,11 @@ def gen_date(min_date=None, max_date=None):
 def gen_datetime(min_date=None, max_date=None):
     """Returns a random datetime value
 
-    :param obj max_date: A valid ``datetime.datetime`` object.
-    :param obj max_date: A valid ``datetime.datetime`` object.
+    :param max_date: A valid ``datetime.datetime`` object.
+    :param max_date: A valid ``datetime.datetime`` object.
     :raises: ``ValueError`` if arguments are not valid ``datetime.datetime``
         objects.
     :returns: Random ``datetime.datetime`` object.
-    :rtype: object
 
     """
 
@@ -363,7 +359,7 @@ def gen_iplum(words=None, paragraphs=None):
     :returns: A ``lorem ipsum`` string containing either the number of ``words``
         or ``paragraphs``, extending and wrapping around the text as needed to
         make sure that it has the specified length.
-    :rtype string
+    :rtype: str
 
     """
 
@@ -493,7 +489,7 @@ def gen_ipaddr(ip3=False, ipv6=False):
 def gen_mac(delimiter=":"):
     """Generates a random MAC address.
 
-    :param str delimeter: Valid MAC delimeter (e.g \':\', \'-\').
+    :param str delimeter: Valid MAC delimeter (e.g ':', '-').
     :returns: A random MAC address.
     :rtype: str
 
@@ -548,7 +544,6 @@ def gen_time():
     """Generates a random time.
 
     :returns: A random ``datetime.time`` object.
-    :rtype: object
 
     """
 
@@ -565,7 +560,7 @@ def gen_url(scheme=None, subdomain=None, tlds=None):
 
     :param str scheme: Either http, https or ftp.
     :param str subdomain: A valid subdmain
-    :param str tlds: A qualified top level domain name (e.g. \'com\', \'net\')
+    :param str tlds: A qualified top level domain name (e.g. 'com', 'net')
     :raises: ``ValueError`` if arguments are not valid.
     :returns: A random URL address.
     :rtype: str
@@ -603,11 +598,13 @@ def gen_url(scheme=None, subdomain=None, tlds=None):
 
 
 def gen_utf8(length=5):
-    """Returns a random string made up of UTF-8 characters, as per RFC 3629.
+    """Returns a random string made up of UTF-8 characters, as per `RFC 3629`_.
 
     :param int length: Length for random data.
     :returns: A random string made up of ``UTF-8`` characters.
     :rtype: str
+
+    .. _`RFC 3629`: http://www.rfc-editor.org/rfc/rfc3629.txt
 
     """
 
