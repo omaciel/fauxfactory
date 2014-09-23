@@ -1,7 +1,7 @@
 .. :changelog:
 
 Release History
-```````````````
+===============
 
 2.0.0 (2014-09-23)
 ++++++++++++++++++
@@ -15,41 +15,41 @@ Release History
 - Polished documentation.
 
 1.0.1 (2014-09-18)
-++++++++++++++++++
+------------------
 
 - Updated ``generate_string`` to also accept ``html`` strings.
 
 1.0.0 (2014-09-17)
-++++++++++++++++++
+------------------
 
 - Added new method generate_html
 - Added new makefile
 
 0.3.1 (2014-07-10)
-++++++++++++++++++
+------------------
 
 - Check for sys.maxunicode when generating utf8 characters.
 
 0.3.0 (2014-06-15)
-++++++++++++++++++
+------------------
 
 - FauxFactory is now Python 3 compatible
 - Added new method generate_utf8
 
 0.2.1 (2014-05-09)
-++++++++++++++++++
+------------------
 
 - Fixed issue that prevented strings longer than the full length of
   LOREM_IPSUM_TEXT from being generated (Github Issue #16).
 
 0.2.0 (2014-05-08)
-++++++++++++++++++
+------------------
 
 - Added new 'Lorem Ipsum' generator.
 - Changed license from LGPL3+ to Apache 2.0
 
 0.1.3 (2014-04-16)
-++++++++++++++++++
+------------------
 
 - Updated character range for CJK generator to avoid generating 'tofu'
   characters.
@@ -62,7 +62,7 @@ Release History
 - Fixed generate_string function (@faustovaz)
 
 0.1.2 (2014-03-19)
-++++++++++++++++++
+------------------
 
 **Bugfixes:**
 
@@ -70,11 +70,11 @@ Release History
   string.
 
 0.1.1 (2014-03-17)
-++++++++++++++++++
+------------------
 
 - Fixed formatting of README for better display on Pypi.
 
 0.1.0 (2014-03-17)
-++++++++++++++++++
+------------------
 
 - Initial Release.
