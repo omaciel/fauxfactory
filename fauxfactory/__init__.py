@@ -80,7 +80,7 @@ def gen_string(str_type, length):
     :param str str_type: The type of string which should be generated.
     :param int length: The length of the generated string. Must be 1 or
         greater.
-    :raises: ``Exception`` if an invalid ``str_type`` is specified.
+    :raises: ``ValueError`` if an invalid ``str_type`` is specified.
     :returns: A string.
     :rtype: str
 
@@ -106,7 +106,7 @@ def gen_string(str_type, length):
     }
     str_type_lower = str_type.lower()  # do not modify user data
     if str_type_lower not in str_types_functions.keys():
-        raise Exception(  # FIXME: Raise a more specific exception.
+        raise ValueError(
             '{0} is not a supported string type. Valid string types are {1}.'
             ''.format(str_type_lower, u','.join(str_types_functions.keys()))
         )
@@ -170,7 +170,7 @@ def gen_choice(choices):
     """Returns a random choice from the available choices.
 
     :param list choices: List of choices from which select a random value.
-    :raises: ``Exception`` if ``choices`` is ``None`` or not ``Iterable`` or
+    :raises: ``ValueError`` if ``choices`` is ``None`` or not ``Iterable`` or
         a ``dict``.
     :returns: A random element from ``choices``.
 

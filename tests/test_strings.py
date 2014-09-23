@@ -593,3 +593,12 @@ class TestStrings(unittest.TestCase):
         html_string = gen_string('html', 10)
         self.assertTrue(len(html_string) > 10,
                         "Generated string does not have the expected length")
+
+    def test_gen_string5(self):
+        """@Test: Call ``gen_string`` with an invalid string type.
+        @Feature: String generator
+        @Assert: ``ValueError`` is raised.
+        """
+        invalid_string_type = gen_string('alpha', 10)
+        with self.assertRaises(ValueError):
+            gen_string(invalid_string_type, 10)
