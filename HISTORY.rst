@@ -4,13 +4,13 @@ Release History
 ===============
 
 2.0.0 (2014-09-23)
-++++++++++++++++++
+------------------
 
 - All generators are now stand-alone functions and can be imported
   directly from ``fauxfactory``. For example, ``from fauxfactory
   import gen_date``
-- Renamed all generator functions to use the prefix "gen_" instead of
-  "generate_". For example, ``generate_date`` is now ``gen_date``.
+- Renamed all generator functions to use the prefix "gen\_" instead of
+  "generate\_". For example, ``generate_date`` is now ``gen_date``.
 - Backwards compatibility with version 1.x.
 - Polished documentation.
 
