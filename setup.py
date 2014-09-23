@@ -16,7 +16,7 @@ setup(
     name='fauxfactory',
     description='Generates random data for your tests.',
     long_description=long_description,
-    version='1.0.1',
+    version='2.0.0',
     author='Og Maciel',
     author_email='omaciel@ogmaciel.com',
     url='https://github.com/omaciel/fauxfactory',
