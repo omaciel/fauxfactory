@@ -674,105 +674,24 @@ def gen_html(length=5):
 
 # Backward Compatibility ------------------------------------------------------
 
-
 def codify(data):
     # (missing-docstring) pylint:disable=C0111
     return _make_unicode(data)
 
 
 class FauxFactory(object):
-    # This issue is no longer relevant, as the class has been turned into a set
-    # of functions.
-    # (too-many-public-methods) pylint:disable=R0904
-    #
     # This code is not imported when `from fauxfactory import *` is called, nor
     # does this code show up in Sphinx's output. See `__all__`.
     # (missing-docstring) pylint:disable=C0111
+    pass
 
-    @classmethod
-    def generate_string(cls, str_type, length):
-        return gen_string(str_type, length)
 
-    @classmethod
-    def generate_alpha(cls, length=5):
-        return gen_alpha(length)
+# Get list of module functions from locals()
+import copy
 
-    @classmethod
-    def generate_alphanumeric(cls, length=5):
-        return gen_alphanumeric(length)
-
-    @classmethod
-    def generate_boolean(cls):
-        return gen_boolean()
-
-    @classmethod
-    def generate_choice(cls, choices):
-        return gen_choice(choices)
-
-    @classmethod
-    def generate_cjk(cls, length=5):
-        return gen_cjk(length)
-
-    @classmethod
-    def generate_date(cls, min_date=None, max_date=None):
-        return gen_date(min_date, max_date)
-
-    @classmethod
-    def generate_datetime(cls, min_date=None, max_date=None):
-        return gen_datetime(min_date, max_date)
-
-    @classmethod
-    def generate_email(cls, name=None, domain=None, tlds=None):
-        return gen_email(name, domain, tlds)
-
-    @classmethod
-    def generate_integer(cls, min_value=None, max_value=None):
-        return gen_integer(min_value, max_value)
-
-    @classmethod
-    def generate_iplum(cls, words=None, paragraphs=None):
-        return gen_iplum(words, paragraphs)
-
-    @classmethod
-    def generate_latin1(cls, length=5):
-        return gen_latin1(length)
-
-    @classmethod
-    def generate_negative_integer(cls):
-        return gen_negative_integer()
-
-    @classmethod
-    def generate_ipaddr(cls, ip3=False, ipv6=False):
-        return gen_ipaddr(ip3, ipv6)
-
-    @classmethod
-    def generate_mac(cls, delimiter=":"):
-        return gen_mac(delimiter)
-
-    @classmethod
-    def generate_numeric_string(cls, length=5):
-        return gen_numeric_string(length)
-
-    @classmethod
-    def generate_positive_integer(cls):
-        return gen_integer()
-
-    @classmethod
-    def generate_time(cls):
-        return gen_time()
-
-    @classmethod
-    def generate_url(cls, scheme=None, subdomain=None, tlds=None):
-        return gen_url(scheme, subdomain, tlds)
-
-    @classmethod
-    def generate_utf8(cls, length=5):
-        return gen_utf8(length)
-
-    @classmethod
-    def generate_uuid(cls):
-        return gen_uuid()
-
-    @classmethod
-    def generate_html(cls, length=5):
-        return gen_html(length)
+_local_variables = copy.deepcopy(locals())
+for key, val in _local_variables.items():
+    # If we're looking at one of the ``gen_`` functions...
+    if key.startswith('gen_'):
+        # ... add it to ``FauxFactory`` but use ``generate_`` as its prefix.
+        setattr(FauxFactory, key.replace('gen_', 'generate_'), staticmethod(val))
