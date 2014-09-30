@@ -557,7 +557,7 @@ class TestStrings(unittest.TestCase):
 
     def test_gen_string(self):
         """
-        @Test: Create alphanumeric string with given lenght
+        @Test: Create alphanumeric string with given length
         @Feature: String Generator
         @Assert: Alphanumeric string is created with size of 15 chars
         """
@@ -602,3 +602,14 @@ class TestStrings(unittest.TestCase):
         invalid_string_type = gen_string('alpha', 10)
         with self.assertRaises(ValueError):
             gen_string(invalid_string_type, 10)
+
+    def test_gen_string6(self):
+        """
+        @Test: Create a numeric string with no length
+        @Feature: String generator
+        @Assert: Alphanumeric string is created with same size
+                 as default string created by gen_alphanumeric()
+        """
+        alphanumeric_string = gen_string('alphanumeric')
+        control_string = gen_alphanumeric()
+        self.assertEqual(len(control_string), len(alphanumeric_string),)
