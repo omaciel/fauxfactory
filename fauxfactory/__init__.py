@@ -32,6 +32,7 @@ import re
 import string
 import sys
 import uuid
+import warnings
 
 from collections import Iterable
 from fauxfactory.constants import (
@@ -39,7 +40,7 @@ from fauxfactory.constants import (
     MAX_YEARS, MIN_YEARS,
     SCHEMES, SUBDOMAINS, TLDS
 )
-
+from functools import wraps
 
 # Private Functions -----------------------------------------------------------
 
@@ -677,6 +678,29 @@ def gen_html(length=10):
 # Backward Compatibility ------------------------------------------------------
 
 
+# Code borrowed from http://code.activestate.com/recipes/391367-deprecated/
+def deprecated(func):
+    """A decorator used to mark functions as deprecated. It will result in
+    a warning being emmitted when the function is used."""
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        # Function name
+        name = func.__name__
+        # New function name
+        # Check if we are dealing with ``codify``
+        if name == 'codify':
+            new_name = '_make_unicode'
+        else:
+            new_name = func.__name__.replace('generate', 'gen')
+        warn_message = ("Function {0} is now deprecated! Please update your "
+            "your code to use the {1} function instead.")
+        warnings.warn(warn_message.format(name, new_name), category=Warning)
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
+@deprecated
 def codify(data):
     # (missing-docstring) pylint:disable=C0111
     return _make_unicode(data)
@@ -691,90 +715,117 @@ class FauxFactory(object):
     # does this code show up in Sphinx's output. See `__all__`.
     # (missing-docstring) pylint:disable=C0111
 
+    warnings.warn(
+        'The FauxFactory class is deprecated. Please use functions from the'
+        ' fauxfactory module instead.',
+        category=Warning)
+
     @classmethod
+    @deprecated
     def generate_string(cls, str_type, length):
         return gen_string(str_type, length)
 
     @classmethod
+    @deprecated
     def generate_alpha(cls, length=10):
         return gen_alpha(length)
 
     @classmethod
+    @deprecated
     def generate_alphanumeric(cls, length=10):
         return gen_alphanumeric(length)
 
     @classmethod
+    @deprecated
     def generate_boolean(cls):
         return gen_boolean()
 
     @classmethod
+    @deprecated
     def generate_choice(cls, choices):
         return gen_choice(choices)
 
     @classmethod
+    @deprecated
     def generate_cjk(cls, length=10):
         return gen_cjk(length)
 
     @classmethod
+    @deprecated
     def generate_date(cls, min_date=None, max_date=None):
         return gen_date(min_date, max_date)
 
     @classmethod
+    @deprecated
     def generate_datetime(cls, min_date=None, max_date=None):
         return gen_datetime(min_date, max_date)
 
     @classmethod
+    @deprecated
     def generate_email(cls, name=None, domain=None, tlds=None):
         return gen_email(name, domain, tlds)
 
     @classmethod
+    @deprecated
     def generate_integer(cls, min_value=None, max_value=None):
         return gen_integer(min_value, max_value)
 
     @classmethod
+    @deprecated
     def generate_iplum(cls, words=None, paragraphs=None):
         return gen_iplum(words, paragraphs)
 
     @classmethod
+    @deprecated
     def generate_latin1(cls, length=10):
         return gen_latin1(length)
 
     @classmethod
+    @deprecated
     def generate_negative_integer(cls):
         return gen_negative_integer()
 
     @classmethod
+    @deprecated
     def generate_ipaddr(cls, ip3=False, ipv6=False):
         return gen_ipaddr(ip3, ipv6)
 
     @classmethod
+    @deprecated
     def generate_mac(cls, delimiter=":"):
         return gen_mac(delimiter)
 
     @classmethod
+    @deprecated
     def generate_numeric_string(cls, length=10):
         return gen_numeric_string(length)
 
     @classmethod
+    @deprecated
     def generate_positive_integer(cls):
         return gen_integer()
 
     @classmethod
+    @deprecated
     def generate_time(cls):
         return gen_time()
 
     @classmethod
+    @deprecated
     def generate_url(cls, scheme=None, subdomain=None, tlds=None):
         return gen_url(scheme, subdomain, tlds)
 
     @classmethod
+    @deprecated
     def generate_utf8(cls, length=10):
         return gen_utf8(length)
 
     @classmethod
+    @deprecated
     def generate_uuid(cls):
         return gen_uuid()
 
     @classmethod
+    @deprecated
     def generate_html(cls, length=10):
         return gen_html(length)
