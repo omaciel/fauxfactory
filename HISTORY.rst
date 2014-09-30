@@ -3,6 +3,14 @@
 Release History
 ===============
 
+2.0.1 (2014-09-30)
+------------------
+
+- Added a default length of 10 to all string generator functions.
+- Display deprecation warnings if ``FauxFactory`` and any of its
+  functions are used, instructing the user to use the newer functions
+  instead.
+
 2.0.0 (2014-09-23)
 ------------------
 
