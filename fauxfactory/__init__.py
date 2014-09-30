@@ -74,7 +74,7 @@ def _is_positive_int(length):
 # Public Functions ------------------------------------------------------------
 
 
-def gen_string(str_type, length):
+def gen_string(str_type, length=None):
     """A simple wrapper that calls other string generation methods.
 
     :param str str_type: The type of string which should be generated.
@@ -111,10 +111,12 @@ def gen_string(str_type, length):
             ''.format(str_type_lower, u','.join(str_types_functions.keys()))
         )
     method = str_types_functions[str_type_lower]
+    if length is None:
+        return method()
     return method(length)
 
 
-def gen_alpha(length=5):
+def gen_alpha(length=10):
     """Returns a random string made up of alpha characters.
 
     :param int length: Length for random data.
@@ -133,7 +135,7 @@ def gen_alpha(length=5):
     return _make_unicode(output_string)
 
 
-def gen_alphanumeric(length=5):
+def gen_alphanumeric(length=10):
     """Returns a random string made up of alpha and numeric characters.
 
     :param int length: Length for random data.
@@ -191,7 +193,7 @@ def gen_choice(choices):
     return random.choice(choices)
 
 
-def gen_cjk(length=5):
+def gen_cjk(length=10):
     """Returns a random string made up of CJK characters.
     (Source: Wikipedia - CJK Unified Ideographs)
 
@@ -410,7 +412,7 @@ def gen_iplum(words=None, paragraphs=None):
     return _make_unicode(result.rstrip())
 
 
-def gen_latin1(length=5):
+def gen_latin1(length=10):
     """Returns a random string made up of UTF-8 characters.
     (Font: Wikipedia - Latin-1 Supplement Unicode Block)
 
@@ -508,7 +510,7 @@ def gen_mac(delimiter=":"):
     return _make_unicode(mac)
 
 
-def gen_numeric_string(length=5):
+def gen_numeric_string(length=10):
     """Returns a random string made up of numbers.
 
     :param int length: Length for random data.
@@ -597,7 +599,7 @@ def gen_url(scheme=None, subdomain=None, tlds=None):
     return _make_unicode(url)
 
 
-def gen_utf8(length=5):
+def gen_utf8(length=10):
     """Returns a random string made up of UTF-8 characters, as per `RFC 3629`_.
 
     :param int length: Length for random data.
@@ -653,7 +655,7 @@ def gen_uuid():
     return output_uuid
 
 
-def gen_html(length=5):
+def gen_html(length=10):
     """Returns a random string made up of html characters.
 
     :param int length: Length for random data.
@@ -694,11 +696,11 @@ class FauxFactory(object):
         return gen_string(str_type, length)
 
     @classmethod
-    def generate_alpha(cls, length=5):
+    def generate_alpha(cls, length=10):
         return gen_alpha(length)
 
     @classmethod
-    def generate_alphanumeric(cls, length=5):
+    def generate_alphanumeric(cls, length=10):
         return gen_alphanumeric(length)
 
     @classmethod
@@ -710,7 +712,7 @@ class FauxFactory(object):
         return gen_choice(choices)
 
     @classmethod
-    def generate_cjk(cls, length=5):
+    def generate_cjk(cls, length=10):
         return gen_cjk(length)
 
     @classmethod
@@ -734,7 +736,7 @@ class FauxFactory(object):
         return gen_iplum(words, paragraphs)
 
     @classmethod
-    def generate_latin1(cls, length=5):
+    def generate_latin1(cls, length=10):
         return gen_latin1(length)
 
     @classmethod
@@ -750,7 +752,7 @@ class FauxFactory(object):
         return gen_mac(delimiter)
 
     @classmethod
-    def generate_numeric_string(cls, length=5):
+    def generate_numeric_string(cls, length=10):
         return gen_numeric_string(length)
 
     @classmethod
@@ -766,7 +768,7 @@ class FauxFactory(object):
         return gen_url(scheme, subdomain, tlds)
 
     @classmethod
-    def generate_utf8(cls, length=5):
+    def generate_utf8(cls, length=10):
         return gen_utf8(length)
 
     @classmethod
@@ -774,5 +776,5 @@ class FauxFactory(object):
         return gen_uuid()
 
     @classmethod
-    def generate_html(cls, length=5):
+    def generate_html(cls, length=10):
         return gen_html(length)

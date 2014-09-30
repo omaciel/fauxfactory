@@ -34,15 +34,15 @@ Usage
         sys.path.append(ROOT_PATH)
     import fauxfactory
 
-Need a 10 character string for one of your tests?
+Need a 15 character string for one of your tests?
 
 .. doctest::
 
-    >>> string = fauxfactory.gen_string('alphanumeric', 10)
+    >>> string = fauxfactory.gen_string('alphanumeric', 15)
     >>> string.isalnum()
     True
     >>> len(string)
-    10
+    15
 
 Need a 5 character numeric string?
 
