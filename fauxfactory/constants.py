@@ -42,7 +42,10 @@ TLDS = [
     'org',
 ]
 
+# The tuple index corresponds to a CIDR number
+# E.g. CIDR 1 == VALID_NETMASKS[1]
 VALID_NETMASKS = (
+    u'0.0.0.0',
     u'128.0.0.0',
     u'192.0.0.0',
     u'224.0.0.0',
@@ -74,6 +77,7 @@ VALID_NETMASKS = (
     u'255.255.255.248',
     u'255.255.255.252',
     u'255.255.255.254',
+    u'255.255.255.255',
 )
 
 HTML_TAGS = [

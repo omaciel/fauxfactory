@@ -512,17 +512,19 @@ def gen_mac(delimiter=":"):
     return _make_unicode(mac)
 
 
-def gen_netmask():
+def gen_netmask(min_cidr=1, max_cidr=31):
     """Generates a random valid netmask.
 
     For more info: http://www.iplocation.net/tools/netmask.php
 
+    :param int min_cidr: Inferior CIDR limit
+    :param int max_cidr: Superior CIDR limit
     :returns: The netmask is chosen from
-        :data:`fauxfactory.constants.VALID_NETMASKS`.
+        :data:`fauxfactory.constants.VALID_NETMASKS` respecting the CIDR range
     :rtype: str
 
     """
-    return random.choice(VALID_NETMASKS)
+    return VALID_NETMASKS[random.randint(min_cidr, max_cidr)]
 
 
 def gen_numeric_string(length=10):
