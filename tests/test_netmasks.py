@@ -8,10 +8,10 @@ from fauxfactory import gen_netmask, VALID_NETMASKS
 
 
 NETMASK_REGEX = re.compile(
-    '((255.){3}(0|128|192|224|240|248|252|254))|'
+    '((255.){3}(0|128|192|224|240|248|252|254|255))|'
     '((255.){2}(0|128|192|224|240|248|252|254).0)|'
     '(255.(0|128|192|224|240|248|252|254)(.0){2})|'
-    '((128|192|224|240|248|252|254)(.0){3})'
+    '((0|128|192|224|240|248|252|254)(.0){3})'
 )
 
 
@@ -23,6 +23,11 @@ class NetmaskTestCase(unittest.TestCase):
         result = gen_netmask()
         self.assertEqual(len(result.split('.')), 4)
         self.assertIsNotNone(NETMASK_REGEX.match(result))
+
+    def test_gen_netmask_boundary(self):
+        """Test gen_netmask boundary cases"""
+        self.assertEqual(u'0.0.0.0', gen_netmask(0, 0))
+        self.assertEqual(u'255.255.255.255', gen_netmask(32, 32))
 
     def test_valid_netmasks(self):
         """Test if VALID_NETMASKS constant have valid netmask values"""
