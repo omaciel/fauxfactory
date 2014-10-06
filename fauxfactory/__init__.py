@@ -16,6 +16,7 @@ __all__ = (
     'gen_iplum',
     'gen_latin1',
     'gen_mac',
+    'gen_netmask',
     'gen_negative_integer',
     'gen_numeric_string',
     'gen_positive_integer',
@@ -38,7 +39,7 @@ from collections import Iterable
 from fauxfactory.constants import (
     HTML_TAGS, LOREM_IPSUM_TEXT,
     MAX_YEARS, MIN_YEARS,
-    SCHEMES, SUBDOMAINS, TLDS
+    SCHEMES, SUBDOMAINS, TLDS, VALID_NETMASKS
 )
 from functools import wraps
 
@@ -509,6 +510,19 @@ def gen_mac(delimiter=":"):
             0, len(chars), 1)] for x in range(6))
 
     return _make_unicode(mac)
+
+
+def gen_netmask():
+    """Generates a random valid netmask.
+
+    For more info: http://www.iplocation.net/tools/netmask.php
+
+    :returns: The netmask is chosen from
+        :data:`fauxfactory.constants.VALID_NETMASKS`.
+    :rtype: str
+
+    """
+    return random.choice(VALID_NETMASKS)
 
 
 def gen_numeric_string(length=10):
