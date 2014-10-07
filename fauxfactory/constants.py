@@ -30,15 +30,14 @@ SCHEMES = [
 
 SUBDOMAINS = [
     'example',
+    'invalid',
+    'localhost',
     'test',
 ]
 
 TLDS = [
-    'biz',
     'com',
-    'edu',
-    'gov',
-    'info',
+    'net',
     'org',
 ]
 
