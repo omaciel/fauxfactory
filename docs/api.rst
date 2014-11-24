@@ -8,3 +8,8 @@ This is a complete list of available methods, along with details about them.
 
 .. automodule:: fauxfactory
     :members:
+
+:mod:`fauxfactory.constants`
+----------------------------
+
+.. automodule:: fauxfactory.constants
