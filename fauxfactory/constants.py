@@ -1,49 +1,48 @@
-# -*- coding: utf-8 -*-
+"""Constants used by :mod:`fauxfactory`.
+
+.. data:: VALID_NETMASKS
+
+    A tuple of netmasks. The tuple index corresponds to a CIDR value. For
+    example, a CIDR of "/1" corresponds to `VALID_NETMASKS[1]`.
 
 """
-Defines various constants.
-"""
-
+# The above constant descriptions can be found by Sphinx and via help().
 import datetime
 
 
-# standard Lorem Ipsum passage, used since the 1500s
-LOREM_IPSUM_TEXT = (u"Lorem ipsum dolor sit amet, consectetur adipisicing"
-                    " elit, sed do eiusmod tempor incididunt ut labore et"
-                    " dolore magna aliqua. Ut enim ad minim veniam, quis "
-                    "nostrud exercitation ullamco laboris nisi ut aliquip"
-                    " ex ea commodo consequat. Duis aute irure dolor in"
-                    " reprehenderit in voluptate velit esse cillum dolore "
-                    "eu fugiat nulla pariatur. Excepteur sint occaecat "
-                    "cupidatat non proident, sunt in culpa qui officia "
-                    "deserunt mollit anim id est laborum.")
+LOREM_IPSUM_TEXT = (
+    u"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do "
+    "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad "
+    "minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip "
+    "ex ea commodo consequat. Duis aute irure dolor in reprehenderit in "
+    "voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur "
+    "sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt "
+    "mollit anim id est laborum."
+)
 
-# Range for YEARS
 MIN_YEARS = datetime.MINYEAR
 MAX_YEARS = 1000  # 1000 years into the future
 
-SCHEMES = [
+SCHEMES = (
     'http',
     'https',
     'ftp',
-]
+)
 
-SUBDOMAINS = [
+SUBDOMAINS = (
     'example',
     'test',
-]
+)
 
-TLDS = [
+TLDS = (
     'biz',
     'com',
     'edu',
     'gov',
     'info',
     'org',
-]
+)
 
-# The tuple index corresponds to a CIDR number
-# E.g. CIDR 1 == VALID_NETMASKS[1]
 VALID_NETMASKS = (
     u'0.0.0.0',
     u'128.0.0.0',
@@ -80,7 +79,7 @@ VALID_NETMASKS = (
     u'255.255.255.255',
 )
 
-HTML_TAGS = [
+HTML_TAGS = (
     'a', 'abbr', 'acronym', 'address', 'applet', 'area', 'b',
     'base', 'basefont', 'bdo', 'big', 'blink', 'blockquote', 'body', 'br',
     'button', 'caption', 'center', 'cite', 'code', 'col', 'colgroup',
@@ -94,4 +93,4 @@ HTML_TAGS = [
     'select', 'small', 'span', 'strike', 'strong', 'style', 'sub',
     'sup', 'table', 'tbody', 'td', 'textarea', 'tfoot', 'th',
     'thead', 'title', 'tr', 'tt', 'u', 'ul', 'var',
-]
+)
