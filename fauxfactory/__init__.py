@@ -522,8 +522,19 @@ def gen_netmask(min_cidr=1, max_cidr=31):
     :returns: The netmask is chosen from
         :data:`fauxfactory.constants.VALID_NETMASKS` respecting the CIDR range
     :rtype: str
+    :raises: ``ValueError`` if ``min_cidr`` or ``max_cidr`` have an invalid
+        value. For example, ``max_cidr`` cannot be 33.
 
     """
+    if min_cidr < 0:
+        raise ValueError(
+            'min_cidr must be 0 or greater, but is {0}'.format(min_cidr)
+        )
+    if max_cidr >= len(VALID_NETMASKS):
+        raise ValueError(
+            'max_cidr must be less than {0}, but is {1}'
+            .format(len(VALID_NETMASKS), max_cidr)
+        )
     return VALID_NETMASKS[random.randint(min_cidr, max_cidr)]
 
 

@@ -28,6 +28,10 @@ class NetmaskTestCase(unittest.TestCase):
         """Test gen_netmask boundary cases"""
         self.assertEqual(u'0.0.0.0', gen_netmask(0, 0))
         self.assertEqual(u'255.255.255.255', gen_netmask(32, 32))
+        with self.assertRaises(ValueError):
+            gen_netmask(-1, 16)
+        with self.assertRaises(ValueError):
+            gen_netmask(16, 33)
 
     def test_valid_netmasks(self):
         """Test if VALID_NETMASKS constant have valid netmask values"""
