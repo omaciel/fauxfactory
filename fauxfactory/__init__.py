@@ -707,23 +707,24 @@ def gen_html(length=10):
 
 # Code borrowed from http://code.activestate.com/recipes/391367-deprecated/
 def deprecated(func):
-    """A decorator used to mark functions as deprecated. It will result in
-    a warning being emmitted when the function is used."""
+    """A decorator used to mark functions as deprecated.
+
+    Emit a warning when the decorated function is called.
+
+    """
     @wraps(func)
     def wrapper(*args, **kwargs):
-        # Function name
-        name = func.__name__
-        # New function name
-        # Check if we are dealing with ``codify``
-        if name == 'codify':
+        old_name = func.__name__
+        if old_name == 'codify':
             new_name = '_make_unicode'
         else:
-            new_name = func.__name__.replace('generate', 'gen')
-        warn_message = ("Function {0} is now deprecated! Please update your "
-            "your code to use the {1} function instead.")
-        warnings.warn(warn_message.format(name, new_name), category=Warning)
+            new_name = old_name.replace('generate', 'gen')
+        warnings.warn(
+            '{0} is deprecated! Please use {1} instead.'
+            .format(old_name, new_name),
+            category=Warning
+        )
         return func(*args, **kwargs)
-
     return wrapper
 
 
@@ -741,11 +742,6 @@ class FauxFactory(object):
     # This code is not imported when `from fauxfactory import *` is called, nor
     # does this code show up in Sphinx's output. See `__all__`.
     # (missing-docstring) pylint:disable=C0111
-
-    warnings.warn(
-        'The FauxFactory class is deprecated. Please use functions from the'
-        ' fauxfactory module instead.',
-        category=Warning)
 
     @classmethod
     @deprecated
