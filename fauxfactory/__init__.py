@@ -342,10 +342,15 @@ def gen_integer(min_value=None, max_value=None):
     if max_value is None:
         max_value = _max_value
 
+    if sys.version_info.major < 3:
+        integer_types = (int, long,)
+    else:
+        integer_types = (int,)
+
     # Perform some validations
-    if not isinstance(min_value, int) or min_value < _min_value:
+    if not isinstance(min_value, integer_types) or min_value < _min_value:
         raise ValueError("\'%s\' is not a valid minimum." % min_value)
-    if not isinstance(max_value, int) or max_value > _max_value:
+    if not isinstance(max_value, integer_types) or max_value > _max_value:
         raise ValueError("\'%s\' is not a valid maximum." % max_value)
 
     value = random.randint(min_value, max_value)

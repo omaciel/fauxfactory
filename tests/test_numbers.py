@@ -22,9 +22,13 @@ class TestNumbers(unittest.TestCase):
         @Assert: A random integer is created
         """
 
+        if sys.version < '3':
+            integer_types = (int, long,)
+        else:
+            integer_types = (int,)
         result = gen_integer()
         self.assertTrue(
-            isinstance(result, int), "A valid integer was not generated.")
+            isinstance(result, integer_types), "A valid integer was not generated.")
 
     def test_gen_integer_2(self):
         """
