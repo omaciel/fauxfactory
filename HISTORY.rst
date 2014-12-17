@@ -3,6 +3,19 @@
 Release History
 ===============
 
+2.0.3 (2014-12-17)
+------------------
+
+- Dropped the class-wide FauxFactory deprecation warning.
+- Refactored the `deprecated` decorator function to comply with pylint
+  and flake8.
+- Make gen_netmask verify function arguments.
+-  Make `gen_netmask` raise a `ValueError` if `min_cidr` is less than
+   0 or `max_cidr` is greater than 32. Add tests for this boundary
+   checking code.
+- Improvements to constants and documentation.
+
+
 2.0.2 (2014-10-06)
 ------------------
 
