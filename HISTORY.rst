@@ -3,6 +3,11 @@
 Release History
 ===============
 
+2.0.4 (2014-12-19)
+------------------
+
+- Altered `gen_integer` to properly check for long() on Python 2.
+
 2.0.3 (2014-12-17)
 ------------------
 
