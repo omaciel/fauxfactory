@@ -6,6 +6,7 @@ from fauxfactory import (
     gen_alpha,
     gen_alphanumeric,
     gen_cjk,
+    gen_cyrillic,
     gen_html,
     gen_latin1,
     gen_numeric_string,
@@ -335,6 +336,102 @@ class TestStrings(unittest.TestCase):
         """
 
         result = gen_string('cjk', 15)
+        self.assertTrue(
+            len(result) > 0, "Empty string was generated")
+
+    def test_gen_cyrillic_1(self):
+        """
+        @Test: Create Cyrillic string of varied length
+        @Feature: String Generator
+        @Assert: Cyrillic string is generated
+        """
+
+        result = gen_cyrillic()
+        self.assertTrue(
+            len(result) > 0, "Empty string was generated")
+
+    def test_gen_cyrillic_2(self):
+        """
+        @Test: Create Cyrillic string of fixed length
+        @Feature: String Generator
+        @Assert: Cyrillic string with fixed length is generated
+        """
+
+        for length in range(2, 12, 2):
+            result = gen_cyrillic(length)
+            self.assertEqual(
+                len(result),
+                length,
+                "Generate string does not have the expected length")
+
+    def test_gen_cyrillic_3(self):
+        """
+        @Test: Create Cyrillic string with zero length
+        @Feature: String Generator
+        @Assert: Cyrillic string is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
+            gen_cyrillic(length=0)
+
+    def test_gen_cyrillic_4(self):
+        """
+        @Test: Create Cyrillic string with negative length
+        @Feature: String Generator
+        @Assert: Cyrillic string is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
+            gen_cyrillic(length=-1)
+
+    def test_gen_cyrillic_5(self):
+        """
+        @Test: Create Cyrillic string with None length
+        @Feature: String Generator
+        @Assert: Cyrillic string is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
+            gen_cyrillic(length=None)
+
+    def test_gen_cyrillic_6(self):
+        """
+        @Test: Create Cyrillic string with empty string length
+        @Feature: String Generator
+        @Assert:  Cyrillic string is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
+            gen_cyrillic(length='')
+
+    def test_gen_cyrillic_7(self):
+        """
+        @Test: Create Cyrillic string with white space length
+        @Feature: String Generator
+        @Assert: Cyrillic string is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
+            gen_cyrillic(length=' ')
+
+    def test_gen_cyrillic_8(self):
+        """
+        @Test: Create Cyrillic string with alpha string length
+        @Feature: String Generator
+        @Assert: Cyrillic string is not created due to value error
+        """
+
+        with self.assertRaises(ValueError):
+            gen_cyrillic(length='a')
+
+    def test_gen_cyrillic_9(self):
+        """
+        @Test: Create Cyrillic string of varied length
+        @Feature: String Generator
+        @Assert: Cyrillic string is generated
+        """
+
+        result = gen_string('cyrillic', 15)
         self.assertTrue(
             len(result) > 0, "Empty string was generated")
 

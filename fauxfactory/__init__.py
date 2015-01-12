@@ -7,6 +7,7 @@ __all__ = (
     'gen_boolean',
     'gen_choice',
     'gen_cjk',
+    'gen_cyrillic',
     'gen_date',
     'gen_datetime',
     'gen_email',
@@ -91,6 +92,7 @@ def gen_string(str_type, length=None):
     * alpha
     * alphanumeric
     * cjk
+    * cyrillic
     * html
     * latin1
     * numeric
@@ -101,6 +103,7 @@ def gen_string(str_type, length=None):
         u'alpha': gen_alpha,
         u'alphanumeric': gen_alphanumeric,
         u'cjk': gen_cjk,
+        u'cyrillic': gen_cyrillic,        
         u'html': gen_html,
         u'latin1': gen_latin1,
         u'numeric': gen_numeric_string,
@@ -212,6 +215,29 @@ def gen_cjk(length=10):
     # valid range of CJK codepoints is 0x4E00 - 0x9FCC, inclusive. Python 2
     # and 3 support the `unichr` and `chr` functions, respectively.
     codepoints = [random.randint(0x4E00, 0x9FCC) for _ in range(length)]
+    try:
+        # (undefined-variable) pylint:disable=E0602
+        output = u''.join(unichr(codepoint) for codepoint in codepoints)
+    except NameError:
+        output = u''.join(chr(codepoint) for codepoint in codepoints)
+    return _make_unicode(output)
+
+def gen_cyrillic(length=10):
+    """Returns a random string made up of Cyrillic characters.
+
+    :param int length: Length for random data.
+    :returns: A random string made up of Cyrillic characters.
+    :rtype: str
+
+    """
+
+    # Validate length argument
+    _is_positive_int(length)
+
+    # Generate codepoints, then convert the codepoints to a string. The
+    # valid range of Cyrillic codepoints is 0x410 - 0x4ff, inclusive. Python 2
+    # and 3 support the `unichr` and `chr` functions, respectively.
+    codepoints = [random.randint(0x0400, 0x04FF) for _ in range(length)]
     try:
         # (undefined-variable) pylint:disable=E0602
         output = u''.join(unichr(codepoint) for codepoint in codepoints)
