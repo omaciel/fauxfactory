@@ -1,3 +1,5 @@
 coverage
 coveralls
+flake8
+pylint
 Sphinx
