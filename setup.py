@@ -1,5 +1,7 @@
 """A setuptools-based script for installing FauxFactory."""
-from distutils.core import setup
+# setuptools is preferred over distutils. See:
+# https://packaging.python.org/en/latest/current.html#packaging-tool-recommendations
+from setuptools import find_packages, setup
 import os
 
 
@@ -20,7 +22,7 @@ setup(
     author='Og Maciel',
     author_email='omaciel@ogmaciel.com',
     url='https://github.com/omaciel/fauxfactory',
-    packages=['fauxfactory'],
+    packages=find_packages(),
     keywords='python automation data',
     license='Apache 2.0',
     classifiers=[

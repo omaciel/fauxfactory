@@ -20,8 +20,8 @@ docs-html:
 
 lint:
 	flake8 .
-	pylint --reports=n --disable=I --ignore-imports=y fauxfactory docs/conf.py
-# pylint should also lint setup.py and the tests/ directory.
+	pylint --reports=n --disable=I --ignore-imports=y fauxfactory docs/conf.py setup.py
+# pylint should also lint the tests/ directory.
 
 test:
 	python $(unittest-args)
