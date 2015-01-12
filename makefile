@@ -1,14 +1,11 @@
 unittest-args = -m unittest discover --start-directory tests --top-level-directory .
 
-define doctest-cmd =
-cd docs && $(MAKE) doctest
-endef
-
 help:
 	@echo "Please use \`make <target>' where <target> is one of:"
 	@echo "  docs-clean    Remove documentation."
 	@echo "  docs-doctest  Check code samples in the documentation."
 	@echo "  docs-html     Compile documentation to HTML."
+	@echo "  lint          Run flake8 and pylint."
 	@echo "  test          Run unit tests."
 	@echo "  test-all      Run unit tests and doctests, measure coverage."
 
@@ -16,16 +13,20 @@ docs-clean:
 	cd docs && $(MAKE) clean
 
 docs-doctest:
-	$(doctest-cmd)
+	cd docs && $(MAKE) doctest
 
 docs-html:
 	cd docs && $(MAKE) html
 
+lint:
+	flake8 .
+	pylint --reports=n --disable=I --ignore-imports=y fauxfactory docs/conf.py
+# pylint should also lint setup.py and the tests/ directory.
+
 test:
 	python $(unittest-args)
 
-test-all:
+test-all: lint docs-doctest
 	coverage run $(unittest-args)
-	$(doctest-cmd)
 
-.PHONY: help docs-clean docs-doctest docs-html test test-all
+.PHONY: help docs-clean docs-doctest docs-html lint test test-all

@@ -55,9 +55,8 @@ def _make_unicode(data):
         cast is necessary, a copy of ``data`` is returned.
 
     """
-    if sys.version_info[0] is 2:
-        # (undefined-variable) pylint:disable=E0602
-        return unicode(data)  # flake8:noqa
+    if sys.version_info.major == 2:
+        return unicode(data)  # flake8:noqa pylint:disable=undefined-variable
     return data
 
 
@@ -103,7 +102,7 @@ def gen_string(str_type, length=None):
         u'alpha': gen_alpha,
         u'alphanumeric': gen_alphanumeric,
         u'cjk': gen_cjk,
-        u'cyrillic': gen_cyrillic,        
+        u'cyrillic': gen_cyrillic,
         u'html': gen_html,
         u'latin1': gen_latin1,
         u'numeric': gen_numeric_string,
@@ -215,10 +214,10 @@ def gen_cjk(length=10):
     # valid range of CJK codepoints is 0x4E00 - 0x9FCC, inclusive. Python 2
     # and 3 support the `unichr` and `chr` functions, respectively.
     codepoints = [random.randint(0x4E00, 0x9FCC) for _ in range(length)]
-    try:
-        # (undefined-variable) pylint:disable=E0602
+    if sys.version_info.major == 2:
+        # pylint:disable=undefined-variable
         output = u''.join(unichr(codepoint) for codepoint in codepoints)
-    except NameError:
+    else:
         output = u''.join(chr(codepoint) for codepoint in codepoints)
     return _make_unicode(output)
 
@@ -369,7 +368,7 @@ def gen_integer(min_value=None, max_value=None):
         max_value = _max_value
 
     if sys.version_info.major < 3:
-        integer_types = (int, long,)
+        integer_types = (int, long,)  # pylint:disable=undefined-variable
     else:
         integer_types = (int,)
 
@@ -471,13 +470,15 @@ def gen_latin1(length=10):
     for i in range(int(range2[0], 16), int(range2[1], 16)):
         output_array.append(i)
 
-    try:
+    if sys.version_info.major == 2:
         output_string = u''.join(
-            # (undefined-variable) pylint:disable=E0602
-            unichr(random.choice(output_array)) for x in range(length))
-    except NameError:
+            # pylint:disable=E0602
+            unichr(random.choice(output_array)) for _ in range(length)
+        )
+    else:
         output_string = u''.join(
-            chr(random.choice(output_array)) for x in range(length))
+            chr(random.choice(output_array)) for _ in range(length)
+        )
 
     return _make_unicode(output_string)
 
@@ -693,10 +694,10 @@ def gen_utf8(length=10):
 
     # Convert codepoints to characters. Python 2 and 3 support the `unichr`
     # and `chr` functions, respectively.
-    try:
-        # (undefined-variable) pylint:disable=E0602
+    if sys.version_info.major == 2:
+        # pylint:disable=E0602
         output = u''.join(unichr(codepoint) for codepoint in codepoints)
-    except NameError:
+    else:
         output = u''.join(chr(codepoint) for codepoint in codepoints)
     return _make_unicode(output)
 
@@ -745,6 +746,7 @@ def deprecated(func):
     """
     @wraps(func)
     def wrapper(*args, **kwargs):
+        """Emit a warning, then call ``func``."""
         old_name = func.__name__
         if old_name == 'codify':
             new_name = '_make_unicode'
@@ -761,18 +763,18 @@ def deprecated(func):
 
 @deprecated
 def codify(data):
-    # (missing-docstring) pylint:disable=C0111
+    # pylint:disable=missing-docstring
     return _make_unicode(data)
 
 
 class FauxFactory(object):
     # This issue is no longer relevant, as the class has been turned into a set
     # of functions.
-    # (too-many-public-methods) pylint:disable=R0904
+    # pylint:disable=too-many-public-methods
     #
     # This code is not imported when `from fauxfactory import *` is called, nor
     # does this code show up in Sphinx's output. See `__all__`.
-    # (missing-docstring) pylint:disable=C0111
+    # pylint:disable=missing-docstring
 
     @classmethod
     @deprecated
