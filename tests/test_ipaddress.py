@@ -2,7 +2,7 @@
 
 """Tests for ipaddr generator."""
 
-from fauxfactory import gen_ipaddr
+from fauxfactory import gen_ipaddr, gen_local_ipaddr
 
 import unittest
 
@@ -82,3 +82,19 @@ class TestIpaddr(unittest.TestCase):
         self.assertTrue(
             len(result.split(":")) == 8,
             "Did not generate a IPv6 addrss")
+
+    def test_local_addr(self):
+        """
+        @Test: Generate a local IPv4 address
+        @Feature: IPAddr Generator
+        @Assert: A local IPv4 address is generated
+        """
+        addr = gen_local_ipaddr()
+        self.assertTrue(
+            len(addr.split(".")) == 4, "IP address does not have 4 fields")
+        self.assertTrue(
+            addr.startswith("10."), "IP address does not start with 10")
+        fields = addr.split(".")
+        self.assertTrue(
+            all(int(field) < 256 and int(field) >= 0 for field in fields),
+            "IP address' field is bigger than 255!")

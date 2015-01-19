@@ -522,6 +522,16 @@ def gen_ipaddr(ip3=False, ipv6=False):
     return _make_unicode(ipaddr)
 
 
+def gen_local_ipaddr():
+    """Generates a random local IP address (10.x.x.x subnet)
+
+    :returns: A random IP address from local 10.x.x.x subnet
+    :rtype: str
+    """
+    return "10.{}.{}.{}".format(
+        *[gen_integer(min_value=0, max_value=255) for i in range(3)])
+
+
 def gen_mac(delimiter=":"):
     """Generates a random MAC address.
 
