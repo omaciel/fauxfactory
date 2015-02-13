@@ -2,6 +2,10 @@
 
 """Tests for all string generators."""
 
+import random
+import unicodedata
+import unittest
+
 from fauxfactory import (
     gen_alpha,
     gen_alphanumeric,
@@ -12,11 +16,9 @@ from fauxfactory import (
     gen_numeric_string,
     gen_string,
     gen_utf8,
+    _unicode_letters_generator,
 )
 from sys import version_info
-
-import unittest
-import random
 
 
 class TestStrings(unittest.TestCase):
@@ -710,3 +712,19 @@ class TestStrings(unittest.TestCase):
         alphanumeric_string = gen_string('alphanumeric')
         control_string = gen_alphanumeric()
         self.assertEqual(len(control_string), len(alphanumeric_string),)
+
+
+class UnicodeLettersGenerator(unittest.TestCase):
+    """Test unicode letters generator"""
+
+    def test_chars_in_letters_category(self):
+        """@Test: Unicode letters generator generates only unicode letters
+        @Feature: String Generator
+        @Assert: All generated characters are unicode letters
+        """
+        # Categories extracted from section 5.5.1 of
+        # http://www.unicode.org/reports/tr44/tr44-4.html
+        for char in _unicode_letters_generator():
+            self.assertIn(
+                unicodedata.category(char), ('Lu', 'Ll', 'Lt', 'Lm', 'Lo')
+            )
