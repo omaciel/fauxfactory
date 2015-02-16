@@ -33,6 +33,7 @@ import random
 import re
 import string
 import sys
+import unicodedata
 import uuid
 import warnings
 
@@ -43,6 +44,7 @@ from fauxfactory.constants import (
     SCHEMES, SUBDOMAINS, TLDS, VALID_NETMASKS
 )
 from functools import wraps
+
 
 # Private Functions -----------------------------------------------------------
 
@@ -59,7 +61,6 @@ def _make_unicode(data):
         return unicode(data)  # flake8:noqa pylint:disable=undefined-variable
     return data
 
-
 def _is_positive_int(length):
     """Check that ``length`` argument is an integer greater than zero.
 
@@ -72,6 +73,29 @@ def _is_positive_int(length):
     if not isinstance(length, int) or length <= 0:
         raise ValueError("{0} is an invalid 'length'.".format(length))
 
+def _unicode_letters_generator():
+    """Generates unicode characters in the letters category
+
+    :return: a generator which will generates all unicode letters available
+
+    """
+    if sys.version_info.major == 2:
+        chr_function = unichr  # pylint:disable=undefined-variable
+        range_function = xrange  # pylint:disable=undefined-variable
+    else:
+        chr_function = chr
+        range_function = range
+
+    # Use sys.maxunicode instead of 0x10FFFF to avoid the exception below, in a
+    # narrow Python build (before Python 3.3)
+    # ValueError: unichr() arg not in range(0x10000) (narrow Python build)
+    # For more information, read PEP 261.
+    for i in range_function(sys.maxunicode):
+        char = chr_function(i)
+        if unicodedata.category(char).startswith('L'):
+            yield char
+
+UNICODE_LETTERS = [c for c in _unicode_letters_generator()]
 
 # Public Functions ------------------------------------------------------------
 
@@ -660,46 +684,20 @@ def gen_url(scheme=None, subdomain=None, tlds=None):
 
 
 def gen_utf8(length=10):
-    """Returns a random string made up of UTF-8 characters, as per `RFC 3629`_.
+    """Returns a random string made up of UTF-8 letters characters, as per
+    `RFC 3629`_.
 
     :param int length: Length for random data.
-    :returns: A random string made up of ``UTF-8`` characters.
+    :returns: A random string made up of ``UTF-8`` letters characters.
     :rtype: str
 
     .. _`RFC 3629`: http://www.rfc-editor.org/rfc/rfc3629.txt
 
     """
-
     # Validate length argument
     _is_positive_int(length)
 
-    # Generate codepoints. The valid range of UTF-8 codepoints is
-    # 0x0-0x10FFFF, minus the following: 0xC0-0xC1, 0xF5-0xFF and
-    # 0xD800-0xDFFF. These 2061 invalid codepoints (2 + 11 + 2048) comprise
-    # 0.2% of 0x0-0x10FFFF. Thus, it should be OK to just check for invalid
-    # codepoints and generate new ones if need be.
-    codepoints = []
-    while len(codepoints) < length:
-        # Use sys.maxunicode instead of 0x10FFFF to avoid the exception
-        # below, in a narrow Python build (before Python 3.3)
-        # ValueError: unichr() arg not in range(0x10000) (narrow Python
-        # build)
-        # For more information, read PEP 261.
-        codepoint = random.randint(0x0, sys.maxunicode)
-        if (
-                codepoint not in range(0xC0, 0xC1 + 1)
-                and codepoint not in range(0xF5, 0xFF + 1)
-                and codepoint not in range(0xD800, 0xDFFF + 1)):
-            codepoints.append(codepoint)
-
-    # Convert codepoints to characters. Python 2 and 3 support the `unichr`
-    # and `chr` functions, respectively.
-    if sys.version_info.major == 2:
-        # pylint:disable=E0602
-        output = u''.join(unichr(codepoint) for codepoint in codepoints)
-    else:
-        output = u''.join(chr(codepoint) for codepoint in codepoints)
-    return _make_unicode(output)
+    return u''.join([random.choice(UNICODE_LETTERS) for _ in range(length)])
 
 
 def gen_uuid():
