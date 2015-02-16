@@ -3,6 +3,12 @@
 Release History
 ===============
 
+2.0.5 (2015-02-16)
+------------------
+
+- Improved the unicode letters generator to avoid returning control
+  characters and other non-letter characters.
+
 2.0.4 (2014-12-19)
 ------------------
 
