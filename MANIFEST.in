@@ -3,6 +3,6 @@ include HISTORY.rst
 include LICENSE
 include README.rst
 include makefile
-recursive-include *.py
+include fauxfactory/*.py
 include docs/*
 include tests/*.py
