@@ -2,7 +2,3 @@ include AUTHORS.rst
 include HISTORY.rst
 include LICENSE
 include README.rst
-include makefile
-include fauxfactory/*.py
-include docs/*
-include tests/*.py
