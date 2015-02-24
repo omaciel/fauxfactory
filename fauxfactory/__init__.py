@@ -57,7 +57,7 @@ def _make_unicode(data):
         cast is necessary, a copy of ``data`` is returned.
 
     """
-    if sys.version_info.major == 2:
+    if sys.version_info[0] == 2:
         return unicode(data)  # flake8:noqa pylint:disable=undefined-variable
     return data
 
@@ -79,7 +79,7 @@ def _unicode_letters_generator():
     :return: a generator which will generates all unicode letters available
 
     """
-    if sys.version_info.major == 2:
+    if sys.version_info[0] == 2:
         chr_function = unichr  # pylint:disable=undefined-variable
         range_function = xrange  # pylint:disable=undefined-variable
     else:
@@ -238,7 +238,7 @@ def gen_cjk(length=10):
     # valid range of CJK codepoints is 0x4E00 - 0x9FCC, inclusive. Python 2
     # and 3 support the `unichr` and `chr` functions, respectively.
     codepoints = [random.randint(0x4E00, 0x9FCC) for _ in range(length)]
-    if sys.version_info.major == 2:
+    if sys.version_info[0] == 2:
         # pylint:disable=undefined-variable
         output = u''.join(unichr(codepoint) for codepoint in codepoints)
     else:
@@ -391,7 +391,7 @@ def gen_integer(min_value=None, max_value=None):
     if max_value is None:
         max_value = _max_value
 
-    if sys.version_info.major < 3:
+    if sys.version_info[0] < 3:
         integer_types = (int, long,)  # pylint:disable=undefined-variable
     else:
         integer_types = (int,)
@@ -494,7 +494,7 @@ def gen_latin1(length=10):
     for i in range(int(range2[0], 16), int(range2[1], 16)):
         output_array.append(i)
 
-    if sys.version_info.major == 2:
+    if sys.version_info[0] == 2:
         output_string = u''.join(
             # pylint:disable=E0602
             unichr(random.choice(output_array)) for _ in range(length)
@@ -532,7 +532,7 @@ def gen_ipaddr(ip3=False, ipv6=False):
 
     if ipv6:
         # StackOverflow.com questions: generate-random-ipv6-address
-        ipaddr = u':'.join('{:x}'.format(
+        ipaddr = u':'.join('{0:x}'.format(
             random.randint(0, 2**16 - 1)
         ) for i in range(8))
     else:

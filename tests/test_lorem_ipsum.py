@@ -2,11 +2,15 @@
 
 """Tests for Lorem Ipsum generator."""
 
+import random
+from sys import version_info
 from fauxfactory import gen_iplum
 from fauxfactory.constants import LOREM_IPSUM_TEXT
 
-import random
-import unittest
+if version_info[0:2] == (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
 
 
 class TestLoremIpsum(unittest.TestCase):

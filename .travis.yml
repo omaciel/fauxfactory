@@ -1,12 +1,15 @@
 language: python
-python:
-  - 2.7
-  - 3.3
-  - 3.4
+# Should be identical to envlist in tox.ini. See:
+# http://tox.readthedocs.org/en/latest/config.html#confval-envlist=CSV
+env:
+  - TOXENV=py26
+  - TOXENV=py27
+  - TOXENV=py33
+  - TOXENV=py34
 install:
-  pip install -r requirements-optional.txt
+  pip install tox
 script:
-  make test-all
+  tox
 after_success:
   coveralls
 notifications:

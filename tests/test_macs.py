@@ -2,12 +2,17 @@
 
 """Tests for MAC generator."""
 
-from fauxfactory import gen_mac
-
 import random
 import re
 import string
-import unittest
+from sys import version_info
+from fauxfactory import gen_mac
+
+if version_info[0:2] == (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
+
 
 mac = re.compile("[0-9a-f]{2}([-:])[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$")
 

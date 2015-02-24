@@ -2,8 +2,7 @@
 
 """Tests for URL generator."""
 
-import unittest
-
+from sys import version_info
 from fauxfactory import (
     gen_alpha,
     gen_alphanumeric,
@@ -12,6 +11,11 @@ from fauxfactory import (
     gen_url,
 )
 from fauxfactory.constants import SCHEMES
+
+if version_info[0:2] == (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
 
 
 class TestURLs(unittest.TestCase):

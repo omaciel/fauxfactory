@@ -2,11 +2,15 @@
 
 """Tests for HTML generator."""
 
+from sys import version_info
 from fauxfactory import gen_html, gen_integer
 import re
-import sys
-import unittest
 # (too-many-public-methods) pylint:disable=R0904
+
+if version_info[0:2] == (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
 
 
 class TestHTML(unittest.TestCase):
@@ -52,7 +56,7 @@ class TestHTML(unittest.TestCase):
         """
 
         result = gen_html()
-        if sys.version_info[0] is 2:
+        if version_info[0] is 2:
             # (undefined-variable) pylint:disable=E0602
             self.assertIsInstance(result, unicode)  # flake8:noqa
         else:
