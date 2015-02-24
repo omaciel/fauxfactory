@@ -2,11 +2,15 @@
 
 """Tests for datetime generator."""
 
+import datetime
 from fauxfactory import gen_date, gen_datetime
 from fauxfactory.constants import MAX_YEARS, MIN_YEARS
+from sys import version_info
 
-import datetime
-import unittest
+if version_info[0:2] == (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
 
 
 class TestDates(unittest.TestCase):

@@ -2,10 +2,14 @@
 
 """Tests for all choice generators."""
 
-from fauxfactory import gen_choice
-
 import string
-import unittest
+from fauxfactory import gen_choice
+from sys import version_info
+
+if version_info[0:2] == (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
 
 
 class TestChoices(unittest.TestCase):

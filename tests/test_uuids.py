@@ -2,9 +2,13 @@
 
 """Tests for UUID generator."""
 
+from sys import version_info
 from fauxfactory import gen_uuid
 
-import unittest
+if version_info[0:2] == (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
 
 
 class TestUUID(unittest.TestCase):

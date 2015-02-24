@@ -2,9 +2,13 @@
 """Tests for the netmask generator"""
 
 import re
-import unittest
-
+from sys import version_info
 from fauxfactory import gen_netmask, VALID_NETMASKS
+
+if version_info[0:2] == (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
 
 
 NETMASK_REGEX = re.compile(

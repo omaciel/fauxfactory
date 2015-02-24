@@ -2,10 +2,14 @@
 
 """Tests for Email generator."""
 
-from fauxfactory import gen_email
-
 import re
-import unittest
+from fauxfactory import gen_email
+from sys import version_info
+
+if version_info[0:2] == (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
 
 REGEX = r"^[a-zA-Z][a-zA-Z-.]*[^.-]@\w*\.[a-zA-Z]{2,3}"
 

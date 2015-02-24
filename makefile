@@ -1,4 +1,6 @@
-unittest-args = -m unittest discover --start-directory tests --top-level-directory .
+UNITTEST_CMD ?= unit2
+UNITTEST_MOD ?= unittest
+UNITTEST_ARGS ?= discover --start-directory tests --top-level-directory .
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of:"
@@ -24,9 +26,9 @@ lint:
 # pylint should also lint the tests/ directory.
 
 test:
-	python $(unittest-args)
+	$(UNITTEST_CMD) $(UNITTEST_ARGS)
 
 test-all: lint docs-doctest
-	coverage run $(unittest-args)
+	coverage run -m $(UNITTEST_MOD) $(UNITTEST_ARGS)
 
 .PHONY: help docs-clean docs-doctest docs-html lint test test-all

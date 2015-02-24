@@ -2,10 +2,14 @@
 
 """Tests for Time generator."""
 
+import datetime
+from sys import version_info
 from fauxfactory import gen_time
 
-import unittest
-import datetime
+if version_info[0:2] == (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
 
 
 class TestTime(unittest.TestCase):

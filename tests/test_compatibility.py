@@ -1,10 +1,17 @@
 """Tests to help ensure that FauxFactory remains backward compatible."""
 from fauxfactory import codify, FauxFactory
 from functools import partial
-from unittest import TestCase
+from sys import version_info
+
 import datetime
 import warnings
 # (too-many-public-methods) pylint:disable=R0904
+
+if version_info[0:2] == (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
+
 
 GENERATORS = (
     partial(codify, 'make-me-unicode'),
@@ -41,7 +48,7 @@ GENERATORS = (
 )
 
 
-class FauxFactoryTestCase(TestCase):
+class FauxFactoryTestCase(unittest.TestCase):
     """Call methods on class ``FauxFactory``."""
     def test_not_none(self):
         """Call every method on ``FauxFactory`` and provide arguments.

@@ -4,8 +4,6 @@
 
 import random
 import unicodedata
-import unittest
-
 from fauxfactory import (
     gen_alpha,
     gen_alphanumeric,
@@ -19,6 +17,11 @@ from fauxfactory import (
     _unicode_letters_generator,
 )
 from sys import version_info
+
+if version_info[0:2] == (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
 
 
 class TestStrings(unittest.TestCase):

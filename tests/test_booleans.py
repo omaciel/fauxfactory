@@ -3,8 +3,12 @@
 """Tests for all boolean generators."""
 
 from fauxfactory import gen_boolean
+from sys import version_info
 
-import unittest
+if version_info[0:2] == (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
 
 
 class TestBooleans(unittest.TestCase):
