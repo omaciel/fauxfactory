@@ -3,6 +3,12 @@
 Release History
 ===============
 
+2.0.6 (2015-02-24)
+------------------
+
+- Added support for **Python 2.6**.
+- Cleaned up the MANIFEST file.
+
 2.0.5 (2015-02-16)
 ------------------
 
