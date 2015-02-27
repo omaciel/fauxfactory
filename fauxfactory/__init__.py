@@ -272,7 +272,7 @@ def gen_cyrillic(length=10):
 def gen_date(min_date=None, max_date=None):
     """Returns a random date value
 
-    :param max_date: A valid ``datetime.date`` object.
+    :param min_date: A valid ``datetime.date`` object.
     :param max_date: A valid ``datetime.date`` object.
     :raises: ``ValueError`` if arguments are not valid ``datetime.date``
         objects.
@@ -310,7 +310,7 @@ def gen_date(min_date=None, max_date=None):
 def gen_datetime(min_date=None, max_date=None):
     """Returns a random datetime value
 
-    :param max_date: A valid ``datetime.datetime`` object.
+    :param min_date: A valid ``datetime.datetime`` object.
     :param max_date: A valid ``datetime.datetime`` object.
     :raises: ``ValueError`` if arguments are not valid ``datetime.datetime``
         objects.
