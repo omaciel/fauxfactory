@@ -3,6 +3,12 @@
 Release History
 ===============
 
+2.0.7 (2015-05-28)
+------------------
+
+- Updated the `gen_ipaddr` method to allow the generation of IP
+  addresses that start with a valid range prefix. (048715d, @mfalesni)
+
 2.0.6 (2015-02-24)
 ------------------
 

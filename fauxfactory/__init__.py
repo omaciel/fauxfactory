@@ -528,7 +528,7 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
 
     :param bool ip3: Whether to generate a 3 or 4 group IP.
     :param bool ipv6: Whether to generate IPv6 or IPv4
-    :param list prefix: A prefix to be used for IPv4 (like [10, 0, 1]). It
+    :param list prefix: A prefix to be used for an IP (e.g. [10, 0, 1]). It
         must be an iterable with strings or integers. Can be left unspecified or
         empty.
     :returns: An IP address.
