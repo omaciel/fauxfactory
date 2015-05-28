@@ -520,25 +520,53 @@ def gen_negative_integer():
     return gen_integer(max_value=max_value)
 
 
-def gen_ipaddr(ip3=False, ipv6=False):
+def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
     """Generates a random IP address.
+
+    You can also specify an IP address prefix if you are interested in
+    local network address generation, etc.
 
     :param bool ip3: Whether to generate a 3 or 4 group IP.
     :param bool ipv6: Whether to generate IPv6 or IPv4
+    :param list prefix: A prefix to be used for IPv4 (like [10, 0, 1]). It
+        must be an iterable with strings or integers. Can be left unspecified or
+        empty.
     :returns: An IP address.
     :rtype: str
+    :raises: ``ValueError`` if ``prefix`` would lead to no random fields at all.
+        This means the length that triggers the ``ValueError`` is 4 for regular
+        IPv4, 3 for IPv4 with ip3 and 8 for IPv6. It will be raised in any case
+        the prefix length reaches or exceeds those values.
 
     """
 
+    # Set the lengths of the randomly generated sections
+    if ipv6:
+        rng = 8
+    elif ip3:
+        rng = 3
+    else:
+        rng = 4
+    prefix = [str(field) for field in prefix]
+    # Prefix reduces number of random fields generated, so subtract the length
+    # of it from the rng to keep the IP address have correct number of fields
+    rng -= len(prefix)
+    if rng == 0:
+        raise ValueError(
+            "Prefix {} would lead to no randomness at all".format(
+                repr(prefix)))
+    elif rng < 0:
+        raise ValueError(
+            "Prefix {} is too long for this configuration".format(
+                repr(prefix)))
     if ipv6:
         # StackOverflow.com questions: generate-random-ipv6-address
-        ipaddr = u':'.join('{0:x}'.format(
-            random.randint(0, 2**16 - 1)
-        ) for i in range(8))
+        random_fields = [
+            '{0:x}'.format(random.randint(0, 2**16 - 1)) for _ in range(rng)]
+        ipaddr = u':'.join(prefix + random_fields)
     else:
-        rng = 3 if ip3 else 4
-        ipaddr = u".".join(
-            str(random.randrange(0, 255, 1)) for x in range(rng))
+        random_fields = [str(random.randrange(0, 255, 1)) for _ in range(rng)]
+        ipaddr = u".".join(prefix + random_fields)
 
         if ip3:
             ipaddr = ipaddr + u".0"

@@ -21,3 +21,4 @@ Contributors
 - Jonathan Edwards `@apense <https://github.com/apense/>`_
 - Kedar Bidarkar  `@kbidarkar <https://github.com/kbidarkar/>`_
 - Sachin Ghai `@sghai <https://github.com/sghai/>`_
+- Milan Falešník `@mfalesni <https://github.com/mfalesni/>`_

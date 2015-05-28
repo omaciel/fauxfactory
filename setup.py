@@ -2,12 +2,14 @@
 # setuptools is preferred over distutils. See:
 # https://packaging.python.org/en/latest/current.html#packaging-tool-recommendations
 from setuptools import find_packages, setup
+import codecs
 import os
 
 
 def read(*paths):
     """Build a file path from *paths* and return the contents."""
-    with open(os.path.join(*paths), 'r') as handle:
+    filename = os.path.join(*paths)
+    with codecs.open(filename, mode='r', encoding="utf-8") as handle:
         return handle.read()
 
 LONG_DESCRIPTION = (read('README.rst') + '\n\n' +
