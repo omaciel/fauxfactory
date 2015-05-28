@@ -25,10 +25,15 @@ lint:
 	pylint --reports=n --disable=I --ignore-imports=y fauxfactory docs/conf.py setup.py
 # pylint should also lint the tests/ directory.
 
+publish:
+	python setup.py register
+	python setup.py sdist upload
+	python setup.py bdist_wheel upload
+
 test:
 	$(UNITTEST_CMD) $(UNITTEST_ARGS)
 
 test-all: lint docs-doctest
 	coverage run -m $(UNITTEST_MOD) $(UNITTEST_ARGS)
 
-.PHONY: help docs-clean docs-doctest docs-html lint test test-all
+.PHONY: help docs-clean docs-doctest docs-html lint publish test test-all
