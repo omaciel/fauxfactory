@@ -26,6 +26,7 @@ __all__ = (
     'gen_url',
     'gen_utf8',
     'gen_uuid',
+    'generate',
 )
 
 import datetime
@@ -758,6 +759,64 @@ def gen_html(length=10):
         html_tag, gen_string("alpha", length), html_tag)
 
     return _make_unicode(output_string)
+
+
+def generate(format_string):
+    """Returns a string with its parts randomized according to the sequences.
+
+    The sequences are similar to python formatting sequences. The sequence
+    starts with ``{`` and ends with ``}``. Inside the braces, a name of the
+    generator is specified without the preceding ``gen_``. Then there are two
+    optional sections. First, if needed, parameters follow starting with ``:``
+    and then separated with ``:`` if there are more than one. Then there is the
+    formatter section, starting with ``|`` and every subsequent formatter is
+    also separated with ``|``. If the formatter starts with ``.`` it will call
+    that method on the result of the preceding step and returns the result of
+    the call as a new result. Other types of formatters are not supported yet.
+
+    Example of the formatter is::
+
+        generate("test_vm_{alpha:12|.lower}")
+
+    :param str format_string: Formatting string.
+    :returns: A string with randomized parts.
+    :rtype: str
+
+    """
+    def _replace(match):
+        """Function called on every occurence of the randomizer."""
+        match = match.group()[1:][:-1]  # Get the inner of {}
+        try:
+            gen, param, filt = re.match(
+                r"^([a-z_A-Z]+)((?::[^:|]+)*)((?:\|[^|]+)*)$", match).groups()
+        except AttributeError:
+            raise ValueError(
+                "The generator field is wrongly specified: {}".format(match))
+        gen_name = "gen_{}".format(gen)
+        if gen_name not in __all__:
+            raise NameError(
+                "Cannot find generator '{}' ({})".format(gen, gen_name))
+        gen_func = getattr(sys.modules[__name__], gen_name)
+        params = []
+        if param:
+            for par in param.lstrip(":").split(":"):
+                try:
+                    params.append(int(par))
+                except ValueError:
+                    params.append(par)
+        result = gen_func(*params)  # noqa
+        if filt:
+            for filter_name in filt.lstrip("|").split("|"):
+                if filter_name.startswith("."):
+                    filter_method = filter_name[1:]
+                    result = getattr(result, filter_method)()
+                else:
+                    raise TypeError(
+                        "Non-method filter not supported yet ({})".format(
+                            filter_name))
+        return result
+
+    return re.sub(r"\{[^}]+\}", _replace, format_string)
 
 
 # Backward Compatibility ------------------------------------------------------
