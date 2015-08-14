@@ -760,6 +760,37 @@ def gen_html(length=10):
     return _make_unicode(output_string)
 
 
+def gen_selectpick(from_where, n_items, quiet=True):
+    """Randomly picks `n` elements from source iterable.
+
+    The iterable will be converted during processing so no side effects happen
+    here.
+
+    :param iterable from_where: Source iterable.
+    :param int n_items: How many elements to pick
+    :param bool quiet: Raise the exception about n bigger than len(from_where)?
+    :returns: n-length list with randomly picked elements from `from_where`
+    :rtype: list
+
+    """
+    if len(from_where) < n_items:
+        # We want more
+        if not quiet:
+            raise ValueError("Less elements in from_where than you want!")
+        else:
+            return list(from_where)
+    elif len(from_where) == n_items:
+        # We want all
+        return list(from_where)
+    # Random picking
+    result = []
+    from_where = list(from_where)  # to prevent side effects
+    while len(result) < n_items:
+        index = random.choice(range(len(from_where)))
+        result.append(from_where.pop(index))
+    return result
+
+
 # Backward Compatibility ------------------------------------------------------
 
 
