@@ -1,3 +1,4 @@
+sudo: false
 language: python
 # Should be identical to envlist in tox.ini. See:
 # http://tox.readthedocs.org/en/latest/config.html#confval-envlist=CSV
