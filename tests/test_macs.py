@@ -105,3 +105,47 @@ class TestMacs(unittest.TestCase):
         with self.assertRaises(ValueError):
             gen_mac(
                 delimiter=random.choice(string.ascii_letters))
+
+    def test_gen_mac_unicast_globally_unique(self):
+        """
+        @Test: Generate a unicast and globally unique MAC address
+        @Feature: MAC Generator
+        @Assert: A unicast and globally unique MAC address is generated
+        """
+        mac = gen_mac(multicast=False, locally=False)
+        first_octect = int(mac.split(':', 1)[0], 16)
+        mask = 0b00000011
+        self.assertEqual(first_octect & mask, 0)
+
+    def test_gen_mac_multicast_globally_unique(self):
+        """
+        @Test: Generate a multicast and globally unique MAC address
+        @Feature: MAC Generator
+        @Assert: A multicast and globally unique MAC address is generated
+        """
+        mac = gen_mac(multicast=True, locally=False)
+        first_octect = int(mac.split(':', 1)[0], 16)
+        mask = 0b00000011
+        self.assertEqual(first_octect & mask, 1)
+
+    def test_gen_mac_unicast_locally_administered(self):
+        """
+        @Test: Generate a unicast and locally administered MAC address
+        @Feature: MAC Generator
+        @Assert: A unicast and locally administered MAC address is generated
+        """
+        mac = gen_mac(multicast=False, locally=True)
+        first_octect = int(mac.split(':', 1)[0], 16)
+        mask = 0b00000011
+        self.assertEqual(first_octect & mask, 2)
+
+    def test_gen_mac_multicast_locally_administered(self):
+        """
+        @Test: Generate a multicast and locally administered MAC address
+        @Feature: MAC Generator
+        @Assert: A multicast and locally administered MAC address is generated
+        """
+        mac = gen_mac(multicast=True, locally=True)
+        first_octect = int(mac.split(':', 1)[0], 16)
+        mask = 0b00000011
+        self.assertEqual(first_octect & mask, 3)
