@@ -574,24 +574,51 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
     return _make_unicode(ipaddr)
 
 
-def gen_mac(delimiter=":"):
+def gen_mac(delimiter=':', multicast=None, locally=None):
     """Generates a random MAC address.
 
+    For more information about how unicast or multicast and globally unique and
+    locally administered MAC addresses are generated check this link
+    https://en.wikipedia.org/wiki/MAC_address.
+
     :param str delimeter: Valid MAC delimeter (e.g ':', '-').
+    :param bool multicast: Indicates if the generated MAC address should be
+        unicast or multicast. If no value is provided a random one will be
+        chosen.
+    :param bool locally: Indicates if the generated MAC address should be
+        globally unique or locally administered. If no value is provided a
+        random one will be chosen.
     :returns: A random MAC address.
     :rtype: str
 
     """
 
-    if delimiter not in [":", "-"]:
-        raise ValueError("Delimiter is not a valid option: %s" % delimiter)
+    if delimiter not in [':', '-']:
+        raise ValueError('Delimiter is not a valid option: %s' % delimiter)
+    if multicast is None:
+        multicast = bool(random.randint(0, 1))
+    if locally is None:
+        locally = bool(random.randint(0, 1))
 
-    chars = ['a', 'b', 'c', 'd', 'e', 'f',
-             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    first_octet = random.randint(0, 255)
+    if multicast:
+        # Ensure that the first least significant bit is 1
+        first_octet |= 0b00000001
+    else:
+        # Ensure that the first least significant bit is 0
+        first_octet &= 0b11111110
+    if locally:
+        # Ensure that the second least significant bit is 1
+        first_octet |= 0b00000010
+    else:
+        # Ensure that the second least significant bit is 0
+        first_octet &= 0b11111101
 
-    mac = delimiter.join(
-        chars[random.randrange(0, len(chars), 1)]+chars[random.randrange(
-            0, len(chars), 1)] for x in range(6))
+    octets = [first_octet]
+    octets.extend([
+        random.randint(0, 255) for _ in range(5)
+    ])
+    mac = delimiter.join(['{0:02x}'.format(octet) for octet in octets])
 
     return _make_unicode(mac)
 
