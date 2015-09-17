@@ -623,6 +623,28 @@ def gen_mac(delimiter=':', multicast=None, locally=None):
     return _make_unicode(mac)
 
 
+def gen_vm_mac(delimiter=":"):
+    """Generates a random MAC address for QEMU/KVM VM's.
+
+    :param str delimeter: Valid MAC delimeter (e.g ':', '-').
+    :returns: A random MAC address.
+    :rtype: str
+
+    """
+
+    if delimiter not in [":", "-"]:
+        raise ValueError("Delimiter is not a valid option: %s" % delimiter)
+
+    chars = ['a', 'b', 'c', 'd', 'e', 'f',
+             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+    mac = delimiter.join(
+        chars[random.randrange(0, len(chars), 1)]+chars[random.randrange(
+            0, len(chars), 1)] for x in range(3))
+    vm_mac = '54:52:00:{0}'.format(mac)
+
+    return _make_unicode(vm_mac)
+
 def gen_netmask(min_cidr=1, max_cidr=31):
     """Generates a random valid netmask.
 
