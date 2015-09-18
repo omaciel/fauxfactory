@@ -3,6 +3,12 @@
 Release History
 ===============
 
+2.0.8 (2015-09-18)
+------------------
+
+- Updated the `gen_mac` method to allow the generation of
+  unicast/multicast and globally/locally MAC addresses.
+
 2.0.7 (2015-05-28)
 ------------------
 
