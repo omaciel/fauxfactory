@@ -3,6 +3,13 @@
 Release History
 ===============
 
+2.0.9 (2016-01-12)
+------------------
+
+- Force randomness every time `random` is used to make sure
+  that unique values are generated when running on multi-process
+  environments, such as py.test with the pytest-xdist plugin.
+
 2.0.8 (2015-09-18)
 ------------------
 
