@@ -1,8 +1,9 @@
 """A setuptools-based script for installing FauxFactory."""
 # setuptools is preferred over distutils.
-from setuptools import find_packages, setup
 import codecs
 import os
+
+from setuptools import find_packages, setup
 
 
 def read(*paths):
