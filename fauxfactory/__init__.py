@@ -156,6 +156,7 @@ def gen_alpha(length=10):
     # Validate length argument
     _is_positive_int(length)
 
+    random.seed()
     output_string = u''.join(
         random.choice(string.ascii_letters) for i in range(length)
     )
@@ -175,6 +176,7 @@ def gen_alphanumeric(length=10):
     # Validate length argument
     _is_positive_int(length)
 
+    random.seed()
     output_string = u''.join(
         random.choice(
             string.ascii_letters + string.digits
@@ -218,6 +220,7 @@ def gen_choice(choices):
     if len(choices) == 1:
         return choices[0]
 
+    random.seed()
     return random.choice(choices)
 
 
@@ -233,6 +236,8 @@ def gen_cjk(length=10):
 
     # Validate length argument
     _is_positive_int(length)
+
+    random.seed()
 
     # Generate codepoints, then convert the codepoints to a string. The
     # valid range of CJK codepoints is 0x4E00 - 0x9FCC, inclusive. Python 2
@@ -256,6 +261,8 @@ def gen_cyrillic(length=10):
 
     # Validate length argument
     _is_positive_int(length)
+
+    random.seed()
 
     # Generate codepoints, then convert the codepoints to a string. The
     # valid range of Cyrillic codepoints is 0x410 - 0x4ff, inclusive. Python 2
@@ -299,6 +306,8 @@ def gen_date(min_date=None, max_date=None):
     # Check that max_date is not before min_date
     assert min_date < max_date
 
+    random.seed()
+
     # Pick a day between min and max dates
     diff = max_date - min_date
     days = random.randint(0, diff.days)
@@ -336,6 +345,8 @@ def gen_datetime(min_date=None, max_date=None):
 
     # Check that max_date is not before min_date
     assert min_date < max_date
+
+    random.seed()
 
     # Pick a time between min and max dates
     diff = max_date - min_date
@@ -402,6 +413,7 @@ def gen_integer(min_value=None, max_value=None):
     if not isinstance(max_value, integer_types) or max_value > _max_value:
         raise ValueError("\'%s\' is not a valid maximum." % max_value)
 
+    random.seed()
     value = random.randint(min_value, max_value)
 
     return value
@@ -494,6 +506,8 @@ def gen_latin1(length=10):
     for i in range(int(range2[0], 16), int(range2[1], 16)):
         output_array.append(i)
 
+    random.seed()
+
     if sys.version_info[0] == 2:
         output_string = u''.join(
             # pylint:disable=E0602
@@ -559,6 +573,9 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
         raise ValueError(
             "Prefix {} is too long for this configuration".format(
                 repr(prefix)))
+
+    random.seed()
+
     if ipv6:
         # StackOverflow.com questions: generate-random-ipv6-address
         random_fields = [
@@ -595,6 +612,7 @@ def gen_mac(delimiter=':', multicast=None, locally=None):
 
     if delimiter not in [':', '-']:
         raise ValueError('Delimiter is not a valid option: %s' % delimiter)
+    random.seed()
     if multicast is None:
         multicast = bool(random.randint(0, 1))
     if locally is None:
@@ -646,6 +664,7 @@ def gen_netmask(min_cidr=1, max_cidr=31):
             'max_cidr must be less than {0}, but is {1}'
             .format(len(VALID_NETMASKS), max_cidr)
         )
+    random.seed()
     return VALID_NETMASKS[random.randint(min_cidr, max_cidr)]
 
 
@@ -661,6 +680,7 @@ def gen_numeric_string(length=10):
     # Validate length argument
     _is_positive_int(length)
 
+    random.seed()
     output_string = u''.join(
         random.choice(string.digits) for i in range(length)
     )
@@ -688,6 +708,7 @@ def gen_time():
 
     """
 
+    random.seed()
     return datetime.time(
         random.randint(0, 23),
         random.randint(0, 59),
@@ -752,6 +773,7 @@ def gen_utf8(length=10):
     # Validate length argument
     _is_positive_int(length)
 
+    random.seed()
     return u''.join([random.choice(UNICODE_LETTERS) for _ in range(length)])
 
 
@@ -780,6 +802,7 @@ def gen_html(length=10):
     # Validate length argument
     _is_positive_int(length)
 
+    random.seed()
     html_tag = random.choice(HTML_TAGS)
     output_string = u'<{0}>{1}</{2}>'.format(
         html_tag, gen_string("alpha", length), html_tag)
