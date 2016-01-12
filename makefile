@@ -7,6 +7,7 @@ help:
 	@echo "  docs-clean    Remove documentation."
 	@echo "  docs-doctest  Check code samples in the documentation."
 	@echo "  docs-html     Compile documentation to HTML."
+	@echo "  flake         Run flake8."
 	@echo "  lint          Run flake8 and pylint."
 	@echo "  test          Run unit tests."
 	@echo "  test-all      Run unit tests and doctests, measure coverage."
@@ -20,8 +21,10 @@ docs-doctest:
 docs-html:
 	cd docs && $(MAKE) html
 
-lint:
+flake:
 	flake8 .
+
+lint: flake
 	pylint --reports=n --disable=I --ignore-imports=y fauxfactory docs/conf.py setup.py
 # pylint should also lint the tests/ directory.
 
@@ -39,7 +42,7 @@ publish:
 test:
 	$(UNITTEST_CMD) $(UNITTEST_ARGS)
 
-test-all: lint docs-doctest
+test-all: flake docs-doctest
 	coverage run -m $(UNITTEST_MOD) $(UNITTEST_ARGS)
 
-.PHONY: help docs-clean docs-doctest docs-html lint package package-clean publish test test-all
+.PHONY: help docs-clean docs-doctest docs-html flake lint package package-clean publish test test-all

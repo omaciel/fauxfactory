@@ -1,6 +1,24 @@
 # -*- coding: utf-8 -*-
 """Generate random data for your tests."""
 
+import datetime
+import random
+import re
+import string
+import sys
+import unicodedata
+import uuid
+import warnings
+
+from collections import Iterable
+from functools import wraps
+
+from fauxfactory.constants import (
+    HTML_TAGS, LOREM_IPSUM_TEXT,
+    MAX_YEARS, MIN_YEARS,
+    SCHEMES, SUBDOMAINS, TLDS, VALID_NETMASKS
+)
+
 __all__ = (
     'gen_alpha',
     'gen_alphanumeric',
@@ -27,24 +45,6 @@ __all__ = (
     'gen_utf8',
     'gen_uuid',
 )
-
-import datetime
-import random
-import re
-import string
-import sys
-import unicodedata
-import uuid
-import warnings
-
-from collections import Iterable
-from fauxfactory.constants import (
-    HTML_TAGS, LOREM_IPSUM_TEXT,
-    MAX_YEARS, MIN_YEARS,
-    SCHEMES, SUBDOMAINS, TLDS, VALID_NETMASKS
-)
-from functools import wraps
-
 
 # Private Functions -----------------------------------------------------------
 
@@ -84,7 +84,7 @@ def _unicode_letters_generator():
         range_function = xrange  # pylint:disable=undefined-variable
     else:
         chr_function = chr
-        range_function = range
+        range_function = range  # pylint:disable=redefined-variable-type
 
     # Use sys.maxunicode instead of 0x10FFFF to avoid the exception below, in a
     # narrow Python build (before Python 3.3)
