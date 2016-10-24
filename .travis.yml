@@ -3,7 +3,6 @@ language: python
 # Should be identical to envlist in tox.ini. See:
 # http://tox.readthedocs.org/en/latest/config.html#confval-envlist=CSV
 env:
-  - TOXENV=py26
   - TOXENV=py27
   - TOXENV=py33
   - TOXENV=py34
