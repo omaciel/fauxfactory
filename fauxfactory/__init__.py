@@ -44,7 +44,9 @@ __all__ = (
     'gen_url',
     'gen_utf8',
     'gen_uuid',
+    'gen_html_with_total_len'
 )
+
 
 # Private Functions -----------------------------------------------------------
 
@@ -61,6 +63,7 @@ def _make_unicode(data):
         return unicode(data)  # flake8:noqa pylint:disable=undefined-variable
     return data
 
+
 def _is_positive_int(length):
     """Check that ``length`` argument is an integer greater than zero.
 
@@ -72,6 +75,7 @@ def _is_positive_int(length):
     """
     if not isinstance(length, int) or length <= 0:
         raise ValueError("{0} is an invalid 'length'.".format(length))
+
 
 def _unicode_letters_generator():
     """Generates unicode characters in the letters category
@@ -95,7 +99,9 @@ def _unicode_letters_generator():
         if unicodedata.category(char).startswith('L'):
             yield char
 
+
 UNICODE_LETTERS = [c for c in _unicode_letters_generator()]
+
 
 # Public Functions ------------------------------------------------------------
 
@@ -249,6 +255,7 @@ def gen_cjk(length=10):
     else:
         output = u''.join(chr(codepoint) for codepoint in codepoints)
     return _make_unicode(output)
+
 
 def gen_cyrillic(length=10):
     """Returns a random string made up of Cyrillic characters.
@@ -426,7 +433,8 @@ def gen_iplum(words=None, paragraphs=None):
     :param int words: The number of words to return.
     :param int paragraphs: The number of paragraphs to return.
     :raises: ``ValueError`` if ``words`` is not a valid positive integer.
-    :returns: A ``lorem ipsum`` string containing either the number of ``words``
+    :returns: A ``lorem ipsum`` string containing either the number of
+    ``words``
         or ``paragraphs``, extending and wrapping around the text as needed to
         make sure that it has the specified length.
     :rtype: str
@@ -536,18 +544,18 @@ def gen_negative_integer():
 
 def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
     """Generates a random IP address.
-
     You can also specify an IP address prefix if you are interested in
     local network address generation, etc.
 
     :param bool ip3: Whether to generate a 3 or 4 group IP.
     :param bool ipv6: Whether to generate IPv6 or IPv4
     :param list prefix: A prefix to be used for an IP (e.g. [10, 0, 1]). It
-        must be an iterable with strings or integers. Can be left unspecified or
-        empty.
+        must be an iterable with strings or integers. Can be left
+        unspecified or empty.
     :returns: An IP address.
     :rtype: str
-    :raises: ``ValueError`` if ``prefix`` would lead to no random fields at all.
+    :raises: ``ValueError`` if ``prefix`` would lead to no random fields at
+    all.
         This means the length that triggers the ``ValueError`` is 4 for regular
         IPv4, 3 for IPv4 with ip3 and 8 for IPv6. It will be raised in any case
         the prefix length reaches or exceeds those values.
@@ -579,7 +587,7 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
     if ipv6:
         # StackOverflow.com questions: generate-random-ipv6-address
         random_fields = [
-            '{0:x}'.format(random.randint(0, 2**16 - 1)) for _ in range(rng)]
+            '{0:x}'.format(random.randint(0, 2 ** 16 - 1)) for _ in range(rng)]
         ipaddr = u':'.join(prefix + random_fields)
     else:
         random_fields = [str(random.randrange(0, 255, 1)) for _ in range(rng)]
@@ -633,9 +641,7 @@ def gen_mac(delimiter=':', multicast=None, locally=None):
         first_octet &= 0b11111101
 
     octets = [first_octet]
-    octets.extend([
-        random.randint(0, 255) for _ in range(5)
-    ])
+    octets.extend(random.randint(0, 255) for _ in range(5))
     mac = delimiter.join(['{0:02x}'.format(octet) for octet in octets])
 
     return _make_unicode(mac)
@@ -662,7 +668,7 @@ def gen_netmask(min_cidr=1, max_cidr=31):
     if max_cidr >= len(VALID_NETMASKS):
         raise ValueError(
             'max_cidr must be less than {0}, but is {1}'
-            .format(len(VALID_NETMASKS), max_cidr)
+                .format(len(VALID_NETMASKS), max_cidr)
         )
     random.seed()
     return VALID_NETMASKS[random.randint(min_cidr, max_cidr)]
@@ -810,6 +816,32 @@ def gen_html(length=10):
     return _make_unicode(output_string)
 
 
+def gen_html_with_total_len(length=10):
+    """Returns a random string made up of html characters.
+    This differ from fauxfactory.gen_html because length takes html tag chars
+    into account
+    :param int length: Length for random data.
+    :returns: A random string made up of html characters.
+    :rtype: str
+
+    """
+    if length < 8:
+        raise ValueError(u'Impossible to generate html with less than 7 chars')
+
+    random.seed()
+    html_tag = random.choice(HTML_TAGS)
+    maybe_len = length - len('<{0}></{0}>'.format(html_tag))
+    if maybe_len <= 0:
+        length -= 7
+        html_tag = 'a'
+    else:
+        length = maybe_len
+    output_string = u'<{0}>{1}</{2}>'.format(
+        html_tag, gen_string("alpha", length), html_tag)
+
+    return _make_unicode(output_string)
+
+
 # Backward Compatibility ------------------------------------------------------
 
 
@@ -820,6 +852,7 @@ def deprecated(func):
     Emit a warning when the decorated function is called.
 
     """
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         """Emit a warning, then call ``func``."""
@@ -830,10 +863,11 @@ def deprecated(func):
             new_name = old_name.replace('generate', 'gen')
         warnings.warn(
             '{0} is deprecated! Please use {1} instead.'
-            .format(old_name, new_name),
+                .format(old_name, new_name),
             category=Warning
         )
         return func(*args, **kwargs)
+
     return wrapper
 
 

@@ -3,7 +3,7 @@
 """Tests for HTML generator."""
 
 from sys import version_info
-from fauxfactory import gen_html, gen_integer
+from fauxfactory import gen_html, gen_integer, gen_html_with_total_len
 import re
 # (too-many-public-methods) pylint:disable=R0904
 
@@ -61,3 +61,11 @@ class TestHTML(unittest.TestCase):
             self.assertIsInstance(result, unicode)  # flake8:noqa
         else:
             self.assertIsInstance(result, str)
+
+    def test_generate_html_with_len_less_than_min(self):
+        for i in range(8):
+            self.assertRaises(ValueError, gen_html_with_total_len, i)
+
+    def test_generate_html_with_len_more_than_min(self):
+        length = gen_integer(8, 25)
+        self.assertEqual(length, len(gen_html_with_total_len(length)))
