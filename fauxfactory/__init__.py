@@ -544,7 +544,6 @@ def gen_negative_integer():
 
 def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
     """Generates a random IP address.
-
     You can also specify an IP address prefix if you are interested in
     local network address generation, etc.
 
@@ -830,7 +829,7 @@ def gen_html_with_total_len(length=10):
 
     """
     if length < 8:
-        raise ValueError(u'Impossible generate html with less than 7 chars')
+        raise ValueError(u'Impossible to generate html with less than 7 chars')
 
     random.seed()
     html_tag = random.choice(HTML_TAGS)
