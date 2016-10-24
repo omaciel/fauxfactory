@@ -551,8 +551,7 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
     :param bool ipv6: Whether to generate IPv6 or IPv4
     :param list prefix: A prefix to be used for an IP (e.g. [10, 0, 1]). It
         must be an iterable with strings or integers. Can be left
-        unspecified or
-        empty.
+        unspecified or empty.
     :returns: An IP address.
     :rtype: str
     :raises: ``ValueError`` if ``prefix`` would lead to no random fields at
