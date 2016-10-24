@@ -44,6 +44,7 @@ __all__ = (
     'gen_url',
     'gen_utf8',
     'gen_uuid',
+    'gen_html_with_total_len'
 )
 
 # Private Functions -----------------------------------------------------------
@@ -804,6 +805,32 @@ def gen_html(length=10):
 
     random.seed()
     html_tag = random.choice(HTML_TAGS)
+    output_string = u'<{0}>{1}</{2}>'.format(
+        html_tag, gen_string("alpha", length), html_tag)
+
+    return _make_unicode(output_string)
+
+
+def gen_html_with_total_len(length=10):
+    """Returns a random string made up of html characters.
+    This differ from fauxfactory.gen_html because length takes html tag chars
+    into account
+    :param int length: Length for random data.
+    :returns: A random string made up of html characters.
+    :rtype: str
+
+    """
+    if length < 8:
+        raise ValueError(u'Impossible generate html with len less then 7')
+
+    random.seed()
+    html_tag = random.choice(HTML_TAGS)
+    maybe_len = length - (len(html_tag) * 2 + 5)
+    if maybe_len <= 0:
+        length -= 7
+        html_tag = 'a'
+    else:
+        length = maybe_len
     output_string = u'<{0}>{1}</{2}>'.format(
         html_tag, gen_string("alpha", length), html_tag)
 
