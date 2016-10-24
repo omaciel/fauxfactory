@@ -641,9 +641,7 @@ def gen_mac(delimiter=':', multicast=None, locally=None):
         first_octet &= 0b11111101
 
     octets = [first_octet]
-    octets.extend([
-                      random.randint(0, 255) for _ in range(5)
-                  ])
+    octets.extend(random.randint(0, 255) for _ in range(5))
     mac = delimiter.join(['{0:02x}'.format(octet) for octet in octets])
 
     return _make_unicode(mac)
