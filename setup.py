@@ -12,6 +12,7 @@ def read(*paths):
     with codecs.open(filename, mode='r', encoding="utf-8") as handle:
         return handle.read()
 
+
 LONG_DESCRIPTION = (read('README.rst') + '\n\n' +
                     read('AUTHORS.rst') + '\n\n' +
                     read('HISTORY.rst'))
@@ -35,7 +36,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Topic :: Software Development :: Testing',
     ]
