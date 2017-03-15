@@ -9,7 +9,6 @@ import sys
 import unicodedata
 import uuid
 import warnings
-
 from collections import Iterable
 from functools import wraps
 
@@ -103,15 +102,67 @@ def _unicode_letters_generator():
 UNICODE_LETTERS = [c for c in _unicode_letters_generator()]
 
 
+def _check_validation(fcn):
+    """Simple decorator to validate values generate by fcn accordingly to
+    parameters `validator`, `default` and `tries`
+
+    :param fcn: function to be enhanced
+    :return: decorated function
+    """
+
+    @wraps(fcn)
+    def validate(*args, **kwargs):
+        validator = kwargs.get('validator')
+        default = kwargs.get('default')
+        tries = kwargs.get('tries', 10)
+        if validator and default is None:
+            raise ValueError('If "validator" param is defined, "default" '
+                             'parameter must not be None')
+        if validator is None:
+            def validator_fcn(_):
+                return True
+        else:
+            validator_fcn = validator
+
+        if not callable(validator_fcn):
+            def regex_validator(value):
+                return re.match(validator, value)
+
+            validator_fcn = regex_validator
+
+        # Removing params related to validation but not fcn
+        for key in ('validator', 'default', 'tries'):
+            if key in kwargs:
+                kwargs.pop(key)
+
+        for _ in range(tries):
+            value = fcn(*args, **kwargs)
+            if validator_fcn(value):
+                return value
+
+        return default
+
+    return validate
+
+
 # Public Functions ------------------------------------------------------------
 
 
-def gen_string(str_type, length=None):
+def gen_string(str_type, length=None, validator=None, default=None, tries=10):
     """A simple wrapper that calls other string generation methods.
 
     :param str str_type: The type of string which should be generated.
     :param int length: The length of the generated string. Must be 1 or
         greater.
+    :param validator: Function or regex (str).
+        If a function it must receive one parameter and return True if value
+        can be used and False of another value need to be generated.
+        If str it will be used as regex to validate the generated value.
+        Default is None which will not validate the value.
+    :param tries: number of times validator must be called before returning
+        `default`. Default is 10.
+    :param default: If validator returns false a number of `tries` times, this
+        value is returned instead. Must be defined if validator is not None
     :raises: ``ValueError`` if an invalid ``str_type`` is specified.
     :returns: A string.
     :rtype: str
@@ -146,10 +197,11 @@ def gen_string(str_type, length=None):
         )
     method = str_types_functions[str_type_lower]
     if length is None:
-        return method()
-    return method(length)
+        return method(validator=validator, default=default, tries=tries)
+    return method(length, validator=validator, default=default, tries=tries)
 
 
+@_check_validation
 def gen_alpha(length=10):
     """Returns a random string made up of alpha characters.
 
@@ -170,6 +222,7 @@ def gen_alpha(length=10):
     return _make_unicode(output_string)
 
 
+@_check_validation
 def gen_alphanumeric(length=10):
     """Returns a random string made up of alpha and numeric characters.
 
@@ -230,6 +283,7 @@ def gen_choice(choices):
     return random.choice(choices)
 
 
+@_check_validation
 def gen_cjk(length=10):
     """Returns a random string made up of CJK characters.
     (Source: Wikipedia - CJK Unified Ideographs)
@@ -257,6 +311,7 @@ def gen_cjk(length=10):
     return _make_unicode(output)
 
 
+@_check_validation
 def gen_cyrillic(length=10):
     """Returns a random string made up of Cyrillic characters.
 
@@ -362,6 +417,7 @@ def gen_datetime(min_date=None, max_date=None):
     return min_date + datetime.timedelta(seconds=seconds)
 
 
+@_check_validation
 def gen_email(name=None, domain=None, tlds=None):
     """Generates a random email address.
 
@@ -488,6 +544,7 @@ def gen_iplum(words=None, paragraphs=None):
     return _make_unicode(result.rstrip())
 
 
+@_check_validation
 def gen_latin1(length=10):
     """Returns a random string made up of UTF-8 characters.
     (Font: Wikipedia - Latin-1 Supplement Unicode Block)
@@ -542,6 +599,7 @@ def gen_negative_integer():
     return gen_integer(max_value=max_value)
 
 
+@_check_validation
 def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
     """Generates a random IP address.
     You can also specify an IP address prefix if you are interested in
@@ -599,6 +657,7 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
     return _make_unicode(ipaddr)
 
 
+@_check_validation
 def gen_mac(delimiter=':', multicast=None, locally=None):
     """Generates a random MAC address.
 
@@ -647,6 +706,7 @@ def gen_mac(delimiter=':', multicast=None, locally=None):
     return _make_unicode(mac)
 
 
+@_check_validation
 def gen_netmask(min_cidr=1, max_cidr=31):
     """Generates a random valid netmask.
 
@@ -674,6 +734,7 @@ def gen_netmask(min_cidr=1, max_cidr=31):
     return VALID_NETMASKS[random.randint(min_cidr, max_cidr)]
 
 
+@_check_validation
 def gen_numeric_string(length=10):
     """Returns a random string made up of numbers.
 
@@ -723,6 +784,7 @@ def gen_time():
     )
 
 
+@_check_validation
 def gen_url(scheme=None, subdomain=None, tlds=None):
     """Generates a random URL address
 
@@ -765,6 +827,7 @@ def gen_url(scheme=None, subdomain=None, tlds=None):
     return _make_unicode(url)
 
 
+@_check_validation
 def gen_utf8(length=10):
     """Returns a random string made up of UTF-8 letters characters, as per
     `RFC 3629`_.
@@ -783,6 +846,7 @@ def gen_utf8(length=10):
     return u''.join([random.choice(UNICODE_LETTERS) for _ in range(length)])
 
 
+@_check_validation
 def gen_uuid():
     """Generates a UUID string (universally unique identifiers).
 
@@ -796,6 +860,7 @@ def gen_uuid():
     return output_uuid
 
 
+@_check_validation
 def gen_html(length=10):
     """Returns a random string made up of html characters.
 
@@ -816,6 +881,7 @@ def gen_html(length=10):
     return _make_unicode(output_string)
 
 
+@_check_validation
 def gen_html_with_total_len(length=10):
     """Returns a random string made up of html characters.
     This differ from fauxfactory.gen_html because length takes html tag chars
