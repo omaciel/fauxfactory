@@ -3,3 +3,4 @@ coveralls
 flake8
 pylint
 Sphinx
+mock
