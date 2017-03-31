@@ -3,6 +3,14 @@
 Release History
 ===============
 
+2.1.0 (2017-03-30)
+------------------
+
+- All methods now allow you to provide a callable which will be
+  used to filter values being returned, the number of tries, and
+  a default value to be returned if the filter cannot match the
+  values being generated after the number of tries. (2a7523, @renzon)
+
 2.0.9 (2016-01-12)
 ------------------
 

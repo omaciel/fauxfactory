@@ -20,5 +20,6 @@ Contributors
 - Jeremy Audet `@Ichimonji10 <https://github.com/Ichimonji10/>`_
 - Jonathan Edwards `@apense <https://github.com/apense/>`_
 - Kedar Bidarkar  `@kbidarkar <https://github.com/kbidarkar/>`_
+- Renzo Nuccitelli `@renzon <https://github.com/renzon>`_
 - Sachin Ghai `@sghai <https://github.com/sghai/>`_
 - Milan Falešník `@mfalesni <https://github.com/mfalesni/>`_
