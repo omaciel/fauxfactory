@@ -1,71 +1,49 @@
-# -*- coding: utf-8 -*-
-
 """Tests for HTML generator."""
 
-from sys import version_info
-from fauxfactory import gen_html, gen_integer, gen_html_with_total_len
 import re
-# (too-many-public-methods) pylint:disable=R0904
 
-if version_info[0:2] == (2, 6):
-    import unittest2 as unittest
-else:
-    import unittest
+import pytest
+
+from fauxfactory import gen_html, gen_integer
 
 
-class TestHTML(unittest.TestCase):
-    """Test HTML generator."""
+# pylint disable:W0621
+@pytest.fixture
+def matcher():
+    """Instantiate a factory and compile a regex.
 
-    @classmethod
-    def setUpClass(cls):
-        """Instantiate a factory and compile a regex.
+    The compiled regex can be used to find the contents of an HTML tag.
+    """
+    return re.compile('^<.*?>(.*?)</.*>$')
 
-        The compiled regex can be used to find the contents of an HTML tag.
 
-        """
-        cls.matcher = re.compile('^<.*?>(.*?)</.*>$')
+def test_length_arg_omitted(matcher):
+    """Generate a random HTML tag with no ``length`` argument."""
+    match = matcher.search(gen_html())
+    assert len(match.group(1)) >= 1
 
-    def test_length_arg_omitted(self):
-        """
-        @Test: Generate a random HTML tag and provide no value for the
-            ``length`` argument.
-        @Feature: HTML Generator
-        @Assert: The contents of the HTML tag are at least one character long.
-        """
 
-        match = self.matcher.search(gen_html())
-        self.assertGreaterEqual(len(match.group(1)), 1)
+def test_length_arg_provided(matcher):
+    """Generate a random HTML tag with ``length`` argument."""
+    length = gen_integer(1, 25)
+    match = matcher.search(gen_html(length))
+    assert len(match.group(1)) == length
 
-    def test_length_arg_provided(self):
-        """
-        @Test: Generate a random HTML tag and provide a value for the
-            ``length`` argument.
-        @Feature: HTML Generator
-        @Assert: The contents of the HTML tag are ``length`` characters long.
-        """
 
-        length = gen_integer(1, 25)
-        match = self.matcher.search(gen_html(length))
-        self.assertEqual(len(match.group(1)), length)
+def test_unicode():
+    """Generate a random HTML tag."""
+    assert isinstance(gen_html(), str)
 
-    def test_unicode(self):
-        """
-        @Test: Generate a random HTML tag.
-        @Feature: HTML Generator
-        @Assert: A unicode string is generated.
-        """
 
-        result = gen_html()
-        if version_info[0] is 2:
-            # (undefined-variable) pylint:disable=E0602
-            self.assertIsInstance(result, unicode)  # flake8:noqa
-        else:
-            self.assertIsInstance(result, str)
+# pylint: disable=C0103
+def test_generate_html_with_len_less_than_min():
+    """Cannot generate a HTML string with length less than minimum."""
+    for value in range(8):
+        with pytest.raises(ValueError):
+            gen_html(value, include_tags=False)
 
-    def test_generate_html_with_len_less_than_min(self):
-        for i in range(8):
-            self.assertRaises(ValueError, gen_html_with_total_len, i)
 
-    def test_generate_html_with_len_more_than_min(self):
-        length = gen_integer(8, 25)
-        self.assertEqual(length, len(gen_html_with_total_len(length)))
+@pytest.mark.parametrize('length', [8, 10, 12, 20, 100])
+def test_generate_html_with_len_more_than_min(length):
+    """Cannot generate a HTML string with length more than minimum."""
+    assert length == len(gen_html(length, include_tags=False))

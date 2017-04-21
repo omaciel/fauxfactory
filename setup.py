@@ -9,7 +9,7 @@ from setuptools import find_packages, setup
 def read(*paths):
     """Build a file path from *paths* and return the contents."""
     filename = os.path.join(*paths)
-    with codecs.open(filename, mode='r', encoding="utf-8") as handle:
+    with codecs.open(filename, mode='r', encoding='utf-8') as handle:
         return handle.read()
 
 

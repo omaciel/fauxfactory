@@ -1,17 +1,15 @@
 sudo: false
 language: python
-# Should be identical to envlist in tox.ini. See:
-# http://tox.readthedocs.org/en/latest/config.html#confval-envlist=CSV
-env:
-  - TOXENV=py27
-  - TOXENV=py34
+python:
+    - 3.5
 install:
-  pip install coveralls tox
+    - pip install -r requirements-optional.txt
 script:
-  tox
+    - make all
 after_success:
-  coveralls
+    - codecov
 notifications:
     email:
         on_success: always
         on_failure: always
+

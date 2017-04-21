@@ -1,69 +1,62 @@
-# -*- coding: utf-8 -*-
+"""Tests related to generator validation methods."""
 
-from sys import version_info
+from unittest import mock
 
-from fauxfactory import _check_validation
+import pytest
 
-if version_info[0:2] == (2, 6):
-    import unittest2 as unittest
-else:
-    import unittest
-    if version_info[0] == 2:
-        from mock import Mock
-    else:
-        from unittest.mock import Mock
+from fauxfactory.helpers import check_validation
 
 
-@_check_validation
+# pylint: disable=invalid-name
+# pylint: disable=E1123
+
+@check_validation
 def decorated_f():
+    """Simple decorated function to test validation method."""
     return 'not a number'
 
 
-class CheckValidationTestCase(unittest.TestCase):
-    """_check_validation decorator tests"""
+def test_no_validator_defined():
+    """Check result value of decorated function is returned."""
+    assert decorated_f() == 'not a number'
 
-    def test_no_validator_defined(self):
-        """Check result value of decorated function is returned when no
-        validator is provided
-        """
-        self.assertEqual('not a number', decorated_f())
 
-    def test_validator_defined_but_default_is_none(self):
-        """Check defining validator but not default raises an error"""
-        self.assertRaises(ValueError, decorated_f, validator=lambda _: True)
+def test_validator_defined_with_no_default():
+    """Check defining validator but not default raises an error."""
+    with pytest.raises(ValueError):
+        decorated_f(validator=lambda _: True)
 
-    def test_regex(self):
-        """Check regex validation when validator is a string"""
-        self.assertEqual(
-            'my default', decorated_f(validator=r'\d.*', default='my default'))
-        self.assertEqual(
-            'not a number', decorated_f(validator=r'.*', default='my default'))
 
-    def test_callable(self):
-        """Check validation when validator is a callable"""
-        callable = Mock(return_value=False)
+def test_regex():
+    """Check regex validation when validator is a string."""
+    assert decorated_f(validator=r'\d.*', default='my default') == 'my default'
+    assert decorated_f(validator=r'.*', default='my default') == 'not a number'
 
-        # Default of 10 unsuccessful tries
-        self.assertEqual(
-            'my default',
-            decorated_f(validator=callable, default='my default')
-        )
-        callable.assert_called_with('not a number')
-        self.assertEqual(10, callable.call_count)
 
-        # 1 unsuccessful try
-        callable.reset_mock()
-        self.assertEqual(
-            'my default',
-            decorated_f(validator=callable, default='my default', tries=1)
-        )
-        callable.assert_called_once_with('not a number')
+def test_callable():
+    """Check validation when validator is a callable."""
+    my_callable = mock.Mock(return_value=False)
 
-        # 1 successful try
-        callable.reset_mock()
-        callable.return_value = True
-        self.assertEqual(
-            'not a number',
-            decorated_f(validator=callable, default='my default', tries=10)
-        )
-        callable.assert_called_once_with('not a number')
+    # Default of 10 unsuccessful tries
+    assert decorated_f(
+        validator=my_callable,
+        default='my default') == 'my default'
+    my_callable.assert_called_with('not a number')
+    assert my_callable.call_count == 10
+
+    # 1 unsuccessful try
+    my_callable.reset_mock()
+    assert decorated_f(
+        validator=my_callable,
+        default='my default',
+        tries=1) == 'my default'
+    my_callable.assert_called_once_with('not a number')
+
+    # 1 successful try
+    my_callable.reset_mock()
+    my_callable.return_value = True
+    assert decorated_f(
+        validator=my_callable,
+        default='my default',
+        tries=10) == 'not a number'
+    my_callable.assert_called_once_with('not a number')

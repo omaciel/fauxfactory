@@ -1,6 +1,22 @@
-coverage
-coveralls
+# For `make lint`
 flake8
+flake8-docstrings
+flake8-quotes
+pydocstyle==1.0.0  # https://github.com/PyCQA/pydocstyle/issues/207
 pylint
-Sphinx
-mock
+
+# For generating documentation.
+sphinx
+
+# For `make package`
+wheel
+
+# For `make publish`
+twine
+
+# For `make test-coverage`
+codecov
+
+# For `make test{,-*}`
+pytest
+pytest-cov

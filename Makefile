@@ -1,7 +1,3 @@
-UNITTEST_CMD ?= unit2
-UNITTEST_MOD ?= unittest
-UNITTEST_ARGS ?= discover --start-directory tests --top-level-directory .
-
 help:
 	@echo "Please use \`make <target>' where <target> is one of:"
 	@echo "  docs-clean    Remove documentation."
@@ -11,6 +7,8 @@ help:
 	@echo "  lint          Run flake8 and pylint."
 	@echo "  test          Run unit tests."
 	@echo "  test-all      Run unit tests and doctests, measure coverage."
+
+all: test-coverage lint docs-clean docs-html package-clean package
 
 docs-clean:
 	cd docs && $(MAKE) clean
@@ -40,9 +38,9 @@ publish:
 	python setup.py bdist_wheel upload -s
 
 test:
-	$(UNITTEST_CMD) $(UNITTEST_ARGS)
+	py.test -v
 
-test-all: flake docs-doctest
-	coverage run -m $(UNITTEST_MOD) $(UNITTEST_ARGS)
+test-coverage:
+	py.test -v --cov-report term-missing --cov=fauxfactory
 
 .PHONY: help docs-clean docs-doctest docs-html flake lint package package-clean publish test test-all
