@@ -38,5 +38,6 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.4',
         'Topic :: Software Development :: Testing',
-    ]
+    ],
+    test_suite='tests',
 )
