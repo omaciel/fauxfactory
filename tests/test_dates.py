@@ -14,29 +14,30 @@ def test_gen_date_1():
     assert isinstance(result, datetime.date)
 
 
-def test_gen_date_2():
+@pytest.mark.parametrize('item', range(10))
+def test_gen_date_2(item):
     """Create a date with only min_date."""
     # Today is...
     today = datetime.date.today()
     # Five days ago
     min_date = today - datetime.timedelta(5)
 
-    for _ in range(10):
-        assert gen_date(min_date=min_date) >= min_date
+    assert gen_date(min_date=min_date) >= min_date
 
 
-def test_gen_date_3():
+@pytest.mark.parametrize('item', range(10))
+def test_gen_date_3(item):
     """Create a date with only max_date."""
     # Today is...
     today = datetime.date.today()
     # Five days into the future
     max_date = today + datetime.timedelta(5)
 
-    for _ in range(10):
-        assert gen_date(max_date=max_date) <= max_date
+    assert gen_date(max_date=max_date) <= max_date
 
 
-def test_gen_date_4():
+@pytest.mark.parametrize('item', range(10))
+def test_gen_date_4(item):
     """Create a date with both arguments."""
     # Today is...
     today = datetime.date.today()
@@ -45,16 +46,16 @@ def test_gen_date_4():
     # Five days into the future
     max_date = today + datetime.timedelta(5)
 
-    for _ in range(10):
-        result = gen_date(
-            min_date=min_date,
-            max_date=max_date
-        )
-        assert result >= min_date
-        assert result <= max_date
+    result = gen_date(
+        min_date=min_date,
+        max_date=max_date
+    )
+    assert result >= min_date
+    assert result <= max_date
 
 
-def test_gen_date_5():
+@pytest.mark.parametrize('item', range(20))
+def test_gen_date_5(item):
     """Create a date with min_date == 'None'."""
     # min_date for the platform
     min_date = (datetime.date.today() -
@@ -62,16 +63,16 @@ def test_gen_date_5():
     # max_date = min_date + 1 year
     max_date = min_date + datetime.timedelta(365 * 1)
 
-    for _ in range(20):
-        result = gen_date(
-            min_date=None,
-            max_date=max_date
-        )
-        assert result.year <= max_date.year
-        assert result.year >= min_date.year
+    result = gen_date(
+        min_date=None,
+        max_date=max_date
+    )
+    assert result.year <= max_date.year
+    assert result.year >= min_date.year
 
 
-def test_gen_date_6():
+@pytest.mark.parametrize('item', range(20))
+def test_gen_date_6(item):
     """Create a date with max_date == 'None'."""
     # max_date for the platform
     max_date = (datetime.date.today() +
@@ -79,16 +80,16 @@ def test_gen_date_6():
     # min_date  = max_date - 1 year
     min_date = max_date - datetime.timedelta(365 * 1)
 
-    for _ in range(20):
-        result = gen_date(
-            min_date=min_date,
-            max_date=None
-        )
-        assert result.year <= max_date.year
-        assert result.year >= min_date.year
+    result = gen_date(
+        min_date=min_date,
+        max_date=None
+    )
+    assert result.year <= max_date.year
+    assert result.year >= min_date.year
 
 
-def test_gen_date_7():
+@pytest.mark.parametrize('item', range(20))
+def test_gen_date_7(item):
     """Create a date with specific date ranges."""
     # min_date for the platform
     min_date = (datetime.date.today() -
@@ -97,13 +98,12 @@ def test_gen_date_7():
     max_date = (datetime.date.today() +
                 datetime.timedelta(365 * MAX_YEARS))
 
-    for _ in range(20):
-        result = gen_date(
-            min_date=min_date,
-            max_date=max_date
-        )
-        assert result.year <= max_date.year
-        assert result.year >= min_date.year
+    result = gen_date(
+        min_date=min_date,
+        max_date=max_date
+    )
+    assert result.year <= max_date.year
+    assert result.year >= min_date.year
 
 
 def test_gen_date_8():

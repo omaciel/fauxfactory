@@ -7,58 +7,58 @@ import pytest
 from fauxfactory import gen_choice
 
 
-def test_gen_choice_1():
+@pytest.mark.parametrize('item', range(10))
+def test_gen_choice_1(item):
     """Select a random value from integer values."""
     choices = range(5)
 
-    for _ in range(10):
-        result = gen_choice(choices)
-        assert result in choices
+    result = gen_choice(choices)
+    assert result in choices
 
 
-def test_gen_choice_2():
+@pytest.mark.parametrize('item', range(10))
+def test_gen_choice_2(item):
     """Select a random value from alphanumeric values."""
     choices = string.ascii_letters + string.digits
 
-    for _ in range(10):
-        result = gen_choice(choices)
-        assert result in choices
+    result = gen_choice(choices)
+    assert result in choices
 
 
-def test_gen_choice_3():
+@pytest.mark.parametrize('item', range(10))
+def test_gen_choice_3(item):
     """Select a random value from short list."""
     choices = [1, ]
 
-    for _ in range(10):
-        result = gen_choice(choices)
-        assert result == choices[0]
+    result = gen_choice(choices)
+    assert result == choices[0]
 
 
-def test_gen_choice_4():
+@pytest.mark.parametrize('item', range(10))
+def test_gen_choice_4(item):
     """Select a random value from longer list."""
     choices = [1, 2, 3, 9, 10, 11, 100, 101, 102]
 
-    for _ in range(10):
-        result = gen_choice(choices)
-        assert result in choices
+    result = gen_choice(choices)
+    assert result in choices
 
 
-def test_gen_choice_5():
+@pytest.mark.parametrize('item', range(10))
+def test_gen_choice_5(item):
     """Select a random value from short tuple."""
     choices = (1, )
 
-    for _ in range(10):
-        result = gen_choice(choices)
-        assert result == choices[0]
+    result = gen_choice(choices)
+    assert result == choices[0]
 
 
-def test_gen_choice_6():
+@pytest.mark.parametrize('item', range(10))
+def test_gen_choice_6(item):
     """Select a random value from longer tuple."""
     choices = (1, 2, 3, 9, 10, 11, 100, 101, 102, )
 
-    for _ in range(10):
-        result = gen_choice(choices)
-        assert result in choices
+    result = gen_choice(choices)
+    assert result in choices
 
 
 def test_gen_choice_7():
@@ -93,7 +93,8 @@ def test_gen_choice_10():
         gen_choice(choices)
 
 
-def test_gen_choice_11():
+@pytest.mark.parametrize('item', range(10))
+def test_gen_choice_11(item):
     """Select a random value from dictionary list."""
     choices = [
         {'Name': 'Bob', 'Age': 39},
@@ -101,18 +102,17 @@ def test_gen_choice_11():
         {'Name': 'Pete', 'Age': 79},
     ]
 
-    for _ in range(10):
-        result = gen_choice(choices)
-        assert result in choices
+    result = gen_choice(choices)
+    assert result in choices
 
 
-def test_gen_choice_12():
+@pytest.mark.parametrize('item', range(10))
+def test_gen_choice_12(item):
     """Select a random value from words list."""
     choices = ['green', 'yellow', 'blue' 'white']
 
-    for _ in range(10):
-        result = gen_choice(choices)
-        assert result in choices
+    result = gen_choice(choices)
+    assert result in choices
 
 
 def test_gen_choice_13():

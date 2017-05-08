@@ -1,9 +1,10 @@
 """Tests for all boolean generators."""
+import pytest
 
 from fauxfactory import gen_boolean
 
 
-def test_gen_boolean():
+@pytest.mark.parametrize('item', range(10))
+def test_gen_boolean(item):
     """Create a random boolean value."""
-    for _ in range(100):
-        assert isinstance(gen_boolean(), bool)
+    assert isinstance(gen_boolean(), bool)
