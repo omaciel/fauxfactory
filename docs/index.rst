@@ -74,6 +74,56 @@ Or a fake email with your company domain:
 
 Simple, right?
 
+Validation
+----------
+
+All string functions allow validation of inputs using 3 parameters:
+
+#. validator: a callable or str with regex returning boolean signaling if
+random data is valid or not;
+#. tries: maximum number of times random data will be generated after
+failing validation. If the limit is reached "default" parameter will be
+returned;
+#. default: value to be returned if validation fails a "tries" number of times.
+
+Example using callable:
+
+.. doctest::
+
+    >>> def start_a(value):
+    ...     return value[0] == 'a'
+    >>> email = fauxfactory.gen_email(validator=start_a, default = 'a@b.c')
+    >>> email[0] == 'a'
+    True
+
+
+Example using regex:
+
+.. doctest::
+
+    >>> n = fauxfactory.gen_string(
+    ... 'numeric', validator='[^0].*', default = '2')
+    >>> n != '0'
+    True
+
+Example using tries and default:
+
+.. doctest::
+
+    >>> def always_false(value):
+    ...     print('Executed')
+    ...     return False
+    >>> fauxfactory.gen_alpha(
+    ... validator=always_false, default = 'default value', tries=1)
+    Executed
+    'default value'
+    >>> fauxfactory.gen_alpha(
+    ... validator=always_false, default = 'default value 2', tries=3)
+    Executed
+    Executed
+    Executed
+    'default value 2'
+
 API
 ---
 
