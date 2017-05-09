@@ -80,11 +80,12 @@ Validation
 All string functions allow validation of inputs using 3 parameters:
 
 #. validator: a callable or str with regex returning boolean signaling if
-random data is valid or not;
+   random data is valid or not.
 #. tries: maximum number of times random data will be generated after
-failing validation. If the limit is reached "default" parameter will be
-returned;
+   failing validation. If the limit is reached "default" parameter will be
+   returned.
 #. default: value to be returned if validation fails a "tries" number of times.
+
 
 Example using callable:
 
