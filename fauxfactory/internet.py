@@ -15,7 +15,7 @@ def gen_domain(name=None, subdomain=None, tlds=None):
     :param str name: Name for your host.
     :param str subdomain: Name for the subdomain.
     :param str tlds: Top Level Domain Server.
-    :returns: An email address.
+    :returns: A random domain name.
     :rtype: str
 
     """
