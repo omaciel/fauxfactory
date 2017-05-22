@@ -163,7 +163,6 @@ def add_processor_info(count=None):
     return processors
 
 
-# pylint: disable=too-many-statements
 def gen_system_facts(name=None):
     """Generate system facts.
 
