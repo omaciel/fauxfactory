@@ -22,9 +22,18 @@ def test_gen_system_facts_with_name():
     # Regex for domain validation
     facts = gen_system_facts(name='faux')
 
-    assert facts['fqdn'] == 'faux'
-    assert facts['domain'] == ''
+    assert facts['fqdn'].startswith('faux')
     assert facts['hostname'] == 'faux'
+
+
+def test_gen_system_facts_with_name_subdomain():
+    """Create a random system facts using name and subdomain."""
+    # Regex for domain validation
+    facts = gen_system_facts(name='faux.example')
+
+    assert facts['fqdn'].startswith('faux.example')
+    assert facts['hostname'] == 'faux'
+    assert facts['domain'].startswith('example')
 
 
 def test_gen_system_facts_with_fqdn():
