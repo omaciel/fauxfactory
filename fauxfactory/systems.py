@@ -115,7 +115,8 @@ def gen_system_facts(name=None):
     host['lscpu.cpu(s)'] = host['cpu.cpu(s)']
     # Add processors info based on total processors
     for idx in range(host['processorcount']):
-        host[f'processor{idx}'] = 'Intel(R) Xeon(R) CPU E31220 @ 3.10GHz'
+        host['processor{}'.format(
+            idx)] = 'Intel(R) Xeon(R) CPU E31220 @ 3.10GHz'
         host['processors']['models'].append(
             'Intel(R) Xeon(R) CPU E31220 @ 3.10GHz')
 
