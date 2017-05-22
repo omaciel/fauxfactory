@@ -9,13 +9,36 @@ from fauxfactory.helpers import check_validation
 from fauxfactory.strings import gen_alpha
 
 
+def gen_domain(name=None, subdomain=None, tlds=None):
+    """Generate a random domain name.
+
+    :param str name: Name for your host.
+    :param str subdomain: Name for the subdomain.
+    :param str tlds: Top Level Domain Server.
+    :returns: An email address.
+    :rtype: str
+
+    """
+    # Generate a new name if needed
+    if name is None:
+        name = gen_alpha(8).lower()
+    # Obtain a random subdomain if needed
+    if subdomain is None:
+        subdomain = gen_choice(SUBDOMAINS)
+    # Obtain a random top level domain if needed
+    if tlds is None:
+        tlds = gen_choice(TLDS)
+
+    return '{}.{}.{}'.format(name, subdomain, tlds)
+
+
 @check_validation
 def gen_email(name=None, domain=None, tlds=None):
     """Generate a random email address.
 
     :param str name: Email name.
     :param str domain: Domain name.
-    :param str tlds: Top Level Domain Server
+    :param str tlds: Top Level Domain Server.
     :returns: An email address.
     :rtype: str
 

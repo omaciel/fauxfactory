@@ -4,6 +4,7 @@ from fauxfactory.booleans import gen_boolean
 from fauxfactory.choices import gen_choice, gen_uuid
 from fauxfactory.dates import gen_date, gen_datetime, gen_time
 from fauxfactory.internet import (
+    gen_domain,
     gen_email,
     gen_ipaddr,
     gen_mac,
@@ -38,6 +39,7 @@ __all__ = (
     'gen_cyrillic',
     'gen_date',
     'gen_datetime',
+    'gen_domain',
     'gen_email',
     'gen_html',
     'gen_integer',
