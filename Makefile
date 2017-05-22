@@ -8,7 +8,7 @@ help:
 	@echo "  test          Run unit tests."
 	@echo "  test-all      Run unit tests and doctests, measure coverage."
 
-all: test-coverage lint docs-clean docs-html package-clean package
+all: test-all lint docs-clean docs-html package-clean package
 
 docs-clean:
 	cd docs && $(MAKE) clean
@@ -40,7 +40,7 @@ publish:
 test:
 	py.test -v
 
-test-coverage:
+test-all:
 	py.test -v --cov-report term-missing --cov=fauxfactory
 
 .PHONY: help docs-clean docs-doctest docs-html flake lint package package-clean publish test test-all

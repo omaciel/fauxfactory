@@ -8,7 +8,14 @@
 """
 # The above constant descriptions can be found by Sphinx and via help().
 import datetime
+import json
+import os
 
+
+FACTS_JSON = json.load(
+    open(os.path.join(
+        os.path.dirname(__file__),
+        'facts.json')))
 
 LOREM_IPSUM_TEXT = (
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do '

@@ -27,6 +27,7 @@ from fauxfactory.strings import (
     gen_string,
     gen_utf8,
 )
+from fauxfactory.systems import gen_system_facts
 
 __all__ = (
     'gen_alpha',
@@ -49,6 +50,7 @@ __all__ = (
     'gen_numeric_string',
     'gen_positive_integer',
     'gen_string',
+    'gen_system_facts',
     'gen_time',
     'gen_url',
     'gen_utf8',
