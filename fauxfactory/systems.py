@@ -25,7 +25,7 @@ def add_memory_info(count=None):
     free_ram = (gen_integer(min_value=4, max_value=count))
 
     return {
-        'dmi.memory.size': '{}'.format(free_ram * 1024),
+        'dmi::memory::size': '{}'.format(free_ram * 1024),
         'memoryfree': '{} GB'.format(free_ram),
         'memoryfree_mb': '{}'.format(free_ram * 1024),
         'memorysize': '{} GB'.format(count),
@@ -97,8 +97,9 @@ def add_operating_system(name=None, family=None, major=None, minor=None):
         'operatingsystemmajrelease': major,
         'operatingsystemrelease': '{}.{}'.format(major, minor),
         'osfamily': family,
-        'distribution.name': name,
-        'distribution.version': '{}.{}'.format(major, minor),
+        'distribution::id': gen_alpha(),
+        'distribution::name': name,
+        'distribution::version': '{}.{}'.format(major, minor),
 
     }
 
@@ -145,8 +146,9 @@ def add_processor_info(count=None):
     processors = {
         'physicalprocessorcount': count,
         'processorcount': count,
-        'cpu.cpu(s)': count,
-        'lscpu.cpu(s)': count,
+        'cpu::topology_source': 'kernel /sys cpu sibling lists',
+        'cpu::cpu(s)': count,
+        'lscpu::cpu(s)': count,
         'processors': {
             'models': [],
             'count': count,
@@ -212,8 +214,8 @@ def gen_system_facts(name=None):
         '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/sbin')
 
     host['productname'] = '{}'.format(gen_alpha())
-    host['dmi.system.product_name'] = host['productname']
-    host['dmi.baseboard.product_name'] = host['productname']
+    host['dmi::system::product_name'] = host['productname']
+    host['dmi::baseboard::product_name'] = host['productname']
     host['serialnumber'] = '{}'.format(gen_alphanumeric())
     host['timezone'] = 'EDT'
     host['uniqueid'] = '{}'.format(gen_alphanumeric())
@@ -227,6 +229,6 @@ def gen_system_facts(name=None):
         'days': host['uptime_days'],
         'uptime': host['uptime']}
     host['uuid'] = gen_uuid()
-    host['dmi.system.uuid'] = host['uuid']
+    host['dmi::system::uuid'] = host['uuid']
 
     return host
