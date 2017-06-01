@@ -2,7 +2,7 @@
 """Tests for system facts helpers."""
 import pytest
 
-from fauxfactory.systems import (
+from fauxfactory.factories.systems import (
     add_memory_info,
     add_network_devices,
     add_operating_system,

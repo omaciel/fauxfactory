@@ -1,12 +1,13 @@
 """Collection of computer systems generating functions."""
 from copy import deepcopy
 
-from fauxfactory.choices import gen_choice, gen_uuid
 from fauxfactory.constants import FACTS_JSON
 from fauxfactory.helpers import is_positive_int
-from fauxfactory.internet import gen_domain, gen_ipaddr, gen_mac, gen_netmask
-from fauxfactory.numbers import gen_integer
-from fauxfactory.strings import gen_alpha, gen_alphanumeric
+
+from .choices import gen_choice, gen_uuid
+from .internet import gen_domain, gen_ipaddr, gen_mac, gen_netmask
+from .numbers import gen_integer
+from .strings import gen_alpha, gen_alphanumeric
 
 
 def add_memory_info(count=None):

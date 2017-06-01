@@ -1,6 +1,6 @@
 """Method for generating random boolean values."""
 
-from fauxfactory.choices import gen_choice
+from .choices import gen_choice
 
 
 def gen_boolean():

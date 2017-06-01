@@ -8,16 +8,16 @@ This is a complete list of available methods, along with details about them.
 
 .. automodule:: fauxfactory
 
-:mod:`fauxfactory.booleans`
----------------------------
+:mod:`fauxfactory.factories.booleans`
+-------------------------------------
 
-.. automodule:: fauxfactory.booleans
+.. automodule:: fauxfactory.factories.booleans
     :members:
 
-:mod:`fauxfactory.choices`
---------------------------
+:mod:`fauxfactory.factories.choices`
+------------------------------------
 
-.. automodule:: fauxfactory.choices
+.. automodule:: fauxfactory.factories.choices
     :members:
 
 :mod:`fauxfactory.constants`
@@ -26,10 +26,10 @@ This is a complete list of available methods, along with details about them.
 .. automodule:: fauxfactory.constants
     :members:
 
-:mod:`fauxfactory.dates`
-------------------------
+:mod:`fauxfactory.factories.dates`
+----------------------------------
 
-.. automodule:: fauxfactory.dates
+.. automodule:: fauxfactory.factories.dates
     :members:
 
 :mod:`fauxfactory.helpers`
@@ -38,26 +38,26 @@ This is a complete list of available methods, along with details about them.
 .. automodule:: fauxfactory.helpers
     :members:
 
-:mod:`fauxfactory.internet`
----------------------------
+:mod:`fauxfactory.factories.internet`
+-------------------------------------
 
-.. automodule:: fauxfactory.internet
+.. automodule:: fauxfactory.factories.internet
     :members:
 
-:mod:`fauxfactory.numbers`
---------------------------
+:mod:`fauxfactory.factories.numbers`
+------------------------------------
 
-.. automodule:: fauxfactory.numbers
+.. automodule:: fauxfactory.factories.numbers
     :members:
 
-:mod:`fauxfactory.strings`
---------------------------
+:mod:`fauxfactory.factories.strings`
+------------------------------------
 
-.. automodule:: fauxfactory.strings
+.. automodule:: fauxfactory.factories.strings
     :members:
 
-:mod:`fauxfactory.systems`
---------------------------
+:mod:`fauxfactory.factories.systems`
+------------------------------------
 
-.. automodule:: fauxfactory.systems
+.. automodule:: fauxfactory.factories.systems
     :members:
