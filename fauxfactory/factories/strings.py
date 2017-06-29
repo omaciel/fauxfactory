@@ -298,3 +298,18 @@ def gen_utf8(length=10):
     """
     random.seed()
     return ''.join([random.choice(UNICODE_LETTERS) for _ in range(length)])
+
+@check_len
+@check_validation
+def gen_special(length=10):
+    """Returns a random special characters string.
+
+    :param int length: Length for random data.
+    :returns: A random string made up of special characters.
+    :rtype: str
+
+    """
+
+
+    random.seed()
+    return u''.join(random.choice(string.punctuation) for _ in xrange(length))
