@@ -38,6 +38,7 @@ __all__ = (
     'gen_negative_integer',
     'gen_numeric_string',
     'gen_positive_integer',
+    'gen_special',
     'gen_string',
     'gen_time',
     'gen_url',
@@ -177,6 +178,7 @@ def gen_string(str_type, length=None, validator=None, default=None, tries=10):
     * latin1
     * numeric
     * utf8
+    * punctuation
 
     """
     str_types_functions = {
@@ -188,6 +190,7 @@ def gen_string(str_type, length=None, validator=None, default=None, tries=10):
         u'latin1': gen_latin1,
         u'numeric': gen_numeric_string,
         u'utf8': gen_utf8,
+        u'punctuation': gen_special,
     }
     str_type_lower = str_type.lower()  # do not modify user data
     if str_type_lower not in str_types_functions.keys():
@@ -766,6 +769,18 @@ def gen_positive_integer():
     min_value = 0
 
     return gen_integer(min_value=min_value)
+
+
+@_check_validation
+def gen_special(length=10):
+    """Return a random special characters string.
+
+    :param int length: Length for random data.
+    :returns: A random string made up of special characters.
+    :rtype: str
+    """
+    random.seed()
+    return u''.join(random.choice(string.punctuation) for _ in range(length))
 
 
 def gen_time():

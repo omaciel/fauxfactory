@@ -3,6 +3,7 @@
 """Tests for all string generators."""
 
 import random
+import string
 import unicodedata
 from fauxfactory import (
     gen_alpha,
@@ -12,6 +13,7 @@ from fauxfactory import (
     gen_html,
     gen_latin1,
     gen_numeric_string,
+    gen_special,
     gen_string,
     gen_utf8,
     _unicode_letters_generator,
@@ -715,6 +717,14 @@ class TestStrings(unittest.TestCase):
         alphanumeric_string = gen_string('alphanumeric')
         control_string = gen_alphanumeric()
         self.assertEqual(len(control_string), len(alphanumeric_string),)
+
+
+    def test_special_string(self):
+        """Assert that only punctuation strings are returned."""
+        VALID_CHARS = string.punctuation
+        special_str = gen_special()
+        for char in special_str:
+            assert char in VALID_CHARS
 
 
 class UnicodeLettersGenerator(unittest.TestCase):
