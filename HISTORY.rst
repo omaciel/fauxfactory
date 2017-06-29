@@ -3,6 +3,12 @@
 Release History
 ===============
 
+2.1.1 (2017-06-29)
+------------------
+
+- New `gen_special` method added by Pavel Zagalsky generates random
+  punctuation strings.
+
 2.1.0 (2017-03-30)
 ------------------
 
