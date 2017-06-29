@@ -43,6 +43,7 @@ def gen_string(str_type, length=None, validator=None, default=None, tries=10):
     * latin1
     * numeric
     * utf8
+    * punctuation
 
     """
     str_types_functions = {
@@ -54,6 +55,7 @@ def gen_string(str_type, length=None, validator=None, default=None, tries=10):
         'latin1': gen_latin1,
         'numeric': gen_numeric_string,
         'utf8': gen_utf8,
+        'punctuation': gen_special,
     }
     str_type_lower = str_type.lower()  # do not modify user data
     if str_type_lower not in str_types_functions.keys():
@@ -298,3 +300,16 @@ def gen_utf8(length=10):
     """
     random.seed()
     return ''.join([random.choice(UNICODE_LETTERS) for _ in range(length)])
+
+
+@check_len
+@check_validation
+def gen_special(length=10):
+    """Return a random special characters string.
+
+    :param int length: Length for random data.
+    :returns: A random string made up of special characters.
+    :rtype: str
+    """
+    random.seed()
+    return ''.join(random.choice(string.punctuation) for _ in range(length))

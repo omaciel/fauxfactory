@@ -1,5 +1,5 @@
 """Tests for all string generators."""
-
+import string
 import unicodedata
 
 import pytest
@@ -14,6 +14,7 @@ from fauxfactory import (
     gen_numeric_string,
     gen_string,
     gen_utf8,
+    gen_special,
 )
 from fauxfactory.helpers import unicode_letters_generator
 
@@ -27,6 +28,7 @@ GENERATORS = [
     gen_latin1,
     gen_numeric_string,
     gen_utf8,
+    gen_special,
     ]
 
 STRING_TYPES = [
@@ -38,6 +40,7 @@ STRING_TYPES = [
     'latin1',
     'numeric',
     'utf8',
+    'punctuation',
     ]
 
 
@@ -133,3 +136,11 @@ def test_invalid_string_type():
     """Only valid string types can be generated."""
     with pytest.raises(ValueError):
         gen_string('foo')
+
+
+def test_special_string():
+    """Assert that only punctuation strings are returned."""
+    VALID_CHARS = string.punctuation
+    special_str = gen_special()
+    for char in special_str:
+        assert char in VALID_CHARS
