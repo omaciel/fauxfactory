@@ -312,4 +312,4 @@ def gen_special(length=10):
 
 
     random.seed()
-    return u''.join(random.choice(string.punctuation) for _ in xrange(length))
+    return u''.join(random.choice(string.punctuation) for _ in range(length))
