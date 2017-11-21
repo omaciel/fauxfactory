@@ -1,9 +1,44 @@
 """Collection of helper methods and functions."""
 import re
 import sys
+import string
 import unicodedata
 
 from functools import wraps
+
+
+VALID_DIGITS = string.digits + string.ascii_letters
+
+
+def base_repr(number, base):
+    """Returns the base representation of a decimal number
+    Args:
+        * number: (int) The decimal number to be converted.
+        * The base to convert.
+    Returns:
+        * The base representation of <number>
+    """
+    assert base > 1, 'Cannot represent number with base smaller than 2.'
+    if number < 0:
+        sign = -1
+    elif number == 0:
+        return VALID_DIGITS[0]
+    else:
+        sign = 1
+
+    number *= sign
+    digits = []
+
+    while number:
+        digits.append(VALID_DIGITS[number % base])
+        number = int(number) / int(base)
+
+    if sign < 0:
+        digits.append('-')
+
+    digits.reverse()
+
+    return ''.join(digits)
 
 
 def check_len(fnc):

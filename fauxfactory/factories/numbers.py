@@ -1,7 +1,10 @@
 """Methods that generate random number values."""
 
+from functools import partial
 import random
 import sys
+
+from fauxfactory.helpers import base_repr
 
 
 def gen_integer(min_value=None, max_value=None):
@@ -60,3 +63,20 @@ def gen_positive_integer():
     min_value = 0
 
     return gen_integer(min_value=min_value)
+
+
+def gen_number(min_value=None, max_value=None, base=10):
+    """Return a random number (with <base> representation).
+
+    :returns: A random number with base of <base>.
+    :rtype: str
+
+    """
+    return base_repr(gen_integer(
+        int(str(min_value), base=base) if min_value is not None else min_value,
+        int(str(max_value), base=base) if max_value is not None else max_value,
+    ), base)
+
+
+gen_octagonal = partial(gen_number, base=8)
+gen_hexadecimal = partial(gen_number, base=16)
