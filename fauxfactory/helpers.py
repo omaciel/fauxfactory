@@ -4,6 +4,48 @@ import sys
 import unicodedata
 
 from functools import wraps
+from fauxfactory.constants import VALID_DIGITS
+
+
+def base_repr(number, base):
+    """Return the base representation of a decimal number.
+
+    As shared here: https://stackoverflow.com/a/2267446
+
+    Conversion steps:
+
+    1) Divide the number by the base
+    2) Get the integer quotient for the next iteration
+    3) Get the remainder for the hex digit
+    4) Repeat the steps until quotient is equal to zero
+
+    :param number: (int) The decimal number to be converted.
+    :param base: The base to convert.
+
+    :return: The base representation of <number>.
+    """
+    if base <= 1:
+        raise ValueError('Cannot represent number with base smaller than 2.')
+    if number < 0:
+        sign = -1
+    elif number == 0:
+        return VALID_DIGITS[0]
+    else:
+        sign = 1
+
+    number *= sign
+    digits = []
+
+    while number:
+        digits.append(VALID_DIGITS[number % base])
+        number //= base
+
+    if sign < 0:
+        digits.append('-')
+
+    digits.reverse()
+
+    return ''.join(digits)
 
 
 def check_len(fnc):

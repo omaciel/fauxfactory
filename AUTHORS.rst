@@ -14,6 +14,7 @@ Contributors
 
 - Corey Welton `@cswiii <https://github.com/cswiii/>`_
 - Elyézer Rezende `@elyezer <https://github.com/elyezer/>`_
+- Gilad Shefer `@gshefer <https://github.com/gshefer/>`_
 - Jacob Callahan `@JacobCallahan <https://github.com/JacobCallahan>`_
 - James Laska `@jlaska <https://github.com/jlaska>`_
 - Jefferson Fausto Vaz `@faustovaz <https://github.com/faustovaz/>`_
