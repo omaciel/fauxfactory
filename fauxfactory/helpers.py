@@ -1,24 +1,31 @@
 """Collection of helper methods and functions."""
 import re
 import sys
-import string
 import unicodedata
 
 from functools import wraps
-
-
-VALID_DIGITS = string.digits + string.ascii_letters
+from fauxfactory.constants import VALID_DIGITS
 
 
 def base_repr(number, base):
-    """Returns the base representation of a decimal number
-    Args:
-        * number: (int) The decimal number to be converted.
-        * The base to convert.
-    Returns:
-        * The base representation of <number>
+    """Return the base representation of a decimal number.
+
+    As shared here: https://stackoverflow.com/a/2267446
+
+    Conversion steps:
+
+    1) Divide the number by the base
+    2) Get the integer quotient for the next iteration
+    3) Get the remainder for the hex digit
+    4) Repeat the steps until quotient is equal to zero
+
+    :param number: (int) The decimal number to be converted.
+    :param base: The base to convert.
+
+    :return: The base representation of <number>.
     """
-    assert base > 1, 'Cannot represent number with base smaller than 2.'
+    if base <= 1:
+        raise ValueError('Cannot represent number with base smaller than 2.')
     if number < 0:
         sign = -1
     elif number == 0:
@@ -31,7 +38,7 @@ def base_repr(number, base):
 
     while number:
         digits.append(VALID_DIGITS[number % base])
-        number = int(number) / int(base)
+        number //= base
 
     if sign < 0:
         digits.append('-')

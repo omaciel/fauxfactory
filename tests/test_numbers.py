@@ -31,18 +31,24 @@ GenFuncDataSets = [
 
 @pytest.mark.parametrize('base', [0, 1])
 def test_base_repr_small_base(base):
-    """Testing the base_repr helper"""
-    with pytest.raises(AssertionError):
+    """Testing the base_repr helper."""
+    with pytest.raises(ValueError):
         base_repr(1, base)
 
 
 @pytest.mark.parametrize('number, base, result', [
-    (10, 10, '10'), (1, 2, '1'),
-    (7, 6, '11'), (16, 8, '20'),
-    (3, 3, '10'), (21, 20, '11'),
-    (123, 12, 'a3'), (139, 16, '8b')
+    (10, 10, '10'),
+    (1, 2, '1'),
+    (7, 6, '11'),
+    (16, 8, '20'),
+    (3, 3, '10'),
+    (21, 20, '11'),
+    (123, 12, 'a3'),
+    (139, 16, '8b'),
+    (0, 10, '0'),
 ])
 def test_base_repr(number, base, result):
+    """Return base representation for a number."""
     assert base_repr(number, base) == result
 
 

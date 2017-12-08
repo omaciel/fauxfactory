@@ -10,7 +10,10 @@
 import datetime
 import json
 import os
+import string
 
+
+VALID_DIGITS = string.digits + string.ascii_letters
 
 FACTS_JSON = json.load(
     open(os.path.join(
