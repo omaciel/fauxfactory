@@ -25,7 +25,7 @@ setup(
     author='Og Maciel',
     author_email='omaciel@ogmaciel.com',
     url='https://github.com/omaciel/fauxfactory',
-    packages=find_packages(),
+    packages=find_packages(exclude=['contrib', 'docs', 'tests']),
     keywords='python automation data',
     license='Apache 2.0',
     classifiers=[
