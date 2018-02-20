@@ -3,6 +3,11 @@
 Release History
 ===============
 
+2.1.2 (2018-02-20)
+------------------
+
+- Exclude tests, docs and contrib folders from binary distribution.
+
 2.1.1 (2017-06-29)
 ------------------
 
