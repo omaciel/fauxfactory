@@ -16,7 +16,7 @@ from fauxfactory import (
     gen_utf8,
     gen_special,
 )
-from fauxfactory.helpers import unicode_letters_generator
+from fauxfactory.helpers import unicode_letters_generator, BMP
 
 
 GENERATORS = [
@@ -130,6 +130,12 @@ def test_chars_in_letters_category():
     # http://www.unicode.org/reports/tr44/tr44-4.html
     for char in unicode_letters_generator():
         assert unicodedata.category(char) in ('Lu', 'Ll', 'Lt', 'Lm', 'Lo')
+
+
+def test_bmp_chars_only():
+    """Unicode letters generator generates only BMP unicode letters."""
+    for char in gen_utf8(length=50, smp=False):
+        assert ord(char) <= BMP.max
 
 
 def test_invalid_string_type():

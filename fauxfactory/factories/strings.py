@@ -11,9 +11,6 @@ from fauxfactory.helpers import (
     )
 
 
-UNICODE_LETTERS = [c for c in unicode_letters_generator()]
-
-
 def gen_string(str_type, length=None, validator=None, default=None, tries=10):
     """A simple wrapper that calls other string generation methods.
 
@@ -286,18 +283,21 @@ def gen_numeric_string(length=10):
 
 @check_len
 @check_validation
-def gen_utf8(length=10):
+def gen_utf8(length=10, smp=True):
     """Return a random string made up of UTF-8 letters characters.
 
     Follows `RFC 3629`_.
 
     :param int length: Length for random data.
+    :param bool smp: Include Supplementary Multilingual Plane (SMP)
+        characters
     :returns: A random string made up of ``UTF-8`` letters characters.
     :rtype: str
 
     .. _`RFC 3629`: http://www.rfc-editor.org/rfc/rfc3629.txt
 
     """
+    UNICODE_LETTERS = [c for c in unicode_letters_generator(smp)]
     random.seed()
     return ''.join([random.choice(UNICODE_LETTERS) for _ in range(length)])
 

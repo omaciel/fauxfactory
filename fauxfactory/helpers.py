@@ -1,10 +1,16 @@
 """Collection of helper methods and functions."""
 import re
-import sys
 import unicodedata
 
+from collections import namedtuple
 from functools import wraps
 from fauxfactory.constants import VALID_DIGITS
+
+
+UnicodePlane = namedtuple('UnicodePlane', ['min', 'max'])
+
+BMP = UnicodePlane(int('0x0000', 16), int('0xffff', 16))
+SMP = UnicodePlane(int('0x10000', 16), int('0x1ffff', 16))
 
 
 def base_repr(number, base):
@@ -125,19 +131,15 @@ def is_positive_int(length):
         raise ValueError('{0} is an invalid \'length\'.'.format(length))
 
 
-def unicode_letters_generator():
+def unicode_letters_generator(smp=True):
     """Generate unicode characters in the letters category.
 
+    :param bool smp: Include Supplementary Multilingual Plane (SMP)
+        characters
     :return: a generator which will generates all unicode letters available
 
     """
-    chr_function = chr
-    range_function = range
-    # Use sys.maxunicode instead of 0x10FFFF to avoid the exception below, in a
-    # narrow Python build (before Python 3.3)
-    # ValueError: unichr() arg not in range(0x10000) (narrow Python build)
-    # For more information, read PEP 261.
-    for i in range_function(sys.maxunicode):
-        char = chr_function(i)
+    for i in range(BMP.min, SMP.max if smp else BMP.max):
+        char = chr(i)
         if unicodedata.category(char).startswith('L'):
             yield char
