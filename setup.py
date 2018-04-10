@@ -21,11 +21,12 @@ setup(
     name='fauxfactory',
     description='Generates random data for your tests.',
     long_description=LONG_DESCRIPTION,
-    version='3.0.1',
+    version='3.0.2',
     author='Og Maciel',
     author_email='omaciel@ogmaciel.com',
     url='https://github.com/omaciel/fauxfactory',
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
+    include_package_data=True,
     keywords='python automation data',
     license='Apache 2.0',
     classifiers=[
