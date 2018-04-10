@@ -3,6 +3,18 @@
 Release History
 ===============
 
+3.0.0 (2018-04-10)
+------------------
+
+- Make `gen_utf8` return optionally only BMP characters
+  (6201b63)
+- Don't install tests into the binary distribution 
+  (b291873, @evgeni)
+- Use floor division operator in base_repr for Python 3
+  compatibility (914178a, @gshefer)
+- New `gen_octagonal` and `gen_hexadecimal` methods added
+  (57f5d17,  @gshefer)
+
 2.1.0 (2017-03-30)
 ------------------
 
