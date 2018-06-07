@@ -43,3 +43,5 @@ coverage.xml
 # Vim swap files
 *.swp
 .pytest_cache
+.idea
+pyvenv.cfg

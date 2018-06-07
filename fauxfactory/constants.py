@@ -15,10 +15,9 @@ import string
 
 VALID_DIGITS = string.digits + string.ascii_letters
 
-FACTS_JSON = json.load(
-    open(os.path.join(
-        os.path.dirname(__file__),
-        'facts.json')))
+FACTS_JSON_FILE = os.path.join(os.path.dirname(__file__), 'facts.json')
+with open(FACTS_JSON_FILE) as data:
+    FACTS_JSON = json.load(data)
 
 LOREM_IPSUM_TEXT = (
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do '
