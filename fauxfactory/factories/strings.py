@@ -163,11 +163,11 @@ def gen_html(length=10, include_tags=True):
             html_tag = 'a'
         else:
             length = maybe_len
-        output_string = u'<{0}>{1}</{2}>'.format(
-            html_tag, gen_string('alpha', length), html_tag)
+        output_string = u'<{0}>{1}</{0}>'.format(
+            html_tag, gen_string('alpha', length))
     else:
-        output_string = '<{0}>{1}</{2}>'.format(
-            html_tag, gen_string('alpha', length), html_tag)
+        output_string = '<{0}>{1}</{0}>'.format(
+            html_tag, gen_string('alpha', length))
 
     return output_string
 
