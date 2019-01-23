@@ -3,7 +3,7 @@
 import random
 import uuid
 
-from collections import Iterable
+from collections.abc import Iterable
 
 from fauxfactory.helpers import check_validation
 
