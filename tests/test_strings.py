@@ -150,3 +150,10 @@ def test_special_string():
     special_str = gen_special()
     for char in special_str:
         assert char in VALID_CHARS
+
+
+@pytest.mark.parametrize('fnc', GENERATORS[1:])
+def test_start_string(fnc):
+    """"String generated has start with specific keyword."""
+    start = fnc(3)
+    assert start == fnc(start=start)[0:3]
