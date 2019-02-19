@@ -1,6 +1,7 @@
 """Tests for all string generators."""
 import string
 import unicodedata
+from random import randint
 
 import pytest
 
@@ -155,5 +156,9 @@ def test_special_string():
 @pytest.mark.parametrize('fnc', GENERATORS[1:])
 def test_start_string(fnc):
     """"String generated has start with specific keyword."""
-    start = fnc(3)
-    assert start == fnc(start=start)[0:3]
+    start = fnc(randint(1, 5))
+    separator = fnc(1)
+    random_str = fnc(start=start, separator=separator)
+    assert start == random_str[0:len(start)]
+    assert separator == random_str[len(start)]
+    assert len(random_str) == 10
