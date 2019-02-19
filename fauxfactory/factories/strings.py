@@ -68,11 +68,12 @@ def gen_string(str_type, length=None, validator=None, default=None, tries=10):
 
 @check_len
 @check_validation
-def gen_alpha(length=10, start=None):
+def gen_alpha(length=10, start=None, separator=''):
     """Return a random string made up of alpha characters.
 
     :param int length: Length for random data.
     :param str start: Random data start with.
+    :param char separator: Separator for start and random data.
     :returns: A random string made up of alpha characters.
     :rtype: str
 
@@ -83,18 +84,19 @@ def gen_alpha(length=10, start=None):
     )
 
     if start:
-        output_string = '{s}_{o}'.format(s=start, o=output_string)
-
+        output_string = '{0}{1}{2}'.format(
+            start, separator, output_string)[0:length]
     return output_string
 
 
 @check_len
 @check_validation
-def gen_alphanumeric(length=10, start=None):
+def gen_alphanumeric(length=10, start=None, separator=''):
     """Return a random string made up of alpha and numeric characters.
 
     :param int length: Length for random data.
     :param str start: Random data start with.
+    :param char separator: Separator for start and random data.
     :returns: A random string made up of alpha and numeric characters.
     :rtype: str
 
@@ -106,20 +108,21 @@ def gen_alphanumeric(length=10, start=None):
         ) for _ in range(length))
 
     if start:
-        output_string = '{s}_{o}'.format(s=start, o=output_string)
-
+        output_string = '{0}{1}{2}'.format(
+            start, separator, output_string)[0:length]
     return output_string
 
 
 @check_len
 @check_validation
-def gen_cjk(length=10, start=None):
+def gen_cjk(length=10, start=None, separator=''):
     """Return a random string made up of CJK characters.
 
     (Source: Wikipedia - CJK Unified Ideographs)
 
     :param int length: Length for random data.
     :param str start: Random data start with.
+    :param char separator: Separator for start and random data.
     :returns: A random string made up of CJK characters.
     :rtype: str
 
@@ -132,18 +135,19 @@ def gen_cjk(length=10, start=None):
     output_string = ''.join(chr(codepoint) for codepoint in codepoints)
 
     if start:
-        output_string = '{s}_{o}'.format(s=start, o=output_string)
-
+        output_string = '{0}{1}{2}'.format(
+            start, separator, output_string)[0:length]
     return output_string
 
 
 @check_len
 @check_validation
-def gen_cyrillic(length=10, start=None):
+def gen_cyrillic(length=10, start=None, separator=''):
     """Return a random string made up of Cyrillic characters.
 
     :param int length: Length for random data.
     :param str start: Random data start with.
+    :param char separator: Separator for start and random data.
     :returns: A random string made up of Cyrillic characters.
     :rtype: str
 
@@ -156,8 +160,8 @@ def gen_cyrillic(length=10, start=None):
     output_string = ''.join(chr(codepoint) for codepoint in codepoints)
 
     if start:
-        output_string = '{s}_{o}'.format(s=start, o=output_string)
-
+        output_string = '{0}{1}{2}'.format(
+            start, separator, output_string)[0:length]
     return output_string
 
 
@@ -256,13 +260,14 @@ def gen_iplum(words=None, paragraphs=None):
 
 @check_len
 @check_validation
-def gen_latin1(length=10, start=None):
+def gen_latin1(length=10, start=None, separator=''):
     """Return a random string made up of UTF-8 characters.
 
     (Font: Wikipedia - Latin-1 Supplement Unicode Block)
 
     :param int length: Length for random data.
     :param str start: Random data start with.
+    :param char separator: Separator for start and random data.
     :returns: A random string made up of ``Latin1`` characters.
     :rtype: str
 
@@ -286,18 +291,19 @@ def gen_latin1(length=10, start=None):
     )
 
     if start:
-        output_string = '{s}_{o}'.format(s=start, o=output_string)
-
+        output_string = '{0}{1}{2}'.format(
+            start, separator, output_string)[0:length]
     return output_string
 
 
 @check_len
 @check_validation
-def gen_numeric_string(length=10, start=None):
+def gen_numeric_string(length=10, start=None, separator=''):
     """Return a random string made up of numbers.
 
     :param int length: Length for random data.
     :param str start: Random data start with.
+    :param char separator: Separator for start and random data.
     :returns: A random string made up of numbers.
     :rtype: str
 
@@ -308,20 +314,21 @@ def gen_numeric_string(length=10, start=None):
     )
 
     if start:
-        output_string = '{s}_{o}'.format(s=start, o=output_string)
-
+        output_string = '{0}{1}{2}'.format(
+            start, separator, output_string)[0:length]
     return output_string
 
 
 @check_len
 @check_validation
-def gen_utf8(length=10, smp=True, start=None):
+def gen_utf8(length=10, smp=True, start=None, separator=''):
     """Return a random string made up of UTF-8 letters characters.
 
     Follows `RFC 3629`_.
 
     :param int length: Length for random data.
     :param str start: Random data start with.
+    :param char separator: Separator for start and random data.
     :param bool smp: Include Supplementary Multilingual Plane (SMP)
         characters
     :returns: A random string made up of ``UTF-8`` letters characters.
@@ -337,18 +344,19 @@ def gen_utf8(length=10, smp=True, start=None):
     )
 
     if start:
-        output_string = '{s}_{o}'.format(s=start, o=output_string)
-
+        output_string = '{0}{1}{2}'.format(
+            start, separator, output_string)[0:length]
     return output_string
 
 
 @check_len
 @check_validation
-def gen_special(length=10, start=None):
+def gen_special(length=10, start=None, separator=''):
     """Return a random special characters string.
 
     :param int length: Length for random data.
     :param str start: Random data start with.
+    :param char separator: Separator for start and random data.
     :returns: A random string made up of special characters.
     :rtype: str
     """
@@ -358,6 +366,6 @@ def gen_special(length=10, start=None):
     )
 
     if start:
-        output_string = '{s}_{o}'.format(s=start, o=output_string)
-
+        output_string = '{0}{1}{2}'.format(
+            start, separator, output_string)[0:length]
     return output_string
