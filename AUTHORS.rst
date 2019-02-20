@@ -25,3 +25,4 @@ Contributors
 - Renzo Nuccitelli `@renzon <https://github.com/renzon>`_
 - Sachin Ghai `@sghai <https://github.com/sghai/>`_
 - Milan Falešník `@mfalesni <https://github.com/mfalesni/>`_
+- Nikhil Dhandre `@digitronik <https://github.com/digitronik/>`_
