@@ -116,12 +116,12 @@ nitpicky = True
 # A list of (type, target) tuples (by default empty) that should be ignored
 # when generating warnings in “nitpicky mode”.
 nitpick_ignore = [
-    ('py:obj', 'bool'),
-    ('py:obj', 'dict'),
-    ('py:obj', 'int'),
-    ('py:obj', 'list'),
-    ('py:obj', 'str'),
-    ('py:obj', 'tuple'),
+    ('py:class', 'bool'),
+    ('py:class', 'dict'),
+    ('py:class', 'int'),
+    ('py:class', 'list'),
+    ('py:class', 'str'),
+    ('py:class', 'tuple'),
 ]
 
 
