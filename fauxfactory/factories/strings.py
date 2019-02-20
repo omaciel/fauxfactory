@@ -73,7 +73,7 @@ def gen_alpha(length=10, start=None, separator=''):
 
     :param int length: Length for random data.
     :param str start: Random data start with.
-    :param char separator: Separator for start and random data.
+    :param str separator: Separator character for start and random data.
     :returns: A random string made up of alpha characters.
     :rtype: str
 
@@ -96,7 +96,7 @@ def gen_alphanumeric(length=10, start=None, separator=''):
 
     :param int length: Length for random data.
     :param str start: Random data start with.
-    :param char separator: Separator for start and random data.
+    :param str separator: Separator character for start and random data.
     :returns: A random string made up of alpha and numeric characters.
     :rtype: str
 
@@ -122,7 +122,7 @@ def gen_cjk(length=10, start=None, separator=''):
 
     :param int length: Length for random data.
     :param str start: Random data start with.
-    :param char separator: Separator for start and random data.
+    :param str separator: Separator character for start and random data.
     :returns: A random string made up of CJK characters.
     :rtype: str
 
@@ -147,7 +147,7 @@ def gen_cyrillic(length=10, start=None, separator=''):
 
     :param int length: Length for random data.
     :param str start: Random data start with.
-    :param char separator: Separator for start and random data.
+    :param str separator: Separator character for start and random data.
     :returns: A random string made up of Cyrillic characters.
     :rtype: str
 
@@ -267,7 +267,7 @@ def gen_latin1(length=10, start=None, separator=''):
 
     :param int length: Length for random data.
     :param str start: Random data start with.
-    :param char separator: Separator for start and random data.
+    :param str separator: Separator character for start and random data.
     :returns: A random string made up of ``Latin1`` characters.
     :rtype: str
 
@@ -303,7 +303,7 @@ def gen_numeric_string(length=10, start=None, separator=''):
 
     :param int length: Length for random data.
     :param str start: Random data start with.
-    :param char separator: Separator for start and random data.
+    :param str separator: Separator character for start and random data.
     :returns: A random string made up of numbers.
     :rtype: str
 
@@ -328,7 +328,7 @@ def gen_utf8(length=10, smp=True, start=None, separator=''):
 
     :param int length: Length for random data.
     :param str start: Random data start with.
-    :param char separator: Separator for start and random data.
+    :param str separator: Separator character for start and random data.
     :param bool smp: Include Supplementary Multilingual Plane (SMP)
         characters
     :returns: A random string made up of ``UTF-8`` letters characters.
@@ -356,7 +356,7 @@ def gen_special(length=10, start=None, separator=''):
 
     :param int length: Length for random data.
     :param str start: Random data start with.
-    :param char separator: Separator for start and random data.
+    :param str separator: Separator character for start and random data.
     :returns: A random string made up of special characters.
     :rtype: str
     """
