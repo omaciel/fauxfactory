@@ -16,3 +16,14 @@ notifications:
     email:
         on_success: always
         on_failure: always
+deploy:
+  provider: pypi
+  skip_existing: true
+  user: mshriver
+  distributions: sdist bdist_wheel
+  password:
+    secure: gy2PpSfC2ymVu85DmiOeQaEt27wG4T4NnmJgo4Ru2bzoIwFQmO3HFP0YyiMISXjccLATrZriIQTS2iX6r63rjh72alYcddDcl2tBzVOM47zFodwcgDe1s4nEUP2jNdEBmxsYHBOm0hnDTS6pVRQJGEqkRw0T2iz9eE4DgjlX6yU=
+  on:
+    tags: true
+    repo: omaciel/fauxfactory
+

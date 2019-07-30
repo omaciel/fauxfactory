@@ -10,6 +10,7 @@ pylint
 sphinx
 
 # For `make package`
+# defined in setup.py
 wheel
 
 # For `make publish`
