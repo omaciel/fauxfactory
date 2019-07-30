@@ -3,6 +3,21 @@
 Release History
 ===============
 
+3.0.5 (2019-07-30)
+------------------
+
+- Update setuptools versioning, add travis deployment
+
+3.0.4 (2019-07-30)
+------------------
+
+- Resolve flake failures in travis
+
+3.0.3 (2019-07-30)
+------------------
+
+- Fixes for warnings on file resources
+
 3.0.2 (2018-04-10)
 ------------------
 
