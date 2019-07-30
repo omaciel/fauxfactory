@@ -128,7 +128,7 @@ def is_positive_int(length):
     if not isinstance(length, int):
         raise ValueError('{0} is not numeric.'.format(length))
     if length <= 0:
-        raise ValueError('{0} is an invalid \'length\'.'.format(length))
+        raise ValueError('{0} is an invalid length.'.format(length))
 
 
 def unicode_letters_generator(smp=True):

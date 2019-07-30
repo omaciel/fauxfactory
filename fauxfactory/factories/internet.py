@@ -94,7 +94,7 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
         raise ValueError(
             'Prefix {} would lead to no randomness at all'.format(
                 repr(prefix)))
-    elif rng < 0:
+    if rng < 0:
         raise ValueError(
             'Prefix {} is too long for this configuration'.format(
                 repr(prefix)))
