@@ -3,6 +3,11 @@
 Release History
 ===============
 
+3.0.6 (2019-07-30)
+------------------
+
+- Change travis deploy credentials to token
+
 3.0.5 (2019-07-30)
 ------------------
 
