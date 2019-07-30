@@ -5,7 +5,7 @@ FauxFactory
    :target: https://travis-ci.org/omaciel/fauxfactory
    :alt: Build Status
 
-.. image:: https://pypip.in/py_versions/fauxfactory/badge.png
+.. image:: https://img.shields.io/pypi/pyversions/fauxfactory.svg
    :target: https://pypi.python.org/pypi/fauxfactory
    :alt: Python Compatibility
 
@@ -13,7 +13,7 @@ FauxFactory
    :target: http://badge.fury.io/py/fauxfactory
    :alt: Current Version
 
-.. image:: https://pypip.in/d/fauxfactory/badge.png
+.. image:: https://img.shields.io/pypi/dm/fauxfactory.svg
    :target: https://crate.io/packages/fauxfactory/
    :alt: Download Statistics
 
@@ -21,7 +21,7 @@ FauxFactory
    :target: https://coveralls.io/r/omaciel/fauxfactory?branch=master
    :alt: Test Coverage
 
-.. image:: https://pypip.in/license/fauxfactory/badge.png
+.. image:: https://img.shields.io/pypi/l/fauxfactory.svg
    :target: https://pypi.python.org/pypi/fauxfactory/
    :alt: License
 
