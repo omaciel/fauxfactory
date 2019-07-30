@@ -22,8 +22,7 @@ deploy:
   # mshriver owned
   user: "@token"
   distributions: sdist bdist_wheel
-  password: 
-    pypi: "AgEIcHlwaS5vcmcCJDA5OWM5YzdlLWZjMDItNDI5OS1iYjIyLTEzODVlNjZkZjk5YgACPHsicGVybWlzc2lvbnMiOiB7InByb2plY3RzIjogWyJmYXV4ZmFjdG9yeSJdfSwgInZlcnNpb24iOiAxfQAABiB4bqeyKIWAgAYE09oFlAFQU9tlJiUDRIaXJEvQxXlmsg"
+  password: "pypi:AgEIcHlwaS5vcmcCJDA5OWM5YzdlLWZjMDItNDI5OS1iYjIyLTEzODVlNjZkZjk5YgACPHsicGVybWlzc2lvbnMiOiB7InByb2plY3RzIjogWyJmYXV4ZmFjdG9yeSJdfSwgInZlcnNpb24iOiAxfQAABiB4bqeyKIWAgAYE09oFlAFQU9tlJiUDRIaXJEvQxXlmsg"
   on:
     tags: true
     repo: omaciel/fauxfactory
