@@ -20,9 +20,10 @@ deploy:
   provider: pypi
   skip_existing: true
   # mshriver owned
-  user: "@token"
+  user: mshriver
   distributions: sdist bdist_wheel
-  password: "pypi:AgEIcHlwaS5vcmcCJDA5OWM5YzdlLWZjMDItNDI5OS1iYjIyLTEzODVlNjZkZjk5YgACPHsicGVybWlzc2lvbnMiOiB7InByb2plY3RzIjogWyJmYXV4ZmFjdG9yeSJdfSwgInZlcnNpb24iOiAxfQAABiB4bqeyKIWAgAYE09oFlAFQU9tlJiUDRIaXJEvQxXlmsg"
+  password:
+    secure: "Hy941hCWVzI61chaGA1n77tNhJK7eT0ePpzZCO2i9bWzoakhlzwUTaPNupFiFSfx1ao3CXo8fpBEY9czNNGgi8rK9w5wwZrGA87mp+ugWfWgqfDhmW83MKvutGvjqLwyAXwauTRcOMdFErnO2eZuXGYPltfj4hoQCZ5jku+XZts="
   on:
     tags: true
     repo: omaciel/fauxfactory
