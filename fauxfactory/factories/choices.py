@@ -34,11 +34,16 @@ def gen_choice(choices):
 
 
 @check_validation
-def gen_uuid():
+def gen_uuid(start=None, separator="-"):
     """Generate a UUID string (universally unique identifiers).
 
+    :param str start: Random data start with.
+    :param str separator: Separator character for start and random data.
     :returns: Returns a string representation for a UUID.
     :rtype: str
 
     """
-    return str(uuid.uuid4())
+    output_string = str(uuid.uuid4())
+    if start:
+        output_string = f"{start}{separator}{output_string}"
+    return output_string
