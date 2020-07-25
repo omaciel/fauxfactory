@@ -180,7 +180,7 @@ def gen_html(length=10, include_tags=True):
 
     if not include_tags:
         if length < 8:
-            raise ValueError(u'Cannot generate html with less than 7 chars')
+            raise ValueError('Cannot generate html with less than 7 chars')
         maybe_len = length - len('<{0}></{0}>'.format(html_tag))
         if maybe_len <= 0:
             length -= 7
