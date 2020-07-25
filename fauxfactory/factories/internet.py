@@ -124,7 +124,7 @@ def gen_mac(delimiter=':', multicast=None, locally=None):
     locally administered MAC addresses are generated check this link
     https://en.wikipedia.org/wiki/MAC_address.
 
-    :param str delimeter: Valid MAC delimeter (e.g ':', '-').
+    :param str delimiter: Valid MAC delimiter (e.g ':', '-').
     :param bool multicast: Indicates if the generated MAC address should be
         unicast or multicast. If no value is provided a random one will be
         chosen.
@@ -197,7 +197,7 @@ def gen_url(scheme=None, subdomain=None, tlds=None):
     """Generate a random URL address.
 
     :param str scheme: Either http, https or ftp.
-    :param str subdomain: A valid subdmain
+    :param str subdomain: A valid subdomain
     :param str tlds: A qualified top level domain name (e.g. 'com', 'net')
     :raises: ``ValueError`` if arguments are not valid.
     :returns: A random URL address.
