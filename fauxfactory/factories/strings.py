@@ -337,7 +337,7 @@ def gen_utf8(length=10, smp=True, start=None, separator=''):
     .. _`RFC 3629`: http://www.rfc-editor.org/rfc/rfc3629.txt
 
     """
-    UNICODE_LETTERS = [c for c in unicode_letters_generator(smp)]
+    UNICODE_LETTERS = list(unicode_letters_generator(smp))
     random.seed()
     output_string = ''.join(
         [random.choice(UNICODE_LETTERS) for _ in range(length)]
