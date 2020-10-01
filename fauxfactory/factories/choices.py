@@ -42,3 +42,10 @@ def gen_uuid():
 
     """
     return str(uuid.uuid4())
+
+
+__all__ = [name for name in locals() if name.startswith('gen_')]
+
+
+def __dir__():
+    return __all__

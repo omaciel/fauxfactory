@@ -13,3 +13,7 @@ def gen_boolean():
     choices = (True, False)
 
     return gen_choice(choices)
+
+
+__all__ = [name for name in locals() if name.startswith('gen_')]
+

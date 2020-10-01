@@ -369,3 +369,10 @@ def gen_special(length=10, start=None, separator=''):
         output_string = '{0}{1}{2}'.format(
             start, separator, output_string)[0:length]
     return output_string
+
+
+__all__ = [name for name in locals() if name.startswith('gen_')]
+
+
+def __dir__():
+    return __all__
