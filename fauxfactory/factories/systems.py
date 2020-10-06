@@ -235,7 +235,7 @@ def gen_system_facts(name=None):
     return host
 
 
-__all__ = [name for name in locals() if name.startswith('gen_')]
+__all__ = tuple(name for name in locals() if name.startswith('gen_'))
 
 
 def __dir__():

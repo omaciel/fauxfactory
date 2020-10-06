@@ -234,7 +234,7 @@ def gen_url(scheme=None, subdomain=None, tlds=None):
     return url
 
 
-__all__ = [name for name in locals() if name.startswith('gen_')]
+__all__ = tuple(name for name in locals() if name.startswith('gen_'))
 
 
 def __dir__():
