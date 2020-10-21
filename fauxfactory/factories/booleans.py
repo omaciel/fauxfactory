@@ -16,4 +16,3 @@ def gen_boolean():
 
 
 __all__ = tuple(name for name in locals() if name.startswith('gen_'))
-

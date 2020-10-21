@@ -1,11 +1,20 @@
 """Generate random data for your tests."""
-from fauxfactory.factories.booleans import *
-from fauxfactory.factories.choices import *
-from fauxfactory.factories.dates import *
-from fauxfactory.factories.internet import *
-from fauxfactory.factories.numbers import *
-from fauxfactory.factories.strings import *
-from fauxfactory.factories.systems import *
+
+# Note flake8 do not like star imports. It makes tracking down the file/module
+# containg the symbol much harder than with explicit imports. This is an issue
+# especially for a human reader. As symbols in this file were always taken from
+# submodules dynamically this problem was there before introducing the start
+# imports. Star imports seem to not be a problem for (perhaps) smarter tools
+# like PyCharm and using them improves the analysis and navigation trough
+# the code.
+
+from fauxfactory.factories.booleans import *  # noqa: F401, F403
+from fauxfactory.factories.choices import *  # noqa: F401, F403
+from fauxfactory.factories.dates import *  # noqa: F401, F403
+from fauxfactory.factories.internet import *  # noqa: F401, F403
+from fauxfactory.factories.numbers import *  # noqa: F401, F403
+from fauxfactory.factories.strings import *  # noqa: F401, F403
+from fauxfactory.factories.systems import *  # noqa: F401, F403
 
 
 # Add all method names to __all__
