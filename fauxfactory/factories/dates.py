@@ -96,3 +96,10 @@ def gen_time():
         random.randint(0, 59),
         random.randint(0, 999999),
     )
+
+
+__all__ = tuple(name for name in locals() if name.startswith('gen_'))
+
+
+def __dir__():
+    return __all__

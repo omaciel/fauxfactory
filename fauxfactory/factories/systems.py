@@ -233,3 +233,10 @@ def gen_system_facts(name=None):
     host['dmi::system::uuid'] = host['uuid']
 
     return host
+
+
+__all__ = tuple(name for name in locals() if name.startswith('gen_'))
+
+
+def __dir__():
+    return __all__

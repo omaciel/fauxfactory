@@ -232,3 +232,10 @@ def gen_url(scheme=None, subdomain=None, tlds=None):
     url = u'{0}://{1}.{2}'.format(scheme, subdomain, tlds)
 
     return url
+
+
+__all__ = tuple(name for name in locals() if name.startswith('gen_'))
+
+
+def __dir__():
+    return __all__
