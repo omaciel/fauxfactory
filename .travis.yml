@@ -19,6 +19,7 @@ notifications:
 deploy:
   provider: pypi
   skip_existing: true
+  skip_cleanup: true
   # mshriver owned
   user: mshriver
   distributions: sdist bdist_wheel

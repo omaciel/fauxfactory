@@ -3,6 +3,12 @@
 Release History
 ===============
 
+3.1.0 (2020-11-10)
+------------------
+
+- Support static analysis and type annotation
+- CI dropped Python 3.5
+
 3.0.6 (2019-07-30)
 ------------------
 
