@@ -128,11 +128,30 @@ def gen_cjk(length=10, start=None, separator=''):
 
     """
     random.seed()
+    
+    # These should represent the ranges for valid CJK characters
+    unicode_block = (
+        # CJK Unified Ideographs
+        (0x4E00, 0x9FFF),
+        # CJK Unified Ideographs Extension A
+        (0x3400, 0x4DBF),
+        # CJK Unified Ideographs Extension B
+        (0x20000, 0x2A6DF),
+        # CJK Unified Ideographs Extension C
+        (0x2A700, 0x2B73F),
+        # CJK Unified Ideographs Extension D
+        (0x2B740, 0x2B81F),
+    )
 
-    # Generate codepoints, then convert the codepoints to a string. The
-    # valid range of CJK codepoints is 0x4E00 - 0x9FCC, inclusive.
-    codepoints = [random.randint(0x4E00, 0x9FCC) for _ in range(length)]
-    output_string = ''.join(chr(codepoint) for codepoint in codepoints)
+    output_array = []
+
+    for code_block in unicode_block:
+        for i in range(*code_block):
+            output_array.append(i)
+
+    output_string =''.join(
+        chr(random.choice(output_array)) for _ in range(length)
+    )
 
     if start:
         output_string = '{0}{1}{2}'.format(
