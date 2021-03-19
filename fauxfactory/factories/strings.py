@@ -128,7 +128,7 @@ def gen_cjk(length=10, start=None, separator=''):
 
     """
     random.seed()
-    
+
     # These should represent the ranges for valid CJK characters
     unicode_block = (
         # CJK Unified Ideographs
@@ -149,7 +149,7 @@ def gen_cjk(length=10, start=None, separator=''):
         for i in range(*code_block):
             output_array.append(i)
 
-    output_string =''.join(
+    output_string = ''.join(
         chr(random.choice(output_array)) for _ in range(length)
     )
 
