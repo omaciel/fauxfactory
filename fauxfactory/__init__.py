@@ -23,3 +23,9 @@ __all__ = tuple(name for name in locals() if name.startswith('gen_'))
 
 def __dir__():
     return __all__
+
+
+def __getattr__(name):
+    if name in __all__:
+        return locals()[name]
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
