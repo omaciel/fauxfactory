@@ -12,7 +12,7 @@ from fauxfactory.helpers import (
 
 
 def gen_string(str_type, length=None, validator=None, default=None, tries=10):
-    """A simple wrapper that calls other string generation methods.
+    """Call other string generation methods.
 
     :param str str_type: The type of string which should be generated.
     :param int length: The length of the generated string. Must be 1 or
@@ -55,10 +55,11 @@ def gen_string(str_type, length=None, validator=None, default=None, tries=10):
         'punctuation': gen_special,
     }
     str_type_lower = str_type.lower()  # do not modify user data
-    if str_type_lower not in str_types_functions.keys():
+    if str_type_lower not in str_types_functions:
         raise ValueError(
-            '{0} is not a supported string type. Valid string types are {1}.'
-            ''.format(str_type_lower, ','.join(str_types_functions.keys()))
+            f'{str_type_lower} is not a supported string type. '
+            'Valid string types are {0}.'
+            .format(','.join(str_types_functions.keys()))
         )
     method = str_types_functions[str_type_lower]
     if length is None:
@@ -84,8 +85,7 @@ def gen_alpha(length=10, start=None, separator=''):
     )
 
     if start:
-        output_string = '{0}{1}{2}'.format(
-            start, separator, output_string)[0:length]
+        output_string = f'{start}{separator}{output_string}'[0:length]
     return output_string
 
 
@@ -108,8 +108,7 @@ def gen_alphanumeric(length=10, start=None, separator=''):
         ) for _ in range(length))
 
     if start:
-        output_string = '{0}{1}{2}'.format(
-            start, separator, output_string)[0:length]
+        output_string = f'{start}{separator}{output_string}'[0:length]
     return output_string
 
 
@@ -154,8 +153,7 @@ def gen_cjk(length=10, start=None, separator=''):
     )
 
     if start:
-        output_string = '{0}{1}{2}'.format(
-            start, separator, output_string)[0:length]
+        output_string = f'{start}{separator}{output_string}'[0:length]
     return output_string
 
 
@@ -179,8 +177,7 @@ def gen_cyrillic(length=10, start=None, separator=''):
     output_string = ''.join(chr(codepoint) for codepoint in codepoints)
 
     if start:
-        output_string = '{0}{1}{2}'.format(
-            start, separator, output_string)[0:length]
+        output_string = f'{start}{separator}{output_string}'[0:length]
     return output_string
 
 
@@ -200,17 +197,19 @@ def gen_html(length=10, include_tags=True):
     if not include_tags:
         if length < 8:
             raise ValueError('Cannot generate html with less than 7 chars')
-        maybe_len = length - len('<{0}></{0}>'.format(html_tag))
+        maybe_len = length - len(f'<{html_tag}></{html_tag}>')
         if maybe_len <= 0:
             length -= 7
             html_tag = 'a'
         else:
             length = maybe_len
-        output_string = u'<{0}>{1}</{0}>'.format(
-            html_tag, gen_string('alpha', length))
+        output_string = (
+            f'<{html_tag}>{gen_string("alpha", length)}</{html_tag}>'
+        )
     else:
-        output_string = '<{0}>{1}</{0}>'.format(
-            html_tag, gen_string('alpha', length))
+        output_string = (
+            f'<{html_tag}>{gen_string("alpha", length)}</{html_tag}>'
+        )
 
     return output_string
 
@@ -252,10 +251,10 @@ def gen_iplum(words=None, paragraphs=None):
     # Pool of words to use
     all_words = all_words * (quotient + modulus)
 
-    result = u''
+    result = ''
     start_pos = 0
     for _ in range(0, paragraphs):
-        sentence = u' '.join(
+        sentence = ' '.join(
             all_words[start_pos:start_pos + words])
 
         # Remove comma from the end, if it exists
@@ -267,10 +266,10 @@ def gen_iplum(words=None, paragraphs=None):
 
         # Each sentence should be properly capitalized
         cap_sentence = [
-            frag.capitalize() + u'.' for frag in sentence.split('. ')]
+            frag.capitalize() + '.' for frag in sentence.split('. ')]
 
         # Add newline at the end
-        result += ' '.join(cap_sentence) + u'\n'
+        result += ' '.join(cap_sentence) + '\n'
 
         # Increment positional counter
         start_pos += words
@@ -310,8 +309,7 @@ def gen_latin1(length=10, start=None, separator=''):
     )
 
     if start:
-        output_string = '{0}{1}{2}'.format(
-            start, separator, output_string)[0:length]
+        output_string = f'{start}{separator}{output_string}'[0:length]
     return output_string
 
 
@@ -333,8 +331,7 @@ def gen_numeric_string(length=10, start=None, separator=''):
     )
 
     if start:
-        output_string = '{0}{1}{2}'.format(
-            start, separator, output_string)[0:length]
+        output_string = f'{start}{separator}{output_string}'[0:length]
     return output_string
 
 
@@ -363,8 +360,7 @@ def gen_utf8(length=10, smp=True, start=None, separator=''):
     )
 
     if start:
-        output_string = '{0}{1}{2}'.format(
-            start, separator, output_string)[0:length]
+        output_string = f'{start}{separator}{output_string}'[0:length]
     return output_string
 
 
@@ -385,8 +381,7 @@ def gen_special(length=10, start=None, separator=''):
     )
 
     if start:
-        output_string = '{0}{1}{2}'.format(
-            start, separator, output_string)[0:length]
+        output_string = f'{start}{separator}{output_string}'[0:length]
     return output_string
 
 

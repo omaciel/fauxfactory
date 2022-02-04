@@ -12,7 +12,7 @@ from fauxfactory.helpers import check_validation
 
 @check_validation
 def decorated_f():
-    """Simple decorated function to test validation method."""
+    """Test validation method with this simple decorated function."""
     return 'not a number'
 
 

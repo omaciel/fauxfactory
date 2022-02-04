@@ -26,15 +26,15 @@ def add_memory_info(count=None):
     free_ram = (gen_integer(min_value=4, max_value=count))
 
     return {
-        'dmi::memory::size': '{}'.format(free_ram * 1024),
-        'memoryfree': '{} GB'.format(free_ram),
-        'memoryfree_mb': '{}'.format(free_ram * 1024),
-        'memorysize': '{} GB'.format(count),
-        'memorysize_mb': '{}'.format(count * 1024),
-        'swapfree': '{} GB'.format(free_ram),
-        'swapfree_mb': '{}'.format(free_ram * 1024),
-        'swapsize': '{} GB'.format(count),
-        'swapsize_mb': '{}'.format(count * 1024),
+        'dmi::memory::size': f'{free_ram * 1024}',
+        'memoryfree': f'{free_ram} GB',
+        'memoryfree_mb': f'{free_ram * 1024}',
+        'memorysize': f'{count} GB',
+        'memorysize_mb': f'{count * 1024}',
+        'swapfree': f'{free_ram} GB',
+        'swapfree_mb': f'{free_ram * 1024}',
+        'swapsize': f'{count} GB',
+        'swapsize_mb': f'{count * 1024}',
     }
 
 
@@ -91,16 +91,16 @@ def add_operating_system(name=None, family=None, major=None, minor=None):
             'release': {
                 'major': major,
                 'minor': minor,
-                'full': '{}.{}'.format(major, minor)
+                'full': f'{major}.{minor}'
             }
         },
         'operatingsystem': name,
         'operatingsystemmajrelease': major,
-        'operatingsystemrelease': '{}.{}'.format(major, minor),
+        'operatingsystemrelease': f'{major}.{minor}',
         'osfamily': family,
         'distribution::id': gen_alpha(),
         'distribution::name': name,
-        'distribution::version': '{}.{}'.format(major, minor),
+        'distribution::version': f'{major}.{minor}',
 
     }
 
@@ -124,7 +124,7 @@ def add_partitions(extra_partitions=None):
             device_id = idx + 1
             partitions['partitions'].update(
                 {
-                    'sdb{}'.format(device_id): {
+                    f'sdb{device_id}': {
                         'size': '975747072',
                         'filesystem': 'LVM2_member',
                     }})
@@ -159,8 +159,7 @@ def add_processor_info(count=None):
 
     # Add processors info based on total processors
     for idx in range(count):
-        processors['processor{}'.format(
-            idx)] = 'Intel(R) Xeon(R) CPU E31220 @ 3.10GHz'
+        processors[f'processor{idx}'] = 'Intel(R) Xeon(R) CPU E31220 @ 3.10GHz'
         processors['processors']['models'].append(
             'Intel(R) Xeon(R) CPU E31220 @ 3.10GHz')
     return processors
@@ -181,8 +180,9 @@ def gen_system_facts(name=None):
     else:
         fqdn = gen_domain(*name.split('.'))
 
-    kernel = '{}.{}.{}'.format(
-        *[gen_integer(min_value=0, max_value=9) for _ in range(3)])
+    kernel = '.'.join(
+        [f'{gen_integer(min_value=0, max_value=9)}' for _ in range(3)]
+    )
 
     host = deepcopy(FACTS_JSON)
 
@@ -194,10 +194,9 @@ def gen_system_facts(name=None):
     host['hardwareisa'] = host['architecture']
     host['hardwaremodel'] = host['architecture']
     host['kernelmajversion'] = '.'.join(kernel.split('.')[:2])
-    host['kernelrelease'] = '{}-{}.{}'.format(
-        kernel,
-        gen_integer(min_value=0, max_value=999),
-        host['architecture']
+    host['kernelrelease'] = (
+        f'{kernel}-'
+        f'{gen_integer(min_value=0, max_value=999)}.{host["architecture"]}'
     )
     host['kernelversion'] = kernel
 
@@ -214,16 +213,16 @@ def gen_system_facts(name=None):
     host['path'] = (
         '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/sbin')
 
-    host['productname'] = '{}'.format(gen_alpha())
+    host['productname'] = f'{gen_alpha()}'
     host['dmi::system::product_name'] = host['productname']
     host['dmi::baseboard::product_name'] = host['productname']
-    host['serialnumber'] = '{}'.format(gen_alphanumeric())
+    host['serialnumber'] = f'{gen_alphanumeric()}'
     host['timezone'] = 'EDT'
-    host['uniqueid'] = '{}'.format(gen_alphanumeric())
+    host['uniqueid'] = f'{gen_alphanumeric()}'
     host['uptime_days'] = gen_integer(min_value=1, max_value=1974)
     host['uptime_hours'] = host['uptime_days'] * 24
     host['uptime_seconds'] = host['uptime_hours'] * 3600
-    host['uptime'] = '{} days'.format(host['uptime_days'])
+    host['uptime'] = f'{host["uptime_days"]} days'
     host['system_uptime'] = {
         'seconds': host['uptime_seconds'],
         'hours': host['uptime_hours'],

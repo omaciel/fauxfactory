@@ -155,7 +155,7 @@ def test_special_string():
 
 @pytest.mark.parametrize('fnc', GENERATORS[1:])
 def test_start_string(fnc):
-    """"String generated has start with specific keyword."""
+    """String generated has start with specific keyword."""
     start = fnc(randint(1, 5))
     separator = fnc(1)
     random_str = fnc(start=start, separator=separator)

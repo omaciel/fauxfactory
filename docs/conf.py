@@ -59,8 +59,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'FauxFactory'
-copyright = u'2014-2017, Og Maciel'  # pylint:disable=redefined-builtin
+project = 'FauxFactory'
+copyright = '2014-2017, Og Maciel'  # pylint:disable=redefined-builtin
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -229,8 +229,8 @@ latex_elements = {
 latex_documents = [(
     'index',
     'FauxFactory.tex',
-    u'FauxFactory Documentation',
-    u'Og Maciel',
+    'FauxFactory Documentation',
+    'Og Maciel',
     'manual'
 )]
 
@@ -260,7 +260,7 @@ latex_documents = [(
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [(
-    'index', 'fauxfactory', u'FauxFactory Documentation', [u'Og Maciel'], 1
+    'index', 'fauxfactory', 'FauxFactory Documentation', ['Og Maciel'], 1
 )]
 
 # If true, show URL addresses after external links.
@@ -275,8 +275,8 @@ man_pages = [(
 texinfo_documents = [(
     'index',
     'FauxFactory',
-    u'FauxFactory Documentation',
-    u'Og Maciel',
+    'FauxFactory Documentation',
+    'Og Maciel',
     'FauxFactory',
     'FauxFactory generates random data for your automated tests easily!',
     'Miscellaneous'
