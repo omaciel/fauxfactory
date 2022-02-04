@@ -31,9 +31,9 @@ def gen_integer(min_value=None, max_value=None):
 
     # Perform some validations
     if not isinstance(min_value, integer_types) or min_value < _min_value:
-        raise ValueError('"{0}" is not a valid minimum.'.format(min_value))
+        raise ValueError(f'"{min_value}" is not a valid minimum.')
     if not isinstance(max_value, integer_types) or max_value > _max_value:
-        raise ValueError('"{0}" is not a valid maximum.'.format(max_value))
+        raise ValueError(f'"{max_value}" is not a valid maximum.')
 
     random.seed()
     value = random.randint(min_value, max_value)

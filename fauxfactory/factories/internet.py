@@ -30,7 +30,7 @@ def gen_domain(name=None, subdomain=None, tlds=None):
     if tlds is None:
         tlds = gen_choice(TLDS)
 
-    return '{}.{}.{}'.format(name, subdomain, tlds)
+    return f'{name}.{subdomain}.{tlds}'
 
 
 @check_validation
@@ -54,7 +54,7 @@ def gen_email(name=None, domain=None, tlds=None):
     if tlds is None:
         tlds = gen_choice(TLDS)
 
-    email = '{0}@{1}.{2}'.format(name, domain, tlds)
+    email = f'{name}@{domain}.{tlds}'
 
     return email
 
@@ -92,19 +92,16 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
     rng -= len(prefix)
     if rng == 0:
         raise ValueError(
-            'Prefix {} would lead to no randomness at all'.format(
-                repr(prefix)))
+            f'Prefix {prefix!r} would lead to no randomness at all')
     if rng < 0:
         raise ValueError(
-            'Prefix {} is too long for this configuration'.format(
-                repr(prefix)))
-
+            f'Prefix {prefix!r} is too long for this configuration')
     random.seed()
 
     if ipv6:
         # StackOverflow.com questions: generate-random-ipv6-address
         random_fields = [
-            '{0:x}'.format(random.randint(0, 2 ** 16 - 1)) for _ in range(rng)]
+            f'{random.randint(0, 2 ** 16 - 1):x}' for _ in range(rng)]
         ipaddr = ':'.join(prefix + random_fields)
     else:
         random_fields = [str(random.randrange(0, 255, 1)) for _ in range(rng)]
@@ -136,7 +133,7 @@ def gen_mac(delimiter=':', multicast=None, locally=None):
 
     """
     if delimiter not in [':', '-']:
-        raise ValueError('Delimiter is not a valid option: %s' % delimiter)
+        raise ValueError(f'Delimiter is not a valid option: {delimiter}')
     random.seed()
     if multicast is None:
         multicast = bool(random.randint(0, 1))
@@ -159,7 +156,7 @@ def gen_mac(delimiter=':', multicast=None, locally=None):
 
     octets = [first_octet]
     octets.extend(random.randint(0, 255) for _ in range(5))
-    mac = delimiter.join(['{0:02x}'.format(octet) for octet in octets])
+    mac = delimiter.join([f'{octet:02x}' for octet in octets])
 
     return mac
 
@@ -181,12 +178,12 @@ def gen_netmask(min_cidr=1, max_cidr=31):
     """
     if min_cidr < 0:
         raise ValueError(
-            'min_cidr must be 0 or greater, but is {0}'.format(min_cidr)
+            f'min_cidr must be 0 or greater, but is {min_cidr}'
         )
     if max_cidr >= len(VALID_NETMASKS):
         raise ValueError(
-            'max_cidr must be less than {0}, but is {1}'
-            .format(len(VALID_NETMASKS), max_cidr)
+            f'max_cidr must be less than {len(VALID_NETMASKS)}, '
+            f'but is {max_cidr}'
         )
     random.seed()
     return VALID_NETMASKS[random.randint(min_cidr, max_cidr)]
@@ -213,23 +210,23 @@ def gen_url(scheme=None, subdomain=None, tlds=None):
 
     if scheme:
         if schemenator.match(scheme) is None:
-            raise ValueError('Protocol {0} is not valid.'.format(scheme))
+            raise ValueError(f'Protocol {scheme} is not valid.')
     else:
         scheme = gen_choice(SCHEMES)
 
     if subdomain:
         if subdomainator.match(subdomain) is None:
-            raise ValueError('Subdomain {0} is invalid.'.format(subdomain))
+            raise ValueError(f'Subdomain {subdomain} is invalid.')
     else:
         subdomain = gen_choice(SUBDOMAINS)
 
     if tlds:
         if tldsnator.match(tlds) is None:
-            raise ValueError('TLDS name {0} is invalid.'.format(tlds))
+            raise ValueError(f'TLDS name {tlds} is invalid.')
     else:
         tlds = gen_choice(TLDS)
 
-    url = u'{0}://{1}.{2}'.format(scheme, subdomain, tlds)
+    url = f'{scheme}://{subdomain}.{tlds}'
 
     return url
 

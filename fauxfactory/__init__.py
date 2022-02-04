@@ -28,4 +28,4 @@ def __dir__():
 def __getattr__(name):
     if name in __all__:
         return locals()[name]
-    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+    raise AttributeError(f'module {__name__!r} has no attribute {name!r}')

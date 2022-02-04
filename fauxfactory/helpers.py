@@ -58,10 +58,10 @@ def check_len(fnc):
     """Validate generators requiring a `length` argument."""
     @wraps(fnc)
     def wrapped(*args, **kwargs):
-        """"Make sure that we verify the `length` argument."""
+        """Make sure that we verify the `length` argument."""
         if args and len(args) == 1:
             is_positive_int(args[0])
-        if 'length' in kwargs.keys():
+        if 'length' in kwargs:
             if kwargs.get('length') is not None:
                 is_positive_int(kwargs.get('length'))
 
@@ -126,9 +126,9 @@ def is_positive_int(length):
 
     """
     if not isinstance(length, int):
-        raise ValueError('{0} is not numeric.'.format(length))
+        raise ValueError(f'{length} is not numeric.')
     if length <= 0:
-        raise ValueError('{0} is an invalid length.'.format(length))
+        raise ValueError(f'{length} is an invalid length.')
 
 
 def unicode_letters_generator(smp=True):
