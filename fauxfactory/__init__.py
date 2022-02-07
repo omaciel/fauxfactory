@@ -17,8 +17,12 @@ from fauxfactory.factories.strings import *  # noqa: F401, F403
 from fauxfactory.factories.systems import *  # noqa: F401, F403
 
 
+__factories = {
+    name: obj for name, obj in locals().items() if name.startswith('gen_')
+}
+
 # Add all method names to __all__
-__all__ = tuple(name for name in locals() if name.startswith('gen_'))
+__all__ = tuple(__factories.keys())
 
 
 def __dir__():
@@ -26,6 +30,6 @@ def __dir__():
 
 
 def __getattr__(name):
-    if name in __all__:
-        return locals()[name]
+    if name in __factories:
+        return __factories[name]
     raise AttributeError(f'module {__name__!r} has no attribute {name!r}')
