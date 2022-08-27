@@ -53,8 +53,7 @@ def test_gen_mac_6():
 def test_gen_mac_7():
     """Generate a MAC address using a letter as the delimiter."""
     with pytest.raises(ValueError):
-        gen_mac(
-            delimiter=random.choice(string.ascii_letters))
+        gen_mac(delimiter=random.choice(string.ascii_letters))
 
 
 # pylint: disable=C0103

@@ -8,6 +8,9 @@ from collections.abc import Iterable
 from fauxfactory.helpers import check_validation
 
 
+random.seed()
+
+
 def gen_choice(choices):
     """Return a random choice from the available choices.
 
@@ -29,7 +32,6 @@ def gen_choice(choices):
     if len(choices) == 1:
         return choices[0]
 
-    random.seed()
     return random.choice(choices)
 
 
