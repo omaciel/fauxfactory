@@ -6,6 +6,9 @@ import random
 from fauxfactory.constants import MAX_YEARS, MIN_YEARS
 
 
+random.seed()
+
+
 def gen_date(min_date=None, max_date=None):
     """Return a random date value.
 
@@ -34,8 +37,6 @@ def gen_date(min_date=None, max_date=None):
 
     # Check that max_date is not before min_date
     assert min_date < max_date
-
-    random.seed()
 
     # Pick a day between min and max dates
     diff = max_date - min_date
@@ -74,8 +75,6 @@ def gen_datetime(min_date=None, max_date=None):
     # Check that max_date is not before min_date
     assert min_date < max_date
 
-    random.seed()
-
     # Pick a time between min and max dates
     diff = max_date - min_date
     seconds = random.randint(0, diff.days * 3600 * 24 + diff.seconds)
@@ -89,7 +88,6 @@ def gen_time():
     :returns: A random ``datetime.time`` object.
 
     """
-    random.seed()
     return datetime.time(
         random.randint(0, 23),
         random.randint(0, 59),

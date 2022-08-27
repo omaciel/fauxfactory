@@ -10,6 +10,9 @@ from .choices import gen_choice
 from .strings import gen_alpha
 
 
+random.seed()
+
+
 def gen_domain(name=None, subdomain=None, tlds=None):
     """Generate a random domain name.
 
@@ -96,7 +99,6 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
     if rng < 0:
         raise ValueError(
             f'Prefix {prefix!r} is too long for this configuration')
-    random.seed()
 
     if ipv6:
         # StackOverflow.com questions: generate-random-ipv6-address
@@ -134,7 +136,6 @@ def gen_mac(delimiter=':', multicast=None, locally=None):
     """
     if delimiter not in [':', '-']:
         raise ValueError(f'Delimiter is not a valid option: {delimiter}')
-    random.seed()
     if multicast is None:
         multicast = bool(random.randint(0, 1))
     if locally is None:
@@ -185,7 +186,6 @@ def gen_netmask(min_cidr=1, max_cidr=31):
             f'max_cidr must be less than {len(VALID_NETMASKS)}, '
             f'but is {max_cidr}'
         )
-    random.seed()
     return VALID_NETMASKS[random.randint(min_cidr, max_cidr)]
 
 

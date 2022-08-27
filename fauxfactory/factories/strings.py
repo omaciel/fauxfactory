@@ -11,6 +11,9 @@ from fauxfactory.helpers import (
     )
 
 
+random.seed()
+
+
 def gen_string(str_type, length=None, validator=None, default=None, tries=10):
     """Call other string generation methods.
 
@@ -79,13 +82,10 @@ def gen_alpha(length=10, start=None, separator=''):
     :rtype: str
 
     """
-    random.seed()
-    output_string = ''.join(
-        random.choice(string.ascii_letters) for _ in range(length)
-    )
+    output_string = ''.join(random.choices(string.ascii_letters, k=length))
 
     if start:
-        output_string = f'{start}{separator}{output_string}'[0:length]
+        output_string = f'{start}{separator}{output_string}'[:length]
     return output_string
 
 
@@ -101,14 +101,14 @@ def gen_alphanumeric(length=10, start=None, separator=''):
     :rtype: str
 
     """
-    random.seed()
     output_string = ''.join(
-        random.choice(
-            string.ascii_letters + string.digits
-        ) for _ in range(length))
+        random.choices(
+            string.ascii_letters + string.digits, k=length
+        )
+    )
 
     if start:
-        output_string = f'{start}{separator}{output_string}'[0:length]
+        output_string = f'{start}{separator}{output_string}'[:length]
     return output_string
 
 
@@ -126,8 +126,6 @@ def gen_cjk(length=10, start=None, separator=''):
     :rtype: str
 
     """
-    random.seed()
-
     # These should represent the ranges for valid CJK characters
     unicode_block = (
         # CJK Unified Ideographs
@@ -148,9 +146,7 @@ def gen_cjk(length=10, start=None, separator=''):
         for i in range(*code_block):
             output_array.append(i)
 
-    output_string = ''.join(
-        chr(random.choice(output_array)) for _ in range(length)
-    )
+    output_string = ''.join(map(chr, random.choices(output_array, k=length)))
 
     if start:
         output_string = f'{start}{separator}{output_string}'[0:length]
@@ -169,8 +165,6 @@ def gen_cyrillic(length=10, start=None, separator=''):
     :rtype: str
 
     """
-    random.seed()
-
     # Generate codepoints, then convert the codepoints to a string. The
     # valid range of Cyrillic codepoints is 0x0400 - 0x04FF, inclusive.
     codepoints = [random.randint(0x0400, 0x04FF) for _ in range(length)]
@@ -191,7 +185,6 @@ def gen_html(length=10, include_tags=True):
     :rtype: str
 
     """
-    random.seed()
     html_tag = random.choice(HTML_TAGS)
 
     if not include_tags:
@@ -303,10 +296,7 @@ def gen_latin1(length=10, start=None, separator=''):
     for i in range(int(range2[0], 16), int(range2[1], 16)):
         output_array.append(i)
 
-    random.seed()
-    output_string = ''.join(
-        chr(random.choice(output_array)) for _ in range(length)
-    )
+    output_string = ''.join(map(chr, random.choices(output_array, k=length)))
 
     if start:
         output_string = f'{start}{separator}{output_string}'[0:length]
@@ -325,10 +315,7 @@ def gen_numeric_string(length=10, start=None, separator=''):
     :rtype: str
 
     """
-    random.seed()
-    output_string = ''.join(
-        random.choice(string.digits) for _ in range(length)
-    )
+    output_string = ''.join(random.choices(string.digits, k=length))
 
     if start:
         output_string = f'{start}{separator}{output_string}'[0:length]
@@ -354,10 +341,7 @@ def gen_utf8(length=10, smp=True, start=None, separator=''):
 
     """
     UNICODE_LETTERS = list(unicode_letters_generator(smp))
-    random.seed()
-    output_string = ''.join(
-        [random.choice(UNICODE_LETTERS) for _ in range(length)]
-    )
+    output_string = ''.join(random.choices(UNICODE_LETTERS, k=length))
 
     if start:
         output_string = f'{start}{separator}{output_string}'[0:length]
@@ -375,10 +359,7 @@ def gen_special(length=10, start=None, separator=''):
     :returns: A random string made up of special characters.
     :rtype: str
     """
-    random.seed()
-    output_string = ''.join(
-        random.choice(string.punctuation) for _ in range(length)
-    )
+    output_string = ''.join(random.choices(string.punctuation, k=length))
 
     if start:
         output_string = f'{start}{separator}{output_string}'[0:length]
