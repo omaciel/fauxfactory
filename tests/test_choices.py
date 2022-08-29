@@ -28,7 +28,9 @@ def test_gen_choice_2(item):
 @pytest.mark.parametrize('item', range(10))
 def test_gen_choice_3(item):
     """Select a random value from short list."""
-    choices = [1, ]
+    choices = [
+        1,
+    ]
 
     result = gen_choice(choices)
     assert result == choices[0]
@@ -46,7 +48,7 @@ def test_gen_choice_4(item):
 @pytest.mark.parametrize('item', range(10))
 def test_gen_choice_5(item):
     """Select a random value from short tuple."""
-    choices = (1, )
+    choices = (1,)
 
     result = gen_choice(choices)
     assert result == choices[0]
@@ -55,7 +57,17 @@ def test_gen_choice_5(item):
 @pytest.mark.parametrize('item', range(10))
 def test_gen_choice_6(item):
     """Select a random value from longer tuple."""
-    choices = (1, 2, 3, 9, 10, 11, 100, 101, 102, )
+    choices = (
+        1,
+        2,
+        3,
+        9,
+        10,
+        11,
+        100,
+        101,
+        102,
+    )
 
     result = gen_choice(choices)
     assert result in choices
@@ -109,7 +121,7 @@ def test_gen_choice_11(item):
 @pytest.mark.parametrize('item', range(10))
 def test_gen_choice_12(item):
     """Select a random value from words list."""
-    choices = ['green', 'yellow', 'blue' 'white']
+    choices = ['green', 'yellow', 'blue', 'white']
 
     result = gen_choice(choices)
     assert result in choices

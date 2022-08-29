@@ -8,7 +8,7 @@ from fauxfactory.helpers import (
     check_validation,
     is_positive_int,
     unicode_letters_generator,
-    )
+)
 
 
 random.seed()
@@ -61,8 +61,7 @@ def gen_string(str_type, length=None, validator=None, default=None, tries=10):
     if str_type_lower not in str_types_functions:
         raise ValueError(
             f'{str_type_lower} is not a supported string type. '
-            'Valid string types are {0}.'
-            .format(','.join(str_types_functions.keys()))
+            'Valid string types are {0}.'.format(','.join(str_types_functions.keys()))
         )
     method = str_types_functions[str_type_lower]
     if length is None:
@@ -101,11 +100,7 @@ def gen_alphanumeric(length=10, start=None, separator=''):
     :rtype: str
 
     """
-    output_string = ''.join(
-        random.choices(
-            string.ascii_letters + string.digits, k=length
-        )
-    )
+    output_string = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
     if start:
         output_string = f'{start}{separator}{output_string}'[:length]
@@ -196,13 +191,9 @@ def gen_html(length=10, include_tags=True):
             html_tag = 'a'
         else:
             length = maybe_len
-        output_string = (
-            f'<{html_tag}>{gen_string("alpha", length)}</{html_tag}>'
-        )
+        output_string = f'<{html_tag}>{gen_string("alpha", length)}</{html_tag}>'
     else:
-        output_string = (
-            f'<{html_tag}>{gen_string("alpha", length)}</{html_tag}>'
-        )
+        output_string = f'<{html_tag}>{gen_string("alpha", length)}</{html_tag}>'
 
     return output_string
 
@@ -229,8 +220,7 @@ def gen_iplum(words=None, paragraphs=None):
         paragraphs = 1
 
     if not isinstance(words, int) or words < 0:
-        raise ValueError(
-            'Cannot generate a string with negative number of words.')
+        raise ValueError('Cannot generate a string with negative number of words.')
     is_positive_int(paragraphs)
 
     # Original Lorem Ipsum string
@@ -247,8 +237,7 @@ def gen_iplum(words=None, paragraphs=None):
     result = ''
     start_pos = 0
     for _ in range(0, paragraphs):
-        sentence = ' '.join(
-            all_words[start_pos:start_pos + words])
+        sentence = ' '.join(all_words[start_pos : start_pos + words])
 
         # Remove comma from the end, if it exists
         if sentence.endswith(','):
@@ -258,8 +247,7 @@ def gen_iplum(words=None, paragraphs=None):
             sentence = sentence.rstrip('.')
 
         # Each sentence should be properly capitalized
-        cap_sentence = [
-            frag.capitalize() + '.' for frag in sentence.split('. ')]
+        cap_sentence = [frag.capitalize() + '.' for frag in sentence.split('. ')]
 
         # Add newline at the end
         result += ' '.join(cap_sentence) + '\n'
@@ -340,8 +328,8 @@ def gen_utf8(length=10, smp=True, start=None, separator=''):
     .. _`RFC 3629`: http://www.rfc-editor.org/rfc/rfc3629.txt
 
     """
-    UNICODE_LETTERS = list(unicode_letters_generator(smp))
-    output_string = ''.join(random.choices(UNICODE_LETTERS, k=length))
+    unicode_letters = list(unicode_letters_generator(smp))
+    output_string = ''.join(random.choices(unicode_letters, k=length))
 
     if start:
         output_string = f'{start}{separator}{output_string}'[0:length]

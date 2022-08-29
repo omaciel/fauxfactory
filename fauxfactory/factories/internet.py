@@ -94,16 +94,13 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
     # of it from the rng to keep the IP address have correct number of fields
     rng -= len(prefix)
     if rng == 0:
-        raise ValueError(
-            f'Prefix {prefix!r} would lead to no randomness at all')
+        raise ValueError(f'Prefix {prefix!r} would lead to no randomness at all')
     if rng < 0:
-        raise ValueError(
-            f'Prefix {prefix!r} is too long for this configuration')
+        raise ValueError(f'Prefix {prefix!r} is too long for this configuration')
 
     if ipv6:
         # StackOverflow.com questions: generate-random-ipv6-address
-        random_fields = [
-            f'{random.randint(0, 2 ** 16 - 1):x}' for _ in range(rng)]
+        random_fields = [f'{random.randint(0, 2 ** 16 - 1):x}' for _ in range(rng)]
         ipaddr = ':'.join(prefix + random_fields)
     else:
         random_fields = [str(random.randrange(0, 255, 1)) for _ in range(rng)]
@@ -178,14 +175,9 @@ def gen_netmask(min_cidr=1, max_cidr=31):
 
     """
     if min_cidr < 0:
-        raise ValueError(
-            f'min_cidr must be 0 or greater, but is {min_cidr}'
-        )
+        raise ValueError(f'min_cidr must be 0 or greater, but is {min_cidr}')
     if max_cidr >= len(VALID_NETMASKS):
-        raise ValueError(
-            f'max_cidr must be less than {len(VALID_NETMASKS)}, '
-            f'but is {max_cidr}'
-        )
+        raise ValueError(f'max_cidr must be less than {len(VALID_NETMASKS)}, ' f'but is {max_cidr}')
     return VALID_NETMASKS[random.randint(min_cidr, max_cidr)]
 
 

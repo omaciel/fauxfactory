@@ -13,9 +13,7 @@ def read(*paths):
         return handle.read()
 
 
-LONG_DESCRIPTION = (read('README.rst') + '\n\n' +
-                    read('AUTHORS.rst') + '\n\n' +
-                    read('HISTORY.rst'))
+LONG_DESCRIPTION = read('README.rst') + '\n\n' + read('AUTHORS.rst') + '\n\n' + read('HISTORY.rst')
 
 setup(
     name='fauxfactory',

@@ -30,7 +30,7 @@ GENERATORS = [
     gen_numeric_string,
     gen_utf8,
     gen_special,
-    ]
+]
 
 STRING_TYPES = [
     'html',
@@ -42,7 +42,7 @@ STRING_TYPES = [
     'numeric',
     'utf8',
     'punctuation',
-    ]
+]
 
 
 @pytest.mark.parametrize('fnc', GENERATORS)
@@ -159,6 +159,6 @@ def test_start_string(fnc):
     start = fnc(randint(1, 5))
     separator = fnc(1)
     random_str = fnc(start=start, separator=separator)
-    assert start == random_str[0:len(start)]
+    assert start == random_str[: len(start)]
     assert separator == random_str[len(start)]
     assert len(random_str) == 10

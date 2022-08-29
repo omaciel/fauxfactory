@@ -19,10 +19,8 @@ def gen_date(min_date=None, max_date=None):
     :returns: Random ``datetime.date`` object.
 
     """
-    _min_value = (datetime.date.today() -
-                  datetime.timedelta(365 * MIN_YEARS))
-    _max_value = (datetime.date.today() +
-                  datetime.timedelta(365 * MAX_YEARS))
+    _min_value = datetime.date.today() - datetime.timedelta(365 * MIN_YEARS)
+    _max_value = datetime.date.today() + datetime.timedelta(365 * MAX_YEARS)
 
     if min_date is None:
         min_date = _min_value
@@ -56,10 +54,8 @@ def gen_datetime(min_date=None, max_date=None):
     :returns: Random ``datetime.datetime`` object.
 
     """
-    _min_value = (datetime.datetime.now() -
-                  datetime.timedelta(365 * MIN_YEARS))
-    _max_value = (datetime.datetime.now() +
-                  datetime.timedelta(365 * MAX_YEARS))
+    _min_value = datetime.datetime.now() - datetime.timedelta(365 * MIN_YEARS)
+    _max_value = datetime.datetime.now() + datetime.timedelta(365 * MAX_YEARS)
 
     if min_date is None:
         min_date = _min_value

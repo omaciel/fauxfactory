@@ -73,8 +73,7 @@ def test_gen_loremipsum_10():
     for _ in range(20):
         words = random.randint(1, 500)
         paragraphs = random.randint(1, 500)
-        result = gen_iplum(
-            words=words, paragraphs=paragraphs)
+        result = gen_iplum(words=words, paragraphs=paragraphs)
         assert len(result.split('\n')) == paragraphs
         for sentence in result.split('\n'):
             assert len(sentence.split()) == words
