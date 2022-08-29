@@ -10,11 +10,7 @@ def test_generate_domain():
 
 def test_generate_domain_with_attributes():
     """Create valid domain names."""
-    domain = gen_domain(
-        name='faux',
-        subdomain='example',
-        tlds='biz'
-    )
+    domain = gen_domain(name='faux', subdomain='example', tlds='biz')
     assert len(domain.split('.')) == 3
     assert domain.split('.')[0] == 'faux'
     assert domain.split('.')[1] == 'example'

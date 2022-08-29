@@ -44,7 +44,7 @@ Release History
 
 - Make `gen_utf8` return optionally only BMP characters
   (6201b63)
-- Don't install tests into the binary distribution 
+- Don't install tests into the binary distribution
   (b291873, @evgeni)
 - Use floor division operator in base_repr for Python 3
   compatibility (914178a, @gshefer)

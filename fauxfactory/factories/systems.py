@@ -23,7 +23,7 @@ def add_memory_info(count=None):
     else:
         is_positive_int(count)
 
-    free_ram = (gen_integer(min_value=4, max_value=count))
+    free_ram = gen_integer(min_value=4, max_value=count)
 
     return {
         'dmi::memory::size': f'{free_ram * 1024}',
@@ -88,11 +88,7 @@ def add_operating_system(name=None, family=None, major=None, minor=None):
         'os': {
             'name': name,
             'family': family,
-            'release': {
-                'major': major,
-                'minor': minor,
-                'full': f'{major}.{minor}'
-            }
+            'release': {'major': major, 'minor': minor, 'full': f'{major}.{minor}'},
         },
         'operatingsystem': name,
         'operatingsystemmajrelease': major,
@@ -101,7 +97,6 @@ def add_operating_system(name=None, family=None, major=None, minor=None):
         'distribution::id': gen_alpha(),
         'distribution::name': name,
         'distribution::version': f'{major}.{minor}',
-
     }
 
 
@@ -109,12 +104,7 @@ def add_partitions(extra_partitions=None):
     """Generate fake partitions facts."""
     partitions = {
         'partitions': {
-            'sda1': {
-                'uuid': gen_uuid(),
-                'size': '1024000',
-                'mount': '/boot',
-                'filesystem': 'xfs'
-            },
+            'sda1': {'uuid': gen_uuid(), 'size': '1024000', 'mount': '/boot', 'filesystem': 'xfs'},
         }
     }
 
@@ -127,7 +117,9 @@ def add_partitions(extra_partitions=None):
                     f'sdb{device_id}': {
                         'size': '975747072',
                         'filesystem': 'LVM2_member',
-                    }})
+                    }
+                }
+            )
     return partitions
 
 
@@ -160,8 +152,7 @@ def add_processor_info(count=None):
     # Add processors info based on total processors
     for idx in range(count):
         processors[f'processor{idx}'] = 'Intel(R) Xeon(R) CPU E31220 @ 3.10GHz'
-        processors['processors']['models'].append(
-            'Intel(R) Xeon(R) CPU E31220 @ 3.10GHz')
+        processors['processors']['models'].append('Intel(R) Xeon(R) CPU E31220 @ 3.10GHz')
     return processors
 
 
@@ -180,9 +171,7 @@ def gen_system_facts(name=None):
     else:
         fqdn = gen_domain(*name.split('.'))
 
-    kernel = '.'.join(
-        [f'{gen_integer(min_value=0, max_value=9)}' for _ in range(3)]
-    )
+    kernel = '.'.join([f'{gen_integer(min_value=0, max_value=9)}' for _ in range(3)])
 
     host = deepcopy(FACTS_JSON)
 
@@ -195,8 +184,7 @@ def gen_system_facts(name=None):
     host['hardwaremodel'] = host['architecture']
     host['kernelmajversion'] = '.'.join(kernel.split('.')[:2])
     host['kernelrelease'] = (
-        f'{kernel}-'
-        f'{gen_integer(min_value=0, max_value=999)}.{host["architecture"]}'
+        f'{kernel}-' f'{gen_integer(min_value=0, max_value=999)}.{host["architecture"]}'
     )
     host['kernelversion'] = kernel
 
@@ -210,8 +198,7 @@ def gen_system_facts(name=None):
 
     host.update(add_processor_info())
 
-    host['path'] = (
-        '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/sbin')
+    host['path'] = '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/sbin'
 
     host['productname'] = f'{gen_alpha()}'
     host['dmi::system::product_name'] = host['productname']
@@ -227,7 +214,8 @@ def gen_system_facts(name=None):
         'seconds': host['uptime_seconds'],
         'hours': host['uptime_hours'],
         'days': host['uptime_days'],
-        'uptime': host['uptime']}
+        'uptime': host['uptime'],
+    }
     host['uuid'] = gen_uuid()
     host['dmi::system::uuid'] = host['uuid']
 

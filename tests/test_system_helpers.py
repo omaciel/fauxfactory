@@ -1,4 +1,3 @@
-
 """Tests for system facts helpers."""
 import pytest
 
@@ -71,12 +70,7 @@ def test_add_random_operating_system():
 # Operating Systems
 def test_add_random_operating_system_with_attributes():
     """Get facts for a random operating system with all attributes."""
-    facts = add_operating_system(
-        name='Fedora',
-        family='Red Hat',
-        major=25,
-        minor=1
-    )
+    facts = add_operating_system(name='Fedora', family='Red Hat', major=25, minor=1)
     assert facts['operatingsystem'] == 'Fedora'
     assert facts['osfamily'] == 'Red Hat'
     assert facts['os']['release']['major'] == 25

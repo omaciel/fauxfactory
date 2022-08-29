@@ -27,4 +27,3 @@ Contributors
 - Milan Falešník `@mfalesni <https://github.com/mfalesni/>`_
 - Nikhil Dhandre `@digitronik <https://github.com/digitronik/>`_
 - Mike Shriver `@mshriver <https://github.com/mshriver/>`_
-

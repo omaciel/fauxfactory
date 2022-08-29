@@ -28,4 +28,3 @@ deploy:
   on:
     tags: true
     repo: omaciel/fauxfactory
-

@@ -19,7 +19,7 @@ def gen_integer(min_value=None, max_value=None):
 
     """
     # Platform-specific value range for integers
-    _min_value = - sys.maxsize - 1
+    _min_value = -sys.maxsize - 1
     _max_value = sys.maxsize
 
     if min_value is None:
@@ -72,10 +72,13 @@ def gen_number(min_value=None, max_value=None, base=10):
     :rtype: str
 
     """
-    return base_repr(gen_integer(
-        int(str(min_value), base=base) if min_value is not None else min_value,
-        int(str(max_value), base=base) if max_value is not None else max_value,
-    ), base)
+    return base_repr(
+        gen_integer(
+            int(str(min_value), base=base) if min_value is not None else min_value,
+            int(str(max_value), base=base) if max_value is not None else max_value,
+        ),
+        base,
+    )
 
 
 gen_octagonal = partial(gen_number, base=8)

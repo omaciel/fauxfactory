@@ -17,15 +17,14 @@ from fauxfactory import (
 )
 
 
-GenFuncDataSet = namedtuple('GenFuncDataSet',
-                            ['gen_func', 'expect_type', 'base'])
+GenFuncDataSet = namedtuple('GenFuncDataSet', ['gen_func', 'expect_type', 'base'])
 GenFuncDataSets = [
     GenFuncDataSet(gen_hexadecimal, str, 16),
     GenFuncDataSet(gen_integer, int, 10),
     GenFuncDataSet(gen_octagonal, str, 8),
     GenFuncDataSet(partial(gen_number, base=2), str, 2),
     GenFuncDataSet(partial(gen_number, base=5), str, 5),
-    GenFuncDataSet(partial(gen_number, base=19), str, 19)
+    GenFuncDataSet(partial(gen_number, base=19), str, 19),
 ]
 
 
@@ -36,17 +35,20 @@ def test_base_repr_small_base(base):
         base_repr(1, base)
 
 
-@pytest.mark.parametrize('number, base, result', [
-    (10, 10, '10'),
-    (1, 2, '1'),
-    (7, 6, '11'),
-    (16, 8, '20'),
-    (3, 3, '10'),
-    (21, 20, '11'),
-    (123, 12, 'a3'),
-    (139, 16, '8b'),
-    (0, 10, '0'),
-])
+@pytest.mark.parametrize(
+    'number, base, result',
+    [
+        (10, 10, '10'),
+        (1, 2, '1'),
+        (7, 6, '11'),
+        (16, 8, '20'),
+        (3, 3, '10'),
+        (21, 20, '11'),
+        (123, 12, 'a3'),
+        (139, 16, '8b'),
+        (0, 10, '0'),
+    ],
+)
 def test_base_repr(number, base, result):
     """Return base representation for a number."""
     assert base_repr(number, base) == result
@@ -57,8 +59,7 @@ def test_gen_number_1(data_set):
     """Create a random number with no range limits."""
     result = data_set.gen_func()
     assert isinstance(result, data_set.expect_type)
-    assert set(str(result).lower()).issubset(
-        set(VALID_DIGITS[:data_set.base] + '-'))
+    assert set(str(result).lower()).issubset(set(VALID_DIGITS[: data_set.base] + '-'))
 
 
 @pytest.mark.parametrize('data_set', GenFuncDataSets)
@@ -70,8 +71,7 @@ def test_gen_number_2(data_set):
         sys.maxsize = 5
 
         for _ in range(10):
-            result = int(str(data_set.gen_func(min_value=1)),
-                         base=data_set.base)
+            result = int(str(data_set.gen_func(min_value=1)), base=data_set.base)
             assert result <= sys.maxsize
             assert result >= 1
     finally:
@@ -86,13 +86,13 @@ def test_gen_number_3(data_set):
         # Change system max int to a smaller number
         old_sys_maxsize = sys.maxsize
         sys.maxsize = 1000
-        min_value = - sys.maxsize - 1
+        min_value = -sys.maxsize - 1
 
-        max_value_based = (1000 if data_set.gen_func is gen_integer
-                           else base_repr(1000, data_set.base))
+        max_value_based = (
+            1000 if data_set.gen_func is gen_integer else base_repr(1000, data_set.base)
+        )
         for _ in range(10):
-            result = int(str(data_set.gen_func(
-                max_value=max_value_based)), base=data_set.base)
+            result = int(str(data_set.gen_func(max_value=max_value_based)), base=data_set.base)
             assert result >= min_value
             assert result <= 1000
     finally:
@@ -103,12 +103,11 @@ def test_gen_number_3(data_set):
 @pytest.mark.parametrize('data_set', GenFuncDataSets)
 def test_gen_number_4(data_set):
     """Create a random number with set min/max limits."""
-    max_value_based = (3000 if data_set.gen_func is gen_integer
-                       else base_repr(3000, data_set.base))
+    max_value_based = 3000 if data_set.gen_func is gen_integer else base_repr(3000, data_set.base)
     for _ in range(10):
-        result = int(str(data_set.gen_func(
-            min_value=1, max_value=max_value_based)),
-                     base=data_set.base)
+        result = int(
+            str(data_set.gen_func(min_value=1, max_value=max_value_based)), base=data_set.base
+        )
         assert result >= 1
         assert result <= 3000
 
@@ -116,7 +115,7 @@ def test_gen_number_4(data_set):
 def test_gen_integer_1():
     """Create a random integer with disallowed minimum limit."""
     # This is lower than allowed platform minimum
-    low_min = - sys.maxsize - 2
+    low_min = -sys.maxsize - 2
 
     with pytest.raises(ValueError):
         gen_integer(min_value=low_min)

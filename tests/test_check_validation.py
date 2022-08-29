@@ -10,6 +10,7 @@ from fauxfactory.helpers import check_validation
 # pylint: disable=invalid-name
 # pylint: disable=E1123
 
+
 @check_validation
 def decorated_f():
     """Test validation method with this simple decorated function."""
@@ -38,25 +39,17 @@ def test_callable():
     my_callable = mock.Mock(return_value=False)
 
     # Default of 10 unsuccessful tries
-    assert decorated_f(
-        validator=my_callable,
-        default='my default') == 'my default'
+    assert decorated_f(validator=my_callable, default='my default') == 'my default'
     my_callable.assert_called_with('not a number')
     assert my_callable.call_count == 10
 
     # 1 unsuccessful try
     my_callable.reset_mock()
-    assert decorated_f(
-        validator=my_callable,
-        default='my default',
-        tries=1) == 'my default'
+    assert decorated_f(validator=my_callable, default='my default', tries=1) == 'my default'
     my_callable.assert_called_once_with('not a number')
 
     # 1 successful try
     my_callable.reset_mock()
     my_callable.return_value = True
-    assert decorated_f(
-        validator=my_callable,
-        default='my default',
-        tries=10) == 'not a number'
+    assert decorated_f(validator=my_callable, default='my default', tries=10) == 'not a number'
     my_callable.assert_called_once_with('not a number')

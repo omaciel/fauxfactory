@@ -1,4 +1,3 @@
-
 """Tests for system facts generator."""
 
 import re

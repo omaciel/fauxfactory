@@ -56,6 +56,7 @@ def base_repr(number, base):
 
 def check_len(fnc):
     """Validate generators requiring a `length` argument."""
+
     @wraps(fnc)
     def wrapped(*args, **kwargs):
         """Make sure that we verify the `length` argument."""
@@ -68,6 +69,7 @@ def check_len(fnc):
         result = fnc(*args, **kwargs)
 
         return result
+
     return wrapped
 
 
@@ -80,6 +82,7 @@ def check_validation(fcn):
     :param fcn: function to be enhanced
     :return: decorated function
     """
+
     @wraps(fcn)
     def validate(*args, **kwargs):
         """Perform the validation on decorated function."""
@@ -87,16 +90,20 @@ def check_validation(fcn):
         default = kwargs.get('default')
         tries = kwargs.get('tries', 10)
         if validator and default is None:
-            raise ValueError('If "validator" param is defined, "default" '
-                             'parameter must not be None')
+            raise ValueError(
+                'If "validator" param is defined, "default" parameter must not be None'
+            )
         if validator is None:
+
             def validator_fcn(_):
                 """No validation passed."""
                 return True
+
         else:
             validator_fcn = validator
 
         if not callable(validator_fcn):
+
             def regex_validator(value):
                 """Perform RegEx validation."""
                 return re.match(validator, value)
