@@ -3,6 +3,14 @@
 Release History
 ===============
 
+3.1.1 (2024-03-26)
+------------------
+
+- Dropping support for Python 3.6, 3.7; added 3.11, 3.12.
+- Several code linting and smell checks.
+- Improve execution time of some key methods
+- Better selection for CJK characters.
+
 3.1.0 (2020-11-10)
 ------------------
 

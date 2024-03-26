@@ -2,9 +2,11 @@ dist: xenial
 sudo: false
 language: python
 python:
-    - 3.6
-    - 3.7
-    - 3.8
+    - 3.9
+    - 3.10
+    - 3.11
+    - 3.12
+
 install:
     - pip install -U pip
     - pip install -r requirements-optional.txt
