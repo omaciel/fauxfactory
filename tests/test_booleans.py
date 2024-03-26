@@ -1,4 +1,5 @@
 """Tests for all boolean generators."""
+
 import pytest
 
 from fauxfactory import gen_boolean

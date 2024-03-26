@@ -1,4 +1,5 @@
 """Tests for system facts helpers."""
+
 import pytest
 
 from fauxfactory.factories.systems import (

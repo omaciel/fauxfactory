@@ -1,4 +1,5 @@
 """Unittests for all methods found in `utils.py`."""
+
 import pytest
 
 from fauxfactory.helpers import is_positive_int

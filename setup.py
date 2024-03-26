@@ -1,4 +1,5 @@
 """A setuptools-based script for installing FauxFactory."""
+
 # setuptools is preferred over distutils.
 import codecs
 import os

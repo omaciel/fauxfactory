@@ -1,4 +1,5 @@
 """Tests for all string generators."""
+
 import string
 import unicodedata
 from random import randint

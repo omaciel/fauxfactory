@@ -1,4 +1,5 @@
 """Collection of computer systems generating functions."""
+
 from copy import deepcopy
 
 from fauxfactory.constants import FACTS_JSON

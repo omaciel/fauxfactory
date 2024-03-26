@@ -3,7 +3,6 @@
 These tests are heavily just artificial tests to get 100% coverage.
 """
 
-
 import os
 import os.path
 import fauxfactory.factories

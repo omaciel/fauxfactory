@@ -6,6 +6,7 @@
     example, a CIDR of "/1" corresponds to `VALID_NETMASKS[1]`.
 
 """
+
 # The above constant descriptions can be found by Sphinx and via help().
 import datetime
 import json

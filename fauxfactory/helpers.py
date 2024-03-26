@@ -1,4 +1,5 @@
 """Collection of helper methods and functions."""
+
 import re
 import unicodedata
 

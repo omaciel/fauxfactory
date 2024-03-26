@@ -1,4 +1,5 @@
 """Collection of string generating functions."""
+
 import random
 import string
 

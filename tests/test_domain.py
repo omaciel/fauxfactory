@@ -1,4 +1,5 @@
 """Tests for domain generator."""
+
 from fauxfactory import gen_domain
 
 
