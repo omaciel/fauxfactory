@@ -11,13 +11,13 @@ help:
 all: test-all lint docs-clean docs-html package-clean package
 
 docs-clean:
-	cd docs && $(MAKE) clean
+	cd docs && rm -rf _build/*
 
 docs-doctest:
-	cd docs && $(MAKE) doctest
+	cd docs && rye run sphinx-build -b doctest -d _build/doctrees   . _build/doctest
 
 docs-html:
-	cd docs && $(MAKE) html
+	cd docs && rye run sphinx-build -b html -d _build/doctrees   . _build/html
 
 format:
 	rye run ruff format -v .
