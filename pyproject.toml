@@ -6,17 +6,6 @@ description = "Generates random data for your tests."
 authors = [
     { name = "Og B. Maciel", email = "omaciel@ogmaciel.com" }
 ]
-dependencies = [
-    "black>=24.3.0",
-    "flake8>=7.0.0",
-    "sphinx>=7.1.2",
-    "codecov>=2.1.13",
-    "pytest>=8.1.1",
-    "pytest-cov>=5.0.0",
-    "wheel>=0.43.0",
-    "twine>=5.0.0",
-    "setuptools>=69.2.0",
-]
 readme = "README.rst"
 requires-python = ">= 3.8"
 
@@ -39,6 +28,8 @@ classifiers = [
         "Programming Language :: Python :: 3.12",
         "Topic :: Software Development :: Testing",
 ]
+dependencies = [
+]
 
 [project.urls]
 Changelog = "https://github.com/omaciel/fauxfactory/blob/main/HISTORY.rst"
@@ -51,7 +42,18 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = []
+dev-dependencies = [
+    "black>=24.3.0",
+    "pytest>=8.1.1",
+    "flake8>=7.0.0",
+    "sphinx>=7.1.2",
+    "codecov>=2.1.13",
+    "pytest>=8.1.1",
+    "pytest-cov>=5.0.0",
+    "wheel>=0.43.0",
+    "twine>=5.0.0",
+    "ruff>=0.3.4",
+]
 
 [tool.hatch.metadata]
 allow-direct-references = true
@@ -60,19 +62,21 @@ allow-direct-references = true
 packages = ["fauxfactory"]
 macos-max-compat = true
 
-[tool.black]
-line-length = 100
-skip-string-normalization = true
-include = '\.pyi?$'
-exclude = '''
-/(
-    \.git
-  | \.hg
-  | \.mypy_cache
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-)/
-'''
+[tool.ruff]
+include = ["*.py"]
+
+[tool.ruff.lint]
+ignore = ["E203"]
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.rye.scripts]
+test-all = { cmd = "py.test -v --cov-report term-missing --cov=fauxfactory" }
+check = { cmd = "ruff check ." }
+lint = { chain = ["lint:black", "lint:flake8" ] }
+"lint:black" = "black --check fauxfactory"
+"lint:flake8" = "flake8 fauxfactory"
+

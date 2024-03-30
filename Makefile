@@ -3,8 +3,8 @@ help:
 	@echo "  docs-clean    Remove documentation."
 	@echo "  docs-doctest  Check code samples in the documentation."
 	@echo "  docs-html     Compile documentation to HTML."
-	@echo "  flake         Run flake8."
-	@echo "  lint          Run flake8 and pylint."
+	@echo "  format         Run format8."
+	@echo "  lint          Run format8 and pylint."
 	@echo "  test          Run unit tests."
 	@echo "  test-all      Run unit tests and doctests, measure coverage."
 
@@ -19,28 +19,25 @@ docs-doctest:
 docs-html:
 	cd docs && $(MAKE) html
 
-flake:
-	flake8 .
+format:
+	rye run ruff format -v .
 
-lint: flake
-	pylint --reports=n --disable=I --ignore-imports=y fauxfactory docs/conf.py setup.py
-# pylint should also lint the tests/ directory.
+lint: format
+	rye run ruff check -v .
 
 package:
-	python setup.py sdist bdist_wheel
+	rye build
 
 package-clean:
-	rm -rf build dist fauxfactory.egg-info
+	rye build --clean
 
 publish:
-	python setup.py register
-	python setup.py sdist upload -s
-	python setup.py bdist_wheel upload -s
+	rye publish
 
 test:
-	py.test -v
+	rye run py.test -v
 
 test-all:
-	py.test -v --cov-report term-missing --cov=fauxfactory
+	rye run py.test -v --cov-report term-missing --cov=fauxfactory
 
-.PHONY: help docs-clean docs-doctest docs-html flake lint package package-clean publish test test-all
+.PHONY: help docs-clean docs-doctest docs-html format lint package package-clean publish test test-all
