@@ -20,13 +20,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - uses: actions/checkout@v4
-      - name: Install a specific version
+      - name: Install Rye
         uses: eifinger/setup-rye@v2
       - name: Install dependencies
         run: |
           rye sync
-      - name: Pre Commit Checks
-        uses: pre-commit/action@v3.0.0
       - name: Run checks
         run: |
           make all
