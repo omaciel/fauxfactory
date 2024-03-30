@@ -12,7 +12,7 @@ def test_gen_loremipsum_1():
     """Create a complete lorem ipsum string."""
     result = gen_iplum()
     assert result == LOREM_IPSUM_TEXT
-    assert result.startswith('Lorem ipsum')
+    assert result.startswith("Lorem ipsum")
 
 
 def test_gen_loremipsum_2():
@@ -28,7 +28,7 @@ def test_gen_loremipsum_3():
     for _ in range(20):
         length = random.randint(1, 20)
         result = gen_iplum(paragraphs=length)
-        assert len(result.split('\n')) == length
+        assert len(result.split("\n")) == length
 
 
 def test_gen_loremipsum_4():
@@ -59,13 +59,13 @@ def test_gen_loremipsum_7():
 def test_gen_loremipsum_8():
     """Create a lorem ipsum string with non-integer words."""
     with pytest.raises(ValueError):
-        gen_iplum(words='a')
+        gen_iplum(words="a")
 
 
 def test_gen_loremipsum_9():
     """Create a lorem ipsum string with non-integer paragraphs."""
     with pytest.raises(ValueError):
-        gen_iplum(paragraphs='a')
+        gen_iplum(paragraphs="a")
 
 
 def test_gen_loremipsum_10():
@@ -74,6 +74,6 @@ def test_gen_loremipsum_10():
         words = random.randint(1, 500)
         paragraphs = random.randint(1, 500)
         result = gen_iplum(words=words, paragraphs=paragraphs)
-        assert len(result.split('\n')) == paragraphs
-        for sentence in result.split('\n'):
+        assert len(result.split("\n")) == paragraphs
+        for sentence in result.split("\n"):
             assert len(sentence.split()) == words

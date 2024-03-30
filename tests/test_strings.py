@@ -34,93 +34,93 @@ GENERATORS = [
 ]
 
 STRING_TYPES = [
-    'html',
-    'alpha',
-    'alphanumeric',
-    'cjk',
-    'cyrillic',
-    'latin1',
-    'numeric',
-    'utf8',
-    'punctuation',
+    "html",
+    "alpha",
+    "alphanumeric",
+    "cjk",
+    "cyrillic",
+    "latin1",
+    "numeric",
+    "utf8",
+    "punctuation",
 ]
 
 
-@pytest.mark.parametrize('fnc', GENERATORS)
+@pytest.mark.parametrize("fnc", GENERATORS)
 def test_positive_string(fnc):
     """Default string generated is longer than zero characters."""
     assert fnc()
 
 
-@pytest.mark.parametrize('fnc', GENERATORS[1:])
+@pytest.mark.parametrize("fnc", GENERATORS[1:])
 def test_fixed_length_positional(fnc):
     """String generated has correct length of characters."""
     assert len(fnc(10)) == 10
 
 
-@pytest.mark.parametrize('fnc', GENERATORS[1:])
+@pytest.mark.parametrize("fnc", GENERATORS[1:])
 def test_fixed_length_keyword(fnc):
     """String generated has correct length of characters."""
     assert len(fnc(length=10)) == 10
 
 
-@pytest.mark.parametrize('fnc', GENERATORS)
+@pytest.mark.parametrize("fnc", GENERATORS)
 def test_negative_length(fnc):
     """Cannot generate string with negative length of characters."""
     with pytest.raises(ValueError):
         fnc(-1)
 
 
-@pytest.mark.parametrize('fnc', GENERATORS)
+@pytest.mark.parametrize("fnc", GENERATORS)
 def test_zero_length(fnc):
     """Cannot generate string with zero length of characters."""
     with pytest.raises(ValueError):
         fnc(0)
 
 
-@pytest.mark.parametrize('fnc', GENERATORS)
+@pytest.mark.parametrize("fnc", GENERATORS)
 def test_alpha_length(fnc):
     """Cannot generate string with alpha length of characters."""
     with pytest.raises(ValueError):
-        fnc('a')
+        fnc("a")
 
 
-@pytest.mark.parametrize('fnc', GENERATORS)
+@pytest.mark.parametrize("fnc", GENERATORS)
 def test_alphanumeric_length(fnc):
     """Cannot generate string with alphanumeric length of characters."""
     with pytest.raises(ValueError):
-        fnc('-1')
+        fnc("-1")
 
 
-@pytest.mark.parametrize('fnc', GENERATORS)
+@pytest.mark.parametrize("fnc", GENERATORS)
 def test_empty_length(fnc):
     """Cannot generate string with empty length of characters."""
     with pytest.raises(ValueError):
-        fnc('')
+        fnc("")
 
 
-@pytest.mark.parametrize('fnc', GENERATORS)
+@pytest.mark.parametrize("fnc", GENERATORS)
 def test_space_length(fnc):
     """Cannot generate string with space length of characters."""
     with pytest.raises(ValueError):
-        fnc(' ')
+        fnc(" ")
 
 
-@pytest.mark.parametrize('fnc', STRING_TYPES)
+@pytest.mark.parametrize("fnc", STRING_TYPES)
 def test_gen_string(fnc):
     """Use `gen_string` to generate supported string."""
     assert gen_string(fnc)
 
 
 # pylint: disable=invalid-name
-@pytest.mark.parametrize('fnc', STRING_TYPES[1:])
+@pytest.mark.parametrize("fnc", STRING_TYPES[1:])
 def test_gen_string_fixed_length_positional(fnc):
     """Use `gen_string` to generate supported string with expected length."""
     assert len(gen_string(fnc, 5)) == 5
 
 
 # pylint: disable=invalid-name
-@pytest.mark.parametrize('fnc', STRING_TYPES[1:])
+@pytest.mark.parametrize("fnc", STRING_TYPES[1:])
 def test_gen_string_fixed_length_keyword(fnc):
     """Use `gen_string` to generate supported string with explict `length`."""
     assert len(gen_string(fnc, length=5)) == 5
@@ -131,7 +131,7 @@ def test_chars_in_letters_category():
     # Categories extracted from section 5.5.1 of
     # http://www.unicode.org/reports/tr44/tr44-4.html
     for char in unicode_letters_generator():
-        assert unicodedata.category(char) in ('Lu', 'Ll', 'Lt', 'Lm', 'Lo')
+        assert unicodedata.category(char) in ("Lu", "Ll", "Lt", "Lm", "Lo")
 
 
 def test_bmp_chars_only():
@@ -143,7 +143,7 @@ def test_bmp_chars_only():
 def test_invalid_string_type():
     """Only valid string types can be generated."""
     with pytest.raises(ValueError):
-        gen_string('foo')
+        gen_string("foo")
 
 
 def test_special_string():
@@ -154,7 +154,7 @@ def test_special_string():
         assert char in VALID_CHARS
 
 
-@pytest.mark.parametrize('fnc', GENERATORS[1:])
+@pytest.mark.parametrize("fnc", GENERATORS[1:])
 def test_start_string(fnc):
     """String generated has start with specific keyword."""
     start = fnc(randint(1, 5))

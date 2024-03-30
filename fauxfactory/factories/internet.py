@@ -33,7 +33,7 @@ def gen_domain(name=None, subdomain=None, tlds=None):
     if tlds is None:
         tlds = gen_choice(TLDS)
 
-    return f'{name}.{subdomain}.{tlds}'
+    return f"{name}.{subdomain}.{tlds}"
 
 
 @check_validation
@@ -57,7 +57,7 @@ def gen_email(name=None, domain=None, tlds=None):
     if tlds is None:
         tlds = gen_choice(TLDS)
 
-    email = f'{name}@{domain}.{tlds}'
+    email = f"{name}@{domain}.{tlds}"
 
     return email
 
@@ -94,26 +94,26 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
     # of it from the rng to keep the IP address have correct number of fields
     rng -= len(prefix)
     if rng == 0:
-        raise ValueError(f'Prefix {prefix!r} would lead to no randomness at all')
+        raise ValueError(f"Prefix {prefix!r} would lead to no randomness at all")
     if rng < 0:
-        raise ValueError(f'Prefix {prefix!r} is too long for this configuration')
+        raise ValueError(f"Prefix {prefix!r} is too long for this configuration")
 
     if ipv6:
         # StackOverflow.com questions: generate-random-ipv6-address
-        random_fields = [f'{random.randint(0, 2 ** 16 - 1):x}' for _ in range(rng)]
-        ipaddr = ':'.join(prefix + random_fields)
+        random_fields = [f"{random.randint(0, 2 ** 16 - 1):x}" for _ in range(rng)]
+        ipaddr = ":".join(prefix + random_fields)
     else:
         random_fields = [str(random.randrange(0, 255, 1)) for _ in range(rng)]
-        ipaddr = '.'.join(prefix + random_fields)
+        ipaddr = ".".join(prefix + random_fields)
 
         if ip3:
-            ipaddr = ipaddr + '.0'
+            ipaddr = ipaddr + ".0"
 
     return ipaddr
 
 
 @check_validation
-def gen_mac(delimiter=':', multicast=None, locally=None):
+def gen_mac(delimiter=":", multicast=None, locally=None):
     """Generate a random MAC address.
 
     For more information about how unicast or multicast and globally unique and
@@ -131,8 +131,8 @@ def gen_mac(delimiter=':', multicast=None, locally=None):
     :rtype: str
 
     """
-    if delimiter not in [':', '-']:
-        raise ValueError(f'Delimiter is not a valid option: {delimiter}')
+    if delimiter not in [":", "-"]:
+        raise ValueError(f"Delimiter is not a valid option: {delimiter}")
     if multicast is None:
         multicast = bool(random.randint(0, 1))
     if locally is None:
@@ -154,7 +154,7 @@ def gen_mac(delimiter=':', multicast=None, locally=None):
 
     octets = [first_octet]
     octets.extend(random.randint(0, 255) for _ in range(5))
-    mac = delimiter.join([f'{octet:02x}' for octet in octets])
+    mac = delimiter.join([f"{octet:02x}" for octet in octets])
 
     return mac
 
@@ -175,9 +175,11 @@ def gen_netmask(min_cidr=1, max_cidr=31):
 
     """
     if min_cidr < 0:
-        raise ValueError(f'min_cidr must be 0 or greater, but is {min_cidr}')
+        raise ValueError(f"min_cidr must be 0 or greater, but is {min_cidr}")
     if max_cidr >= len(VALID_NETMASKS):
-        raise ValueError(f'max_cidr must be less than {len(VALID_NETMASKS)}, ' f'but is {max_cidr}')
+        raise ValueError(
+            f"max_cidr must be less than {len(VALID_NETMASKS)}, " f"but is {max_cidr}"
+        )
     return VALID_NETMASKS[random.randint(min_cidr, max_cidr)]
 
 
@@ -194,36 +196,36 @@ def gen_url(scheme=None, subdomain=None, tlds=None):
 
     """
     # Regex for subdomain names
-    subdomainator = re.compile(r'^[a-zA-Z0-9][-\w.~]*$')
+    subdomainator = re.compile(r"^[a-zA-Z0-9][-\w.~]*$")
     # Regex for URL scheme
-    schemenator = re.compile(r'^(https?|ftp)$')
+    schemenator = re.compile(r"^(https?|ftp)$")
     # Regex for TLDS
-    tldsnator = re.compile(r'^[a-zA-Z]{1,3}$')
+    tldsnator = re.compile(r"^[a-zA-Z]{1,3}$")
 
     if scheme:
         if schemenator.match(scheme) is None:
-            raise ValueError(f'Protocol {scheme} is not valid.')
+            raise ValueError(f"Protocol {scheme} is not valid.")
     else:
         scheme = gen_choice(SCHEMES)
 
     if subdomain:
         if subdomainator.match(subdomain) is None:
-            raise ValueError(f'Subdomain {subdomain} is invalid.')
+            raise ValueError(f"Subdomain {subdomain} is invalid.")
     else:
         subdomain = gen_choice(SUBDOMAINS)
 
     if tlds:
         if tldsnator.match(tlds) is None:
-            raise ValueError(f'TLDS name {tlds} is invalid.')
+            raise ValueError(f"TLDS name {tlds} is invalid.")
     else:
         tlds = gen_choice(TLDS)
 
-    url = f'{scheme}://{subdomain}.{tlds}'
+    url = f"{scheme}://{subdomain}.{tlds}"
 
     return url
 
 
-__all__ = tuple(name for name in locals() if name.startswith('gen_'))
+__all__ = tuple(name for name in locals() if name.startswith("gen_"))
 
 
 def __dir__():

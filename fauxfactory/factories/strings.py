@@ -48,21 +48,21 @@ def gen_string(str_type, length=None, validator=None, default=None, tries=10):
 
     """
     str_types_functions = {
-        'alpha': gen_alpha,
-        'alphanumeric': gen_alphanumeric,
-        'cjk': gen_cjk,
-        'cyrillic': gen_cyrillic,
-        'html': gen_html,
-        'latin1': gen_latin1,
-        'numeric': gen_numeric_string,
-        'utf8': gen_utf8,
-        'punctuation': gen_special,
+        "alpha": gen_alpha,
+        "alphanumeric": gen_alphanumeric,
+        "cjk": gen_cjk,
+        "cyrillic": gen_cyrillic,
+        "html": gen_html,
+        "latin1": gen_latin1,
+        "numeric": gen_numeric_string,
+        "utf8": gen_utf8,
+        "punctuation": gen_special,
     }
     str_type_lower = str_type.lower()  # do not modify user data
     if str_type_lower not in str_types_functions:
         raise ValueError(
-            f'{str_type_lower} is not a supported string type. '
-            'Valid string types are {0}.'.format(','.join(str_types_functions.keys()))
+            f"{str_type_lower} is not a supported string type. "
+            "Valid string types are {0}.".format(",".join(str_types_functions.keys()))
         )
     method = str_types_functions[str_type_lower]
     if length is None:
@@ -72,7 +72,7 @@ def gen_string(str_type, length=None, validator=None, default=None, tries=10):
 
 @check_len
 @check_validation
-def gen_alpha(length=10, start=None, separator=''):
+def gen_alpha(length=10, start=None, separator=""):
     """Return a random string made up of alpha characters.
 
     :param int length: Length for random data.
@@ -82,16 +82,16 @@ def gen_alpha(length=10, start=None, separator=''):
     :rtype: str
 
     """
-    output_string = ''.join(random.choices(string.ascii_letters, k=length))
+    output_string = "".join(random.choices(string.ascii_letters, k=length))
 
     if start:
-        output_string = f'{start}{separator}{output_string}'[:length]
+        output_string = f"{start}{separator}{output_string}"[:length]
     return output_string
 
 
 @check_len
 @check_validation
-def gen_alphanumeric(length=10, start=None, separator=''):
+def gen_alphanumeric(length=10, start=None, separator=""):
     """Return a random string made up of alpha and numeric characters.
 
     :param int length: Length for random data.
@@ -101,16 +101,18 @@ def gen_alphanumeric(length=10, start=None, separator=''):
     :rtype: str
 
     """
-    output_string = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+    output_string = "".join(
+        random.choices(string.ascii_letters + string.digits, k=length)
+    )
 
     if start:
-        output_string = f'{start}{separator}{output_string}'[:length]
+        output_string = f"{start}{separator}{output_string}"[:length]
     return output_string
 
 
 @check_len
 @check_validation
-def gen_cjk(length=10, start=None, separator=''):
+def gen_cjk(length=10, start=None, separator=""):
     """Return a random string made up of CJK characters.
 
     (Source: Wikipedia - CJK Unified Ideographs)
@@ -142,16 +144,16 @@ def gen_cjk(length=10, start=None, separator=''):
         for i in range(*code_block):
             output_array.append(i)
 
-    output_string = ''.join(map(chr, random.choices(output_array, k=length)))
+    output_string = "".join(map(chr, random.choices(output_array, k=length)))
 
     if start:
-        output_string = f'{start}{separator}{output_string}'[0:length]
+        output_string = f"{start}{separator}{output_string}"[0:length]
     return output_string
 
 
 @check_len
 @check_validation
-def gen_cyrillic(length=10, start=None, separator=''):
+def gen_cyrillic(length=10, start=None, separator=""):
     """Return a random string made up of Cyrillic characters.
 
     :param int length: Length for random data.
@@ -164,10 +166,10 @@ def gen_cyrillic(length=10, start=None, separator=''):
     # Generate codepoints, then convert the codepoints to a string. The
     # valid range of Cyrillic codepoints is 0x0400 - 0x04FF, inclusive.
     codepoints = [random.randint(0x0400, 0x04FF) for _ in range(length)]
-    output_string = ''.join(chr(codepoint) for codepoint in codepoints)
+    output_string = "".join(chr(codepoint) for codepoint in codepoints)
 
     if start:
-        output_string = f'{start}{separator}{output_string}'[0:length]
+        output_string = f"{start}{separator}{output_string}"[0:length]
     return output_string
 
 
@@ -185,11 +187,11 @@ def gen_html(length=10, include_tags=True):
 
     if not include_tags:
         if length < 8:
-            raise ValueError('Cannot generate html with less than 7 chars')
-        maybe_len = length - len(f'<{html_tag}></{html_tag}>')
+            raise ValueError("Cannot generate html with less than 7 chars")
+        maybe_len = length - len(f"<{html_tag}></{html_tag}>")
         if maybe_len <= 0:
             length -= 7
-            html_tag = 'a'
+            html_tag = "a"
         else:
             length = maybe_len
         output_string = f'<{html_tag}>{gen_string("alpha", length)}</{html_tag}>'
@@ -221,7 +223,7 @@ def gen_iplum(words=None, paragraphs=None):
         paragraphs = 1
 
     if not isinstance(words, int) or words < 0:
-        raise ValueError('Cannot generate a string with negative number of words.')
+        raise ValueError("Cannot generate a string with negative number of words.")
     is_positive_int(paragraphs)
 
     # Original Lorem Ipsum string
@@ -235,23 +237,23 @@ def gen_iplum(words=None, paragraphs=None):
     # Pool of words to use
     all_words = all_words * (quotient + modulus)
 
-    result = ''
+    result = ""
     start_pos = 0
     for _ in range(0, paragraphs):
-        sentence = ' '.join(all_words[start_pos : start_pos + words])
+        sentence = " ".join(all_words[start_pos : start_pos + words])
 
         # Remove comma from the end, if it exists
-        if sentence.endswith(','):
-            sentence = sentence.rstrip(',')
+        if sentence.endswith(","):
+            sentence = sentence.rstrip(",")
         # Remove period from the end, if it exists
-        if sentence.endswith('.'):
-            sentence = sentence.rstrip('.')
+        if sentence.endswith("."):
+            sentence = sentence.rstrip(".")
 
         # Each sentence should be properly capitalized
-        cap_sentence = [frag.capitalize() + '.' for frag in sentence.split('. ')]
+        cap_sentence = [frag.capitalize() + "." for frag in sentence.split(". ")]
 
         # Add newline at the end
-        result += ' '.join(cap_sentence) + '\n'
+        result += " ".join(cap_sentence) + "\n"
 
         # Increment positional counter
         start_pos += words
@@ -260,7 +262,7 @@ def gen_iplum(words=None, paragraphs=None):
 
 @check_len
 @check_validation
-def gen_latin1(length=10, start=None, separator=''):
+def gen_latin1(length=10, start=None, separator=""):
     """Return a random string made up of UTF-8 characters.
 
     (Font: Wikipedia - Latin-1 Supplement Unicode Block)
@@ -273,9 +275,9 @@ def gen_latin1(length=10, start=None, separator=''):
 
     """
     range0 = range1 = range2 = []
-    range0 = ['00C0', '00D6']
-    range1 = ['00D8', '00F6']
-    range2 = ['00F8', '00FF']
+    range0 = ["00C0", "00D6"]
+    range1 = ["00D8", "00F6"]
+    range2 = ["00F8", "00FF"]
     output_array = []
 
     for i in range(int(range0[0], 16), int(range0[1], 16)):
@@ -285,16 +287,16 @@ def gen_latin1(length=10, start=None, separator=''):
     for i in range(int(range2[0], 16), int(range2[1], 16)):
         output_array.append(i)
 
-    output_string = ''.join(map(chr, random.choices(output_array, k=length)))
+    output_string = "".join(map(chr, random.choices(output_array, k=length)))
 
     if start:
-        output_string = f'{start}{separator}{output_string}'[0:length]
+        output_string = f"{start}{separator}{output_string}"[0:length]
     return output_string
 
 
 @check_len
 @check_validation
-def gen_numeric_string(length=10, start=None, separator=''):
+def gen_numeric_string(length=10, start=None, separator=""):
     """Return a random string made up of numbers.
 
     :param int length: Length for random data.
@@ -304,16 +306,16 @@ def gen_numeric_string(length=10, start=None, separator=''):
     :rtype: str
 
     """
-    output_string = ''.join(random.choices(string.digits, k=length))
+    output_string = "".join(random.choices(string.digits, k=length))
 
     if start:
-        output_string = f'{start}{separator}{output_string}'[0:length]
+        output_string = f"{start}{separator}{output_string}"[0:length]
     return output_string
 
 
 @check_len
 @check_validation
-def gen_utf8(length=10, smp=True, start=None, separator=''):
+def gen_utf8(length=10, smp=True, start=None, separator=""):
     """Return a random string made up of UTF-8 letters characters.
 
     Follows `RFC 3629`_.
@@ -330,16 +332,16 @@ def gen_utf8(length=10, smp=True, start=None, separator=''):
 
     """
     unicode_letters = list(unicode_letters_generator(smp))
-    output_string = ''.join(random.choices(unicode_letters, k=length))
+    output_string = "".join(random.choices(unicode_letters, k=length))
 
     if start:
-        output_string = f'{start}{separator}{output_string}'[0:length]
+        output_string = f"{start}{separator}{output_string}"[0:length]
     return output_string
 
 
 @check_len
 @check_validation
-def gen_special(length=10, start=None, separator=''):
+def gen_special(length=10, start=None, separator=""):
     """Return a random special characters string.
 
     :param int length: Length for random data.
@@ -348,14 +350,14 @@ def gen_special(length=10, start=None, separator=''):
     :returns: A random string made up of special characters.
     :rtype: str
     """
-    output_string = ''.join(random.choices(string.punctuation, k=length))
+    output_string = "".join(random.choices(string.punctuation, k=length))
 
     if start:
-        output_string = f'{start}{separator}{output_string}'[0:length]
+        output_string = f"{start}{separator}{output_string}"[0:length]
     return output_string
 
 
-__all__ = tuple(name for name in locals() if name.startswith('gen_'))
+__all__ = tuple(name for name in locals() if name.startswith("gen_"))
 
 
 def __dir__():

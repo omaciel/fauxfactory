@@ -17,7 +17,7 @@ from fauxfactory import (
 )
 
 
-GenFuncDataSet = namedtuple('GenFuncDataSet', ['gen_func', 'expect_type', 'base'])
+GenFuncDataSet = namedtuple("GenFuncDataSet", ["gen_func", "expect_type", "base"])
 GenFuncDataSets = [
     GenFuncDataSet(gen_hexadecimal, str, 16),
     GenFuncDataSet(gen_integer, int, 10),
@@ -28,7 +28,7 @@ GenFuncDataSets = [
 ]
 
 
-@pytest.mark.parametrize('base', [0, 1])
+@pytest.mark.parametrize("base", [0, 1])
 def test_base_repr_small_base(base):
     """Testing the base_repr helper."""
     with pytest.raises(ValueError):
@@ -36,17 +36,17 @@ def test_base_repr_small_base(base):
 
 
 @pytest.mark.parametrize(
-    'number, base, result',
+    "number, base, result",
     [
-        (10, 10, '10'),
-        (1, 2, '1'),
-        (7, 6, '11'),
-        (16, 8, '20'),
-        (3, 3, '10'),
-        (21, 20, '11'),
-        (123, 12, 'a3'),
-        (139, 16, '8b'),
-        (0, 10, '0'),
+        (10, 10, "10"),
+        (1, 2, "1"),
+        (7, 6, "11"),
+        (16, 8, "20"),
+        (3, 3, "10"),
+        (21, 20, "11"),
+        (123, 12, "a3"),
+        (139, 16, "8b"),
+        (0, 10, "0"),
     ],
 )
 def test_base_repr(number, base, result):
@@ -54,15 +54,15 @@ def test_base_repr(number, base, result):
     assert base_repr(number, base) == result
 
 
-@pytest.mark.parametrize('data_set', GenFuncDataSets)
+@pytest.mark.parametrize("data_set", GenFuncDataSets)
 def test_gen_number_1(data_set):
     """Create a random number with no range limits."""
     result = data_set.gen_func()
     assert isinstance(result, data_set.expect_type)
-    assert set(str(result).lower()).issubset(set(VALID_DIGITS[: data_set.base] + '-'))
+    assert set(str(result).lower()).issubset(set(VALID_DIGITS[: data_set.base] + "-"))
 
 
-@pytest.mark.parametrize('data_set', GenFuncDataSets)
+@pytest.mark.parametrize("data_set", GenFuncDataSets)
 def test_gen_number_2(data_set):
     """Create a random number with set minimum limit."""
     try:
@@ -79,7 +79,7 @@ def test_gen_number_2(data_set):
         sys.maxsize = old_sys_maxsize
 
 
-@pytest.mark.parametrize('data_set', GenFuncDataSets)
+@pytest.mark.parametrize("data_set", GenFuncDataSets)
 def test_gen_number_3(data_set):
     """Create a random number with set maximum limit."""
     try:
@@ -92,7 +92,9 @@ def test_gen_number_3(data_set):
             1000 if data_set.gen_func is gen_integer else base_repr(1000, data_set.base)
         )
         for _ in range(10):
-            result = int(str(data_set.gen_func(max_value=max_value_based)), base=data_set.base)
+            result = int(
+                str(data_set.gen_func(max_value=max_value_based)), base=data_set.base
+            )
             assert result >= min_value
             assert result <= 1000
     finally:
@@ -100,13 +102,16 @@ def test_gen_number_3(data_set):
         sys.maxsize = old_sys_maxsize
 
 
-@pytest.mark.parametrize('data_set', GenFuncDataSets)
+@pytest.mark.parametrize("data_set", GenFuncDataSets)
 def test_gen_number_4(data_set):
     """Create a random number with set min/max limits."""
-    max_value_based = 3000 if data_set.gen_func is gen_integer else base_repr(3000, data_set.base)
+    max_value_based = (
+        3000 if data_set.gen_func is gen_integer else base_repr(3000, data_set.base)
+    )
     for _ in range(10):
         result = int(
-            str(data_set.gen_func(min_value=1, max_value=max_value_based)), base=data_set.base
+            str(data_set.gen_func(min_value=1, max_value=max_value_based)),
+            base=data_set.base,
         )
         assert result >= 1
         assert result <= 3000
@@ -133,55 +138,55 @@ def test_gen_integer_2():
 def test_gen_integer_7_0():
     """Create a random integer using empty strings as args."""
     with pytest.raises(ValueError):
-        gen_integer(min_value='')
+        gen_integer(min_value="")
 
 
 def test_gen_integer_7_1():
     """Create a random integer using empty strings as args."""
     with pytest.raises(ValueError):
-        gen_integer(max_value='')
+        gen_integer(max_value="")
 
 
 def test_gen_integer_7_2():
     """Create a random integer using empty strings as args."""
     with pytest.raises(ValueError):
-        gen_integer(min_value='', max_value='')
+        gen_integer(min_value="", max_value="")
 
 
 def test_gen_integer_8_0():
     """Create a random integer using whitespace as args."""
     with pytest.raises(ValueError):
-        gen_integer(min_value=' ')
+        gen_integer(min_value=" ")
 
 
 def test_gen_integer_8_1():
     """Create a random integer using whitespace as args."""
     with pytest.raises(ValueError):
-        gen_integer(max_value=' ')
+        gen_integer(max_value=" ")
 
 
 def test_gen_integer_8_2():
     """Create a random integer using whitespace as args."""
     with pytest.raises(ValueError):
-        gen_integer(min_value=' ', max_value=' ')
+        gen_integer(min_value=" ", max_value=" ")
 
 
 def test_gen_integer_9_0():
     """Create a random integer using alpha strings as args."""
     with pytest.raises(ValueError):
-        gen_integer(min_value='a')
+        gen_integer(min_value="a")
 
 
 def test_gen_integer_9_1():
     """Create a random integer using alpha strings as args."""
     with pytest.raises(ValueError):
-        gen_integer(max_value='a')
+        gen_integer(max_value="a")
 
 
 def test_gen_integer_9_2():
     """Create a random integer using alpha strings as args."""
     with pytest.raises(ValueError):
-        gen_integer(min_value='a', max_value='b')
+        gen_integer(min_value="a", max_value="b")
 
 
 def test_gen_positive_integer_1():

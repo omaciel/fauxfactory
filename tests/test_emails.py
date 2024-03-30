@@ -4,7 +4,7 @@ import re
 
 from fauxfactory import gen_email
 
-REGEX = r'^[a-zA-Z][a-zA-Z-.]*[^.-]@\w*\.[a-zA-Z]{2,3}'
+REGEX = r"^[a-zA-Z][a-zA-Z-.]*[^.-]@\w*\.[a-zA-Z]{2,3}"
 
 
 def test_gen_email_1():

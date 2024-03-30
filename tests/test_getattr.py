@@ -9,7 +9,7 @@ import pytest
 
 def test_fauxfactory_getattr():
     """Check __getattr__ returns expected objects."""
-    assert fauxfactory.__getattr__('gen_integer') is fauxfactory.gen_integer
+    assert fauxfactory.__getattr__("gen_integer") is fauxfactory.gen_integer
 
 
 def test_fauxfactory_getattr_raises_attributeerror():

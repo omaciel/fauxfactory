@@ -5,13 +5,13 @@ import pytest
 from fauxfactory.helpers import is_positive_int
 
 
-@pytest.mark.parametrize('length', [1, 2, 3, 30, 100])
+@pytest.mark.parametrize("length", [1, 2, 3, 30, 100])
 def test_positive_value(length):
     """Positive values are allowed."""
     assert is_positive_int(length) is None
 
 
-@pytest.mark.parametrize('length', [-1, -2, -3, -30, -100])
+@pytest.mark.parametrize("length", [-1, -2, -3, -30, -100])
 def test_negative_value(length):
     """Negative values are not allowed."""
     with pytest.raises(ValueError):
@@ -36,7 +36,7 @@ def test_empty_value():
         is_positive_int([])
 
 
-@pytest.mark.parametrize('length', ['a', 'foo', ' ', '1', '0', '-1'])
+@pytest.mark.parametrize("length", ["a", "foo", " ", "1", "0", "-1"])
 def test_non_numeric_value(length):
     """Non-numeric values are not allowed."""
     with pytest.raises(ValueError):

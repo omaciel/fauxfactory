@@ -14,7 +14,7 @@ def matcher():
 
     The compiled regex can be used to find the contents of an HTML tag.
     """
-    return re.compile('^<.*?>(.*?)</.*>$')
+    return re.compile("^<.*?>(.*?)</.*>$")
 
 
 def test_length_arg_omitted(matcher):
@@ -43,7 +43,7 @@ def test_generate_html_with_len_less_than_min():
             gen_html(value, include_tags=False)
 
 
-@pytest.mark.parametrize('length', [8, 10, 12, 20, 100])
+@pytest.mark.parametrize("length", [8, 10, 12, 20, 100])
 def test_generate_html_with_len_more_than_min(length):
     """Cannot generate a HTML string with length more than minimum."""
     assert length == len(gen_html(length, include_tags=False))

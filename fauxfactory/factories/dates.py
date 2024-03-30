@@ -29,9 +29,9 @@ def gen_date(min_date=None, max_date=None):
 
     # Validation
     if not isinstance(min_date, datetime.date):
-        raise ValueError('%s is not a valid datetime.date object')
+        raise ValueError("%s is not a valid datetime.date object")
     if not isinstance(max_date, datetime.date):
-        raise ValueError('%s is not a valid datetime.date object')
+        raise ValueError("%s is not a valid datetime.date object")
 
     # Check that max_date is not before min_date
     assert min_date < max_date
@@ -64,9 +64,9 @@ def gen_datetime(min_date=None, max_date=None):
 
     # Validation
     if not isinstance(min_date, datetime.datetime):
-        raise ValueError('%s is not a valid datetime.datetime object')
+        raise ValueError("%s is not a valid datetime.datetime object")
     if not isinstance(max_date, datetime.datetime):
-        raise ValueError('%s is not a valid datetime.datetime object')
+        raise ValueError("%s is not a valid datetime.datetime object")
 
     # Check that max_date is not before min_date
     assert min_date < max_date
@@ -92,7 +92,7 @@ def gen_time():
     )
 
 
-__all__ = tuple(name for name in locals() if name.startswith('gen_'))
+__all__ = tuple(name for name in locals() if name.startswith("gen_"))
 
 
 def __dir__():

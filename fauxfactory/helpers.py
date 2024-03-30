@@ -8,10 +8,10 @@ from functools import wraps
 from fauxfactory.constants import VALID_DIGITS
 
 
-UnicodePlane = namedtuple('UnicodePlane', ['min', 'max'])
+UnicodePlane = namedtuple("UnicodePlane", ["min", "max"])
 
-BMP = UnicodePlane(int('0x0000', 16), int('0xffff', 16))
-SMP = UnicodePlane(int('0x10000', 16), int('0x1ffff', 16))
+BMP = UnicodePlane(int("0x0000", 16), int("0xffff", 16))
+SMP = UnicodePlane(int("0x10000", 16), int("0x1ffff", 16))
 
 
 def base_repr(number, base):
@@ -32,7 +32,7 @@ def base_repr(number, base):
     :return: The base representation of <number>.
     """
     if base <= 1:
-        raise ValueError('Cannot represent number with base smaller than 2.')
+        raise ValueError("Cannot represent number with base smaller than 2.")
     if number < 0:
         sign = -1
     elif number == 0:
@@ -48,11 +48,11 @@ def base_repr(number, base):
         number //= base
 
     if sign < 0:
-        digits.append('-')
+        digits.append("-")
 
     digits.reverse()
 
-    return ''.join(digits)
+    return "".join(digits)
 
 
 def check_len(fnc):
@@ -63,9 +63,9 @@ def check_len(fnc):
         """Make sure that we verify the `length` argument."""
         if args and len(args) == 1:
             is_positive_int(args[0])
-        if 'length' in kwargs:
-            if kwargs.get('length') is not None:
-                is_positive_int(kwargs.get('length'))
+        if "length" in kwargs:
+            if kwargs.get("length") is not None:
+                is_positive_int(kwargs.get("length"))
 
         result = fnc(*args, **kwargs)
 
@@ -87,9 +87,9 @@ def check_validation(fcn):
     @wraps(fcn)
     def validate(*args, **kwargs):
         """Perform the validation on decorated function."""
-        validator = kwargs.get('validator')
-        default = kwargs.get('default')
-        tries = kwargs.get('tries', 10)
+        validator = kwargs.get("validator")
+        default = kwargs.get("default")
+        tries = kwargs.get("tries", 10)
         if validator and default is None:
             raise ValueError(
                 'If "validator" param is defined, "default" parameter must not be None'
@@ -112,7 +112,7 @@ def check_validation(fcn):
             validator_fcn = regex_validator
 
         # Removing params related to validation but not fcn
-        for key in ('validator', 'default', 'tries'):
+        for key in ("validator", "default", "tries"):
             if key in kwargs:
                 kwargs.pop(key)
 
@@ -134,9 +134,9 @@ def is_positive_int(length):
 
     """
     if not isinstance(length, int):
-        raise ValueError(f'{length} is not numeric.')
+        raise ValueError(f"{length} is not numeric.")
     if length <= 0:
-        raise ValueError(f'{length} is an invalid length.')
+        raise ValueError(f"{length} is an invalid length.")
 
 
 def unicode_letters_generator(smp=True):
@@ -149,5 +149,5 @@ def unicode_letters_generator(smp=True):
     """
     for i in range(BMP.min, SMP.max if smp else BMP.max):
         char = chr(i)
-        if unicodedata.category(char).startswith('L'):
+        if unicodedata.category(char).startswith("L"):
             yield char

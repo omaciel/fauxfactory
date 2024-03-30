@@ -85,7 +85,7 @@ gen_octagonal = partial(gen_number, base=8)
 gen_hexadecimal = partial(gen_number, base=16)
 
 
-__all__ = tuple(name for name in locals() if name.startswith('gen_'))
+__all__ = tuple(name for name in locals() if name.startswith("gen_"))
 
 
 def __dir__():

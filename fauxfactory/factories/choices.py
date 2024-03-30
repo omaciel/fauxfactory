@@ -22,12 +22,12 @@ def gen_choice(choices):
     """
     # Validation for 'choices'
     if choices is None:
-        raise ValueError('Choices argument cannot be None.')
+        raise ValueError("Choices argument cannot be None.")
     # We don't want a single dictionary value.
     if not isinstance(choices, Iterable) or isinstance(choices, dict):
-        raise ValueError('Choices argument is not iterable.')
+        raise ValueError("Choices argument is not iterable.")
     if not choices:
-        raise ValueError('Choices argument cannot be empty.')
+        raise ValueError("Choices argument cannot be empty.")
     # If only 1 item is present, return it right away
     if len(choices) == 1:
         return choices[0]
@@ -46,7 +46,7 @@ def gen_uuid():
     return str(uuid.uuid4())
 
 
-__all__ = tuple(name for name in locals() if name.startswith('gen_'))
+__all__ = tuple(name for name in locals() if name.startswith("gen_"))
 
 
 def __dir__():

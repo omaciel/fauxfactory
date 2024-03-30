@@ -17,31 +17,31 @@ def test_gen_url_1():
     for _ in range(10):
         result = gen_url()
         assert result
-        assert result.split(':')[0] in SCHEMES
+        assert result.split(":")[0] in SCHEMES
 
 
 def test_gen_url_2():
     """Create a random URL with http scheme."""
     for _ in range(10):
-        result = gen_url(scheme='http')
+        result = gen_url(scheme="http")
         assert result
-        assert result.split(':')[0] == 'http'
+        assert result.split(":")[0] == "http"
 
 
 def test_gen_url_3():
     """Create a random URL with https scheme."""
     for _ in range(10):
-        result = gen_url(scheme='https')
+        result = gen_url(scheme="https")
         assert result
-        assert result.split(':')[0] == 'https'
+        assert result.split(":")[0] == "https"
 
 
 def test_gen_url_4():
     """Create a random URL with ftp scheme."""
     for _ in range(10):
-        result = gen_url(scheme='ftp')
+        result = gen_url(scheme="ftp")
         assert result
-        assert result.split(':')[0] == 'ftp'
+        assert result.split(":")[0] == "ftp"
 
 
 def test_gen_url_5():
@@ -60,21 +60,21 @@ def test_gen_url_6():
         assert result
 
         # Breakdown the generated URL
-        scheme_breakdown = result.split('//')
-        domain = scheme_breakdown[1].split('.')
+        scheme_breakdown = result.split("//")
+        domain = scheme_breakdown[1].split(".")
         assert domain[0] == subdomain
 
 
 def test_gen_url_7():
     """Create a random URL with empty subdomain."""
-    result = gen_url(subdomain='')
+    result = gen_url(subdomain="")
     assert result
 
 
 def test_gen_url_8():
     """Create a random URL with whitespace subdomain."""
     with pytest.raises(ValueError):
-        gen_url(subdomain=' ')
+        gen_url(subdomain=" ")
 
 
 def test_gen_url_9():
@@ -91,7 +91,7 @@ def test_gen_url_10():
         tlds = gen_alpha(length=3)
         result = gen_url(tlds=tlds)
         assert result
-        assert result.split('.')[-1] == tlds
+        assert result.split(".")[-1] == tlds
 
 
 def test_gen_url_11():
@@ -106,4 +106,4 @@ def test_gen_url_12():
     """Create a random URL with whitespace TLDS."""
     for _ in range(10):
         with pytest.raises(ValueError):
-            gen_url(tlds=' ')
+            gen_url(tlds=" ")

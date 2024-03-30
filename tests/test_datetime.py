@@ -92,13 +92,13 @@ def test_gen_datetime_7():
 def test_gen_datetime_8():
     """Create a datetime with non-Date arguments."""
     with pytest.raises(ValueError):
-        gen_datetime(min_date='', max_date='')
+        gen_datetime(min_date="", max_date="")
 
 
 def test_gen_datetime_9():
     """Create a datetime with non-Date arguments."""
     with pytest.raises(ValueError):
-        gen_datetime(min_date='abc', max_date='def')
+        gen_datetime(min_date="abc", max_date="def")
 
 
 def test_gen_datetime_10():
@@ -116,7 +116,7 @@ def test_gen_datetime_11():
 def test_gen_datetime_12():
     """Create a datetime with non-Date arguments."""
     with pytest.raises(ValueError):
-        gen_datetime(min_date=['a', 'b'], max_date=['c', 'd', 'e'])
+        gen_datetime(min_date=["a", "b"], max_date=["c", "d", "e"])
 
 
 def test_gen_datetime_13():
@@ -133,4 +133,4 @@ def test_gen_datetime_13():
 def test_gen_date_14():
     """max-date must be a Datetime type."""
     with pytest.raises(ValueError):
-        gen_datetime(min_date=datetime.datetime.now(), max_date='foo')
+        gen_datetime(min_date=datetime.datetime.now(), max_date="foo")

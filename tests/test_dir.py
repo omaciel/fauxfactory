@@ -18,8 +18,8 @@ def check_all_dired_names_are_getattrable(obj):
 def test_fauxfactory_factories_dir():
     """Check dir of fauxfactory factories."""
     for d in os.listdir(os.path.dirname(fauxfactory.factories.__file__)):
-        if d.endswith('.py') and not d.startswith('__'):
-            name = f'.{d[:-3]}'
+        if d.endswith(".py") and not d.startswith("__"):
+            name = f".{d[:-3]}"
             module = import_module(name, fauxfactory.factories.__package__)
             check_all_dired_names_are_getattrable(module)
 
