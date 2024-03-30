@@ -15,6 +15,10 @@ jobs:
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
     steps:
+      - name: Set up Python ${{ matrix.python-version }}
+          uses: actions/setup-python@v3
+          with:
+            python-version: ${{ matrix.python-version }}
       - uses: actions/checkout@v4
       - name: Install a specific version
         uses: eifinger/setup-rye@v2
@@ -22,7 +26,7 @@ jobs:
         run: |
           rye sync
       - name: Pre Commit Checks
-        uses: pre-commit/action@v3.7.0
+        uses: pre-commit/action@v3.0.0
       - name: Run checks
         run: |
           make all
