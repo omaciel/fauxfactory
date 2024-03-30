@@ -29,6 +29,7 @@ classifiers = [
         "Topic :: Software Development :: Testing",
 ]
 dependencies = [
+    "sphinx>=7.2.6",
 ]
 
 [project.urls]
@@ -43,9 +44,7 @@ build-backend = "hatchling.build"
 [tool.rye]
 managed = true
 dev-dependencies = [
-    "black>=24.3.0",
     "pytest>=8.1.1",
-    "flake8>=7.0.0",
     "sphinx>=7.1.2",
     "codecov>=2.1.13",
     "pytest>=8.1.1",
