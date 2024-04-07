@@ -7,7 +7,7 @@ authors = [
     { name = "Og B. Maciel", email = "omaciel@ogmaciel.com" }
 ]
 readme = "README.rst"
-requires-python = ">= 3.8"
+requires-python = ">= 3.9"
 
 keywords = [
   "automation",
