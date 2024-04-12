@@ -57,7 +57,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "FauxFactory"
-copyright = "2014-2017, Og Maciel"  # pylint:disable=redefined-builtin
+copyright = "2014-2024, Og Maciel"  # pylint:disable=redefined-builtin
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
