@@ -3,6 +3,7 @@
 from functools import partial
 import random
 import sys
+import os
 
 from fauxfactory.helpers import base_repr
 
@@ -35,7 +36,9 @@ def gen_integer(min_value=None, max_value=None):
     if not isinstance(max_value, integer_types) or max_value > _max_value:
         raise ValueError(f'"{max_value}" is not a valid maximum.')
 
-    random.seed()
+    if 'FAUXFACTORY_DISABLE_SEED_RANDOMIZATION' not in os.environ:
+        random.seed()
+    
     value = random.randint(min_value, max_value)
 
     return value

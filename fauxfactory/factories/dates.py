@@ -2,11 +2,13 @@
 
 import datetime
 import random
+import os
 
 from fauxfactory.constants import MAX_YEARS, MIN_YEARS
 
 
-random.seed()
+if 'FAUXFACTORY_DISABLE_SEED_RANDOMIZATION' not in os.environ:
+    random.seed()
 
 
 def gen_date(min_date=None, max_date=None):

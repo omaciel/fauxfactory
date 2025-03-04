@@ -2,6 +2,7 @@
 
 import random
 import re
+import os
 
 from fauxfactory.constants import SCHEMES, SUBDOMAINS, TLDS, VALID_NETMASKS
 from fauxfactory.helpers import check_validation
@@ -10,7 +11,8 @@ from .choices import gen_choice
 from .strings import gen_alpha
 
 
-random.seed()
+if 'FAUXFACTORY_DISABLE_SEED_RANDOMIZATION' not in os.environ:
+    random.seed()
 
 
 def gen_domain(name=None, subdomain=None, tlds=None):
