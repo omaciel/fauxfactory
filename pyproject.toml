@@ -1,6 +1,6 @@
 [project]
 name = "fauxfactory"
-version = "3.1.1"
+version = "3.1.2"
 license = { text = "Apache-2.0" }
 description = "Generates random data for your tests."
 authors = [
@@ -32,27 +32,34 @@ dependencies = [
     "sphinx>=7.2.6",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.1.1",
+    "sphinx>=7.1.2",
+    "codecov>=2.1.13",
+    "pytest-cov>=5.0.0",
+    "wheel>=0.43.0",
+    "twine>=5.0.0",
+    "ruff>=0.3.4",
+]
+
 [project.urls]
-Changelog = "https://github.com/omaciel/fauxfactory/blob/main/HISTORY.rst"
+Changelog = "https://github.com/omaciel/fauxfactory/blob/master/HISTORY.rst"
 Homepage = "https://github.com/omaciel/fauxfactory"
+Repository = "https://github.com/omaciel/fauxfactory"
 
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.rye]
-managed = true
-dev-dependencies = [
-    "pytest>=8.1.1",
-    "sphinx>=7.1.2",
-    "codecov>=2.1.13",
-    "pytest>=8.1.1",
-    "pytest-cov>=5.0.0",
-    "wheel>=0.43.0",
-    "twine>=5.0.0",
-    "ruff>=0.3.4",
-]
+[tool.hatch.build]
+exclude = ["tests/", "docs/"]  # Exclude test and doc directories
+include = ["fauxfactory/**/*", "README.rst", "LICENSE"]  # Ensure only necessary files are packaged
+directory = "dist"
+
+[tool.hatch.build.targets.sdist]
+include = ["fauxfactory/**/*", "README.rst", "LICENSE"]
 
 [tool.hatch.metadata]
 allow-direct-references = true
@@ -63,19 +70,11 @@ macos-max-compat = true
 
 [tool.ruff]
 include = ["*.py"]
+target-version = "py312"
 
 [tool.ruff.lint]
-ignore = ["E203"]
-# Allow fix for all enabled rules (when `--fix`) is provided.
+select = ["E", "F", "B", "I"]
+ignore = ["B018", "E203"]
 fixable = ["ALL"]
 unfixable = []
-# Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
-
-[tool.rye.scripts]
-test-all = { cmd = "py.test -v --cov-report term-missing --cov=fauxfactory" }
-check = { cmd = "ruff check ." }
-lint = { chain = ["lint:black", "lint:flake8" ] }
-"lint:black" = "black --check fauxfactory"
-"lint:flake8" = "flake8 fauxfactory"
-

@@ -8,7 +8,21 @@ help:
 	@echo "  test          Run unit tests."
 	@echo "  test-all      Run unit tests and doctests, measure coverage."
 
-all: test-all lint docs-clean docs-html package-clean package
+all: clean lint test-all check clean docs-clean docs-html
+
+# Linting and formatting
+check:
+	uvx ruff check .
+
+# Clean build artifacts
+clean:
+	rm -rf build/
+	rm -rf dist/
+	rm -rf *.egg-info
+	find . -type d -name __pycache__ -exec rm -rf {} +
+	find . -type f -name "*.pyc" -delete
+	find . -type f -name "*.pyo" -delete
+	find . -type f -name "*.pyd" -delete
 
 docs-clean:
 	cd docs && rm -rf _build/*
@@ -20,24 +34,24 @@ docs-html:
 	cd docs && rye run sphinx-build -b html -d _build/doctrees   . _build/html
 
 format:
-	rye run ruff format -v .
+	uvx ruff format .
 
-lint: format
-	rye run ruff check -v .
+lint: check format
 
-package:
-	rye build
+install-dev:
+	uv pip install -e ".[dev]"
 
-package-clean:
-	rye build --clean
+build: clean
+	uv build
+
 
 publish:
-	rye publish
+	uv publish
 
-test:
-	rye run py.test -v
+test: install-dev
+	uv run --with '.[test]' pytest -v
 
-test-all:
-	rye run py.test -v --cov-report term-missing --cov=fauxfactory
+test-all: install-dev
+	uv run --with pytest-cov --with '.[test]' pytest --cov-report term-missing --cov=fauxfactory
 
-.PHONY: help docs-clean docs-doctest docs-html format lint package package-clean publish test test-all
+.PHONY: help build check clean docs-clean docs-doctest docs-html format lint build publish test test-all
