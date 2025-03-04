@@ -2,13 +2,15 @@
 
 import random
 import uuid
+import os
 
 from collections.abc import Iterable
 
 from fauxfactory.helpers import check_validation
 
 
-random.seed()
+if 'FAUXFACTORY_DISABLE_SEED_RANDOMIZATION' not in os.environ:
+    random.seed()
 
 
 def gen_choice(choices):

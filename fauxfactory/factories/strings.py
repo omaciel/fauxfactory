@@ -2,6 +2,7 @@
 
 import random
 import string
+import os
 
 from fauxfactory.constants import HTML_TAGS, LOREM_IPSUM_TEXT
 from fauxfactory.helpers import (
@@ -12,7 +13,8 @@ from fauxfactory.helpers import (
 )
 
 
-random.seed()
+if 'FAUXFACTORY_DISABLE_SEED_RANDOMIZATION' not in os.environ:
+    random.seed()
 
 
 def gen_string(str_type, length=None, validator=None, default=None, tries=10):
