@@ -1,13 +1,12 @@
 """Methods related to generating date/time related values."""
 
 import datetime
-import random
 import os
+import random
 
 from fauxfactory.constants import MAX_YEARS, MIN_YEARS
 
-
-if 'FAUXFACTORY_DISABLE_SEED_RANDOMIZATION' not in os.environ:
+if "FAUXFACTORY_DISABLE_SEED_RANDOMIZATION" not in os.environ:
     random.seed()
 
 

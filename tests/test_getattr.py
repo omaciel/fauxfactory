@@ -3,8 +3,9 @@
 These tests are heavily just artificial tests to get 100% coverage.
 """
 
-import fauxfactory
 import pytest
+
+import fauxfactory
 
 
 def test_fauxfactory_getattr():

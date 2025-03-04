@@ -4,8 +4,8 @@ import random
 
 import pytest
 
-from fauxfactory.constants import LOREM_IPSUM_TEXT
 from fauxfactory import gen_iplum
+from fauxfactory.constants import LOREM_IPSUM_TEXT
 
 
 def test_gen_loremipsum_1():

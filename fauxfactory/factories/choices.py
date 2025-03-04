@@ -1,15 +1,13 @@
 """Module to keep methods related to selecting values."""
 
+import os
 import random
 import uuid
-import os
-
 from collections.abc import Iterable
 
 from fauxfactory.helpers import check_validation
 
-
-if 'FAUXFACTORY_DISABLE_SEED_RANDOMIZATION' not in os.environ:
+if "FAUXFACTORY_DISABLE_SEED_RANDOMIZATION" not in os.environ:
     random.seed()
 
 

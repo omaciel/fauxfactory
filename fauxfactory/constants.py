@@ -13,7 +13,6 @@ import json
 import os
 import string
 
-
 VALID_DIGITS = string.digits + string.ascii_letters
 
 FACTS_JSON_FILE = os.path.join(os.path.dirname(__file__), "facts.json")

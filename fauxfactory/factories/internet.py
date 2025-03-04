@@ -1,8 +1,8 @@
 """Methods related to generating internet related values."""
 
+import os
 import random
 import re
-import os
 
 from fauxfactory.constants import SCHEMES, SUBDOMAINS, TLDS, VALID_NETMASKS
 from fauxfactory.helpers import check_validation
@@ -10,8 +10,7 @@ from fauxfactory.helpers import check_validation
 from .choices import gen_choice
 from .strings import gen_alpha
 
-
-if 'FAUXFACTORY_DISABLE_SEED_RANDOMIZATION' not in os.environ:
+if "FAUXFACTORY_DISABLE_SEED_RANDOMIZATION" not in os.environ:
     random.seed()
 
 
@@ -102,7 +101,7 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
 
     if ipv6:
         # StackOverflow.com questions: generate-random-ipv6-address
-        random_fields = [f"{random.randint(0, 2 ** 16 - 1):x}" for _ in range(rng)]
+        random_fields = [f"{random.randint(0, 2**16 - 1):x}" for _ in range(rng)]
         ipaddr = ":".join(prefix + random_fields)
     else:
         random_fields = [str(random.randrange(0, 255, 1)) for _ in range(rng)]
@@ -180,7 +179,7 @@ def gen_netmask(min_cidr=1, max_cidr=31):
         raise ValueError(f"min_cidr must be 0 or greater, but is {min_cidr}")
     if max_cidr >= len(VALID_NETMASKS):
         raise ValueError(
-            f"max_cidr must be less than {len(VALID_NETMASKS)}, " f"but is {max_cidr}"
+            f"max_cidr must be less than {len(VALID_NETMASKS)}, but is {max_cidr}"
         )
     return VALID_NETMASKS[random.randint(min_cidr, max_cidr)]
 

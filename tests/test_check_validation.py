@@ -6,7 +6,6 @@ import pytest
 
 from fauxfactory.helpers import check_validation
 
-
 # pylint: disable=invalid-name
 # pylint: disable=E1123
 

@@ -6,16 +6,15 @@ from functools import partial
 
 import pytest
 
-from fauxfactory.helpers import base_repr, VALID_DIGITS
 from fauxfactory import (
     gen_hexadecimal,
     gen_integer,
+    gen_negative_integer,
     gen_number,
     gen_octagonal,
-    gen_negative_integer,
     gen_positive_integer,
 )
-
+from fauxfactory.helpers import VALID_DIGITS, base_repr
 
 GenFuncDataSet = namedtuple("GenFuncDataSet", ["gen_func", "expect_type", "base"])
 GenFuncDataSets = [

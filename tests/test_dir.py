@@ -5,8 +5,9 @@ These tests are heavily just artificial tests to get 100% coverage.
 
 import os
 import os.path
-import fauxfactory.factories
 from importlib import import_module
+
+import fauxfactory.factories
 
 
 def check_all_dired_names_are_getattrable(obj):

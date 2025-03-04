@@ -4,9 +4,8 @@ import re
 
 import pytest
 
-from fauxfactory.constants import VALID_NETMASKS
 from fauxfactory import gen_netmask
-
+from fauxfactory.constants import VALID_NETMASKS
 
 NETMASK_REGEX = re.compile(
     "((255.){3}(0|128|192|224|240|248|252|254|255))|"

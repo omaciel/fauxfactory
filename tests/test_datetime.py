@@ -4,8 +4,8 @@ import datetime
 
 import pytest
 
-from fauxfactory.constants import MAX_YEARS, MIN_YEARS
 from fauxfactory import gen_datetime
+from fauxfactory.constants import MAX_YEARS, MIN_YEARS
 
 
 def test_gen_datetime_1():

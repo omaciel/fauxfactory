@@ -1,8 +1,8 @@
 """Collection of string generating functions."""
 
+import os
 import random
 import string
-import os
 
 from fauxfactory.constants import HTML_TAGS, LOREM_IPSUM_TEXT
 from fauxfactory.helpers import (
@@ -12,8 +12,7 @@ from fauxfactory.helpers import (
     unicode_letters_generator,
 )
 
-
-if 'FAUXFACTORY_DISABLE_SEED_RANDOMIZATION' not in os.environ:
+if "FAUXFACTORY_DISABLE_SEED_RANDOMIZATION" not in os.environ:
     random.seed()
 
 
@@ -196,9 +195,9 @@ def gen_html(length=10, include_tags=True):
             html_tag = "a"
         else:
             length = maybe_len
-        output_string = f'<{html_tag}>{gen_string("alpha", length)}</{html_tag}>'
+        output_string = f"<{html_tag}>{gen_string('alpha', length)}</{html_tag}>"
     else:
-        output_string = f'<{html_tag}>{gen_string("alpha", length)}</{html_tag}>'
+        output_string = f"<{html_tag}>{gen_string('alpha', length)}</{html_tag}>"
 
     return output_string
 

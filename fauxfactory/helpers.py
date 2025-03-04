@@ -2,11 +2,10 @@
 
 import re
 import unicodedata
-
 from collections import namedtuple
 from functools import wraps
-from fauxfactory.constants import VALID_DIGITS
 
+from fauxfactory.constants import VALID_DIGITS
 
 UnicodePlane = namedtuple("UnicodePlane", ["min", "max"])
 

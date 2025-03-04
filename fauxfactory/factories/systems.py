@@ -192,7 +192,7 @@ def gen_system_facts(name=None):
     host["hardwaremodel"] = host["architecture"]
     host["kernelmajversion"] = ".".join(kernel.split(".")[:2])
     host["kernelrelease"] = (
-        f'{kernel}-' f'{gen_integer(min_value=0, max_value=999)}.{host["architecture"]}'
+        f"{kernel}-{gen_integer(min_value=0, max_value=999)}.{host['architecture']}"
     )
     host["kernelversion"] = kernel
 
@@ -217,7 +217,7 @@ def gen_system_facts(name=None):
     host["uptime_days"] = gen_integer(min_value=1, max_value=1974)
     host["uptime_hours"] = host["uptime_days"] * 24
     host["uptime_seconds"] = host["uptime_hours"] * 3600
-    host["uptime"] = f'{host["uptime_days"]} days'
+    host["uptime"] = f"{host['uptime_days']} days"
     host["system_uptime"] = {
         "seconds": host["uptime_seconds"],
         "hours": host["uptime_hours"],

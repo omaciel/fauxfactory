@@ -14,12 +14,11 @@ from fauxfactory import (
     gen_html,
     gen_latin1,
     gen_numeric_string,
+    gen_special,
     gen_string,
     gen_utf8,
-    gen_special,
 )
-from fauxfactory.helpers import unicode_letters_generator, BMP
-
+from fauxfactory.helpers import BMP, unicode_letters_generator
 
 GENERATORS = [
     gen_html,
