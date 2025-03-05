@@ -20,15 +20,13 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - uses: actions/checkout@v4
-      - name: Install Rye
-        uses: eifinger/setup-rye@v2
-      - name: Pin the version of Python to be used
-        run: |
-          rye pin ${{ matrix.python-version }}
+      - name: Install UV
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          rye pin ${{ matrix.python-version }}
-          rye sync
+          uv sync
       - name: Run checks
         run: |
           make all
