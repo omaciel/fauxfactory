@@ -27,11 +27,11 @@ clean:
 docs-clean:
 	cd docs && rm -rf _build/*
 
-docs-doctest:
-	cd docs && rye run sphinx-build -b doctest -d _build/doctrees   . _build/doctest
+docs-doctest: install-docs
+	uv run --with '.[docs]' sphinx-build -b doctest -d docs/_build/doctrees   docs/ docs/_build/doctest
 
-docs-html:
-	cd docs && rye run sphinx-build -b html -d _build/doctrees   . _build/html
+docs-html: install-docs
+	uv run --with '.[docs]' sphinx-build -b html -d docs/_build/doctrees docs/ docs/_build/html
 
 format:
 	uvx ruff format .
@@ -41,6 +41,9 @@ lint: check format
 install-dev:
 	uv pip install -e ".[dev]"
 
+install-docs:
+	uv pip install -e ".[docs]"
+
 build: clean
 	uv build
 
@@ -49,9 +52,9 @@ publish:
 	uv publish
 
 test: install-dev
-	uv run --with '.[test]' pytest -v
+	uv run --with '.[dev]' pytest -v
 
 test-all: install-dev
-	uv run --with pytest-cov --with '.[test]' pytest --cov-report term-missing --cov=fauxfactory
+	uv run --with pytest-cov --with '.[dev]' pytest --cov-report term-missing --cov=fauxfactory
 
 .PHONY: help build check clean docs-clean docs-doctest docs-html format lint build publish test test-all
