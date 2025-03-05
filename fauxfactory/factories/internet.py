@@ -1,6 +1,5 @@
 """Methods related to generating internet related values."""
 
-import os
 import random
 import re
 
@@ -9,9 +8,6 @@ from fauxfactory.helpers import check_validation
 
 from .choices import gen_choice
 from .strings import gen_alpha
-
-if "FAUXFACTORY_DISABLE_SEED_RANDOMIZATION" not in os.environ:
-    random.seed()
 
 
 def gen_domain(name=None, subdomain=None, tlds=None):

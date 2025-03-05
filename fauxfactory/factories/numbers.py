@@ -1,6 +1,5 @@
 """Methods that generate random number values."""
 
-import os
 import random
 import sys
 from functools import partial
@@ -35,9 +34,6 @@ def gen_integer(min_value=None, max_value=None):
         raise ValueError(f'"{min_value}" is not a valid minimum.')
     if not isinstance(max_value, integer_types) or max_value > _max_value:
         raise ValueError(f'"{max_value}" is not a valid maximum.')
-
-    if "FAUXFACTORY_DISABLE_SEED_RANDOMIZATION" not in os.environ:
-        random.seed()
 
     value = random.randint(min_value, max_value)
 

@@ -1,6 +1,5 @@
 """Collection of string generating functions."""
 
-import os
 import random
 import string
 
@@ -11,9 +10,6 @@ from fauxfactory.helpers import (
     is_positive_int,
     unicode_letters_generator,
 )
-
-if "FAUXFACTORY_DISABLE_SEED_RANDOMIZATION" not in os.environ:
-    random.seed()
 
 
 def gen_string(str_type, length=None, validator=None, default=None, tries=10):
