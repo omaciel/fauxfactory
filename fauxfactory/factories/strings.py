@@ -1,7 +1,10 @@
 """Collection of string generating functions."""
 
 import random
+import re
 import string
+from collections.abc import Callable
+from typing import Any, Pattern
 
 from fauxfactory.constants import HTML_TAGS, LOREM_IPSUM_TEXT
 from fauxfactory.helpers import (
@@ -11,8 +14,17 @@ from fauxfactory.helpers import (
     unicode_letters_generator,
 )
 
+ValidatorType = Callable[[str], bool] | Pattern[str] | str | None
 
-def gen_string(str_type, length=None, validator=None, default=None, tries=10):
+
+def gen_string(
+    str_type: str,
+    length: int | None = None,
+    validator: ValidatorType = None,
+    default: str | None = None,
+    tries: int = 10,
+    **kwargs: Any,
+) -> str:
     """Call other string generation methods.
 
     :param str str_type: The type of string which should be generated.
@@ -63,13 +75,20 @@ def gen_string(str_type, length=None, validator=None, default=None, tries=10):
         )
     method = str_types_functions[str_type_lower]
     if length is None:
-        return method(validator=validator, default=default, tries=tries)
-    return method(length, validator=validator, default=default, tries=tries)
+        return method(validator=validator, default=default, tries=tries)  # type: ignore[no-any-return, operator]
+    return method(length, validator=validator, default=default, tries=tries)  # type: ignore[no-any-return, operator]
 
 
 @check_len
 @check_validation
-def gen_alpha(length=10, start=None, separator=""):
+def gen_alpha(
+    length: int = 10,
+    start: str | None = None,
+    separator: str = "",
+    validator: ValidatorType = None,
+    default: str | None = None,
+    tries: int = 10,
+) -> str:
     """Return a random string made up of alpha characters.
 
     :param int length: Length for random data.
@@ -88,7 +107,14 @@ def gen_alpha(length=10, start=None, separator=""):
 
 @check_len
 @check_validation
-def gen_alphanumeric(length=10, start=None, separator=""):
+def gen_alphanumeric(
+    length: int = 10,
+    start: str | None = None,
+    separator: str = "",
+    validator: ValidatorType = None,
+    default: str | None = None,
+    tries: int = 10,
+) -> str:
     """Return a random string made up of alpha and numeric characters.
 
     :param int length: Length for random data.
@@ -109,7 +135,15 @@ def gen_alphanumeric(length=10, start=None, separator=""):
 
 @check_len
 @check_validation
-def gen_cjk(length=10, start=None, separator="", bmp_only=False):
+def gen_cjk(
+    length: int = 10,
+    start: str | None = None,
+    separator: str = "",
+    bmp_only: bool = False,
+    validator: ValidatorType = None,
+    default: str | None = None,
+    tries: int = 10,
+) -> str:
     """Return a random string made up of CJK characters.
 
     (Source: Wikipedia - CJK Unified Ideographs)
@@ -161,7 +195,14 @@ def gen_cjk(length=10, start=None, separator="", bmp_only=False):
 
 @check_len
 @check_validation
-def gen_cyrillic(length=10, start=None, separator=""):
+def gen_cyrillic(
+    length: int = 10,
+    start: str | None = None,
+    separator: str = "",
+    validator: ValidatorType = None,
+    default: str | None = None,
+    tries: int = 10,
+) -> str:
     """Return a random string made up of Cyrillic characters.
 
     :param int length: Length for random data.
@@ -183,7 +224,13 @@ def gen_cyrillic(length=10, start=None, separator=""):
 
 @check_len
 @check_validation
-def gen_html(length=10, include_tags=True):
+def gen_html(
+    length: int = 10,
+    include_tags: bool = True,
+    validator: ValidatorType = None,
+    default: str | None = None,
+    tries: int = 10,
+) -> str:
     """Return a random string made up of html characters.
 
     :param int length: Length for random data.
@@ -209,7 +256,7 @@ def gen_html(length=10, include_tags=True):
     return output_string
 
 
-def gen_iplum(words=None, paragraphs=None):
+def gen_iplum(words: int | None = None, paragraphs: int | None = None) -> str:
     """Return a lorem ipsum string.
 
     If no arguments are passed, then return the entire default lorem ipsum
@@ -270,7 +317,14 @@ def gen_iplum(words=None, paragraphs=None):
 
 @check_len
 @check_validation
-def gen_latin1(length=10, start=None, separator=""):
+def gen_latin1(
+    length: int = 10,
+    start: str | None = None,
+    separator: str = "",
+    validator: ValidatorType = None,
+    default: str | None = None,
+    tries: int = 10,
+) -> str:
     """Return a random string made up of UTF-8 characters.
 
     (Font: Wikipedia - Latin-1 Supplement Unicode Block)
@@ -304,7 +358,14 @@ def gen_latin1(length=10, start=None, separator=""):
 
 @check_len
 @check_validation
-def gen_numeric_string(length=10, start=None, separator=""):
+def gen_numeric_string(
+    length: int = 10,
+    start: str | None = None,
+    separator: str = "",
+    validator: ValidatorType = None,
+    default: str | None = None,
+    tries: int = 10,
+) -> str:
     """Return a random string made up of numbers.
 
     :param int length: Length for random data.
@@ -323,7 +384,15 @@ def gen_numeric_string(length=10, start=None, separator=""):
 
 @check_len
 @check_validation
-def gen_utf8(length=10, smp=True, start=None, separator=""):
+def gen_utf8(
+    length: int = 10,
+    smp: bool = True,
+    start: str | None = None,
+    separator: str = "",
+    validator: ValidatorType = None,
+    default: str | None = None,
+    tries: int = 10,
+) -> str:
     """Return a random string made up of UTF-8 letters characters.
 
     Follows `RFC 3629`_.
@@ -349,7 +418,14 @@ def gen_utf8(length=10, smp=True, start=None, separator=""):
 
 @check_len
 @check_validation
-def gen_special(length=10, start=None, separator=""):
+def gen_special(
+    length: int = 10,
+    start: str | None = None,
+    separator: str = "",
+    validator: ValidatorType = None,
+    default: str | None = None,
+    tries: int = 10,
+) -> str:
     """Return a random special characters string.
 
     :param int length: Length for random data.

@@ -3,7 +3,7 @@
 from .choices import gen_choice
 
 
-def gen_boolean():
+def gen_boolean() -> bool:
     """Return a random Boolean value.
 
     :returns: A random Boolean value.

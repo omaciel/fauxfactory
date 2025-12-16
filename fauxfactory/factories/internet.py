@@ -2,6 +2,7 @@
 
 import random
 import re
+from collections.abc import Sequence
 
 from fauxfactory.constants import SCHEMES, SUBDOMAINS, TLDS, VALID_NETMASKS
 from fauxfactory.helpers import check_validation
@@ -10,7 +11,7 @@ from .choices import gen_choice
 from .strings import gen_alpha
 
 
-def gen_domain(name=None, subdomain=None, tlds=None):
+def gen_domain(name: str | None = None, subdomain: str | None = None, tlds: str | None = None) -> str:
     """Generate a random domain name.
 
     :param str name: Name for your host.
@@ -34,7 +35,7 @@ def gen_domain(name=None, subdomain=None, tlds=None):
 
 
 @check_validation
-def gen_email(name=None, domain=None, tlds=None):
+def gen_email(name: str | None = None, domain: str | None = None, tlds: str | None = None) -> str:
     """Generate a random email address.
 
     :param str name: Email name.
@@ -60,7 +61,7 @@ def gen_email(name=None, domain=None, tlds=None):
 
 
 @check_validation
-def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
+def gen_ipaddr(ip3: bool = False, ipv6: bool = False, prefix: Sequence[str | int] = ()) -> str:
     """Generate a random IP address.
 
     You can also specify an IP address prefix if you are interested in
@@ -86,7 +87,7 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
         rng = 3
     else:
         rng = 4
-    prefix = [str(field) for field in prefix]
+    prefix_str: list[str] = [str(field) for field in prefix]
     # Prefix reduces number of random fields generated, so subtract the length
     # of it from the rng to keep the IP address have correct number of fields
     rng -= len(prefix)
@@ -98,10 +99,10 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
     if ipv6:
         # StackOverflow.com questions: generate-random-ipv6-address
         random_fields = [f"{random.randint(0, 2**16 - 1):x}" for _ in range(rng)]
-        ipaddr = ":".join(prefix + random_fields)
+        ipaddr = ":".join(prefix_str + random_fields)
     else:
         random_fields = [str(random.randrange(0, 255, 1)) for _ in range(rng)]
-        ipaddr = ".".join(prefix + random_fields)
+        ipaddr = ".".join(prefix_str + random_fields)
 
         if ip3:
             ipaddr = ipaddr + ".0"
@@ -110,7 +111,7 @@ def gen_ipaddr(ip3=False, ipv6=False, prefix=()):
 
 
 @check_validation
-def gen_mac(delimiter=":", multicast=None, locally=None):
+def gen_mac(delimiter: str = ":", multicast: bool | None = None, locally: bool | None = None) -> str:
     """Generate a random MAC address.
 
     For more information about how unicast or multicast and globally unique and
@@ -157,7 +158,7 @@ def gen_mac(delimiter=":", multicast=None, locally=None):
 
 
 @check_validation
-def gen_netmask(min_cidr=1, max_cidr=31):
+def gen_netmask(min_cidr: int = 1, max_cidr: int = 31) -> str:
     """Generate a random valid netmask.
 
     For more info: http://www.iplocation.net/tools/netmask.php
@@ -181,7 +182,7 @@ def gen_netmask(min_cidr=1, max_cidr=31):
 
 
 @check_validation
-def gen_url(scheme=None, subdomain=None, tlds=None):
+def gen_url(scheme: str | None = None, subdomain: str | None = None, tlds: str | None = None) -> str:
     """Generate a random URL address.
 
     :param str scheme: Either http, https or ftp.

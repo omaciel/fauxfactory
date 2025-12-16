@@ -7,7 +7,7 @@ from functools import partial
 from fauxfactory.helpers import base_repr
 
 
-def gen_integer(min_value=None, max_value=None):
+def gen_integer(min_value: int | None = None, max_value: int | None = None) -> int:
     """Return a random integer value based on the current platform.
 
     :param int min_value: The minimum allowed value.
@@ -40,7 +40,7 @@ def gen_integer(min_value=None, max_value=None):
     return value
 
 
-def gen_negative_integer():
+def gen_negative_integer() -> int:
     """Return a random negative integer based on the current platform.
 
     :returns: Returns a random negative integer value.
@@ -52,7 +52,7 @@ def gen_negative_integer():
     return gen_integer(max_value=max_value)
 
 
-def gen_positive_integer():
+def gen_positive_integer() -> int:
     """Return a random positive integer based on the current platform.
 
     :returns: A random positive integer value.
@@ -64,7 +64,7 @@ def gen_positive_integer():
     return gen_integer(min_value=min_value)
 
 
-def gen_number(min_value=None, max_value=None, base=10):
+def gen_number(min_value: str | None = None, max_value: str | None = None, base: int = 10) -> str:
     """Return a random number (with <base> representation).
 
     :returns: A random number with base of <base>.
@@ -80,8 +80,8 @@ def gen_number(min_value=None, max_value=None, base=10):
     )
 
 
-gen_octagonal = partial(gen_number, base=8)
-gen_hexadecimal = partial(gen_number, base=16)
+gen_octagonal: partial[str] = partial(gen_number, base=8)
+gen_hexadecimal: partial[str] = partial(gen_number, base=16)
 
 
 __all__ = tuple(name for name in locals() if name.startswith("gen_"))

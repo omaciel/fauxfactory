@@ -12,14 +12,15 @@ import datetime
 import json
 import os
 import string
+from typing import Any, Final
 
-VALID_DIGITS = string.digits + string.ascii_letters
+VALID_DIGITS: Final[str] = string.digits + string.ascii_letters
 
-FACTS_JSON_FILE = os.path.join(os.path.dirname(__file__), "facts.json")
+FACTS_JSON_FILE: Final[str] = os.path.join(os.path.dirname(__file__), "facts.json")
 with open(FACTS_JSON_FILE, encoding="utf-8") as data:
-    FACTS_JSON = json.load(data)
+    FACTS_JSON: Final[dict[str, Any]] = json.load(data)
 
-LOREM_IPSUM_TEXT = (
+LOREM_IPSUM_TEXT: Final[str] = (
     "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do "
     "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad "
     "minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip "
@@ -29,21 +30,21 @@ LOREM_IPSUM_TEXT = (
     "mollit anim id est laborum."
 )
 
-MIN_YEARS = datetime.MINYEAR
-MAX_YEARS = 1000  # 1000 years into the future
+MIN_YEARS: Final[int] = datetime.MINYEAR
+MAX_YEARS: Final[int] = 1000  # 1000 years into the future
 
-SCHEMES = (
+SCHEMES: Final[tuple[str, ...]] = (
     "http",
     "https",
     "ftp",
 )
 
-SUBDOMAINS = (
+SUBDOMAINS: Final[tuple[str, ...]] = (
     "example",
     "test",
 )
 
-TLDS = (
+TLDS: Final[tuple[str, ...]] = (
     "biz",
     "com",
     "edu",
@@ -52,7 +53,7 @@ TLDS = (
     "org",
 )
 
-VALID_NETMASKS = (
+VALID_NETMASKS: Final[tuple[str, ...]] = (
     "0.0.0.0",
     "128.0.0.0",
     "192.0.0.0",
@@ -88,7 +89,7 @@ VALID_NETMASKS = (
     "255.255.255.255",
 )
 
-HTML_TAGS = (
+HTML_TAGS: Final[tuple[str, ...]] = (
     "a",
     "abbr",
     "acronym",

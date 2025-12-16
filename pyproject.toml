@@ -38,6 +38,7 @@ dev = [
     "wheel>=0.43.0",
     "twine>=5.0.0",
     "ruff>=0.3.4",
+    "mypy>=1.8.0",
 ]
 docs = [
     "sphinx",
@@ -74,8 +75,21 @@ include = ["*.py"]
 target-version = "py312"
 
 [tool.ruff.lint]
-select = ["E", "F", "B", "I"]
-ignore = ["B018", "E203"]
+select = ["E", "F", "B", "I", "ANN", "UP"]
+ignore = ["B018", "E203", "ANN101", "ANN102", "ANN401"]
 fixable = ["ALL"]
 unfixable = []
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_any_unimported = false
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+check_untyped_defs = true
+strict_optional = true

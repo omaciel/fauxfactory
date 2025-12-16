@@ -126,7 +126,7 @@ def test_gen_datetime_13():
     # Five minutes into the future
     min_date = today + datetime.timedelta(seconds=5 * 60)
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         gen_datetime(min_date=min_date, max_date=today)
 
 

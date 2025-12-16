@@ -127,7 +127,7 @@ def test_gen_date_13():
     # Five days into the future
     min_date = today + datetime.timedelta(5)
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         gen_date(min_date=min_date, max_date=today)
 
 

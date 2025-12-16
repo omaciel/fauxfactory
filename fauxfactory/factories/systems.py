@@ -1,6 +1,7 @@
 """Collection of computer systems generating functions."""
 
 from copy import deepcopy
+from typing import Any
 
 from fauxfactory.constants import FACTS_JSON
 from fauxfactory.helpers import is_positive_int
@@ -11,7 +12,7 @@ from .numbers import gen_integer
 from .strings import gen_alpha, gen_alphanumeric
 
 
-def add_memory_info(count=None):
+def add_memory_info(count: int | None = None) -> dict[str, str]:
     """Generate fake memory facts.
 
     :param int count: The total amount of RAM for a system.
@@ -39,7 +40,7 @@ def add_memory_info(count=None):
     }
 
 
-def add_network_devices():
+def add_network_devices() -> dict[str, Any]:
     """Generate fake network device facts.
 
     :returns: A dictionary representing a Host's network devices.
@@ -66,7 +67,12 @@ def add_network_devices():
     }
 
 
-def add_operating_system(name=None, family=None, major=None, minor=None):
+def add_operating_system(
+    name: str | None = None,
+    family: str | None = None,
+    major: int | None = None,
+    minor: int | None = None,
+) -> dict[str, Any]:
     """Generate fake operating system facts.
 
     :param str name: The name for an operating system.
@@ -101,7 +107,7 @@ def add_operating_system(name=None, family=None, major=None, minor=None):
     }
 
 
-def add_partitions(extra_partitions=None):
+def add_partitions(extra_partitions: int | None = None) -> dict[str, dict[str, Any]]:
     """Generate fake partitions facts."""
     partitions = {
         "partitions": {
@@ -129,7 +135,7 @@ def add_partitions(extra_partitions=None):
     return partitions
 
 
-def add_processor_info(count=None):
+def add_processor_info(count: int | None = None) -> dict[str, Any]:
     """Generate fake processor facts.
 
     :param int count: Number of processors for a system.
@@ -158,13 +164,13 @@ def add_processor_info(count=None):
     # Add processors info based on total processors
     for idx in range(count):
         processors[f"processor{idx}"] = "Intel(R) Xeon(R) CPU E31220 @ 3.10GHz"
-        processors["processors"]["models"].append(
+        processors["processors"]["models"].append(  # type: ignore[index]
             "Intel(R) Xeon(R) CPU E31220 @ 3.10GHz"
         )
     return processors
 
 
-def gen_system_facts(name=None):
+def gen_system_facts(name: str | None = None) -> dict[str, Any]:
     """Generate system facts.
 
     See https://docs.puppet.com/facter/3.6/core_facts.html for more
