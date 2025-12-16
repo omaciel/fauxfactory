@@ -109,7 +109,7 @@ def gen_alphanumeric(length=10, start=None, separator=""):
 
 @check_len
 @check_validation
-def gen_cjk(length=10, start=None, separator=""):
+def gen_cjk(length=10, start=None, separator="", bmp_only=False):
     """Return a random string made up of CJK characters.
 
     (Source: Wikipedia - CJK Unified Ideographs)
@@ -117,23 +117,34 @@ def gen_cjk(length=10, start=None, separator=""):
     :param int length: Length for random data.
     :param str start: Random data start with.
     :param str separator: Separator character for start and random data.
+    :param bool bmp_only: Include only Basic Multilingual Plane (BMP)
+        characters (U+0000 to U+FFFF). Set to True for compatibility with
+        tools like ChromeDriver that don't support non-BMP characters.
     :returns: A random string made up of CJK characters.
     :rtype: str
 
     """
     # These should represent the ranges for valid CJK characters
-    unicode_block = (
-        # CJK Unified Ideographs
-        (0x4E00, 0x9FFF),
-        # CJK Unified Ideographs Extension A
-        (0x3400, 0x4DBF),
-        # CJK Unified Ideographs Extension B
-        (0x20000, 0x2A6DF),
-        # CJK Unified Ideographs Extension C
-        (0x2A700, 0x2B73F),
-        # CJK Unified Ideographs Extension D
-        (0x2B740, 0x2B81F),
-    )
+    if bmp_only:
+        unicode_block = (
+            # CJK Unified Ideographs (BMP)
+            (0x4E00, 0x9FFF),
+            # CJK Unified Ideographs Extension A (BMP)
+            (0x3400, 0x4DBF),
+        )
+    else:
+        unicode_block = (
+            # CJK Unified Ideographs
+            (0x4E00, 0x9FFF),
+            # CJK Unified Ideographs Extension A
+            (0x3400, 0x4DBF),
+            # CJK Unified Ideographs Extension B
+            (0x20000, 0x2A6DF),
+            # CJK Unified Ideographs Extension C
+            (0x2A700, 0x2B73F),
+            # CJK Unified Ideographs Extension D
+            (0x2B740, 0x2B81F),
+        )
 
     output_array = []
 

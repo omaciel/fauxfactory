@@ -139,6 +139,36 @@ def test_bmp_chars_only():
         assert ord(char) <= BMP.max
 
 
+def test_gen_cjk_bmp_only():
+    """gen_cjk with bmp_only=True generates only BMP CJK characters."""
+    result = gen_cjk(50, bmp_only=True)
+    for char in result:
+        codepoint = ord(char)
+        # Verify character is in BMP range
+        assert 0x0000 <= codepoint <= 0xFFFF
+        # Verify it's in the allowed CJK BMP blocks
+        assert (0x3400 <= codepoint <= 0x4DBF) or (0x4E00 <= codepoint <= 0x9FFF)
+
+
+def test_gen_cjk_default_includes_all_blocks():
+    """gen_cjk default behavior includes all CJK blocks."""
+    # Test that default behavior still works (includes all blocks)
+    result = gen_cjk(50)
+    assert len(result) == 50
+    # All characters should be valid CJK characters
+    for char in result:
+        codepoint = ord(char)
+        # Verify it's in one of the valid CJK blocks (BMP or non-BMP)
+        in_valid_block = (
+            (0x3400 <= codepoint <= 0x4DBF)
+            or (0x4E00 <= codepoint <= 0x9FFF)
+            or (0x20000 <= codepoint <= 0x2A6DF)
+            or (0x2A700 <= codepoint <= 0x2B73F)
+            or (0x2B740 <= codepoint <= 0x2B81F)
+        )
+        assert in_valid_block
+
+
 def test_invalid_string_type():
     """Only valid string types can be generated."""
     with pytest.raises(ValueError):
