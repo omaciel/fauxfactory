@@ -1,10 +1,10 @@
 """Collection of string generating functions."""
 
 import random
-import re
 import string
 from collections.abc import Callable
-from typing import Any, Pattern
+from re import Pattern
+from typing import Any
 
 from fauxfactory.constants import HTML_TAGS, LOREM_IPSUM_TEXT
 from fauxfactory.helpers import (

@@ -75,8 +75,31 @@ include = ["*.py"]
 target-version = "py312"
 
 [tool.ruff.lint]
-select = ["E", "F", "B", "I", "ANN", "UP"]
-ignore = ["B018", "E203", "ANN101", "ANN102", "ANN401"]
+select = [
+    "E",    # pycodestyle errors
+    "F",    # pyflakes
+    "B",    # flake8-bugbear
+    "I",    # isort
+    "ANN",  # flake8-annotations
+    "UP",   # pyupgrade
+    "RUF",  # Ruff-specific rules
+    "C4",   # flake8-comprehensions
+    "SIM",  # flake8-simplify
+    "PTH",  # flake8-use-pathlib
+]
+ignore = [
+    "B018",    # Useless expression
+    "E203",    # Whitespace before ':'
+    "E501",    # Line too long (handled by formatter)
+    "ANN001",  # Missing type annotation for function argument
+    "ANN202",  # Missing return type annotation for private function
+    "ANN401",  # Dynamically typed expressions (Any) are disallowed
+    "PTH118",  # os.path.join should be replaced by Path
+    "PTH120",  # os.path.dirname should be replaced by Path.parent
+    "PTH123",  # Path.open should be used instead of built-in open
+    "SIM102",  # Use single if statement instead of nested if
+    "SIM108",  # Use ternary operator instead of if-else-block
+]
 fixable = ["ALL"]
 unfixable = []
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
