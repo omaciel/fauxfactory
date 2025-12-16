@@ -11,7 +11,9 @@ from .choices import gen_choice
 from .strings import gen_alpha
 
 
-def gen_domain(name: str | None = None, subdomain: str | None = None, tlds: str | None = None) -> str:
+def gen_domain(
+    name: str | None = None, subdomain: str | None = None, tlds: str | None = None
+) -> str:
     """Generate a random domain name.
 
     :param str name: Name for your host.
@@ -35,7 +37,9 @@ def gen_domain(name: str | None = None, subdomain: str | None = None, tlds: str 
 
 
 @check_validation
-def gen_email(name: str | None = None, domain: str | None = None, tlds: str | None = None) -> str:
+def gen_email(
+    name: str | None = None, domain: str | None = None, tlds: str | None = None
+) -> str:
     """Generate a random email address.
 
     :param str name: Email name.
@@ -61,7 +65,9 @@ def gen_email(name: str | None = None, domain: str | None = None, tlds: str | No
 
 
 @check_validation
-def gen_ipaddr(ip3: bool = False, ipv6: bool = False, prefix: Sequence[str | int] = ()) -> str:
+def gen_ipaddr(
+    ip3: bool = False, ipv6: bool = False, prefix: Sequence[str | int] = ()
+) -> str:
     """Generate a random IP address.
 
     You can also specify an IP address prefix if you are interested in
@@ -111,7 +117,9 @@ def gen_ipaddr(ip3: bool = False, ipv6: bool = False, prefix: Sequence[str | int
 
 
 @check_validation
-def gen_mac(delimiter: str = ":", multicast: bool | None = None, locally: bool | None = None) -> str:
+def gen_mac(
+    delimiter: str = ":", multicast: bool | None = None, locally: bool | None = None
+) -> str:
     """Generate a random MAC address.
 
     For more information about how unicast or multicast and globally unique and
@@ -182,7 +190,9 @@ def gen_netmask(min_cidr: int = 1, max_cidr: int = 31) -> str:
 
 
 @check_validation
-def gen_url(scheme: str | None = None, subdomain: str | None = None, tlds: str | None = None) -> str:
+def gen_url(
+    scheme: str | None = None, subdomain: str | None = None, tlds: str | None = None
+) -> str:
     """Generate a random URL address.
 
     :param str scheme: Either http, https or ftp.

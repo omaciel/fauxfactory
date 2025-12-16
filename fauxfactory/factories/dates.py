@@ -6,7 +6,9 @@ import random
 from fauxfactory.constants import MAX_YEARS, MIN_YEARS
 
 
-def gen_date(min_date: datetime.date | None = None, max_date: datetime.date | None = None) -> datetime.date:
+def gen_date(
+    min_date: datetime.date | None = None, max_date: datetime.date | None = None
+) -> datetime.date:
     """Return a random date value.
 
     :param min_date: A valid ``datetime.date`` object.
@@ -32,7 +34,9 @@ def gen_date(min_date: datetime.date | None = None, max_date: datetime.date | No
 
     # Check that max_date is not before min_date
     if min_date >= max_date:
-        raise ValueError(f"min_date ({min_date}) must be less than max_date ({max_date})")
+        raise ValueError(
+            f"min_date ({min_date}) must be less than max_date ({max_date})"
+        )
 
     # Pick a day between min and max dates
     diff = max_date - min_date
@@ -42,7 +46,9 @@ def gen_date(min_date: datetime.date | None = None, max_date: datetime.date | No
     return date
 
 
-def gen_datetime(min_date: datetime.datetime | None = None, max_date: datetime.datetime | None = None) -> datetime.datetime:
+def gen_datetime(
+    min_date: datetime.datetime | None = None, max_date: datetime.datetime | None = None
+) -> datetime.datetime:
     """Return a random datetime value.
 
     :param min_date: A valid ``datetime.datetime`` object.
@@ -68,7 +74,9 @@ def gen_datetime(min_date: datetime.datetime | None = None, max_date: datetime.d
 
     # Check that max_date is not before min_date
     if min_date >= max_date:
-        raise ValueError(f"min_date ({min_date}) must be less than max_date ({max_date})")
+        raise ValueError(
+            f"min_date ({min_date}) must be less than max_date ({max_date})"
+        )
 
     # Pick a time between min and max dates
     diff = max_date - min_date

@@ -64,7 +64,9 @@ def gen_positive_integer() -> int:
     return gen_integer(min_value=min_value)
 
 
-def gen_number(min_value: str | None = None, max_value: str | None = None, base: int = 10) -> str:
+def gen_number(
+    min_value: str | None = None, max_value: str | None = None, base: int = 10
+) -> str:
     """Return a random number (with <base> representation).
 
     :returns: A random number with base of <base>.
