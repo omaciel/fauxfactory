@@ -1,28 +1,28 @@
 FauxFactory
 ===========
 
-.. image:: https://travis-ci.org/omaciel/fauxfactory.png?branch=master
-   :target: https://travis-ci.org/omaciel/fauxfactory
+.. image:: https://github.com/omaciel/fauxfactory/workflows/Fauxfactory%20Checks/badge.svg
+   :target: https://github.com/omaciel/fauxfactory/actions
    :alt: Build Status
 
 .. image:: https://img.shields.io/pypi/pyversions/fauxfactory.svg
    :target: https://pypi.python.org/pypi/fauxfactory
    :alt: Python Compatibility
 
-.. image:: https://badge.fury.io/py/fauxfactory.png
-   :target: http://badge.fury.io/py/fauxfactory
+.. image:: https://img.shields.io/pypi/v/fauxfactory.svg
+   :target: https://pypi.org/project/fauxfactory/
    :alt: Current Version
 
 .. image:: https://img.shields.io/pypi/dm/fauxfactory.svg
-   :target: https://crate.io/packages/fauxfactory/
+   :target: https://pypistats.org/packages/fauxfactory
    :alt: Download Statistics
 
-.. image:: https://coveralls.io/repos/omaciel/fauxfactory/badge.png?branch=master
-   :target: https://coveralls.io/r/omaciel/fauxfactory?branch=master
+.. image:: https://coveralls.io/repos/github/omaciel/fauxfactory/badge.svg?branch=master
+   :target: https://coveralls.io/github/omaciel/fauxfactory?branch=master
    :alt: Test Coverage
 
 .. image:: https://img.shields.io/pypi/l/fauxfactory.svg
-   :target: https://pypi.python.org/pypi/fauxfactory/
+   :target: https://pypi.org/project/fauxfactory/
    :alt: License
 
 **FauxFactory** generates random data for your automated tests easily!
