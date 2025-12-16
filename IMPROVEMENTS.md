@@ -23,15 +23,9 @@ This document outlines potential improvements for the FauxFactory project based 
   - fauxfactory/factories/dates.py:69
 - **Fix**: Replace with proper `if` statements and `raise ValueError`
 
-### 3. Remove Obsolete Travis CI Configuration
-
-- **Issue**: .travis.yml:1-33 still exists despite migration to GitHub Actions
-- **Impact**: Confusing for contributors, suggests outdated CI
-- **Action**: Delete .travis.yml file
-
 ## Medium Priority Improvements
 
-### 4. Update Pre-commit Hooks
+### 3. Update Pre-commit Hooks
 
 - **Issue**: .pre-commit-config.yaml:12 uses ruff v1.3.1 (outdated)
 - **Action**: Update to latest versions and consider adding additional hooks:
@@ -40,7 +34,7 @@ This document outlines potential improvements for the FauxFactory project based 
   - `check-merge-conflict`
   - `check-case-conflict`
 
-### 5. Expand Ruff Linting Rules
+### 4. Expand Ruff Linting Rules
 
 - **Issue**: pyproject.toml:76 only enables basic rules (`E`, `F`, `B`, `I`)
 - **Suggestion**: Enable additional rule sets for better code quality:
@@ -52,13 +46,13 @@ This document outlines potential improvements for the FauxFactory project based 
   - `PL` - Pylint rules
   - `PTH` - flake8-use-pathlib
 
-### 6. Add Type Checking with mypy
+### 5. Add Type Checking with mypy
 
 - **Action**: Add mypy to dev dependencies
 - **Benefit**: Static type checking once type hints are added
 - **Config**: Add `[tool.mypy]` section to pyproject.toml with appropriate settings
 
-### 7. Update Deprecated HTML Tags
+### 6. Update Deprecated HTML Tags
 
 - **Issue**: constants.py:91-184 includes deprecated HTML tags:
   - `applet`, `basefont`, `blink`, `center`, `font`, `frame`, `frameset`, `strike`, `tt`, `isindex`
@@ -68,7 +62,7 @@ This document outlines potential improvements for the FauxFactory project based 
   - Adding a modern-only option
   - Adding HTML5 semantic tags (article, aside, nav, section, etc.)
 
-### 8. Add Security Scanning
+### 7. Add Security Scanning
 
 - **Action**: Add automated security scanning to CI/CD
 - **Options**:
@@ -79,7 +73,7 @@ This document outlines potential improvements for the FauxFactory project based 
 
 ## Low Priority Improvements
 
-### 9. Fix Inconsistent Variable Initialization
+### 8. Fix Inconsistent Variable Initialization
 
 - **Issue**: strings.py:274 has redundant initialization
 
@@ -91,7 +85,7 @@ This document outlines potential improvements for the FauxFactory project based 
 - **Location**: fauxfactory/factories/strings.py:274-277
 - **Fix**: Remove the redundant first line
 
-### 10. Improve Error Messages with f-strings
+### 9. Improve Error Messages with f-strings
 
 - **Issue**: Some error messages use old-style formatting and don't include actual values
 - **Examples**:
@@ -105,7 +99,7 @@ This document outlines potential improvements for the FauxFactory project based 
   raise ValueError(f"{min_date} is not a valid datetime.date object")
   ```
 
-### 11. Update GitHub Actions
+### 10. Update GitHub Actions
 
 - **Issue**: Using outdated action versions in .github/workflows/checks.yml
   - `actions/setup-python@v3` (latest is v5)
@@ -114,13 +108,13 @@ This document outlines potential improvements for the FauxFactory project based 
 - **Action**: Update to latest stable action versions
 - **Benefit**: Access to latest features and security improvements
 
-### 12. Add Dependency Update Automation
+### 11. Add Dependency Update Automation
 
 - **Action**: Add Dependabot or Renovate configuration
 - **Benefit**: Automated dependency updates via pull requests
 - **Config**: Create `.github/dependabot.yml` for GitHub Actions and Python dependencies
 
-### 13. Consider Adding More TLDs
+### 12. Consider Adding More TLDs
 
 - **Issue**: constants.py:46-53 has limited TLD list (only 6 TLDs)
 - **Current**: `biz`, `com`, `edu`, `gov`, `info`, `org`
@@ -129,7 +123,7 @@ This document outlines potential improvements for the FauxFactory project based 
   - Country codes: `.uk`, `.ca`, `.au`, `.de`, `.jp`
 - **Note**: Keep it reasonable; don't need all 1500+ TLDs
 
-### 14. Documentation Links May Be Outdated
+### 13. Documentation Links May Be Outdated
 
 - **Issue**: README.rst:4-22 has several badge links that may be deprecated
 - **Check**:
@@ -138,21 +132,21 @@ This document outlines potential improvements for the FauxFactory project based 
   - Coveralls badge - verify still active
 - **Action**: Update to use GitHub Actions badge and modern analytics
 
-### 15. Add `py.typed` Marker File
+### 14. Add `py.typed` Marker File
 
 - **Action**: Once type hints are added, include a `py.typed` file in the package root
 - **Location**: `fauxfactory/py.typed` (empty file)
 - **Benefit**: Signals to type checkers (mypy, pyright) that the package supports typing
 - **PEP**: PEP 561 - Distributing and Packaging Type Information
 
-### 16. Consider Adding CHANGELOG.md
+### 15. Consider Adding CHANGELOG.md
 
 - **Issue**: HISTORY.rst exists but CHANGELOG.md is more common in modern projects
 - **Note**: This is cosmetic; HISTORY.rst works fine
 - **Action**: Could keep both or migrate to CHANGELOG.md following [Keep a Changelog](https://keepachangelog.com/) format
 - **Low priority**: Current approach is working
 
-### 17. Add Python 3.10 Minimum Version Features
+### 16. Add Python 3.10 Minimum Version Features
 
 - **Current**: Requires Python >= 3.10
 - **Opportunity**: Can use Python 3.10+ features like:
@@ -187,7 +181,6 @@ This document outlines potential improvements for the FauxFactory project based 
 ## Recommended Implementation Order
 
 1. **Quick Wins** (1-2 hours):
-   - Remove .travis.yml
    - Update GitHub Actions versions
    - Fix error message formatting in dates.py
    - Fix redundant variable initialization in strings.py
