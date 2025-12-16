@@ -159,6 +159,7 @@ def gen_cjk(
 
     """
     # These should represent the ranges for valid CJK characters
+    unicode_block: tuple[tuple[int, int], ...]
     if bmp_only:
         unicode_block = (
             # CJK Unified Ideographs (BMP)
