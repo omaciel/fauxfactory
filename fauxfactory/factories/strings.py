@@ -336,7 +336,6 @@ def gen_latin1(
     :rtype: str
 
     """
-    range0 = range1 = range2 = []
     range0 = ["00C0", "00D6"]
     range1 = ["00D8", "00F6"]
     range2 = ["00F8", "00FF"]
