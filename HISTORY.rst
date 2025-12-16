@@ -3,6 +3,14 @@
 Release History
 ===============
 
+4.0.0 (2025-12-16)
+------------------
+
+- **BREAKING**: Dropped support for Python 3.9.
+- Added support for Python 3.13 and 3.14.
+- Removed obsolete Travis CI configuration.
+- Updated minimum Python version requirement to 3.10+.
+
 3.1.2 (2025-03-04)
 ------------------
 
