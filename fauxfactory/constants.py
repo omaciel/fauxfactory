@@ -45,12 +45,23 @@ SUBDOMAINS: Final[tuple[str, ...]] = (
 )
 
 TLDS: Final[tuple[str, ...]] = (
+    "app",
+    "au",
     "biz",
+    "ca",
+    "co",
     "com",
+    "de",
+    "dev",
     "edu",
     "gov",
     "info",
+    "io",
+    "jp",
+    "net",
     "org",
+    "tech",
+    "uk",
 )
 
 VALID_NETMASKS: Final[tuple[str, ...]] = (
