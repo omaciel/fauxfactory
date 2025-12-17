@@ -180,10 +180,7 @@ def gen_system_facts(name: str | None = None) -> dict[str, Any]:
     :returns: A Dictionary representing a system's facts.
     :rtype: dict
     """
-    if name is None or name == "":
-        fqdn = gen_domain()
-    else:
-        fqdn = gen_domain(*name.split("."))
+    fqdn = gen_domain() if name is None or name == "" else gen_domain(*name.split("."))
 
     kernel = ".".join([f"{gen_integer(min_value=0, max_value=9)}" for _ in range(3)])
 

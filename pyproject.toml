@@ -99,7 +99,6 @@ ignore = [
     "ANN202",  # Missing return type annotation for private function
     "ANN401",  # Dynamically typed expressions (Any) are disallowed
     "SIM102",  # Use single if statement instead of nested if
-    "SIM108",  # Use ternary operator instead of if-else-block
     "SIM118",  # Use key in dict (keeping explicit .keys() in tests)
     "UP047",   # Generic functions with type parameters (false positives)
     "S101",    # Use of assert (acceptable in tests)
