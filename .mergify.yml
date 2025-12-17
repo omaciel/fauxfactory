@@ -1,0 +1,114 @@
+queue_rules:
+  - name: default
+    conditions:
+      - check-success=build (3.10)
+      - check-success=build (3.11)
+      - check-success=build (3.12)
+      - check-success=build (3.13)
+      - check-success=build (3.14)
+
+pull_request_rules:
+  # Automatically rebase and merge PRs when approved and tests pass
+  - name: Automatic merge on approval
+    conditions:
+      - base=master
+      - "#approved-reviews-by>=1"
+      - approved-reviews-by=omaciel
+      - check-success=build (3.10)
+      - check-success=build (3.11)
+      - check-success=build (3.12)
+      - check-success=build (3.13)
+      - check-success=build (3.14)
+      - -draft
+      - -conflict
+      - -closed
+    actions:
+      queue:
+        method: rebase
+        name: default
+        commit_message_template: |
+          {{ title }} (#{{ number }})
+
+          {{ body }}
+
+  # Automatically rebase PRs to keep them up to date
+  - name: Automatic rebase
+    conditions:
+      - base=master
+      - -draft
+      - -conflict
+      - -closed
+      - -merged
+      - "#commits-behind>0"
+    actions:
+      rebase:
+
+  # Label PRs that are ready to merge
+  - name: Label when approved and ready
+    conditions:
+      - base=master
+      - "#approved-reviews-by>=1"
+      - approved-reviews-by=omaciel
+      - check-success=build (3.10)
+      - check-success=build (3.11)
+      - check-success=build (3.12)
+      - check-success=build (3.13)
+      - check-success=build (3.14)
+      - -draft
+      - -conflict
+    actions:
+      label:
+        add:
+          - ready-to-merge
+
+  # Remove label when conditions no longer met
+  - name: Remove ready label when not ready
+    conditions:
+      - base=master
+      - or:
+        - "#approved-reviews-by<1"
+        - -approved-reviews-by=omaciel
+        - check-failure=build (3.10)
+        - check-failure=build (3.11)
+        - check-failure=build (3.12)
+        - check-failure=build (3.13)
+        - check-failure=build (3.14)
+        - draft
+        - conflict
+    actions:
+      label:
+        remove:
+          - ready-to-merge
+
+  # Auto-label Dependabot PRs
+  - name: Auto-label Dependabot PRs
+    conditions:
+      - author=dependabot[bot]
+    actions:
+      label:
+        add:
+          - dependencies
+
+  # Auto-merge Dependabot PRs if tests pass (optional - uncomment if desired)
+  # - name: Auto-merge Dependabot PRs
+  #   conditions:
+  #     - author=dependabot[bot]
+  #     - base=master
+  #     - check-success=build (3.10)
+  #     - check-success=build (3.11)
+  #     - check-success=build (3.12)
+  #     - check-success=build (3.13)
+  #     - check-success=build (3.14)
+  #     - -draft
+  #     - -conflict
+  #   actions:
+  #     queue:
+  #       method: rebase
+  #       name: default
+  #       commit_message_template: |
+  #         {{ title }} (#{{ number }})
+  #
+  #         {{ body }}
+  #     review:
+  #       type: APPROVE
+  #       message: "Automatically approving Dependabot PR - tests passed"
