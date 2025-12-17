@@ -14,6 +14,7 @@ from fauxfactory.factories.dates import *  # noqa: F403
 from fauxfactory.factories.internet import *  # noqa: F403
 from fauxfactory.factories.numbers import *  # noqa: F403
 from fauxfactory.factories.strings import *  # noqa: F403
+from fauxfactory.factories.structures import *  # noqa: F403
 from fauxfactory.factories.systems import *  # noqa: F403
 
 __factories = {name: obj for name, obj in locals().items() if name.startswith("gen_")}

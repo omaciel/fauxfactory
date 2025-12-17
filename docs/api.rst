@@ -56,6 +56,12 @@ This is a complete list of available methods, along with details about them.
 .. automodule:: fauxfactory.factories.strings
     :members:
 
+:mod:`fauxfactory.factories.structures`
+---------------------------------------
+
+.. automodule:: fauxfactory.factories.structures
+    :members:
+
 :mod:`fauxfactory.factories.systems`
 ------------------------------------
 
