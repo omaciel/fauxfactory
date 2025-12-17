@@ -90,7 +90,7 @@ def _process_schema_value(
 
 @check_validation
 def gen_dict(
-    schema: Schema,
+    schema: dict[str, Any],
     *,
     list_sizes: dict[str, int] | None = None,
     max_depth: int = 10,
@@ -163,7 +163,7 @@ def gen_dict(
 
 @check_validation
 def gen_json(
-    schema: Schema,
+    schema: dict[str, Any],
     *,
     indent: int | None = None,
     list_sizes: dict[str, int] | None = None,
