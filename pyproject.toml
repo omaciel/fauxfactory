@@ -98,10 +98,6 @@ ignore = [
     "ANN201",  # Missing return type annotation for public function (tests)
     "ANN202",  # Missing return type annotation for private function
     "ANN401",  # Dynamically typed expressions (Any) are disallowed
-    "PTH118",  # os.path.join should be replaced by Path
-    "PTH120",  # os.path.dirname should be replaced by Path.parent
-    "PTH123",  # Path.open should be used instead of built-in open
-    "PTH208",  # Use pathlib.Path.iterdir() (keeping os.listdir for compatibility)
     "SIM102",  # Use single if statement instead of nested if
     "SIM108",  # Use ternary operator instead of if-else-block
     "SIM118",  # Use key in dict (keeping explicit .keys() in tests)

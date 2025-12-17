@@ -10,14 +10,14 @@
 # The above constant descriptions can be found by Sphinx and via help().
 import datetime
 import json
-import os
 import string
+from pathlib import Path
 from typing import Any, Final
 
 VALID_DIGITS: Final[str] = string.digits + string.ascii_letters
 
-FACTS_JSON_FILE: Final[str] = os.path.join(os.path.dirname(__file__), "facts.json")
-with open(FACTS_JSON_FILE, encoding="utf-8") as data:
+FACTS_JSON_FILE: Final[Path] = Path(__file__).parent / "facts.json"
+with FACTS_JSON_FILE.open(encoding="utf-8") as data:
     FACTS_JSON: Final[dict[str, Any]] = json.load(data)
 
 LOREM_IPSUM_TEXT: Final[str] = (

@@ -3,9 +3,8 @@
 These tests are heavily just artificial tests to get 100% coverage.
 """
 
-import os
-import os.path
 from importlib import import_module
+from pathlib import Path
 
 import fauxfactory.factories
 
@@ -18,9 +17,10 @@ def check_all_dired_names_are_getattrable(obj):
 
 def test_fauxfactory_factories_dir():
     """Check dir of fauxfactory factories."""
-    for d in os.listdir(os.path.dirname(fauxfactory.factories.__file__)):
-        if d.endswith(".py") and not d.startswith("__"):
-            name = f".{d[:-3]}"
+    factories_dir = Path(fauxfactory.factories.__file__).parent
+    for path in factories_dir.iterdir():
+        if path.suffix == ".py" and not path.name.startswith("__"):
+            name = f".{path.stem}"
             module = import_module(name, fauxfactory.factories.__package__)
             check_all_dired_names_are_getattrable(module)
 
