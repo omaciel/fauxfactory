@@ -1,6 +1,6 @@
 [project]
 name = "fauxfactory"
-version = "4.1.0"
+version = "4.2.0"
 license = { text = "Apache-2.0" }
 description = "Generates random data for your tests."
 authors = [
