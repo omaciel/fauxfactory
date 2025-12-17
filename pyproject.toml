@@ -47,7 +47,7 @@ docs = [
 ]
 
 [project.urls]
-Changelog = "https://github.com/omaciel/fauxfactory/blob/master/HISTORY.rst"
+Changelog = "https://github.com/omaciel/fauxfactory/blob/master/CHANGELOG.md"
 Homepage = "https://github.com/omaciel/fauxfactory"
 Repository = "https://github.com/omaciel/fauxfactory"
 
