@@ -5,6 +5,58 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0] - 2025-12-17
+
+### Added
+- **New Structure Generators**: Added `gen_dict()` and `gen_json()` functions for generating complex nested data structures
+  - `gen_dict()`: Generate dictionaries from schema definitions
+    - Supports callable generators (e.g., `gen_alpha`, `gen_email`)
+    - Supports lambda functions for parameterized generators
+    - Supports nested dictionaries and lists
+    - Supports literal values (strings, numbers, booleans, None)
+    - Customizable list sizes via `list_sizes` parameter
+    - Full validation support with `validator`, `default`, and `tries` parameters
+    - Max depth protection to prevent infinite recursion (default: 10)
+  - `gen_json()`: Generate JSON strings from schema definitions
+    - Built on `gen_dict()` for consistency
+    - Supports indentation via `indent` parameter for pretty-printing
+    - Full validation support
+
+  **Examples:**
+  ```python
+  from fauxfactory import gen_dict, gen_json, gen_alpha, gen_email, gen_integer
+
+  # Simple flat dictionary
+  user = gen_dict({
+      'name': gen_alpha,
+      'email': gen_email,
+      'age': lambda: gen_integer(min_value=18, max_value=100),
+      'active': True,  # literal value
+  })
+  # Returns: {'name': 'xKjPqR', 'email': 'abc@example.com', 'age': 42, 'active': True}
+
+  # Nested structure with lists
+  api_data = gen_dict({
+      'users': [{
+          'name': gen_alpha,
+          'email': gen_email,
+      }],
+      'metadata': {
+          'version': '1.0',
+          'count': lambda: gen_integer(min_value=1, max_value=100),
+      },
+  }, list_sizes={'users': 3})
+
+  # Generate JSON for API testing
+  json_str = gen_json({
+      'user': {
+          'name': gen_alpha,
+          'email': gen_email,
+      },
+      'tags': [gen_alpha],
+  }, list_sizes={'tags': 5}, indent=2)
+  ```
+
 ## [4.0.0] - 2025-12-16
 
 ### Changed
@@ -212,6 +264,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial Release
 
+[4.1.0]: https://github.com/omaciel/fauxfactory/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/omaciel/fauxfactory/compare/v3.1.2...v4.0.0
 [3.1.2]: https://github.com/omaciel/fauxfactory/compare/v3.1.1...v3.1.2
 [3.1.1]: https://github.com/omaciel/fauxfactory/compare/v3.1.0...v3.1.1
