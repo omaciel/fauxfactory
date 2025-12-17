@@ -82,16 +82,16 @@ def test_add_random_operating_system_with_attributes():
 def test_add_single_partition():
     """Get facts for a single partition."""
     facts = add_partitions()
-    assert "sda1" in facts["partitions"].keys()
+    assert "sda1" in facts["partitions"]
 
 
 def test_add_three_partitions():
     """Get facts for three partition."""
     facts = add_partitions(extra_partitions=3)
-    assert "sda1" in facts["partitions"].keys()
-    assert "sdb1" in facts["partitions"].keys()
-    assert "sdb2" in facts["partitions"].keys()
-    assert "sdb3" in facts["partitions"].keys()
+    assert "sda1" in facts["partitions"]
+    assert "sdb1" in facts["partitions"]
+    assert "sdb2" in facts["partitions"]
+    assert "sdb3" in facts["partitions"]
 
 
 def test_add_zero_extra_partition():
