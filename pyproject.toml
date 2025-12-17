@@ -39,6 +39,7 @@ dev = [
     "twine>=5.0.0",
     "ruff>=0.3.4",
     "mypy>=1.8.0",
+    "bandit>=1.7.0",
 ]
 docs = [
     "sphinx",
@@ -87,6 +88,7 @@ select = [
     "C4",   # flake8-comprehensions
     "SIM",  # flake8-simplify
     "PTH",  # flake8-use-pathlib
+    "S",    # flake8-bandit (security)
 ]
 ignore = [
     "B018",    # Useless expression
@@ -104,6 +106,9 @@ ignore = [
     "SIM108",  # Use ternary operator instead of if-else-block
     "SIM118",  # Use key in dict (keeping explicit .keys() in tests)
     "UP047",   # Generic functions with type parameters (false positives)
+    "S101",    # Use of assert (acceptable in tests)
+    "S104",    # Possible binding to all interfaces (false positive for netmask constants)
+    "S311",    # Pseudo-random generators (intentional for test data generation library)
 ]
 fixable = ["ALL"]
 unfixable = []

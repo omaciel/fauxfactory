@@ -1,0 +1,14 @@
+# Bandit security scanner configuration for FauxFactory
+# See https://bandit.readthedocs.io/en/latest/config.html
+exclude_dirs:
+  - /tests/
+  - /docs/
+
+# Skip these tests for pragmatic reasons:
+# B101 - Use of assert (acceptable in tests)
+# B104 - Possible binding to all interfaces (false positive for netmask constants)
+# B311 - Standard pseudo-random generators (intentional for test data generation library)
+skips:
+  - B101
+  - B104
+  - B311

@@ -5,11 +5,12 @@ help:
 	@echo "  docs-html     Compile documentation to HTML."
 	@echo "  format        Run ruff format."
 	@echo "  lint          Run ruff check and format."
+	@echo "  security      Run security scanning with bandit."
 	@echo "  type-check    Run mypy type checking."
 	@echo "  test          Run unit tests."
 	@echo "  test-all      Run unit tests and doctests, measure coverage."
 
-all: clean lint type-check test-all check clean docs-clean docs-html
+all: clean lint type-check security test-all check clean docs-clean docs-html
 
 # Linting and formatting
 check:
@@ -39,6 +40,9 @@ format:
 
 lint: check format
 
+security: install-dev
+	uv run --with '.[dev]' bandit -r fauxfactory -c .bandit
+
 type-check: install-dev
 	uv run --with '.[dev]' mypy fauxfactory
 
@@ -61,4 +65,4 @@ test: install-dev
 test-all: install-dev
 	uv run --with pytest-cov --with '.[dev]' pytest --cov-report term-missing --cov=fauxfactory
 
-.PHONY: help build check clean docs-clean docs-doctest docs-html format lint type-check build publish test test-all
+.PHONY: help build check clean docs-clean docs-doctest docs-html format lint security type-check build publish test test-all
