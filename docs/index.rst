@@ -74,6 +74,66 @@ Or a fake email with your company domain:
 
 Simple, right?
 
+Structure Generators
+--------------------
+
+FauxFactory also provides powerful structure generators for creating complex nested data:
+
+Generate dictionaries from schemas:
+
+.. doctest::
+
+    >>> user = fauxfactory.gen_dict({
+    ...     'name': fauxfactory.gen_alpha,
+    ...     'email': fauxfactory.gen_email,
+    ...     'age': lambda: fauxfactory.gen_integer(min_value=18, max_value=100),
+    ...     'active': True,
+    ... })
+    >>> isinstance(user, dict)
+    True
+    >>> '@' in user['email']
+    True
+    >>> 18 <= user['age'] <= 100
+    True
+
+Generate JSON strings:
+
+.. doctest::
+
+    >>> import json
+    >>> json_str = fauxfactory.gen_json({
+    ...     'user': {
+    ...         'name': fauxfactory.gen_alpha,
+    ...         'verified': fauxfactory.gen_boolean,
+    ...     }
+    ... }, indent=2)
+    >>> data = json.loads(json_str)
+    >>> isinstance(data['user']['name'], str)
+    True
+
+Generate lists directly:
+
+.. doctest::
+
+    >>> tags = fauxfactory.gen_list(fauxfactory.gen_alpha, size=5)
+    >>> len(tags)
+    5
+    >>> all(isinstance(tag, str) for tag in tags)
+    True
+
+Generate lists of dictionaries:
+
+.. doctest::
+
+    >>> users = fauxfactory.gen_list({
+    ...     'name': fauxfactory.gen_alpha,
+    ...     'email': fauxfactory.gen_email,
+    ... }, size=3)
+    >>> len(users)
+    3
+    >>> all('@' in user['email'] for user in users)
+    True
+
 Validation
 ----------
 

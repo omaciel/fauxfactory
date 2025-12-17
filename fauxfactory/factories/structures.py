@@ -224,6 +224,77 @@ def gen_json(
     return json.dumps(data, indent=indent)
 
 
+@check_validation
+def gen_list(
+    item_schema: Any,
+    *,
+    size: int = 3,
+    max_depth: int = 10,
+    validator: Callable[[list[Any]], bool] | None = None,
+    default: list[Any] | None = None,
+    tries: int = 10,
+) -> list[Any]:
+    """Generate a list of items based on a schema definition.
+
+    The item_schema can be:
+
+    - Callable: Will be invoked to generate each list item
+    - dict: Each list item will be a dictionary generated from this schema
+    - list: Each list item will be a list generated from this schema
+    - Any other value: Each list item will be this literal value
+
+    :param item_schema: Schema definition for each list item
+    :param size: Number of items to generate in the list. Default is 3.
+    :param max_depth: Maximum recursion depth to prevent infinite loops.
+        Default is 10.
+    :param validator: Optional validation function for the entire list.
+        Should accept a list and return True if valid.
+    :param default: Default value if validation fails after ``tries`` attempts
+    :param tries: Number of generation attempts before returning default
+    :returns: Generated list of items matching the schema
+    :rtype: list[Any]
+    :raises: ValueError if max_depth is exceeded
+
+    Example::
+
+        from fauxfactory import gen_list, gen_alpha, gen_email, gen_integer
+
+        # Simple list of strings
+        tags = gen_list(gen_alpha, size=5)
+        # Returns: ['xKjPqR', 'mNoPqR', 'aBcDeF', 'ghIjKl', 'mnOpQr']
+
+        # List of integers with lambda
+        scores = gen_list(lambda: gen_integer(min_value=0, max_value=100), size=10)
+        # Returns: [42, 87, 23, 56, 91, 12, 68, 34, 79, 15]
+
+        # List of dictionaries
+        users = gen_list({
+            'name': gen_alpha,
+            'email': gen_email,
+            'active': True,
+        }, size=3)
+        # Returns: [
+        #     {'name': 'xKjPqR', 'email': 'abc@example.com', 'active': True},
+        #     {'name': 'mNoPqR', 'email': 'def@example.com', 'active': True},
+        #     {'name': 'aBcDeF', 'email': 'ghi@example.com', 'active': True},
+        # ]
+
+        # List of nested lists
+        matrix = gen_list([lambda: gen_integer(min_value=0, max_value=9)], size=3)
+        # Returns: [[1, 5, 8], [3, 7, 2], [9, 4, 6]] (each inner list has 3 items by default)
+
+    """
+    if size < 0:
+        raise ValueError(f"Size must be non-negative, got {size}")
+
+    result = []
+    for _ in range(size):
+        item = _process_schema_value(item_schema, None, "", 0, max_depth)
+        result.append(item)
+
+    return result
+
+
 __all__ = tuple(name for name in locals() if name.startswith("gen_"))
 
 

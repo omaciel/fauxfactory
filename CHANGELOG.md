@@ -5,9 +5,49 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- **New List Generator**: Added `gen_list()` function for generating lists directly
+  - `gen_list()`: Generate lists from item schema definitions
+    - Supports callable generators for each list item
+    - Supports dict/list schemas for complex list items
+    - Supports literal values for constant lists
+    - Customizable list size via `size` parameter (default: 3)
+    - Full validation support with `validator`, `default`, and `tries` parameters
+    - Max depth protection for nested structures (default: 10)
+
+  **Examples:**
+
+  ```python
+  from fauxfactory import gen_list, gen_alpha, gen_email, gen_integer
+
+  # Generate list of strings
+  tags = gen_list(gen_alpha, size=5)
+  # Returns: ['xKjPqR', 'mNoPqR', 'aBcDeF', 'ghIjKl', 'mnOpQr']
+
+  # Generate list of dictionaries
+  users = gen_list({
+      'name': gen_alpha,
+      'email': gen_email,
+      'active': True,
+  }, size=3)
+  # Returns: [
+  #     {'name': 'xKjPqR', 'email': 'abc@example.com', 'active': True},
+  #     {'name': 'mNoPqR', 'email': 'def@example.com', 'active': True},
+  #     {'name': 'aBcDeF', 'email': 'ghi@example.com', 'active': True},
+  # ]
+
+  # Generate matrix (list of lists)
+  matrix = gen_list([lambda: gen_integer(min_value=0, max_value=9)], size=3)
+  # Returns: [[1, 5, 8], [3, 7, 2], [9, 4, 6]]
+  ```
+
 ## [4.1.0] - 2025-12-17
 
 ### Added
+
 - **New Structure Generators**: Added `gen_dict()` and `gen_json()` functions for generating complex nested data structures
   - `gen_dict()`: Generate dictionaries from schema definitions
     - Supports callable generators (e.g., `gen_alpha`, `gen_email`)
@@ -23,6 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Full validation support
 
   **Examples:**
+  
   ```python
   from fauxfactory import gen_dict, gen_json, gen_alpha, gen_email, gen_integer
 
