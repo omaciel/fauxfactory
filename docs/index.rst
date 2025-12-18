@@ -20,7 +20,8 @@ code::
 
     $ git clone git@github.com:omaciel/fauxfactory.git
     $ cd fauxfactory
-    $ python setup.py build install
+    $ uv sync
+    $ uv pip install .
 
 Usage
 -----
