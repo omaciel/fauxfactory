@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.2.1] - 2026-03-30
+
+### Changed
+
+- Updated installation documentation to recommend `uv`
+- Updated Mergify configuration for current schema
+- Bumped CI action: codecov/codecov-action from 5 to 6
+
+### Fixed
+
+- Resolved `pycrypto` build failure on Python 3.11+ by upgrading `keyring`
+
+### Dependencies
+
+- Bumped `cryptography` from 44.0.2 to 46.0.6
+- Bumped `jinja2` from 3.1.5 to 3.1.6
+- Bumped `urllib3` from 2.3.0 to 2.6.3
+- Bumped `requests` from 2.32.3 to 2.33.0
+- Bumped `wheel` from 0.45.1 to 0.46.2
+
 ## [4.2.0] - 2025-12-17
 
 ### Added
@@ -305,6 +325,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial Release
 
+[4.2.1]: https://github.com/omaciel/fauxfactory/compare/v4.2.0...v4.2.1
 [4.2.0]: https://github.com/omaciel/fauxfactory/compare/v4.1.0...v4.2.0
 [4.1.0]: https://github.com/omaciel/fauxfactory/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/omaciel/fauxfactory/compare/v3.1.2...v4.0.0
