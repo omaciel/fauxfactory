@@ -55,6 +55,7 @@ jobs:
     needs: [check-version, test]
     if: needs.check-version.outputs.version_changed == 'true'
     runs-on: ubuntu-latest
+    environment: pypi
     permissions:
       contents: write
       id-token: write
