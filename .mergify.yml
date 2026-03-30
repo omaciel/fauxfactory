@@ -88,22 +88,3 @@ pull_request_rules:
       label:
         add:
           - dependencies
-
-  # Auto-merge Dependabot PRs if tests pass
-  - name: Auto-merge Dependabot PRs
-    conditions:
-      - author=dependabot[bot]
-      - base=master
-      - check-success=build (3.10)
-      - check-success=build (3.11)
-      - check-success=build (3.12)
-      - check-success=build (3.13)
-      - check-success=build (3.14)
-      - -draft
-      - -conflict
-    actions:
-      queue:
-        name: default
-      review:
-        type: APPROVE
-        message: "Automatically approving Dependabot PR - tests passed"
