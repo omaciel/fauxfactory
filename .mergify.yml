@@ -1,5 +1,10 @@
 queue_rules:
   - name: default
+    merge_method: rebase
+    commit_message_template: |
+      {{ title }} (#{{ number }})
+
+      {{ body }}
     conditions:
       - check-success=build (3.10)
       - check-success=build (3.11)
@@ -24,12 +29,7 @@ pull_request_rules:
       - -closed
     actions:
       queue:
-        method: rebase
         name: default
-        commit_message_template: |
-          {{ title }} (#{{ number }})
-
-          {{ body }}
 
   # Automatically rebase PRs to keep them up to date
   - name: Automatic rebase
@@ -103,12 +103,7 @@ pull_request_rules:
   #     - -conflict
   #   actions:
   #     queue:
-  #       method: rebase
   #       name: default
-  #       commit_message_template: |
-  #         {{ title }} (#{{ number }})
-  #
-  #         {{ body }}
   #     review:
   #       type: APPROVE
   #       message: "Automatically approving Dependabot PR - tests passed"
