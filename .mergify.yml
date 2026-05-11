@@ -5,7 +5,7 @@ queue_rules:
       {{ title }} (#{{ number }})
 
       {{ body }}
-    conditions:
+    merge_conditions:
       - check-success=build (3.10)
       - check-success=build (3.11)
       - check-success=build (3.12)
@@ -66,15 +66,15 @@ pull_request_rules:
     conditions:
       - base=master
       - or:
-        - "#approved-reviews-by<1"
-        - -approved-reviews-by=omaciel
-        - check-failure=build (3.10)
-        - check-failure=build (3.11)
-        - check-failure=build (3.12)
-        - check-failure=build (3.13)
-        - check-failure=build (3.14)
-        - draft
-        - conflict
+          - "#approved-reviews-by<1"
+          - -approved-reviews-by=omaciel
+          - check-failure=build (3.10)
+          - check-failure=build (3.11)
+          - check-failure=build (3.12)
+          - check-failure=build (3.13)
+          - check-failure=build (3.14)
+          - draft
+          - conflict
     actions:
       label:
         remove:
