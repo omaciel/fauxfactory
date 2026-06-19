@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.2.2] - 2026-06-19
+
+### Changed
+
+- Upgraded Mergify configuration to the current schema format
+- Enabled auto-merge for Dependabot PRs (via Mergify and GitHub native auto-merge)
+- Required manual approval for releases via the `pypi` deployment environment
+- Bumped CI action: codecov/codecov-action from 6 to 7
+- Bumped CI action: softprops/action-gh-release from 2 to 3
+
+### Dependencies
+
+- Bumped `cryptography` to 48.0.1
+- Bumped `idna` from 3.10 to 3.15
+- Bumped `urllib3` from 2.6.3 to 2.7.0
+- Bumped `pytest` from 8.3.5 to 9.0.3
+- Bumped `twine` from 6.1.0 to 6.2.0
+- Bumped `pygments` from 2.19.1 to 2.20.0
+
 ## [4.2.1] - 2026-03-30
 
 ### Changed
