@@ -1,10 +1,9 @@
 queue_rules:
   - name: default
     merge_method: rebase
-    commit_message_template: |
-      {{ title }} (#{{ number }})
-
-      {{ body }}
+    commit_message_format:
+      title: pr-title
+      body: pr-body
     merge_conditions:
       - check-success=build (3.10)
       - check-success=build (3.11)
