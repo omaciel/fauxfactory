@@ -201,8 +201,7 @@ Contribute
 
 #. Fork `the repository`_ on GitHub and make some changes. Make sure to add
    yourself to `AUTHORS`_.
-#. Install the development requirements. ``pip install -r
-   requirements-optional.txt``.
+#. Install the development requirements. ``make install-dev``.
 #.  Test your changes.
 
     #. Run ``make test-all`` and make sure nothing has broken.
