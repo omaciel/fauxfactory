@@ -371,7 +371,7 @@ is available on ReadTheDocs.
 
 Generate documentation locally::
 
-    pip install -r requirements-optional.txt
+    make install-docs
     make docs-html
 
 🤝 Contributing
